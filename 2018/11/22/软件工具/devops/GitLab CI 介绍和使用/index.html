@@ -477,32 +477,78 @@
 </ul>
 <h4 id="7-gitlab-ci-yml"><a href="#7-gitlab-ci-yml" class="headerlink" title="(7) .gitlab-ci.yml"></a>(7) .gitlab-ci.yml</h4><p>GitLab 中默认开启了 Gitlab CI&#x2F;CD 的支持，且使用<a target="_blank" rel="noopener" href="http://yaml.org/">YAML</a>文件<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/ci/yaml/README.html#examples">.gitlab-ci.yml</a>来管理项目构建配置。该文件需要存放于项目仓库的根目录（默认路径，可在 GitLab 中修改），它定义该项目的 CI&#x2F;CD 如何配置。所以，我们只需要在<code>.gitlab-ci.yml</code>配置文件中定义流水线的各个阶段，以及各个阶段中的若干作业（任务）即可。</p>
 <p>下面是<code>.gitlab-ci.yml</code>文件的一个简单的<code>Hello World</code>示例：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 test 和 package 两个 Stages</span></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">test</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">package</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 package 阶段的一个 job</span></span><br><span class="line"><span class="attr">package-job:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">package</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;Hello, package-job&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;I am in package stage&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 test 阶段的一个 job</span></span><br><span class="line"><span class="attr">test-job:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;Hello, test-job&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;I am in test stage&quot;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yaml"># 定义 test 和 package 两个 Stages
+stages:
+  - test
+  - package
 
+# 定义 package 阶段的一个 job
+package-job:
+  stage: package
+  script:
+    - echo &quot;Hello, package-job&quot;
+    - echo &quot;I am in package stage&quot;
+
+# 定义 test 阶段的一个 job
+test-job:
+  stage: test
+  script:
+    - echo &quot;Hello, test-job&quot;
+    - echo &quot;I am in test stage&quot;
+</code></pre>
 <p>以上配置中，用 stages 关键字来定义 Pipeline 中的各个构建阶段，然后用一些非关键字来定义 jobs。每个 job 中可以可以再用 stage 关键字来指定该 job 对应哪个 stage。job 里面的<code>script</code>关键字是每个 job 中必须要包含的，它表示每个 job 要执行的命令。</p>
 <blockquote>
 <p><strong>注</strong>：猜猜上面例子的运行结果？</p>
 </blockquote>
 <h4 id="8-Badges"><a href="#8-Badges" class="headerlink" title="(8) Badges"></a>(8) Badges</h4><p><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/ci/pipelines.html#badges">Badges</a> 即：<strong>徽章</strong>，当 Pipelines 执行过程中或者执行完成时会生成徽章，你可以将这些徽章加入到你的<code>README.md</code>文件中，便于从仓库主页看到最新的构建状态。</p>
 <p>徽章的链接形如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.gitlab.com/namespace/project/badges/branch/build.svg </span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">http://example.gitlab.com/namespace/project/badges/branch/build.svg 
+</code></pre>
 <p>我们用 GitLab 项目的徽章作为例子，效果如下：</p>
 <p><img src="https://gitlab.com/gitlab-org/gitlab-ce/badges/master/build.svg" alt="Gitlab build badges"> <img src="https://gitlab.com/gitlab-org/gitlab-ce/badges/master/coverage.svg?job=coverage" alt="Gitlab coverage badges"></p>
 <h3 id="2-安装-GitLab-Runner"><a href="#2-安装-GitLab-Runner" class="headerlink" title="2 安装 GitLab Runner"></a>2 安装 GitLab Runner</h3><p><a target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/install/index.html">这里</a>有 GitLab Runner安装相关的资源和文档可供大家参考。以下仅以咱们公司常用的<code>Centos</code>为例来做安装说明。</p>
-<h4 id="1-在线安装"><a href="#1-在线安装" class="headerlink" title="(1) 在线安装"></a>(1) 在线安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加官方的repo.</span></span><br><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># yum 安装Gtilab Runner.</span></span><br><span class="line">sudo yum install gitlab-runner</span><br></pre></td></tr></table></figure>
+<h4 id="1-在线安装"><a href="#1-在线安装" class="headerlink" title="(1) 在线安装"></a>(1) 在线安装</h4><pre><code class="bash"># 添加官方的repo.
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
 
-<h4 id="2-离线安装"><a href="#2-离线安装" class="headerlink" title="(2) 离线安装"></a>(2) 离线安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Git</span></span><br><span class="line">sudo yum –y install git</span><br><span class="line"></span><br><span class="line"><span class="comment"># rpm离线安装事先下载好的 Gitlab Runner rpm包.</span></span><br><span class="line">rpm -ivh gitlab-runner-10.5.0-1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+# yum 安装Gtilab Runner.
+sudo yum install gitlab-runner
+</code></pre>
+<h4 id="2-离线安装"><a href="#2-离线安装" class="headerlink" title="(2) 离线安装"></a>(2) 离线安装</h4><pre><code class="bash"># 安装Git
+sudo yum –y install git
 
+# rpm离线安装事先下载好的 Gitlab Runner rpm包.
+rpm -ivh gitlab-runner-10.5.0-1.x86_64.rpm
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：Gitlab Runner 依赖了<code>Git</code>，所以，离线安装 Gitlab Runner 之前得首先安装Git，离线安装包可以从<a target="_blank" rel="noopener" href="https://packages.gitlab.com/runner/gitlab-runner">这里</a>下载。</p>
 </blockquote>
 <h3 id="3-注册-Gitlab-Runner"><a href="#3-注册-Gitlab-Runner" class="headerlink" title="3 注册 Gitlab Runner"></a>3 注册 Gitlab Runner</h3><p>安装了 GitLab Runner 之后,就可以为 GitLab 中的仓库<a target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/register/index.html">注册一个 Runner</a>，注册的交互式命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner register</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">sudo gitlab-runner register
+</code></pre>
 <p>命令的交互式的过程如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入注册命令</span></span><br><span class="line">sudo gitlab-runner register</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入公司的 GitLab 网站地址</span></span><br><span class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )</span><br><span class="line">http://gitlab.xxxx.com/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 你项目仓库的token，token可以在 Settings -&gt; CI/CD -&gt; Runners settings 中找到.</span></span><br><span class="line">Please enter the gitlab-ci token <span class="keyword">for</span> this runner</span><br><span class="line">xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入描述这个 runner 的名称</span></span><br><span class="line">Please enter the gitlab-ci description <span class="keyword">for</span> this runner</span><br><span class="line">[hostame] my-runner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入 runner 的标签</span></span><br><span class="line">Please enter the gitlab-ci tags <span class="keyword">for</span> this runner (comma separated):</span><br><span class="line">my-tag,another-tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入 runner 的执行器.</span></span><br><span class="line">Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell:</span><br><span class="line">shell</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 输入注册命令
+sudo gitlab-runner register
 
+# 输入公司的 GitLab 网站地址
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )
+http://gitlab.xxxx.com/
+
+# 你项目仓库的token，token可以在 Settings -&gt; CI/CD -&gt; Runners settings 中找到.
+Please enter the gitlab-ci token for this runner
+xxx
+
+# 输入描述这个 runner 的名称
+Please enter the gitlab-ci description for this runner
+[hostame] my-runner
+
+# 输入 runner 的标签
+Please enter the gitlab-ci tags for this runner (comma separated):
+my-tag,another-tag
+
+# 输入 runner 的执行器.
+Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell:
+shell
+</code></pre>
 <p>以上流程注册成功之后，就可以在你的项目仓库中 <code>Settings</code> -&gt; <code>CI/CD</code> -&gt; <code>Runners settings</code> 看到这个 Runner 了。</p>
 <h3 id="4-Gitlab-Runner-常用命令汇总"><a href="#4-Gitlab-Runner-常用命令汇总" class="headerlink" title="4 Gitlab Runner 常用命令汇总"></a>4 Gitlab Runner 常用命令汇总</h3><p>下面的表格中列出了一些常用的<a target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-list">Gitlab Runner命令</a>，以供参考：</p>
 <table>
@@ -554,8 +600,74 @@
 <blockquote>
 <p><strong>注</strong>：我 Gitlab Runner 是安装在<code>Centos</code>环境中，并使用的<code>shell</code>执行器。</p>
 </blockquote>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义stages</span></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">test</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">install</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">run</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sonar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义安装包的存放位置和Tomcat服务器的地址的变量，便于后续部署使用.</span></span><br><span class="line"><span class="attr">variables:</span></span><br><span class="line">  <span class="attr">CIDEMO_PACKAGE_DIR:</span> <span class="string">&#x27;/home/gitlab-runner/packages/cidemo/&#x27;</span></span><br><span class="line">  <span class="attr">SERVER_HOME_DIR:</span> <span class="string">&#x27;/home/gitlab-runner/tomcat/cidemo-tomcat/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###################### 构建编译和单元测试的job. #######################</span></span><br><span class="line"></span><br><span class="line"><span class="string">编译测试任务:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">branches</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mvn</span> <span class="string">clean</span> <span class="string">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###################### Maven安装得到war包的job. #######################</span></span><br><span class="line"></span><br><span class="line"><span class="string">打包任务:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">install</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">develop</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mvn</span> <span class="string">install</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&#x27;准备将最新的war包复制、保存到某个目录里面供后续使用.&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">rm</span> <span class="string">-rf</span> <span class="string">$CIDEMO_PACKAGE_DIR/*.war</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">cp</span> <span class="string">target/*.war</span> <span class="string">$CIDEMO_PACKAGE_DIR/cidemo.war</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####################### 部署运行war包的job. #######################</span></span><br><span class="line"></span><br><span class="line"><span class="string">部署运行任务:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">run</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">develop</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&#x27;准备部署和运行war包！(为了方便部署到了Tomcat中运行)&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">cd</span> <span class="string">$SERVER_HOME_DIR</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">sh</span> <span class="string">bin/shutdown.sh</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">rm</span> <span class="string">-rf</span> <span class="string">webapps/cidemo.war</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">cp</span> <span class="string">$CIDEMO_PACKAGE_DIR/cidemo.war</span> <span class="string">$SERVER_HOME_DIR/webapps/cidemo.war</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">nohup</span> <span class="string">sh</span> <span class="string">./bin/startup.sh</span> <span class="string">&gt;</span> <span class="string">logs/cidemo_nohup.log</span> <span class="number">2</span><span class="string">&gt;&amp;1</span> <span class="string">&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###################### Sonar手动构建的job. #######################</span></span><br><span class="line"></span><br><span class="line"><span class="string">Sonar手动检查:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">sonar</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">develop</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&#x27;准备对项目代码做sonar的质量检查！&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mvn</span> <span class="string">compile</span> <span class="string">&amp;&amp;</span> <span class="string">mvn</span> <span class="string">sonar:sonar</span> <span class="string">-Dsonar.host.url=http://172.16.34.102:9000</span> <span class="string">-Dsonar.login=497a0e0e2fc07f64c4b54edc17bb47dfa251ba34</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###################### Sonar每晚定时构建的job. #######################</span></span><br><span class="line"></span><br><span class="line"><span class="string">Sonar定时检查:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">sonar</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">schedules</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&#x27;开始定时对项目代码做sonar的质量检查！&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mvn</span> <span class="string">compile</span> <span class="string">&amp;&amp;</span> <span class="string">mvn</span> <span class="string">sonar:sonar</span> <span class="string">-Dsonar.host.url=http://172.16.34.102:9000</span> <span class="string">-Dsonar.login=497a0e0e2fc07f64c4b54edc17bb47dfa251ba34</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yaml"># 定义stages
+stages:
+  - test
+  - install
+  - run
+  - sonar
 
+# 定义安装包的存放位置和Tomcat服务器的地址的变量，便于后续部署使用.
+variables:
+  CIDEMO_PACKAGE_DIR: &#39;/home/gitlab-runner/packages/cidemo/&#39;
+  SERVER_HOME_DIR: &#39;/home/gitlab-runner/tomcat/cidemo-tomcat/&#39;
+
+###################### 构建编译和单元测试的job. #######################
+
+编译测试任务:
+  stage: test
+  only:
+    - branches
+  script:
+    - mvn clean test
+
+###################### Maven安装得到war包的job. #######################
+
+打包任务:
+  stage: install
+  only:
+    - develop
+  script:
+    - mvn install
+    - echo &#39;准备将最新的war包复制、保存到某个目录里面供后续使用.&#39;
+    - rm -rf $CIDEMO_PACKAGE_DIR/*.war
+    - cp target/*.war $CIDEMO_PACKAGE_DIR/cidemo.war
+
+####################### 部署运行war包的job. #######################
+
+部署运行任务:
+  stage: run
+  only:
+    - develop
+  script:
+    - echo &#39;准备部署和运行war包！(为了方便部署到了Tomcat中运行)&#39;
+    - cd $SERVER_HOME_DIR
+    - sh bin/shutdown.sh
+    - rm -rf webapps/cidemo.war
+    - cp $CIDEMO_PACKAGE_DIR/cidemo.war $SERVER_HOME_DIR/webapps/cidemo.war
+    - nohup sh ./bin/startup.sh &gt; logs/cidemo_nohup.log 2&gt;&amp;1 &amp;
+
+###################### Sonar手动构建的job. #######################
+
+Sonar手动检查:
+  stage: sonar
+  when: manual
+  only:
+    - develop
+  script:
+    - echo &#39;准备对项目代码做sonar的质量检查！&#39;
+    - mvn compile &amp;&amp; mvn sonar:sonar -Dsonar.host.url=http://172.16.34.102:9000 -Dsonar.login=497a0e0e2fc07f64c4b54edc17bb47dfa251ba34
+
+###################### Sonar每晚定时构建的job. #######################
+
+Sonar定时检查:
+  stage: sonar
+  only:
+    - schedules
+  script:
+    - echo &#39;开始定时对项目代码做sonar的质量检查！&#39;
+    - mvn compile &amp;&amp; mvn sonar:sonar -Dsonar.host.url=http://172.16.34.102:9000 -Dsonar.login=497a0e0e2fc07f64c4b54edc17bb47dfa251ba34
+</code></pre>
 <h2 id="四、Gitlab-CI-x2F-CD-yaml-常用配置介绍"><a href="#四、Gitlab-CI-x2F-CD-yaml-常用配置介绍" class="headerlink" title="四、Gitlab CI&#x2F;CD yaml 常用配置介绍"></a>四、Gitlab CI&#x2F;CD yaml 常用配置介绍</h2><p>开始构建之前<code>.gitlab-ci.yml</code>文件定义了一系列带有约束说明的任务。这些任务都是以任务名开始并且至少要包含script部分，<code>.gitlab-ci.yml</code>允许指定无限量 jobs。每个 jobs 必须有一个唯一的名字，且名字不能是下面列出的保留字段：</p>
 <ul>
 <li><code>image</code></li>
@@ -681,16 +793,35 @@
 <p>是在 GitLab 11.3 中引入的。</p>
 </blockquote>
 <p><code>extends</code>定义了一个使用<code>extends</code>的作业将继承的条目名称。它是使用<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/ci/yaml/README.html#anchors">YAML锚点</a>的替代方案，并且更加灵活和可读：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.tests:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">rake</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="attr">refs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">branches</span></span><br><span class="line"></span><br><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.tests</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">rake</span> <span class="string">rspec</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="attr">variables:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$RSPEC</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yaml">.tests:
+  script: rake test
+  stage: test
+  only:
+    refs:
+      - branches
 
+rspec:
+  extends: .tests
+  script: rake rspec
+  only:
+    variables:
+      - $RSPEC
+</code></pre>
 <p>在上面的示例中，<code>rspec</code>作业继承自<code>.tests</code>模板作业。 GitLab 将根据键执行反向深度合并。 GitLab将：</p>
 <ul>
 <li>将<code>rspec</code>内容以递归方式合并到<code>.tests</code>中。</li>
 <li>不合并键的值。</li>
 </ul>
 <p>这实际生成的是以下<code>rspec</code>作业：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">rake</span> <span class="string">rspec</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="attr">refs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">branches</span></span><br><span class="line">    <span class="attr">variables:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$RSPEC</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">rspec:
+  script: rake rspec
+  stage: test
+  only:
+    refs:
+      - branches
+    variables:
+      - $RSPEC
+</code></pre>
 <blockquote>
 <p><strong>注</strong>: <code>rake test</code>已被<code>rake rspec</code>脚本覆盖。</p>
 </blockquote>
@@ -703,8 +834,11 @@
 <li>下一个 stage 的 job 会在前一个 stage 的 job 成功后开始执行。</li>
 </ol>
 <p>接下仔细看看这个例子，它包含了3个 stage：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">build</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">test</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">stages:
+ - build
+ - test
+ - deploy
+</code></pre>
 <ol>
 <li>首先，所有 build 的 jobs 都是并行执行的。</li>
 <li>所有 build 的 jobs 执行成功后，test 的 jobs 才会开始并行执行。</li>
@@ -730,59 +864,120 @@
 <li>only 和 except 允许使用指定仓库地址但不是forks的仓库(查看示例3)。</li>
 </ul>
 <p>在下面这个例子中，job 将只会运行以<code>issue-</code>开始的refs(分支)，然而<code>except</code>中设置将被跳过。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="comment"># use regexp</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/^issue-.*$/</span></span><br><span class="line">  <span class="comment"># use special keyword</span></span><br><span class="line">  <span class="attr">except:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">branches</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">job:
+  # use regexp
+  only:
+    - /^issue-.*$/
+  # use special keyword
+  except:
+    - branches
+</code></pre>
 <p>在下面这个例子中，job 将只会执行有<code>tags</code>的refs，或者通过<code>API</code>触发器明确地请求构建。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="comment"># use special keywords</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">tags</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">triggers</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">job:
+  # use special keywords
+  only:
+    - tags
+    - triggers
+</code></pre>
 <p>下面这个例子将会为所有的分支执行job，但 master 分支除外。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">branches@gitlab-org/gitlab-ce</span></span><br><span class="line">  <span class="attr">except:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master@gitlab-org/gitlab-ce</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">job:
+  only:
+    - branches@gitlab-org/gitlab-ce
+  except:
+    - master@gitlab-org/gitlab-ce
+</code></pre>
 <h3 id="variables"><a href="#variables" class="headerlink" title="variables"></a>variables</h3><p>GItLab CI 允许在<code>.gitlab-ci.yml</code>文件中添加变量，并在 job 环境中起作用。因为这些配置是存储在 git 仓库中，所以<strong>最好是存储项目的非敏感配置</strong>，例如：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">variables:</span></span><br><span class="line">  <span class="string">DATABASE_URL:&quot;postgres://postgres@postgres/my_database&quot;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">variables:
+  DATABASE_URL:&quot;postgres://postgres@postgres/my_database&quot;
+</code></pre>
 <p>这些变量可以被后续的命令和脚本使用。</p>
 <p>除了用户自定义的变量外，Runner 也可以定义它自己的变量。<code>CI_COMMIT_REG_NAME</code>就是一个很好的例子，它的值表示用于构建项目的分支或tag名称。除了在<code>.gitlab-ci.yml</code>中设置变量外，还有可以通过 GitLab 的界面上设置私有变量。</p>
 <p>这里有更多关于<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/ci/variables/README.html">variables</a>的介绍。</p>
 <h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><h4 id="cache-paths"><a href="#cache-paths" class="headerlink" title="cache: paths"></a>cache: paths</h4><p>使用<code>paths</code>指令选择要缓存的文件或目录。也可以使用通配符。</p>
 <p>如果 cache 定义在 jobs 的作用域之外，那么它就是全局缓存，所有 jobs 都可以使用该缓存。</p>
 <p>缓存<code>binaries</code>和<code>.config</code>中的所有文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">binaries/</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">.config</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">rspec:
+  script: test
+  cache:
+    paths:
+    - binaries/
+    - .config
+</code></pre>
 <p>缓存<code>git</code>中没有被跟踪的文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">rspec:
+  script: test
+  cache:
+    untracked: true
+</code></pre>
 <p>缓存<code>binaries</code>下没有被<code>git</code>跟踪的文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">untracked:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">binaries/</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">rspec:
+  script: test
+  cache:
+    untracked: true
+    paths:
+    - binaries/
+</code></pre>
 <p>job 中优先级高于全局的。下面这个<code>rspec</code> job中将只会缓存<code>binaries/</code>下的文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">my/files</span></span><br><span class="line"></span><br><span class="line"><span class="attr">rspec:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">rspec</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">binaries/</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yaml">cache:
+  paths:
+  - my/files
 
+rspec:
+  script: test
+  cache:
+    key: rspec
+    paths:
+    - binaries/
+</code></pre>
 <p>注意，缓存是在 jobs 之前进行共享的。如果你不同的 jobs 缓存不同的文件路径，必须设置不同的<code>cache:key</code>，否则缓存内容将被重写。缓存只是尽力而为之，所以别期望缓存会一直存在。</p>
 <h4 id="cache-key"><a href="#cache-key" class="headerlink" title="cache: key"></a>cache: key</h4><p><code>key</code>指令允许我们定义缓存的作用域(亲和性)，可以是所有 jobs 的单个缓存，也可以是每个 job，也可以是每个分支或者是任何你认为合适的地方。它也可以让你很好的调整缓存，允许你设置不同 jobs 的缓存，甚至是不同分支的缓存。</p>
 <p><code>cache:key</code>可以使用任何的<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/ci/variables/README.html">预定义变量</a>。</p>
 <p>默认key是默认设置的这个项目缓存，因此默认情况下，从GitLab 9.0开始，每个 pipelines 和 jobs 中可以共享一切。</p>
 <p>配置示例</p>
 <p>缓存每个job：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&quot;$CI_JOB_NAME&quot;</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">cache:
+  key: &quot;$CI_JOB_NAME&quot;
+  untracked: true
+</code></pre>
 <p>缓存每个分支：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&quot;$CI_COMMIT_REF_NAME&quot;</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">cache:
+  key: &quot;$CI_COMMIT_REF_NAME&quot;
+  untracked: true
+</code></pre>
 <p>缓存每个 job 且每个分支：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&quot;$CI_JOB_NAME/$CI_COMMIT_REF_NAME&quot;</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">cache:
+  key: &quot;$CI_JOB_NAME/$CI_COMMIT_REF_NAME&quot;
+  untracked: true
+</code></pre>
 <p>缓存每个分支且每个stage：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&quot;$CI_JOB_STAGE/$CI_COMMIT_REF_NAME&quot;</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">cache:
+  key: &quot;$CI_JOB_STAGE/$CI_COMMIT_REF_NAME&quot;
+  untracked: true
+</code></pre>
 <p>如果使用的Windows Batch(windows批处理)来跑脚本需要用%替代$：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&quot;%CI_JOB_STAGE%/%CI_COMMIT_REF_NAME%&quot;</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">cache:
+  key: &quot;%CI_JOB_STAGE%/%CI_COMMIT_REF_NAME%&quot;
+  untracked: true
+</code></pre>
 <h3 id="allow-failure"><a href="#allow-failure" class="headerlink" title="allow_failure"></a>allow_failure</h3><p><code>allow_failure</code>可以用于当你想设置一个 job 失败的之后并不影响后续的CI组件的时候。失败的 jobs 不会影响到<code>commit</code>状态。</p>
 <p>当开启了允许 job 失败，所有的 intents 和 purposes 里的 pipeline 都是成功&#x2F;绿色，但是也会有一个”<code>CI build passed with warnings</code>“信息显示在<code>Merge Request</code>或<code>commit</code>或<code>job page</code>。这被允许失败的作业使用，但是如果失败表示其他地方应采取其他（手动）步骤。</p>
 <p>下面的这个例子中，job1和job2将会并列进行，如果job1失败了，它也不会影响进行中的下一个 stage，因为这里有设置了<code>allow_failure: true</code>。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job1:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">execute_script_that_will_fail</span></span><br><span class="line">  <span class="attr">allow_failure:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">job2:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">execute_script_that_will_succeed</span></span><br><span class="line"></span><br><span class="line"><span class="attr">job3:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">deploy_to_staging</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yaml">job1:
+  stage: test
+  script:
+    - execute_script_that_will_fail
+  allow_failure: true
 
+job2:
+  stage: test
+  script:
+    - execute_script_that_will_succeed
+
+job3:
+  stage: deploy
+  script:
+    - deploy_to_staging
+</code></pre>
 <h3 id="when"><a href="#when" class="headerlink" title="when"></a>when</h3><p><code>when</code>用于实现在发生故障或尽管失败时运行的作业。when可以设置以下值：</p>
 <ul>
 <li><code>on_success</code> - 只有前面 stages 的所有工作成功时才执行。这是默认值。</li>
@@ -792,14 +987,21 @@
 </ul>
 <h3 id="artifacts"><a href="#artifacts" class="headerlink" title="artifacts"></a>artifacts</h3><p><code>artifacts</code>用于指定成功后应附加到 job 的文件和目录的列表。只能使用项目工作间内的文件或目录路径。在job成功完成后artifacts将会发送到GitLab中，同时也会在 GitLab UI 中提供下载。如果想要在不通的 job 之间传递<code>artifacts</code>，请查阅<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/ci/yaml/README.html#dependencies">依赖关系</a>。以下是一些例子：</p>
 <p>发送<code>binaries</code>和<code>.config</code>中的所有文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">artifacts:</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">binaries/</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">.config</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">artifacts:
+  paths:
+  - binaries/
+  - .config
+</code></pre>
 <p>发送所有没有被Git跟踪的文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">artifacts:</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">artifacts:
+  untracked: true
+</code></pre>
 <p>发送没有被Git跟踪和<code>binaries</code>中的所有文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">artifacts:</span></span><br><span class="line">  <span class="attr">untracked:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">binaries/</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">artifacts:
+  untracked: true
+  paths:
+  - binaries/
+</code></pre>
 <h2 id="五、其他相关内容"><a href="#五、其他相关内容" class="headerlink" title="五、其他相关内容"></a>五、其他相关内容</h2><h3 id="1-API触发器-Triggers"><a href="#1-API触发器-Triggers" class="headerlink" title="1 API触发器 Triggers"></a>1 API触发器 Triggers</h3><p>Triggers 可用于强制使用API调用重建特定分支，<code>tag</code>或<code>commits</code>。API的使用示例可以在<code>Settings</code> -&gt; <code>CI/CD</code> -&gt; <code>Pipeline triggers</code>中找到。</p>
 <p>在<code>triggers</code>文档中<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/ci/triggers/README.html">查看更多</a>。</p>
 <h3 id="2-配置定时任务"><a href="#2-配置定时任务" class="headerlink" title="2 配置定时任务"></a>2 配置定时任务</h3><p>GitLab CI 中可以在 GitLab <code>Settings</code> -&gt; <code>CI/CD</code> -&gt; <code>Schedules</code>中配置定时任务，点击<code>New Schedule</code>按钮，可以配置你流水线的定时执行任务，包括：描述信息、定时的Cron表达式、目标分支、变量等信息。</p>
@@ -812,8 +1014,18 @@
 <li>artifacts必须定义在<code>public/</code>目录下</li>
 </ul>
 <p>下面的这个例子是将所有文件从项目根目录移动到<code>public/</code>目录。<code>.public</code>工作流是<code>cp</code>，并且它不会循环复制<code>public/</code>本身。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pages:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">mkdir</span> <span class="string">.public</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">cp</span> <span class="string">-r</span> <span class="string">*</span> <span class="string">.public</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">mv</span> <span class="string">.public</span> <span class="string">public</span></span><br><span class="line">  <span class="attr">artifacts:</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">public</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+</code></pre>
 <p>更多内容请查看<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ce/user/project/pages/index.html">GitLab Pages用户文档</a>。</p>
 <h3 id="6-跳过-jobs"><a href="#6-跳过-jobs" class="headerlink" title="6 跳过 jobs"></a>6 跳过 jobs</h3><p>如果你的<code>commit</code>信息中包含<code>[ci skip]</code>或者<code>[skip ci]</code>，不论大小写，那么这个<code>commit</code>将会创建但是 jobs 也会跳过。</p>
 <hr>

@@ -429,20 +429,117 @@
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/factory-method.jpg" alt="工厂方法模式结构图"></p>
 <h3 id="3-时序图"><a href="#3-时序图" class="headerlink" title="3. 时序图"></a>3. 时序图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/seq-factory-method.jpg" alt="工厂方法模式时序图"></p>
 <h2 id="三、示例代码"><a href="#三、示例代码" class="headerlink" title="三、示例代码"></a>三、示例代码</h2><p>首先，是抽象的产品类和具体的产品类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象产品类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 产品类的公共方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是产品类的公共方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 抽象方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 抽象产品类
+ * Created by blinkfox on 16-6-29.
+ */
+public abstract class Product &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体产品类1</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteProduct1</span> <span class="keyword">extends</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;ConcreteProduct1的method2方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /**
+     * 产品类的公共方法
+     */
+    public void method1() &#123;
+        System.out.println(&quot;这是产品类的公共方法&quot;);
+    &#125;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体产品类2</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteProduct2</span> <span class="keyword">extends</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;ConcreteProduct2的method2方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /**
+     * 抽象方法
+     */
+    public abstract void method2();
 
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体产品类1
+ * Created by blinkfox on 16-6-29.
+ */
+public class ConcreteProduct1 extends Product &#123;
+
+    @Override
+    public void method2() &#123;
+        System.out.println(&quot;ConcreteProduct1的method2方法&quot;);
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体产品类2
+ * Created by blinkfox on 16-6-29.
+ */
+public class ConcreteProduct2 extends Product &#123;
+
+    @Override
+    public void method2() &#123;
+        System.out.println(&quot;ConcreteProduct2的method2方法&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>然后，是抽象的工厂类和具体的工厂类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象的工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 运用了Java中的泛型和反射技术,生成某种具体的产品</span></span><br><span class="line"><span class="comment">     * 其输入类型可以自行设置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> c</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> &lt;T <span class="keyword">extends</span> <span class="title class_">Product</span>&gt; T <span class="title function_">createProduct</span><span class="params">(Class&lt;T&gt; c)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 抽象的工厂类
+ * Created by blinkfox on 16-6-29.
+ */
+public abstract class Factory &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体生产产品的工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteFactory</span> <span class="keyword">extends</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 运用了Java中的泛型和反射技术,生成某种具体的产品</span></span><br><span class="line"><span class="comment">     * 其输入类型可以自行设置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> c</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T <span class="keyword">extends</span> <span class="title class_">Product</span>&gt; T <span class="title function_">createProduct</span><span class="params">(Class&lt;T&gt; c)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            product = (Product) Class.forName(c.getName()).newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;生产产品出错&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (T) product;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /**
+     * 运用了Java中的泛型和反射技术,生成某种具体的产品
+     * 其输入类型可以自行设置
+     * @param c
+     * @param &lt;T&gt;
+     * @return
+     */
+    public abstract &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c);
 
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体生产产品的工厂类
+ * Created by blinkfox on 16-6-29.
+ */
+public class ConcreteFactory extends Factory &#123;
+
+    /**
+     * 运用了Java中的泛型和反射技术,生成某种具体的产品
+     * 其输入类型可以自行设置
+     * @param c
+     * @param &lt;T&gt;
+     * @return
+     */
+    @Override
+    public &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c) &#123;
+        Product product = null;
+        try &#123;
+            product = (Product) Class.forName(c.getName()).newInstance();
+        &#125; catch (Exception e) &#123;
+            System.out.println(&quot;生产产品出错&quot;);
+            e.printStackTrace();
+        &#125;
+        return (T) product;
+    &#125;
+
+&#125;
+</code></pre>
 <p>最后，是客户端场景类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 工厂方法模式客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteFactory</span>();</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product1</span> <span class="operator">=</span> factory.createProduct(ConcreteProduct1.class);</span><br><span class="line">        product1.method1();</span><br><span class="line">        product1.method2();</span><br><span class="line"></span><br><span class="line">        <span class="type">Product</span> <span class="variable">product2</span> <span class="operator">=</span> factory.createProduct(ConcreteProduct2.class);</span><br><span class="line">        product2.method1();</span><br><span class="line">        product2.method2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 工厂方法模式客户端场景类
+ * Created by blinkfox on 16-6-29.
+ */
+public class Client &#123;
 
+    public static void main(String[] args) &#123;
+        Factory factory = new ConcreteFactory();
+        Product product1 = factory.createProduct(ConcreteProduct1.class);
+        product1.method1();
+        product1.method2();
+
+        Product product2 = factory.createProduct(ConcreteProduct2.class);
+        product2.method1();
+        product2.method2();
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="四、模式分析"><a href="#四、模式分析" class="headerlink" title="四、模式分析"></a>四、模式分析</h2><p>在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。这个核心类仅仅负责给出具体工厂必须实现的接口，而不负责哪一个产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</p>
 <h3 id="1-优点"><a href="#1-优点" class="headerlink" title="1. 优点"></a>1. 优点</h3><p>工厂方法模式的优点：</p>
 <ul>
@@ -463,41 +560,234 @@
 </ul>
 <h2 id="五、模式扩展"><a href="#五、模式扩展" class="headerlink" title="五、模式扩展"></a>五、模式扩展</h2><p>工厂方法模式有很多扩展，而且与其他模式结合使用威力更大，下面介绍4种常用扩展。</p>
 <h3 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1. 简单工厂模式"></a>1. 简单工厂模式</h3><p>我们这样考虑一个问题：一个模块仅需要一个工厂类，没有必要把它产生出来，使用静态的方法就可以了。因此去掉工厂类中继承的抽象类，把方法改成静态即可。通用代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简单工厂模式中的工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 运用了Java中的泛型和反射技术,生成某种具体的产品</span></span><br><span class="line"><span class="comment">     * 其输入类型可以自行设置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> c</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  &lt;T <span class="keyword">extends</span> <span class="title class_">Product</span>&gt; T <span class="title function_">createProduct</span><span class="params">(Class&lt;T&gt; c)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            product = (Product) Class.forName(c.getName()).newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;生产产品出错&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (T) product;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 简单工厂模式中的工厂类
+ * Created by blinkfox on 16-6-29.
+ */
+public class SimpleFactory &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简单工厂模式客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product1</span> <span class="operator">=</span> SimpleFactory.createProduct(ConcreteProduct1.class);</span><br><span class="line">        product1.method1();</span><br><span class="line">        product1.method2();</span><br><span class="line"></span><br><span class="line">        <span class="type">Product</span> <span class="variable">product2</span> <span class="operator">=</span> SimpleFactory.createProduct(ConcreteProduct2.class);</span><br><span class="line">        product2.method1();</span><br><span class="line">        product2.method2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /**
+     * 运用了Java中的泛型和反射技术,生成某种具体的产品
+     * 其输入类型可以自行设置
+     * @param c
+     * @param &lt;T&gt;
+     * @return
+     */
+    public static  &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c) &#123;
+        Product product = null;
+        try &#123;
+            product = (Product) Class.forName(c.getName()).newInstance();
+        &#125; catch (Exception e) &#123;
+            System.out.println(&quot;生产产品出错&quot;);
+            e.printStackTrace();
+        &#125;
+        return (T) product;
+    &#125;
 
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 简单工厂模式客户端场景类
+ * Created by blinkfox on 16-6-29.
+ */
+public class SimpleClient &#123;
+
+    public static void main(String[] args) &#123;
+        Product product1 = SimpleFactory.createProduct(ConcreteProduct1.class);
+        product1.method1();
+        product1.method2();
+
+        Product product2 = SimpleFactory.createProduct(ConcreteProduct2.class);
+        product2.method1();
+        product2.method2();
+    &#125;
+
+&#125;
+</code></pre>
 <p>运行结果没有发生变化，但是类图简单了，调用者也比较简单，简单工厂模式是工厂方法模式的弱化，也叫做静态工厂模式。其缺点是工厂类的扩展比较困难，不符合“开闭原则”，但它仍然是一个非常实用的设计模式。</p>
 <h3 id="2-多工厂类工厂方法模式"><a href="#2-多工厂类工厂方法模式" class="headerlink" title="2. 多工厂类工厂方法模式"></a>2. 多工厂类工厂方法模式</h3><p>当我们在一个比较复杂的项目时，经常会遇到初始化一个对象很耗费精力的情况，所有的产品类都放到一个工厂方法中进行初始化会使代码结构不清晰。为了让结构清晰，我们就为每类产品定义一个创造者，然后由调用者自己去选择与哪个工厂方法关联。多工厂模式的通用代码如下：</p>
 <p>多工厂模式的抽象工厂类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成多个产品的抽象工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-2.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">MultiFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成某种产品的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title function_">createProduct</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 生成多个产品的抽象工厂类
+ * Created by blinkfox on 16-7-2.
+ */
+public abstract class MultiFactory &#123;
 
+    /**
+     * 生成某种产品的方法
+     * @return
+     */
+    public abstract Product createProduct();
+
+&#125;
+</code></pre>
 <p>第一种产品的创建工厂实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成产品1的具体工厂类1</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-2.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteFactory1</span> <span class="keyword">extends</span> <span class="title class_">MultiFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成产品1的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Product <span class="title function_">createProduct</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreteProduct1</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 生成产品1的具体工厂类1
+ * Created by blinkfox on 16-7-2.
+ */
+public class ConcreteFactory1 extends MultiFactory &#123;
 
+    /**
+     * 生成产品1的方法
+     * @return
+     */
+    @Override
+    public Product createProduct() &#123;
+        return new ConcreteProduct1();
+    &#125;
+
+&#125;
+</code></pre>
 <p>第二种产品的创建工厂实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成产品2的具体工厂类2</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-2.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteFactory2</span> <span class="keyword">extends</span> <span class="title class_">MultiFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成产品2的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Product <span class="title function_">createProduct</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreteProduct2</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 生成产品2的具体工厂类2
+ * Created by blinkfox on 16-7-2.
+ */
+public class ConcreteFactory2 extends MultiFactory &#123;
 
+    /**
+     * 生成产品2的方法
+     * @return
+     */
+    @Override
+    public Product createProduct() &#123;
+        return new ConcreteProduct2();
+    &#125;
+
+&#125;
+</code></pre>
 <p>多工厂模式的客户端场景类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多工厂方法模式客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-2.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">concreteProduct1</span> <span class="operator">=</span> (<span class="keyword">new</span> <span class="title class_">ConcreteFactory1</span>()).createProduct();</span><br><span class="line">        concreteProduct1.method1();</span><br><span class="line">        concreteProduct1.method2();</span><br><span class="line"></span><br><span class="line">        <span class="type">Product</span> <span class="variable">concreteProduct2</span> <span class="operator">=</span> (<span class="keyword">new</span> <span class="title class_">ConcreteFactory2</span>()).createProduct();</span><br><span class="line">        concreteProduct1.method1();</span><br><span class="line">        concreteProduct1.method2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 多工厂方法模式客户端场景类
+ * Created by blinkfox on 16-7-2.
+ */
+public class MultiClient &#123;
 
+    public static void main(String[] args) &#123;
+        Product concreteProduct1 = (new ConcreteFactory1()).createProduct();
+        concreteProduct1.method1();
+        concreteProduct1.method2();
+
+        Product concreteProduct2 = (new ConcreteFactory2()).createProduct();
+        concreteProduct1.method1();
+        concreteProduct1.method2();
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="3-工厂方法的单例模式"><a href="#3-工厂方法的单例模式" class="headerlink" title="3. 工厂方法的单例模式"></a>3. 工厂方法的单例模式</h3><p>单例模式的核心要求就是在内存中只有一个对象，通过工厂方法模式也可以只在内存中生成一个对象，从而实现单例的功能。</p>
 <p>下面是单例类，其中定义了一个private的无参构造函数，目的是不允许通过new的方式创建对象，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 工厂方法模式中的单例类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-4.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有化构造方法，不允许new产生一个对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 工厂方法模式中的单例模式业务方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;工厂方法模式中的单例模式方法。。。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 工厂方法模式中的单例类
+ * Created by blinkfox on 16-7-4.
+ */
+public class Singleton &#123;
 
+    /**
+     * 私有化构造方法，不允许new产生一个对象
+     */
+    private Singleton() &#123;&#125;
+
+    /**
+     * 工厂方法模式中的单例模式业务方法
+     */
+    public void doSomething() &#123;
+        System.out.println(&quot;工厂方法模式中的单例模式方法。。。&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>以上单例类中不能通过正常的渠道建立一个对象，那单例的工厂类中如何建立一个单例对象呢？答案是通过反射方式创建，单例工厂类的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成单例的工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-4.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SingletonFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(Singleton.class.getName());</span><br><span class="line">            <span class="comment">// 获得无参构造</span></span><br><span class="line">            <span class="type">Constructor</span> <span class="variable">constructor</span> <span class="operator">=</span> c.getDeclaredConstructor();</span><br><span class="line">            <span class="comment">// 设置无参构造是可访问的</span></span><br><span class="line">            constructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">// 产生一个实例对象</span></span><br><span class="line">            singleton = (Singleton) constructor.newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.out.println(<span class="string">&quot;生成单例的工厂类方法中生成单例出错&quot;</span>);zuihou</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 生成单例的工厂类
+ * Created by blinkfox on 16-7-4.
+ */
+public class SingletonFactory &#123;
 
+    private static Singleton singleton;
+
+    static &#123;
+        try &#123;
+            Class c = Class.forName(Singleton.class.getName());
+            // 获得无参构造
+            Constructor constructor = c.getDeclaredConstructor();
+            // 设置无参构造是可访问的
+            constructor.setAccessible(true);
+            // 产生一个实例对象
+            singleton = (Singleton) constructor.newInstance();
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+            System.out.println(&quot;生成单例的工厂类方法中生成单例出错&quot;);zuihou
+        &#125;
+    &#125;
+
+    public static Singleton getSingleton() &#123;
+        return singleton;
+    &#125;
+&#125;
+</code></pre>
 <p>最后是工厂方法单例模式的客户端场景类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 工厂方法单例模式客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-4.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SingleClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Singleton</span> <span class="variable">singleton</span> <span class="operator">=</span> SingletonFactory.getSingleton();</span><br><span class="line">        singleton.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 工厂方法单例模式客户端场景类
+ * Created by blinkfox on 16-7-4.
+ */
+public class SingleClient &#123;
 
+    public static void main(String[] args) &#123;
+        Singleton singleton = SingletonFactory.getSingleton();
+        singleton.doSomething();
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="4-工厂方法的延迟初始化"><a href="#4-工厂方法的延迟初始化" class="headerlink" title="4. 工厂方法的延迟初始化"></a>4. 工厂方法的延迟初始化</h3><p>何为延迟初始化？一个对象被消费完毕后，并不立即释放，工厂类保持其初始状态，等待再次使用。延迟初始化是工厂模式的一个扩展应用，其通用代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 延迟加载的工厂类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-4.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LazyFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, Product&gt; lazyMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Product&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Product <span class="title function_">createProduct</span><span class="params">(String type)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果map中已经有这个对象，则直接取出该对象即可，否则创建并放在缓存容器中</span></span><br><span class="line">        <span class="keyword">if</span> (lazyMap.containsKey(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> lazyMap.get(type);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据类型创建具体的产品对象</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;product1&quot;</span>.equals(type)) &#123;</span><br><span class="line">            product = <span class="keyword">new</span> <span class="title class_">ConcreteProduct1</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            product = <span class="keyword">new</span> <span class="title class_">ConcreteProduct2</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 同时把对象放到缓存容器中</span></span><br><span class="line">        lazyMap.put(<span class="string">&quot;type&quot;</span>, product);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> product;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 延迟加载的工厂类
+ * Created by blinkfox on 16-7-4.
+ */
+public class LazyFactory &#123;
 
+    private static final Map&lt;String, Product&gt; lazyMap = new HashMap&lt;String, Product&gt;();
+
+    public static synchronized Product createProduct(String type) &#123;
+        Product product = null;
+
+        // 如果map中已经有这个对象，则直接取出该对象即可，否则创建并放在缓存容器中
+        if (lazyMap.containsKey(type)) &#123;
+            return lazyMap.get(type);
+        &#125;
+
+        // 根据类型创建具体的产品对象
+        if (&quot;product1&quot;.equals(type)) &#123;
+            product = new ConcreteProduct1();
+        &#125; else &#123;
+            product = new ConcreteProduct2();
+        &#125;
+        // 同时把对象放到缓存容器中
+        lazyMap.put(&quot;type&quot;, product);
+
+        return product;
+    &#125;
+
+&#125;
+</code></pre>
 <p>上面即为延迟加载的工厂类。代码比较简单，通过定义一个<code>map</code>容器来容纳所有产生的对象，如果在<code>map</code>容器中已经有的对象，则直接取出返回；如果没有，则根据需要的类型产生一个对象并放入到<code>map</code>容器中，以便下次调用。</p>
 <p>延迟加载的工厂模式客户端场景类代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 延迟加载的工厂模式客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-7-4.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LazyClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product1</span> <span class="operator">=</span> LazyFactory.createProduct(<span class="string">&quot;product1&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Product</span> <span class="variable">product11</span> <span class="operator">=</span> LazyFactory.createProduct(<span class="string">&quot;product1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 延迟加载的工厂模式客户端场景类
+ * Created by blinkfox on 16-7-4.
+ */
+public class LazyClient &#123;
 
+    public static void main(String[] args) &#123;
+        Product product1 = LazyFactory.createProduct(&quot;product1&quot;);
+
+        Product product11 = LazyFactory.createProduct(&quot;product1&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><ul>
 <li><p>工厂方法模式又称为工厂模式，它属于类创建型模式。在工厂方法模式中，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，这样做的目的是将产品类的实例化操作延迟到工厂子类中完成，即通过工厂子类来确定究竟应该实例化哪一个具体产品类。</p>
 </li>

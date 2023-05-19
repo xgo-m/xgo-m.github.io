@@ -438,11 +438,17 @@
 <h2 id="一、泛型-Generics"><a href="#一、泛型-Generics" class="headerlink" title="一、泛型(Generics)"></a>一、泛型(Generics)</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>Java语言引入泛型的好处是安全简单。可以将运行时错误提前到编译时错误。在Java5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的<strong>任意化</strong>，<strong>任意化</strong>带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。泛型的好处是在编译的时候检查类型安全，并且所有的强制转换都是自动和隐式的，提高代码的重用率。</p>
 <p>泛型的本质是<strong>参数化类型</strong>，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法中，分别称为泛型类、泛型接口、泛型方法。</p>
 <h3 id="2-泛型类、泛型接口"><a href="#2-泛型类、泛型接口" class="headerlink" title="2. 泛型类、泛型接口"></a>2. 泛型类、泛型接口</h3><p>泛型类中的类型参数几乎可以用于任何可以使用接口名、类名的地方。以下是Jdk中Map接口的定义：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Map</span>&lt;K,V&gt; &#123;</span><br><span class="line"></span><br><span class="line">    V <span class="title function_">get</span><span class="params">(Object key)</span>;</span><br><span class="line"></span><br><span class="line">    V <span class="title function_">put</span><span class="params">(K key, V value)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public interface Map&lt;K,V&gt; &#123;
 
+    V get(Object key);
+
+    V put(K key, V value);
+
+&#125;
+</code></pre>
 <p>当声明或者实例化一个泛型的对象时，必须指定类型参数的值：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, String&gt;();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Map&lt;Integer, String&gt; map = new HashMap&lt;Integer, String&gt;();
+</code></pre>
 <p>对于常见的泛型模式，推荐的名称是：</p>
 <ul>
 <li>K: 键</li>
@@ -451,25 +457,89 @@
 <li>T: 泛型</li>
 </ul>
 <h3 id="3-泛型方法"><a href="#3-泛型方法" class="headerlink" title="3. 泛型方法"></a>3. 泛型方法</h3><h4 id="1-定义泛型方法"><a href="#1-定义泛型方法" class="headerlink" title="(1). 定义泛型方法"></a>(1). 定义泛型方法</h4><p>泛型方法使得该方法能独立于类而产生变化。以下是一个基本的指导原则：<strong>无论何时，只要你能做到，你就应该尽量使用泛型方法</strong>。也就是说，如果使用泛型方法可以取代将整个类泛型化，那么就应该只使用泛型方法，因为它可以使事情更清楚明白。要定义泛型方法，只需<strong>将泛型参数列表置于返回值之前</strong>，就像下面这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericMethods</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当方法操作的引用数据类型不确定的时候，可以将泛型定义在方法上</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(T x)</span>&#123;</span><br><span class="line">        System.out.println(x.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">GenericMethods</span> <span class="variable">gm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericMethods</span>();</span><br><span class="line">        gm.f(<span class="number">99</span>);</span><br><span class="line">        gm.f(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class GenericMethods &#123;
 
+    //当方法操作的引用数据类型不确定的时候，可以将泛型定义在方法上
+    public &lt;T&gt; void f(T x)&#123;
+        System.out.println(x.getClass().getName());
+    &#125;
+
+    public static void main(String[] args) &#123;
+        GenericMethods gm = new GenericMethods();
+        gm.f(99);
+        gm.f(&quot;abc&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <h4 id="2-可变参数泛型方法"><a href="#2-可变参数泛型方法" class="headerlink" title="(2). 可变参数泛型方法"></a>(2). 可变参数泛型方法</h4><p>泛型方法与可变参数列表能很好地共存。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericVarargs</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">makeList</span><span class="params">(T... args)</span> &#123;</span><br><span class="line">        List&lt;T&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;T&gt;();</span><br><span class="line">        <span class="keyword">for</span>(T item:args) &#123;</span><br><span class="line">            result.add(item);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">List</span> <span class="variable">ls</span> <span class="operator">=</span> makeList(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">        ls = makeList(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>);</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">        ls = makeList(<span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>.split(<span class="string">&quot;&quot;</span>));</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class GenericVarargs &#123;
 
+    public static &lt;T&gt; List&lt;T&gt; makeList(T... args) &#123;
+        List&lt;T&gt; result = new ArrayList&lt;T&gt;();
+        for(T item:args) &#123;
+            result.add(item);
+        &#125;
+        return result;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        List ls = makeList(&quot;A&quot;);
+        System.out.println(ls);
+        ls = makeList(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;);
+        System.out.println(ls);
+        ls = makeList(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.split(&quot;&quot;));
+        System.out.println(ls);
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：静态方法无法访问类上定义的泛型。如果静态方法操作的引用数据类型不确定的时候，必须要将泛型定义在方法上。</p>
 </blockquote>
 <h3 id="4-泛型擦除"><a href="#4-泛型擦除" class="headerlink" title="4. 泛型擦除"></a>4. 泛型擦除</h3><p>看以下一段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ErasedTypeEquivalence</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;().getClass();</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;().getClass();</span><br><span class="line">        System.out.println(c1 == c2); <span class="comment">// 输出true.</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class ErasedTypeEquivalence &#123;
 
+    public static void main(String[] args) &#123;
+        Class c1 = new ArrayList&lt;String&gt;().getClass();
+        Class c2 = new ArrayList&lt;Integer&gt;().getClass();
+        System.out.println(c1 == c2); // 输出true.
+    &#125;
+
+&#125;
+</code></pre>
 <p>从以上代码的执行结果可以知道，<code>ArrayList&lt;String&gt;</code>和<code>ArrayList&lt;Integer&gt;</code>是相同的类型。Java中的泛型，只在编译阶段有效。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。也就是说，成功编译过后的class文件中是不包含任何泛型信息的。泛型信息不会进入到运行时阶段。</p>
 <p>要想在表达式中使用类型，需要显式地传递类型的class对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Building</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">class Building &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">House</span> <span class="keyword">extends</span> <span class="title class_">Building</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+&#125;
+</code></pre>
+<pre><code class="java">class House extends Building &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassTypeCapture</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Class&lt;T&gt; kind;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ClassTypeCapture</span><span class="params">(Class&lt;T&gt; kind)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.kind = kind;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">f</span><span class="params">(Object arg)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> kind.isInstance(arg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        ClassTypeCapture&lt;Building&gt; ctt1 = <span class="keyword">new</span> <span class="title class_">ClassTypeCapture</span>&lt;Building&gt;(Building.class);</span><br><span class="line">        System.out.println(ctt1.f(<span class="keyword">new</span> <span class="title class_">Building</span>())); <span class="comment">// true</span></span><br><span class="line">        System.out.println(ctt1.f(<span class="keyword">new</span> <span class="title class_">House</span>())); <span class="comment">// true</span></span><br><span class="line">        ClassTypeCapture&lt;House&gt; ctt2 = <span class="keyword">new</span> <span class="title class_">ClassTypeCapture</span>&lt;House&gt;(House.class);</span><br><span class="line">        System.out.println(ctt2.f(<span class="keyword">new</span> <span class="title class_">Building</span>())); <span class="comment">// false</span></span><br><span class="line">        System.out.println(ctt2.f(<span class="keyword">new</span> <span class="title class_">House</span>())); <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+&#125;
+</code></pre>
+<pre><code class="java">public class ClassTypeCapture&lt;T&gt; &#123;
 
+    Class&lt;T&gt; kind;
+
+    public ClassTypeCapture(Class&lt;T&gt; kind) &#123;
+        this.kind = kind;
+    &#125;
+
+    public boolean f(Object arg) &#123;
+        return kind.isInstance(arg);
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ClassTypeCapture&lt;Building&gt; ctt1 = new ClassTypeCapture&lt;Building&gt;(Building.class);
+        System.out.println(ctt1.f(new Building())); // true
+        System.out.println(ctt1.f(new House())); // true
+        ClassTypeCapture&lt;House&gt; ctt2 = new ClassTypeCapture&lt;House&gt;(House.class);
+        System.out.println(ctt2.f(new Building())); // false
+        System.out.println(ctt2.f(new House())); // true
+    &#125;
+&#125;
+</code></pre>
 <h3 id="5-通配符及泛型边界"><a href="#5-通配符及泛型边界" class="headerlink" title="5. 通配符及泛型边界"></a>5. 通配符及泛型边界</h3><ul>
 <li>通配符(<code>?</code>): 当操作类型时，不需要使用类型的具体功能时，只使用<code>Object</code>类中的功能。那么可以用<code>?</code>通配符来表未知类型。例如：<code>Class&lt;?&gt; classType = Class.forName(&quot;java.lang.String&quot;);</code>。</li>
 <li>上界(<code>? extends T</code>): 可以接收<code>T</code>类型或者其子类型的对象。</li>
@@ -490,26 +560,109 @@
 </li>
 </ul>
 <h2 id="二、增强for循环-Enhanced-for-Loop"><a href="#二、增强for循环-Enhanced-for-Loop" class="headerlink" title="二、增强for循环(Enhanced for Loop)"></a>二、增强for循环(Enhanced for Loop)</h2><p>在Java5中，引入了另一种形式的for循环来对集合、数组、Map等进行遍历。如以下示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] integers = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"><span class="comment">/* 开始遍历 */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i : integers) &#123;</span><br><span class="line">    System.out.println(i);<span class="comment">/* 依次输出“1”、“2”、“3”、“4” */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">int[] integers = &#123;1, 2, 3, 4&#125;;
+/* 开始遍历 */
+for (int i : integers) &#123;
+    System.out.println(i);/* 依次输出“1”、“2”、“3”、“4” */
+&#125;
+</code></pre>
 <p>借助增强for循环，可以用一种更简单地方式来完成遍历。能用这种方法遍历的对象的类型，可以是数组、<code>Collection</code>、<code>Map</code>或者任何其它实现了<code>java.lang.Iterable</code>接口的类。通过跟同样是在Java5中引入的泛型机制配合使用，可以精确的控制能采用的循环变量的类型。而且，因为这么编写的代码，会在编译期间被自动当成是和传统写法相同的形式，所以不必担心要额外付出性能方面的代价。</p>
 <blockquote>
 <p><strong>注</strong>：Java采用<code>for</code>（而不是意义更明确的<code>foreach</code>）来引导这种一般被叫做<strong>for-each循环</strong>的循环，并使用<code>:</code>（而不是意义更明确的<code>in</code>）来分割循环变量名称和要被遍历的对象。这样做的主要原因，是为了避免因为引入新的关键字，造成兼容性方面的问题——在Java语言中，不允许把关键字当作变量名来使用，虽然使用<code>foreach</code>这名字的情况并不是非常多，但是<code>in</code>却是一个经常用来表示输入流的名字（例如<code>java.lang.System</code>类里，就有一个名字叫做<code>in</code>的<code>static</code>属性，表示<strong>标准输入流</strong>）。</p>
 </blockquote>
 <h2 id="三、自动装箱拆箱-Autoboxing-x2F-Unboxing"><a href="#三、自动装箱拆箱-Autoboxing-x2F-Unboxing" class="headerlink" title="三、自动装箱拆箱(Autoboxing&#x2F;Unboxing)"></a>三、自动装箱拆箱(Autoboxing&#x2F;Unboxing)</h2><h3 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>自动装箱就是Java自动将原始类型值转换成对应的对象，比如将<code>int</code>的变量转换成<code>Integer</code>对象，这个过程叫做装箱，反之将<code>Integer</code>对象转换成<code>int</code>类型值，这个过程叫做拆箱。因为这里的装箱和拆箱是自动进行的非人为转换，所以就称作为自动装箱和拆箱。原始类型<code>byte</code>, <code>short</code>, <code>char</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>和<code>boolean</code>对应的封装类分别为<code>Byte</code>, <code>Short</code>, <code>Character</code>, <code>Integer</code>, <code>Long</code>, <code>Float</code>, <code>Double</code>, <code>Boolean</code>。</p>
 <p>自动装箱时编译器调用<code>valueOf</code>将原始类型值转换成对象，同时自动拆箱时，编译器通过调用类似<code>intValue()</code>, <code>doubleValue()</code>这类的方法将对象转换成原始类型值。自动装箱和拆箱在Java中很常见，比如我们有一个方法，接受一个对象类型的参数，如果我们传递一个原始类型值，那么Java会自动将这个原始类型值转换成与之对应的对象。最经典的一个场景就是当我们向<code>ArrayList</code>这样的容器中增加原始类型数据时，就会发生自动装箱。代码示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; intList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">intList.add(<span class="number">1</span>); <span class="comment">//自动装箱</span></span><br><span class="line">intList.add(<span class="number">2</span>); <span class="comment">// 自动装箱</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> intList.get(<span class="number">0</span>); <span class="comment">// 自动拆箱</span></span><br></pre></td></tr></table></figure>
+<pre><code class="java">ArrayList&lt;Integer&gt; intList = new ArrayList&lt;Integer&gt;();
+intList.add(1); //自动装箱
+intList.add(2); // 自动装箱
 
+int number = intList.get(0); // 自动拆箱
+</code></pre>
 <h3 id="2-对象相等的比较"><a href="#2-对象相等的比较" class="headerlink" title="2. 对象相等的比较"></a>2. 对象相等的比较</h3><p>这是一个比较容易出错的地方，<code>==</code>可以用于原始值进行比较，也可以用于对象进行比较，当用于对象与对象之间比较时，比较的不是对象代表的值，而是检查两个对象是否是同一对象，这个比较过程中<strong>没有自动装箱</strong>发生。进行对象值比较不应该使用<code>==</code>，而应该使用对象对应的<code>equals</code>方法。看一个能说明问题的例子。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoboxingTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="comment">// 示例 1: 使用&#x27;==&#x27;号进行原始类型的比较(没有自动装箱)</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;i1==i2 : &quot;</span> + (i1 == i2)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 示例 2: 使用&#x27;==&#x27;号进行原始类型和对象类型混合的比较(自动装箱)</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;num1 == num2 : &quot;</span> + (num1 == num2)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 示例 3: 使用&#x27;==&#x27;号进行Integer对象类型的比较(会有缓存的特殊情况)</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">obj1</span> <span class="operator">=</span> <span class="number">127</span>; <span class="comment">// 自动装箱将调用`Integer.valueOf()`且缓存该对象，以便重用</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">obj2</span> <span class="operator">=</span> <span class="number">127</span>; <span class="comment">// 获取已经缓存过的对象</span></span><br><span class="line">        System.out.println(<span class="string">&quot;obj1 == obj2 : &quot;</span> + (obj1 == obj2)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">// 示例 4: 使用&#x27;==&#x27;号进行Integer对象类型的比较(不会缓存)</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">obj3</span> <span class="operator">=</span> <span class="number">128</span>; <span class="comment">// 自动装箱将调用`Integer.valueOf()`不缓存该对象</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">obj4</span> <span class="operator">=</span> <span class="number">128</span>; <span class="comment">// 同样是自动装箱将调用`Integer.valueOf()`</span></span><br><span class="line">        System.out.println(<span class="string">&quot;obj3 == obj4 : &quot;</span> + (obj3 == obj4)); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 示例 5: 使用&#x27;==&#x27;号进行`new`出来的新`Integer`对象类型的比较</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">one</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>); <span class="comment">// no autoboxing</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">anotherOne</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;one == anotherOne : &quot;</span> + (one == anotherOne)); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class AutoboxingTest &#123;
 
+    public static void main(String args[]) &#123;
+        // 示例 1: 使用&#39;==&#39;号进行原始类型的比较(没有自动装箱)
+        int i1 = 1;
+        int i2 = 1;
+        System.out.println(&quot;i1==i2 : &quot; + (i1 == i2)); // true
+
+        // 示例 2: 使用&#39;==&#39;号进行原始类型和对象类型混合的比较(自动装箱)
+        Integer num1 = 1;
+        int num2 = 1;
+        System.out.println(&quot;num1 == num2 : &quot; + (num1 == num2)); // true
+
+        // 示例 3: 使用&#39;==&#39;号进行Integer对象类型的比较(会有缓存的特殊情况)
+        Integer obj1 = 127; // 自动装箱将调用`Integer.valueOf()`且缓存该对象，以便重用
+        Integer obj2 = 127; // 获取已经缓存过的对象
+        System.out.println(&quot;obj1 == obj2 : &quot; + (obj1 == obj2)); // true
+
+       // 示例 4: 使用&#39;==&#39;号进行Integer对象类型的比较(不会缓存)
+        Integer obj3 = 128; // 自动装箱将调用`Integer.valueOf()`不缓存该对象
+        Integer obj4 = 128; // 同样是自动装箱将调用`Integer.valueOf()`
+        System.out.println(&quot;obj3 == obj4 : &quot; + (obj3 == obj4)); // false
+
+        // 示例 5: 使用&#39;==&#39;号进行`new`出来的新`Integer`对象类型的比较
+        Integer one = new Integer(1); // no autoboxing
+        Integer anotherOne = new Integer(1);
+        System.out.println(&quot;one == anotherOne : &quot; + (one == anotherOne)); // false
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="3-缓存部分对象"><a href="#3-缓存部分对象" class="headerlink" title="3. 缓存部分对象"></a>3. 缓存部分对象</h3><p>输出结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i1==i2 : <span class="literal">true</span></span><br><span class="line">num1 == num2 : <span class="literal">true</span></span><br><span class="line">obj1 == obj2 : <span class="literal">true</span></span><br><span class="line">obj3 == obj4 : <span class="literal">false</span></span><br><span class="line">one == anotherOne : <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">i1==i2 : true
+num1 == num2 : true
+obj1 == obj2 : true
+obj3 == obj4 : false
+one == anotherOne : false
+</code></pre>
 <p>在 Java5 中，为<code>Integer</code>的操作引入了一个新的特性，会对<code>-128</code>到<code>127</code>的<code>Integer</code>对象进行缓存，当创建新的<code>Integer</code>对象时，如果符合这个这个范围，并且已有存在的相同值的对象，则返回这个对象，否则创建新的<code>Integer</code>对象。这种<code>Integer</code>缓存策略仅在<strong>自动装箱（autoboxing）</strong>的时候有用，使用构造器创建的<code>Integer</code>对象不能被缓存。</p>
 <p><code>Integer</code>类中有一个专门的私有静态内部类<code>IntegerCache</code>来负责<code>Integer</code>的缓存。代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cache to support the object identity semantics of autoboxing for values between</span></span><br><span class="line"><span class="comment"> * -128 and 127 (inclusive) as required by JLS.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * The cache is initialized on first usage.  The size of the cache</span></span><br><span class="line"><span class="comment"> * may be controlled by the &#123;<span class="doctag">@code</span> -XX:AutoBoxCacheMax=&lt;size&gt;&#125; option.</span></span><br><span class="line"><span class="comment"> * During VM initialization, java.lang.Integer.IntegerCache.high property</span></span><br><span class="line"><span class="comment"> * may be set and saved in the private system properties in the</span></span><br><span class="line"><span class="comment"> * sun.misc.VM class.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">IntegerCache</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> -<span class="number">128</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> high;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Integer cache[];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">// high value may be configured by property</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">h</span> <span class="operator">=</span> <span class="number">127</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">integerCacheHighPropValue</span> <span class="operator">=</span></span><br><span class="line">            sun.misc.VM.getSavedProperty(<span class="string">&quot;java.lang.Integer.IntegerCache.high&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (integerCacheHighPropValue != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> parseInt(integerCacheHighPropValue);</span><br><span class="line">                i = Math.max(i, <span class="number">127</span>);</span><br><span class="line">                <span class="comment">// Maximum array size is Integer.MAX_VALUE</span></span><br><span class="line">                h = Math.min(i, Integer.MAX_VALUE - (-low) -<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span>( NumberFormatException nfe) &#123;</span><br><span class="line">                <span class="comment">// If the property cannot be parsed into an int, ignore it.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        high = h;</span><br><span class="line"></span><br><span class="line">        cache = <span class="keyword">new</span> <span class="title class_">Integer</span>[(high - low) + <span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> low;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; cache.length; k++)</span><br><span class="line">            cache[k] = <span class="keyword">new</span> <span class="title class_">Integer</span>(j++);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// range [-128, 127] must be interned (JLS7 5.1.7)</span></span><br><span class="line">        <span class="keyword">assert</span> IntegerCache.high &gt;= <span class="number">127</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">IntegerCache</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * Cache to support the object identity semantics of autoboxing for values between
+ * -128 and 127 (inclusive) as required by JLS.
+ *
+ * The cache is initialized on first usage.  The size of the cache
+ * may be controlled by the &#123;@code -XX:AutoBoxCacheMax=&lt;size&gt;&#125; option.
+ * During VM initialization, java.lang.Integer.IntegerCache.high property
+ * may be set and saved in the private system properties in the
+ * sun.misc.VM class.
+ */
+private static class IntegerCache &#123;
+    static final int low = -128;
+    static final int high;
+    static final Integer cache[];
 
+    static &#123;
+        // high value may be configured by property
+        int h = 127;
+        String integerCacheHighPropValue =
+            sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);
+        if (integerCacheHighPropValue != null) &#123;
+            try &#123;
+                int i = parseInt(integerCacheHighPropValue);
+                i = Math.max(i, 127);
+                // Maximum array size is Integer.MAX_VALUE
+                h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
+            &#125; catch( NumberFormatException nfe) &#123;
+                // If the property cannot be parsed into an int, ignore it.
+            &#125;
+        &#125;
+        high = h;
+
+        cache = new Integer[(high - low) + 1];
+        int j = low;
+        for(int k = 0; k &lt; cache.length; k++)
+            cache[k] = new Integer(j++);
+
+        // range [-128, 127] must be interned (JLS7 5.1.7)
+        assert IntegerCache.high &gt;= 127;
+    &#125;
+
+    private IntegerCache() &#123;&#125;
+&#125;
+</code></pre>
 <p>Javadoc详细的说明这个类是用来实现缓存支持，并支持<code>-128</code>到<code>127</code>之间的自动装箱过程。最大值<code>127</code>可以通过JVM的启动参数<code>-XX:AutoBoxCacheMax=size</code>修改。 缓存通过一个<code>for</code>循环实现。从小到大的创建尽可能多的整数并存储在一个名为<code>cache</code>的整数数组中。这个缓存会在<code>Integer</code>类第一次被使用的时候被初始化出来。以后，就可以使用缓存中包含的实例对象，而不是创建一个新的实例(在自动装箱的情况下)。</p>
 <p>这种缓存行为不仅适用于<code>Integer</code>对象。我们针对所有整数类型的类都有类似的缓存机制。</p>
 <ul>
@@ -523,21 +676,34 @@
 <p><strong>注</strong>：在Java中另一个节省内存的例子就是<strong>字符串常量池</strong>。</p>
 </blockquote>
 <h3 id="4-自动装箱拆箱的隐患"><a href="#4-自动装箱拆箱的隐患" class="headerlink" title="4. 自动装箱拆箱的隐患"></a>4. 自动装箱拆箱的隐患</h3><p>另一个需要避免的问题就是混乱使用对象和原始数据值，一个具体的例子就是当我们在一个原始数据值与一个对象进行比较时，如果这个对象没有进行初始化或者为<code>null</code>，在自动拆箱过程中<code>obj.xxxValue</code>，会抛出<code>NullPointerException</code>，如下面的代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Integer count;</span><br><span class="line"></span><br><span class="line"><span class="comment">//NullPointerException on unboxing</span></span><br><span class="line"><span class="keyword">if</span> (count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Count is not started yet&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">private static Integer count;
 
+//NullPointerException on unboxing
+if (count &lt;= 0) &#123;
+    System.out.println(&quot;Count is not started yet&quot;);
+&#125;
+</code></pre>
 <p>因为自动装箱会隐式地创建对象，像前面提到的那样，如果在一个循环体中，会创建无用的中间对象，这样会增加GC压力，拉低程序的性能。所以在写循环时一定要注意代码，避免引入不必要的自动装箱操作。</p>
 <h2 id="四、枚举-Enums"><a href="#四、枚举-Enums" class="headerlink" title="四、枚举(Enums)"></a>四、枚举(Enums)</h2><p>枚举（<code>enum</code>全称为<code>enumeration</code>）类型是 Java5 新增的类型，存放在<code>java.lang</code>包中，允许用常量来表示特定的数据片断，而且全部都以类型安全的形式来表示。</p>
 <p>关于枚举的介绍，这里就不再细讲了，请参考我以前所整理的<a target="_blank" rel="noopener" href="http://blinkfox.com/java-mei-ju-zhi-shi-zheng-li/">Java 枚举知识整理</a>一文。</p>
 <h2 id="五、可变参数-Varargs"><a href="#五、可变参数-Varargs" class="headerlink" title="五、可变参数(Varargs)"></a>五、可变参数(Varargs)</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><p>在 Java5 中提供了可变参数（<code>Varargs</code>），也就是在方法定义中可以使用个数不确定的参数，对于同一方法可以使用不同个数的参数调用，例如<code>print(&quot;hello&quot;);</code>、<code>print(&quot;hello&quot;,&quot;lisi&quot;);</code>等。下面介绍如何定义可变长参数以及如何使用可变长参数。</p>
 <p>使用<code>...</code>表示可变长参数，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(String... args) &#123;</span><br><span class="line">   <span class="comment">// 方法代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">print(String... args) &#123;
+   // 方法代码
+&#125;
+</code></pre>
 <p>在具有可变长参数的方法中可以把参数当成数组使用，例如可以循环输出所有的参数值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(String... args) &#123;</span><br><span class="line">    <span class="keyword">for</span>(String temp:args) &#123;</span><br><span class="line">        System.out.println(temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">print(String... args) &#123;
+    for(String temp:args) &#123;
+        System.out.println(temp);
+    &#125;
+&#125;
+</code></pre>
 <p>调用的时候可以给出任意多个参数也可不给参数，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print();</span><br><span class="line">print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">print(<span class="string">&quot;hello&quot;</span>,<span class="string">&quot;lisi&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">print();
+print(&quot;hello&quot;);
+print(&quot;hello&quot;,&quot;lisi&quot;);
+</code></pre>
 <h3 id="2-可变参数的使用规则"><a href="#2-可变参数的使用规则" class="headerlink" title="2. 可变参数的使用规则"></a>2. 可变参数的使用规则</h3><ul>
 <li>拥有可变参数的方法可以被重载，在调用方法的时候，如果能够和固定参数的方法匹配，也能够与可变参数的方法匹配，则执行时会选择固定参数的方法。</li>
 <li>如果要调用的方法可以和两个可变参数匹配，则编译不会通过。</li>
@@ -557,22 +723,129 @@
 </ul>
 <h2 id="六、静态导入-Static-Import"><a href="#六、静态导入-Static-Import" class="headerlink" title="六、静态导入(Static Import)"></a>六、静态导入(Static Import)</h2><p><code>import static</code>，即静态导入是JDK5中的新特性。一般我们导入一个类都用<code>import com.xxx.ClassName;</code>，而静态导入是这样的：<code>import static com.xxx.ClassName.*;</code>。这里多了个<code>static</code>，还有就是类名<code>ClassName</code>后面多了个<code>.*</code>，意思是导入这个类里的所有静态方法。当然，也可以只导入某个静态方法，只要把<code>.*</code>换成具体的静态方法名就行了。然后在这个类中，就可以直接用方法名调用静态方法，而不必用<code>ClassName.方法名</code>的方式来调用。</p>
 <p>静态导入之前的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">r</span> <span class="operator">=</span> Math.cos(Math.PI * theta);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">double r = Math.cos(Math.PI * theta);
+</code></pre>
 <p>使用静态导入之后的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.*;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="variable">r</span> <span class="operator">=</span> cos(PI * theta);</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import static java.lang.Math.*;
 
+double r = cos(PI * theta);
+</code></pre>
 <p><strong>当你需要频繁访问一个或两个类的静态成员、静态方法时才使用静态导入</strong>。如果您过度的使用了静态导入功能，则可能导致您的程序无法读取且无法维护，从而导致您导入的所有静态成员和方法污染其名称空间。你的代码读者（包括你，在你写了几个月后）不会知道静态成员来自哪个类。从类中导入所有静态成员对可读性尤其有害，如果您只需要一个或两个成员，请单独导入它们。使用适当的，静态导入可以使您的程序更具可读性，通过删除重复的类名称，来减少样板代码。</p>
 <h2 id="七、注解-Annotations"><a href="#七、注解-Annotations" class="headerlink" title="七、注解(Annotations)"></a>七、注解(Annotations)</h2><p>关于注解的介绍，这里就不再细讲了，请参考我前段时间所写的<a target="_blank" rel="noopener" href="http://blinkfox.com/javazhu-jie-de-li-jie-he-ying-yong/">Java注解的理解和应用</a>一文。</p>
 <h2 id="八、值得关注"><a href="#八、值得关注" class="headerlink" title="八、值得关注"></a>八、值得关注</h2><h3 id="1-新增ProcessBuilder类"><a href="#1-新增ProcessBuilder类" class="headerlink" title="1. 新增ProcessBuilder类"></a>1. 新增ProcessBuilder类</h3><p><code>ProcessBuilder</code>类是Java5在<code>java.lang</code>包中新添加的一个新类，此类用于创建操作系统进程，它提供一种启动和管理进程（也就是应用程序）的方法。在此之前，都是由<code>Process</code>类处来实现进程的控制管理。每个<code>ProcessBuilder</code>实例管理一个进程属性集。它的<code>start()</code>方法利用这些属性创建一个新的<code>Process</code>实例。<code>start()</code>方法可以从同一实例重复调用，以利用相同的或相关的属性创建新的子进程。</p>
 <p><code>ProcessBuilder</code>是一个<code>final</code>类，有两个带参数的构造方法，你可以通过构造方法来直接创建<code>ProcessBuilder</code>的对象。而<code>Process</code>是一个抽象类，一般都通过<code>Runtime.exec()</code>和<code>ProcessBuilder.start()</code>来间接创建其实例。<code>ProcessBuilder</code>为进程提供了更多的控制，例如，可以设置当前工作目录，还可以改变环境参数。而<code>Process</code>类的功能相对来说简单的多。<code>ProcessBuilder</code>类不是同步的。如果多个线程同时访问一个<code>ProcessBuilder</code>，而其中至少一个线程从结构上修改了其中一个属性，它必须保持外部同步。</p>
 <p>若要使用<code>ProcessBuilder</code>创建一个进程，只需要创建<code>ProcessBuilder</code>的一个实例，指定该进程的名称和所需参数。要执行此程序，调用该实例上的<code>start()</code>即可。下面是一个执行打开<code>Windows</code>记事本的例子。注意它将要编辑的文件名指定为一个参数。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PBDemo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">ProcessBuilder</span> <span class="variable">proc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProcessBuilder</span>(<span class="string">&quot;notepad.exe&quot;</span>, <span class="string">&quot;testfile&quot;</span>);</span><br><span class="line">            proc.start();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Error executing notepad.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">class PBDemo &#123;
 
+    public static void main(String args[]) &#123;
+        try &#123;
+            ProcessBuilder proc = new ProcessBuilder(&quot;notepad.exe&quot;, &quot;testfile&quot;);
+            proc.start();
+        &#125; catch (Exception e) &#123;
+            System.out.println(&quot;Error executing notepad.&quot;);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="2-新增Formatter格式化器-Formatter"><a href="#2-新增Formatter格式化器-Formatter" class="headerlink" title="2. 新增Formatter格式化器(Formatter)"></a>2. 新增Formatter格式化器(Formatter)</h3><p><code>Formatter</code>类是Java5中新增的<code>printf-style</code>格式化字符串的解释器，它提供对布局和对齐的支持，提供了对数字，字符串和日期&#x2F;时间数据的常用格式以及特定于语言环境的输出。常见的Java类型，如<code>byte</code>，<code>java.math.BigDecimal</code>和<code>java.util.Calendar</code>都支持。 通过<code>java.util.Formattable</code>接口提供了针对任意用户类型的有限格式定制。</p>
 <p>更详细的介绍见<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html">这里</a>。主要使用方法的代码示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.text.MessageFormat;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 格式化测试使用的示例类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-11-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FormatTester</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(FormatTester.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 格式化.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">formatter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="type">Formatter</span> <span class="variable">formatter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Formatter</span>(sb, Locale.US);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可重新排序输出.</span></span><br><span class="line">        formatter.format(<span class="string">&quot;%n%4$2s %3$2s %2$2s %1$2s %n&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>); <span class="comment">// -&gt; &quot; d  c  b  a&quot;</span></span><br><span class="line">        formatter.format(Locale.FRANCE, <span class="string">&quot;e = %+10.4f&quot;</span>, Math.E); <span class="comment">// -&gt; &quot;e =    +2,7183&quot;</span></span><br><span class="line">        formatter.format(<span class="string">&quot;%nAmount gained or lost since last statement: $ %(,.2f&quot;</span>, <span class="number">6217.58</span>);</span><br><span class="line">        <span class="comment">// -&gt; &quot;Amount gained or lost since last statement: $ 6,217.58&quot;</span></span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;打印出格式化后的字符串:&#123;&#125;&quot;</span>, formatter);</span><br><span class="line">        formatter.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * printf打印.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printf</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">filename</span> <span class="operator">=</span> <span class="string">&quot;testfile&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">FileReader</span> <span class="variable">fileReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(filename)) &#123;</span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(fileReader);</span><br><span class="line">            String line;</span><br><span class="line">            <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> ((line = reader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;Line %d: %s%n&quot;</span>, i++, line);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.err.printf(<span class="string">&quot;Unable to open file named &#x27;%s&#x27;: %s&quot;</span>, filename, e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * stringFormat使用.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">stringFormat</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 格式化日期.</span></span><br><span class="line">        <span class="type">Calendar</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GregorianCalendar</span>(<span class="number">1995</span>, Calendar.MAY, <span class="number">23</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> String.format(<span class="string">&quot;Duke&#x27;s Birthday: %1$tm %1$te,%1$tY&quot;</span>, c);</span><br><span class="line">        <span class="comment">// -&gt; s == &quot;Duke&#x27;s Birthday: May 23, 1995&quot;</span></span><br><span class="line">        log.info(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 格式化消息.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">messageFormat</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="string">&quot;欢迎光临，当前（&#123;0&#125;）等待的业务受理的顾客有&#123;1&#125;位，请排号办理业务！&quot;</span>;</span><br><span class="line">        <span class="type">MessageFormat</span> <span class="variable">mf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MessageFormat</span>(msg);</span><br><span class="line">        <span class="type">String</span> <span class="variable">fmsg</span> <span class="operator">=</span> mf.format(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="keyword">new</span> <span class="title class_">Date</span>(), <span class="number">35</span>&#125;);</span><br><span class="line">        log.info(fmsg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 格式化日期.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">dateFormat</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;2010-1-10 17:39:21&quot;</span>;</span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">format</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyyMMddHHmmss&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            log.info(<span class="string">&quot;格式化后的日期:&#123;&#125;&quot;</span>, format.format(format.parse(str)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;日期格式化出错！&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        formatter();</span><br><span class="line">        stringFormat();</span><br><span class="line">        messageFormat();</span><br><span class="line">        dateFormat();</span><br><span class="line">        printf();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import java.io.BufferedReader;
+import java.io.FileReader;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * 格式化测试使用的示例类.
+ *
+ * @author blinkfox on 2017-11-28.
+ */
+public class FormatTester &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(FormatTester.class);
+
+    /**
+     * 格式化.
+     */
+    private static void formatter() &#123;
+        StringBuilder sb = new StringBuilder();
+        Formatter formatter = new Formatter(sb, Locale.US);
+
+        // 可重新排序输出.
+        formatter.format(&quot;%n%4$2s %3$2s %2$2s %1$2s %n&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;); // -&gt; &quot; d  c  b  a&quot;
+        formatter.format(Locale.FRANCE, &quot;e = %+10.4f&quot;, Math.E); // -&gt; &quot;e =    +2,7183&quot;
+        formatter.format(&quot;%nAmount gained or lost since last statement: $ %(,.2f&quot;, 6217.58);
+        // -&gt; &quot;Amount gained or lost since last statement: $ 6,217.58&quot;
+
+        log.info(&quot;打印出格式化后的字符串:&#123;&#125;&quot;, formatter);
+        formatter.close();
+    &#125;
+
+    /**
+     * printf打印.
+     */
+    private static void printf() &#123;
+        String filename = &quot;testfile&quot;;
+        try (FileReader fileReader = new FileReader(filename)) &#123;
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line;
+            int i = 1;
+            while ((line = reader.readLine()) != null) &#123;
+                System.out.printf(&quot;Line %d: %s%n&quot;, i++, line);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            System.err.printf(&quot;Unable to open file named &#39;%s&#39;: %s&quot;, filename, e.getMessage());
+        &#125;
+    &#125;
+
+    /**
+     * stringFormat使用.
+     */
+    private static void stringFormat() &#123;
+        // 格式化日期.
+        Calendar c = new GregorianCalendar(1995, Calendar.MAY, 23);
+        String s = String.format(&quot;Duke&#39;s Birthday: %1$tm %1$te,%1$tY&quot;, c);
+        // -&gt; s == &quot;Duke&#39;s Birthday: May 23, 1995&quot;
+        log.info(s);
+    &#125;
+
+    /**
+     * 格式化消息.
+     */
+    private static void messageFormat() &#123;
+        String msg = &quot;欢迎光临，当前（&#123;0&#125;）等待的业务受理的顾客有&#123;1&#125;位，请排号办理业务！&quot;;
+        MessageFormat mf = new MessageFormat(msg);
+        String fmsg = mf.format(new Object[]&#123;new Date(), 35&#125;);
+        log.info(fmsg);
+    &#125;
+
+    /**
+     * 格式化日期.
+     */
+    private static void dateFormat() &#123;
+        String str = &quot;2010-1-10 17:39:21&quot;;
+        SimpleDateFormat format = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);
+        try &#123;
+            log.info(&quot;格式化后的日期:&#123;&#125;&quot;, format.format(format.parse(str)));
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;日期格式化出错！&quot;, e);
+        &#125;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        formatter();
+        stringFormat();
+        messageFormat();
+        dateFormat();
+        printf();
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="3-新增Scanner类-Scanner"><a href="#3-新增Scanner类-Scanner" class="headerlink" title="3. 新增Scanner类(Scanner)"></a>3. 新增Scanner类(Scanner)</h3><p><code>java.util.Scanner</code>是Java5的新特征，主要功能是简化文本扫描，但这个类最实用的地方还是在获取控制台输入。</p>
 <h4 id="1-Scanner概述"><a href="#1-Scanner概述" class="headerlink" title="(1). Scanner概述"></a>(1). Scanner概述</h4><p>可以从字符串(<code>Readable</code>)、输入流、文件、Channel等来直接构造Scanner对象，有了Scanner了，就可以逐段（根据正则分隔式）来扫描整个文本，并对扫描后的结果做想要的处理。</p>
 <p><code>Scanner</code>默认使用<strong>空格</strong>作为分割符来分隔文本，但允许你使用<code>useDelimiter(Pattern pattern)</code>或<code>useDelimiter(String pattern)</code>方法来指定新的分隔符。</p>
@@ -585,17 +858,46 @@
 <li><code>nextLine()</code>: 此扫描器执行当前行，并返回跳过的输入信息。</li>
 </ul>
 <h4 id="2-扫描控制台输入"><a href="#2-扫描控制台输入" class="headerlink" title="(2). 扫描控制台输入"></a>(2). 扫描控制台输入</h4><p>当通过<code>new Scanner(System.in)</code>创建了一个<code>Scanner</code>实例时，控制台会一直等待输入，直到敲回车键结束，把所输入的内容传给<code>Scanner</code>，作为扫描对象。如果要获取输入的内容，则只需要调用<code>Scanner</code>的<code>nextLine()</code>方法即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 扫描控制台输入.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> blinkfox 2017-11-28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScannerTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入字符串：&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> s.nextLine();</span><br><span class="line">            <span class="keyword">if</span> (line.equals(<span class="string">&quot;exit&quot;</span>)) <span class="keyword">break</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;&gt;&gt;&gt;&quot;</span> + line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+* 扫描控制台输入.
+*
+* @author blinkfox 2017-11-28
+*/
+public class ScannerTest &#123;
 
+    public static void main(String[] args) &#123;
+        Scanner s = new Scanner(System.in);
+        System.out.println(&quot;请输入字符串：&quot;);
+        while (true) &#123;
+            String line = s.nextLine();
+            if (line.equals(&quot;exit&quot;)) break;
+            System.out.println(&quot;&gt;&gt;&gt;&quot; + line);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <h4 id="3-其它示例"><a href="#3-其它示例" class="headerlink" title="(3).其它示例"></a>(3).其它示例</h4><p>该示例中会从<code>myNumbers</code>文件中读取长整型<code>long</code>的数据。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;myNumbers&quot;</span>));</span><br><span class="line"><span class="keyword">while</span> (sc.hasNextLong()) &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">aLong</span> <span class="operator">=</span> sc.nextLong();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Scanner sc = new Scanner(new File(&quot;myNumbers&quot;));
+while (sc.hasNextLong()) &#123;
+    long aLong = sc.nextLong();
+&#125;
+</code></pre>
 <p>以下示例可以使用除空格之外的分隔符来从一个字符串中读取几个条目：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> <span class="string">&quot;1 fish 2 fish red fish blue fish&quot;</span>;</span><br><span class="line"><span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(input).useDelimiter(<span class="string">&quot;\\s*fish\\s*&quot;</span>);</span><br><span class="line">System.out.println(s.nextInt());</span><br><span class="line">System.out.println(s.nextInt());</span><br><span class="line">System.out.println(s.next());</span><br><span class="line">System.out.println(s.next());</span><br><span class="line">s.close();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">String input = &quot;1 fish 2 fish red fish blue fish&quot;;
+Scanner s = new Scanner(input).useDelimiter(&quot;\\s*fish\\s*&quot;);
+System.out.println(s.nextInt());
+System.out.println(s.nextInt());
+System.out.println(s.next());
+System.out.println(s.next());
+s.close();
+</code></pre>
 <p>将输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">red</span><br><span class="line">blue</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">1
+2
+red
+blue
+</code></pre>
 <h3 id="4-增强反射功能-Reflection"><a href="#4-增强反射功能-Reflection" class="headerlink" title="4. 增强反射功能(Reflection)"></a>4. 增强反射功能(Reflection)</h3><p>Java5反射功能方面的增强主要在<code>java.lang.Class</code>和<code>java.lang.reflect</code>类中。</p>
 <p>主要有以下内容增强：</p>
 <ul>

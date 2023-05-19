@@ -416,29 +416,118 @@
             <div id="articleContent">
                 <h2 id="1-sort-文本排序"><a href="#1-sort-文本排序" class="headerlink" title="1. sort - 文本排序"></a>1. sort - 文本排序</h2><p><code>sort</code>命令用于将文本文件的行排序。默认情况下，<code>sort</code>命令是按照字符串的字母顺序排序。</p>
 <p>sort 的常用命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文本内容按字母顺序排序</span></span><br><span class="line"><span class="built_in">sort</span> example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -u 选项，移除所有重复行后排序</span></span><br><span class="line"><span class="built_in">sort</span> -u example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -n 选项，将令数字按数值的大小排序</span></span><br><span class="line"><span class="built_in">sort</span> -n example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -r 选项，以倒序方式排序</span></span><br><span class="line"><span class="built_in">sort</span> -n -r example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将 file1、file2 的内容排序</span></span><br><span class="line"><span class="built_in">sort</span> file1 file2</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 将文本内容按字母顺序排序
+sort example.txt
 
+# 使用 -u 选项，移除所有重复行后排序
+sort -u example.txt
+
+# 使用 -n 选项，将令数字按数值的大小排序
+sort -n example.txt
+
+# 使用 -r 选项，以倒序方式排序
+sort -n -r example.txt
+
+# 同时将 file1、file2 的内容排序
+sort file1 file2
+</code></pre>
 <h2 id="2-uniq-文本去重"><a href="#2-uniq-文本去重" class="headerlink" title="2.uniq - 文本去重"></a>2.uniq - 文本去重</h2><p><code>uniq</code>命令用于移除或发现文件中重复的条目。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 它将移除文件中重复的行并显示单一行</span></span><br><span class="line"><span class="built_in">uniq</span> example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以统计重复行出现的次数</span></span><br><span class="line"><span class="built_in">uniq</span> -c example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -d 选项，只显示文件中有重复的行并只显示一次</span></span><br><span class="line"><span class="built_in">uniq</span> -d example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -D 选项，显示文件中所有重复的行</span></span><br><span class="line"><span class="built_in">uniq</span> -D example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -u 选项，只显示文件中不重复的行</span></span><br><span class="line"><span class="built_in">uniq</span> -u example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -w 选项，限制 uniq 命令只比较每行的前 3 个字符是否重复</span></span><br><span class="line"><span class="built_in">uniq</span> -w 3 example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -s 选项，避免 uniq 命令比较每行的前 3 个字符，只比较后面的字符是否重复</span></span><br><span class="line"><span class="built_in">uniq</span> -s 3 example.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -f 选项，避免 uniq 命令比较第一列的内容，只比较后面的字符是否重复</span></span><br><span class="line"><span class="built_in">uniq</span> -f 1 example.txt</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 它将移除文件中重复的行并显示单一行
+uniq example.txt
 
+# 可以统计重复行出现的次数
+uniq -c example.txt
+
+# 使用 -d 选项，只显示文件中有重复的行并只显示一次
+uniq -d example.txt
+
+# 使用 -D 选项，显示文件中所有重复的行
+uniq -D example.txt
+
+# 使用 -u 选项，只显示文件中不重复的行
+uniq -u example.txt
+
+# 使用 -w 选项，限制 uniq 命令只比较每行的前 3 个字符是否重复
+uniq -w 3 example.txt
+
+# 使用 -s 选项，避免 uniq 命令比较每行的前 3 个字符，只比较后面的字符是否重复
+uniq -s 3 example.txt
+
+# 使用 -f 选项，避免 uniq 命令比较第一列的内容，只比较后面的字符是否重复
+uniq -f 1 example.txt
+</code></pre>
 <h2 id="3-tr-替换或删除字符"><a href="#3-tr-替换或删除字符" class="headerlink" title="3.tr - 替换或删除字符"></a>3.tr - 替换或删除字符</h2><p><code>tr</code>命令主要用于删除文件中控制字符或进行字符转换。使用<code>tr</code>时要转换两个字符串：字符串 1 用于查询，字符串 2 用于处理各种转换。<code>tr</code>刚执行时，字符串 1 中的字符被映射到字符串 2 中的字符，然后转换操作开始。</p>
 <p><code>tr</code>命令的语法如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tr</span> [OPTION]... SET1 [SET2]</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">tr [OPTION]... SET1 [SET2]
+</code></pre>
 <p>常用命令示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 若要将大括号转换为小括号</span></span><br><span class="line"><span class="built_in">tr</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> <span class="string">&#x27;()&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要将大括号转换成方括号</span></span><br><span class="line"><span class="built_in">tr</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> <span class="string">&#x27;\[]&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要将小写字符转换成大写，请输入：</span></span><br><span class="line"><span class="built_in">tr</span> <span class="string">&#x27;a-z&#x27;</span> <span class="string">&#x27;A-Z&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要创建一个文件中的单词列表</span></span><br><span class="line"><span class="built_in">tr</span> -cs <span class="string">&#x27;[:lower:][:upper:]&#x27;</span> <span class="string">&#x27;[\n*]&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要从某个文件中删除所有空字符</span></span><br><span class="line"><span class="built_in">tr</span> -d <span class="string">&#x27;\0&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要用单独的换行替换每一序列的一个或多个换行，请输入：</span></span><br><span class="line"><span class="built_in">tr</span> -s <span class="string">&#x27;\n&#x27;</span> &lt; textfile &gt; newfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要以单个“#”字符替换 &lt;space&gt; 字符类中的每个字符序列</span></span><br><span class="line"><span class="built_in">tr</span> -s <span class="string">&#x27;[:space:]&#x27;</span> <span class="string">&#x27;[#*]&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 若要将大括号转换为小括号
+tr &#39;&#123;&#125;&#39; &#39;()&#39; &lt; textfile &gt; newfile
 
+# 若要将大括号转换成方括号
+tr &#39;&#123;&#125;&#39; &#39;\[]&#39; &lt; textfile &gt; newfile
+
+# 若要将小写字符转换成大写，请输入：
+tr &#39;a-z&#39; &#39;A-Z&#39; &lt; textfile &gt; newfile
+
+# 若要创建一个文件中的单词列表
+tr -cs &#39;[:lower:][:upper:]&#39; &#39;[\n*]&#39; &lt; textfile &gt; newfile
+
+# 若要从某个文件中删除所有空字符
+tr -d &#39;\0&#39; &lt; textfile &gt; newfile
+
+# 若要用单独的换行替换每一序列的一个或多个换行，请输入：
+tr -s &#39;\n&#39; &lt; textfile &gt; newfile
+
+# 要以单个“#”字符替换 &lt;space&gt; 字符类中的每个字符序列
+tr -s &#39;[:space:]&#39; &#39;[#*]&#39;
+</code></pre>
 <h2 id="4-grep-查找字符串"><a href="#4-grep-查找字符串" class="headerlink" title="4.grep - 查找字符串"></a>4.grep - 查找字符串</h2><p><code>grep</code>命令用于搜索文本或指定的文件中与指定的字符串或模式相匹配的行。默认情况下，<code>grep</code>命令只显示匹配的行。</p>
 <p><code>grep</code>命令的语法如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep [OPTION]... PATTERN [FILE]...</span><br><span class="line">grep [OPTION]... [-e PATTERN | -f FILE] [FILE]...</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">grep [OPTION]... PATTERN [FILE]...
+grep [OPTION]... [-e PATTERN | -f FILE] [FILE]...
+</code></pre>
+<pre><code class="bash"># `grep`命令查找文件/etc/passwd 中帐号 blinkfox 的信息
+grep blinkfox /etc/passwd
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># `grep`命令查找文件/etc/passwd 中帐号 blinkfox 的信息</span></span><br><span class="line">grep blinkfox /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -i 选项，强制 grep 命令忽略搜索关键字的大小写</span></span><br><span class="line">grep -i blinkfox /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -r 选项，可以递归搜索指定目录下的所有文件</span></span><br><span class="line">grep -r blinkfox /etc/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -w 选项，只匹配包含指定单词的行</span></span><br><span class="line">grep -w blinkfox /etc/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -c 选项，报告文件或文本中模式被匹配的次数</span></span><br><span class="line">grep -c blinkfox /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -n 选项，显示每一个匹配的行的行号</span></span><br><span class="line">grep -n blinkfox /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -v 选项，可以输出除匹配指定模式的行以外的其他所有行</span></span><br><span class="line">grep -v blinkfox /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 --color 选项，在输出中将匹配的字符串以彩色的形式标出</span></span><br><span class="line">grep --color blinkfox /etc/passwd</span><br></pre></td></tr></table></figure>
+# 使用 -i 选项，强制 grep 命令忽略搜索关键字的大小写
+grep -i blinkfox /etc/passwd
 
+# 使用 -r 选项，可以递归搜索指定目录下的所有文件
+grep -r blinkfox /etc/
+
+# 使用 -w 选项，只匹配包含指定单词的行
+grep -w blinkfox /etc/
+
+# 使用 -c 选项，报告文件或文本中模式被匹配的次数
+grep -c blinkfox /etc/passwd
+
+# 使用 -n 选项，显示每一个匹配的行的行号
+grep -n blinkfox /etc/passwd
+
+# 使用 -v 选项，可以输出除匹配指定模式的行以外的其他所有行
+grep -v blinkfox /etc/passwd
+
+# 使用 --color 选项，在输出中将匹配的字符串以彩色的形式标出
+grep --color blinkfox /etc/passwd
+</code></pre>
 <h2 id="5-diff-比较两个文件"><a href="#5-diff-比较两个文件" class="headerlink" title="5.diff - 比较两个文件"></a>5.diff - 比较两个文件</h2><p><code>diff</code>命令用于比较两个文件，并找出它们之间的不同。<code>diff</code>命令的语法如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff [OPTION]... from-file to-file</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">diff [OPTION]... from-file to-file
+</code></pre>
 <p>常用使用方式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比较两个文件</span></span><br><span class="line">diff nsswitch.conf nsswitch.conf.org</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -w 选项，比较时忽略空格</span></span><br><span class="line">diff -w nsswitch.conf nsswitch.conf.org</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -y 选项，以并排的格式输出两个文件的比较结果</span></span><br><span class="line">diff -y nsswitch.conf nsswitch.conf.org</span><br><span class="line"></span><br><span class="line">使用 -c 选项，以上下对比的格式输出两个文件的比较结果</span><br><span class="line">diff -c nsswitch.conf nsswitch.conf.org</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 比较两个文件
+diff nsswitch.conf nsswitch.conf.org
+
+# 使用 -w 选项，比较时忽略空格
+diff -w nsswitch.conf nsswitch.conf.org
+
+# 使用 -y 选项，以并排的格式输出两个文件的比较结果
+diff -y nsswitch.conf nsswitch.conf.org
+
+使用 -c 选项，以上下对比的格式输出两个文件的比较结果
+diff -c nsswitch.conf nsswitch.conf.org
+</code></pre>
+
                 
             </div>
             <hr/>

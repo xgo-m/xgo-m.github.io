@@ -442,40 +442,505 @@
 <h2 id="DAO-层的单元测试"><a href="#DAO-层的单元测试" class="headerlink" title="DAO 层的单元测试"></a>DAO 层的单元测试</h2><h3 id="新建数据库脚本"><a href="#新建数据库脚本" class="headerlink" title="新建数据库脚本"></a>新建数据库脚本</h3><p>DAO 层的测试我这里采用的是 <code>HSQLDB</code> 的内存数据库，最好准备一些初始化的数据表结构和脚本，当然也可用直接通过官方示例的 <code>JPA</code>特性和 API 代码来初始化数据。这里我还是通过脚本的方式来做，便于统一管理和维护表结构和数据。</p>
 <p>在 <code>src/test</code> 目录下新建 <code>resources</code> 资源目录，并在 <code>resources</code> 目录下新建 <code>db</code> 目录，在 <code>db</code> 目录下分别，新建用于管理的表结构文件(<code>schema.sql</code>)和初始化数据文件(<code>data.sql</code>)的 SQL 脚本。</p>
 <p><code>schema.sql</code> 文件中的内容如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建数据库表所在的模式 schema.</span></span><br><span class="line"><span class="keyword">CREATE</span> SCHEMA test;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在 test 模式下创建数据库表.</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> test.t_test_blog;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test.t_test_blog (</span><br><span class="line">    c_id <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    c_author <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    c_content <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    dt_publish_time <span class="type">timestamp</span>(<span class="number">6</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    c_title <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    c_url <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    n_status <span class="type">int</span>,</span><br><span class="line">    c_create_user <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    dt_create_time <span class="type">timestamp</span>(<span class="number">6</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    dt_update_time <span class="type">timestamp</span>(<span class="number">6</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">constraint</span> pk_test_blog <span class="keyword">primary</span> key(c_id)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="sql">-- 创建数据库表所在的模式 schema.
+CREATE SCHEMA test;
+commit;
 
+-- 在 test 模式下创建数据库表.
+DROP TABLE IF EXISTS test.t_test_blog;
+CREATE TABLE test.t_test_blog (
+    c_id varchar(32) NOT NULL,
+    c_author varchar(255),
+    c_content varchar(255),
+    dt_publish_time timestamp(6) NULL,
+    c_title varchar(255),
+    c_url varchar(255),
+    n_status int,
+    c_create_user varchar(255),
+    dt_create_time timestamp(6) NULL,
+    dt_update_time timestamp(6) NULL,
+    constraint pk_test_blog primary key(c_id)
+);
+commit;
+</code></pre>
 <p><code>data.sql</code> 文件中的内容如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 初始化插入一些博客信息数据.</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> test.t_test_blog <span class="keyword">VALUES</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;这是内容&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:01&#x27;</span>, <span class="string">&#x27;Spring从入门到精通&#x27;</span>, <span class="string">&#x27;https://baidu.com&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;tom&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:33&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:36&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> test.t_test_blog <span class="keyword">VALUES</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;这是Mybatis的内容&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:01&#x27;</span>, <span class="string">&#x27;Mybatis基础&#x27;</span>, <span class="string">&#x27;https://qq.com&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;jack&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:33&#x27;</span>, <span class="string">&#x27;2019-03-01 00:41:36&#x27;</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sql">-- 初始化插入一些博客信息数据.
+INSERT INTO test.t_test_blog VALUES (&#39;1&#39;, &#39;张三&#39;, &#39;这是内容&#39;, &#39;2019-03-01 00:41:01&#39;, &#39;Spring从入门到精通&#39;, &#39;https://baidu.com&#39;, &#39;1&#39;, &#39;tom&#39;, &#39;2019-03-01 00:41:33&#39;, &#39;2019-03-01 00:41:36&#39;);
+INSERT INTO test.t_test_blog VALUES (&#39;2&#39;, &#39;李四&#39;, &#39;这是Mybatis的内容&#39;, &#39;2019-03-01 00:41:01&#39;, &#39;Mybatis基础&#39;, &#39;https://qq.com&#39;, &#39;2&#39;, &#39;jack&#39;, &#39;2019-03-01 00:41:33&#39;, &#39;2019-03-01 00:41:36&#39;);
+commit;
+</code></pre>
 <h3 id="增加-yaml-配置文件及内容"><a href="#增加-yaml-配置文件及内容" class="headerlink" title="增加 yaml 配置文件及内容"></a>增加 yaml 配置文件及内容</h3><p>在 <code>resources</code> 目录下新建 <code>application-hsqldb.yml</code> 配置文件，用于存放 HSQLDB 及 JPA 相关的配置信息，主要配置内容如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:hsqldb:mem:db_test</span> <span class="comment"># 以内存数据库的方式来运行.</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">org.hsqldb.jdbc.JDBCDriver</span></span><br><span class="line">    <span class="attr">platform:</span> <span class="string">hsqldb</span></span><br><span class="line">    <span class="attr">schema:</span> <span class="string">classpath:db/schema.sql</span></span><br><span class="line">    <span class="attr">data:</span> <span class="string">classpath:db/data.sql</span></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">show-sql:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">hibernate:</span></span><br><span class="line">      <span class="attr">ddl-auto:</span> <span class="string">none</span> <span class="comment"># 这里没用 JPA 的自动生成表结构等功能，你可以视自己的具体情况来开启.</span></span><br><span class="line">    <span class="attr">generate-ddl:</span> <span class="literal">false</span> <span class="comment"># 启动时是否初始化数据库.</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml">spring:
+  datasource:
+    url: jdbc:hsqldb:mem:db_test # 以内存数据库的方式来运行.
+    username: root
+    password: 123456
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    platform: hsqldb
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none # 这里没用 JPA 的自动生成表结构等功能，你可以视自己的具体情况来开启.
+    generate-ddl: false # 启动时是否初始化数据库.
+</code></pre>
 <h3 id="准备实体-POJO-和-DAO-层-Repository-类"><a href="#准备实体-POJO-和-DAO-层-Repository-类" class="headerlink" title="准备实体 POJO 和 DAO 层 Repository 类"></a>准备实体 POJO 和 DAO 层 Repository 类</h3><p>博客信息的实体 POJO 类如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Column;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Table;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"><span class="keyword">import</span> lombok.experimental.Accessors;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 博客实体.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-2-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Accessors(chain = true)</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name = &quot;t_test_blog&quot;, schema = &quot;test&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Blog</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ID.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_id&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 作者.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_author&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 标题.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_title&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 内容.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_content&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发布时间.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;dt_publish_time&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date publishTime;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 链接地址.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_url&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 状态.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;n_status&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer status;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建用户.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;c_create_user&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String createUser;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建时间.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;dt_create_time&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date createTime;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 最后更新时间.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;dt_update_time&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date updateTime;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.springbootsample.pojo;
 
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+/**
+ * 博客实体.
+ *
+ * @author blinkfox on 2019-2-26.
+ */
+@Getter
+@Setter
+@Accessors(chain = true)
+@Entity
+@Table(name = &quot;t_test_blog&quot;, schema = &quot;test&quot;)
+public class Blog &#123;
+
+    /**
+     * ID.
+     */
+    @Id
+    @Column(name = &quot;c_id&quot;)
+    private String id;
+
+    /**
+     * 作者.
+     */
+    @Column(name = &quot;c_author&quot;)
+    private String author;
+
+    /**
+     * 标题.
+     */
+    @Column(name = &quot;c_title&quot;)
+    private String title;
+
+    /**
+     * 内容.
+     */
+    @Column(name = &quot;c_content&quot;)
+    private String content;
+
+    /**
+     * 发布时间.
+     */
+    @Column(name = &quot;dt_publish_time&quot;)
+    private Date publishTime;
+
+    /**
+     * 链接地址.
+     */
+    @Column(name = &quot;c_url&quot;)
+    private String url;
+
+    /**
+     * 状态.
+     */
+    @Column(name = &quot;n_status&quot;)
+    private Integer status;
+
+    /**
+     * 创建用户.
+     */
+    @Column(name = &quot;c_create_user&quot;)
+    private String createUser;
+
+    /**
+     * 创建时间.
+     */
+    @Column(name = &quot;dt_create_time&quot;)
+    private Date createTime;
+
+    /**
+     * 最后更新时间.
+     */
+    @Column(name = &quot;dt_update_time&quot;)
+    private Date updateTime;
+
+&#125;
+</code></pre>
 <p>下面是 <code>BlogRepository</code> 中的一个简单的自定义 <code>@Query</code> 查询，当然你也可以采用名称的规则来写本查询，我这里为了做示例，使用了 <code>@Query</code> 查询。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.pojo.Blog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Query;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogRepository.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-02-27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BlogRepository</span> <span class="keyword">extends</span> <span class="title class_">JpaRepository</span>&lt;Blog, String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Query(&quot;SELECT b FROM Blog AS b WHERE b.title like &#x27;Spring%&#x27;&quot;)</span></span><br><span class="line">    List&lt;Blog&gt; <span class="title function_">querySpringBlogs</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.springbootsample.repository;
 
+import com.blinkfox.springbootsample.pojo.Blog;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+/**
+ * BlogRepository.
+ *
+ * @author blinkfox on 2019-02-27.
+ */
+@Repository
+public interface BlogRepository extends JpaRepository&lt;Blog, String&gt; &#123;
+
+    @Query(&quot;SELECT b FROM Blog AS b WHERE b.title like &#39;Spring%&#39;&quot;)
+    List&lt;Blog&gt; querySpringBlogs();
+
+&#125;
+</code></pre>
 <h3 id="BlogRepository-的单元测试"><a href="#BlogRepository-的单元测试" class="headerlink" title="BlogRepository 的单元测试"></a>BlogRepository 的单元测试</h3><p>然后在 Intellij IDEA 中通过 <code>Ctrl + Shift + T</code> 来为 <code>BlogRepository</code> 生成它对应的单元测试类 <code>BlogRepositoryTest</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.pojo.Blog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Assert;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.ActiveProfiles;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogRepositoryTest.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-03-01.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@ActiveProfiles(&quot;hsqldb&quot;)</span></span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BlogRepositoryTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> BlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试新增博客的情况.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> <span class="string">&quot;newblogId&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">title</span> <span class="operator">=</span> <span class="string">&quot;Java 从入门到放弃&quot;</span>;</span><br><span class="line">        blogRepository.save(<span class="keyword">new</span> <span class="title class_">Blog</span>().setId(id).setTitle(title));</span><br><span class="line"></span><br><span class="line">        Optional&lt;Blog&gt; blogOptional = blogRepository.findById(id);</span><br><span class="line">        Assert.assertTrue(blogOptional.isPresent() &amp;&amp; title.equals(blogOptional.get().getTitle()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试查询所有 Spring 相关的博客信息.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">querySpringBlogs</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;Blog&gt; blogs = blogRepository.querySpringBlogs();</span><br><span class="line">        Assert.assertEquals(<span class="number">1</span>, blogs.size());</span><br><span class="line">        Assert.assertEquals(<span class="string">&quot;Spring从入门到精通&quot;</span>, blogs.get(<span class="number">0</span>).getTitle());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.springbootsample.repository;
 
+import com.blinkfox.springbootsample.pojo.Blog;
+
+import java.util.List;
+import java.util.Optional;
+import javax.annotation.Resource;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * BlogRepositoryTest.
+ *
+ * @author blinkfox on 2019-03-01.
+ */
+@RunWith(SpringRunner.class)
+@ActiveProfiles(&quot;hsqldb&quot;)
+@DataJpaTest
+public class BlogRepositoryTest &#123;
+
+    @Resource
+    private BlogRepository blogRepository;
+
+    /**
+     * 测试新增博客的情况.
+     */
+    @Test
+    public void save() &#123;
+        String id = &quot;newblogId&quot;;
+        String title = &quot;Java 从入门到放弃&quot;;
+        blogRepository.save(new Blog().setId(id).setTitle(title));
+
+        Optional&lt;Blog&gt; blogOptional = blogRepository.findById(id);
+        Assert.assertTrue(blogOptional.isPresent() &amp;&amp; title.equals(blogOptional.get().getTitle()));
+    &#125;
+
+    /**
+     * 测试查询所有 Spring 相关的博客信息.
+     */
+    @Test
+    public void querySpringBlogs() &#123;
+        List&lt;Blog&gt; blogs = blogRepository.querySpringBlogs();
+        Assert.assertEquals(1, blogs.size());
+        Assert.assertEquals(&quot;Spring从入门到精通&quot;, blogs.get(0).getTitle());
+    &#125;
+
+&#125;
+</code></pre>
 <p>这样就完成了 DAO 层代码的测试，以上程序主要依托于内存数据库 HSQLDB 和 Spring Data JPA。</p>
 <h2 id="Service-层的单元测试"><a href="#Service-层的单元测试" class="headerlink" title="Service 层的单元测试"></a>Service 层的单元测试</h2><p>实际开发过程中，Service 层中的类依赖了 DAO 层中的类或其他 Service 类。为了隔离对其他 Service 类或 DAO 层中的类的依赖，只测试本 Service 类中的方法逻辑，就需要 Mock 数据和做打桩等操作。Spring Boot 中原生集成了 <a target="_blank" rel="noopener" href="https://site.mockito.org/">Mockito</a>，可以非常方便我们对 Java 代码做单元测试。</p>
-<h3 id="新建-BlogService-类"><a href="#新建-BlogService-类" class="headerlink" title="新建 BlogService 类"></a>新建 BlogService 类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.pojo.Blog;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.repository.BlogRepository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogService.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-03-01.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BlogService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> BlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询所有 Spring 相关的博客信息.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 博客信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Blog&gt; <span class="title function_">getSpringBlogs</span><span class="params">()</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;进入了获取 Spring 相关博客的 Service 方法.&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> blogRepository.querySpringBlogs();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据博客ID来修改该博客的名称.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 博客ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> title 博客标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyTitileById</span><span class="params">(String id, String title)</span> &#123;</span><br><span class="line">        Optional&lt;Blog&gt; blogOptional = blogRepository.findById(id);</span><br><span class="line">        <span class="keyword">if</span> (!blogOptional.isPresent()) &#123;</span><br><span class="line">            log.warn(<span class="string">&quot;需要修改名称的博客不存在，id为【&#123;&#125;】请检查！&quot;</span>, id);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        blogRepository.save(blogOptional.get().setTitle(title));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="新建-BlogService-类"><a href="#新建-BlogService-类" class="headerlink" title="新建 BlogService 类"></a>新建 BlogService 类</h3><pre><code class="java">package com.blinkfox.springbootsample.service;
 
+import com.blinkfox.springbootsample.pojo.Blog;
+import com.blinkfox.springbootsample.repository.BlogRepository;
+
+import java.util.List;
+import java.util.Optional;
+import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.stereotype.Service;
+
+/**
+ * BlogService.
+ *
+ * @author blinkfox on 2019-03-01.
+ */
+@Slf4j
+@Service
+public class BlogService &#123;
+
+    @Resource
+    private BlogRepository blogRepository;
+
+    /**
+     * 查询所有 Spring 相关的博客信息.
+     *
+     * @return 博客信息
+     */
+    public List&lt;Blog&gt; getSpringBlogs() &#123;
+        log.info(&quot;进入了获取 Spring 相关博客的 Service 方法.&quot;);
+        return blogRepository.querySpringBlogs();
+    &#125;
+
+    /**
+     * 根据博客ID来修改该博客的名称.
+     *
+     * @param id 博客ID
+     * @param title 博客标题
+     */
+    public void modifyTitileById(String id, String title) &#123;
+        Optional&lt;Blog&gt; blogOptional = blogRepository.findById(id);
+        if (!blogOptional.isPresent()) &#123;
+            log.warn(&quot;需要修改名称的博客不存在，id为【&#123;&#125;】请检查！&quot;, id);
+            return;
+        &#125;
+
+        blogRepository.save(blogOptional.get().setTitle(title));
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="BlogService-的单元测试"><a href="#BlogService-的单元测试" class="headerlink" title="BlogService 的单元测试"></a>BlogService 的单元测试</h3><p>通过 <code>BlogService</code> 可以生成和书写出其对应的单元测试类和测试方法，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.pojo.Blog;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.repository.BlogRepository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Assert;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.mockito.InjectMocks;</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mock;</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mockito;</span><br><span class="line"><span class="keyword">import</span> org.mockito.junit.MockitoJUnitRunner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogServiceTest.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-03-01.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith(MockitoJUnitRunner.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BlogServiceTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> BlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@InjectMocks</span></span><br><span class="line">    <span class="keyword">private</span> BlogService blogService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试service层中获取Spring相关博客的方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getSpringBlogs</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 构造需要返回的博客信息集合数据.</span></span><br><span class="line">        <span class="type">Blog</span> <span class="variable">blog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Blog</span>()</span><br><span class="line">                .setId(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">                .setTitle(<span class="string">&quot;Spring Action&quot;</span>);</span><br><span class="line">        List&lt;Blog&gt; blogList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        blogList.add(blog);</span><br><span class="line"></span><br><span class="line">        Mockito.when(blogRepository.querySpringBlogs())</span><br><span class="line">                .thenReturn(blogList);</span><br><span class="line">        List&lt;Blog&gt; blogs = blogService.getSpringBlogs();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 断言验证查询到的数据.</span></span><br><span class="line">        Assert.assertEquals(<span class="number">1</span>, blogs.size());</span><br><span class="line">        Assert.assertEquals(<span class="string">&quot;Spring Action&quot;</span>, blog.getTitle());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试根据博客ID来修改该博客的名称成功时的情况.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyTitileById</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// Mock 相关数据和类方法的行为.</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">        Mockito.when(blogRepository.findById(id))</span><br><span class="line">                .thenReturn(Optional.of(<span class="keyword">new</span> <span class="title class_">Blog</span>()));</span><br><span class="line">        Mockito.when(blogRepository.save(Mockito.any()))</span><br><span class="line">                .thenReturn(<span class="keyword">new</span> <span class="title class_">Blog</span>());</span><br><span class="line"></span><br><span class="line">        blogService.modifyTitileById(id, <span class="string">&quot;算法导论&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 验证 blogRepository.save(s) 方法被调用过一次.</span></span><br><span class="line">        Mockito.verify(blogRepository).save(Mockito.any());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试根据博客ID来修改该博客的名称失败时的情况.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyTitileByIdWithFailure</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// Mock 未根据 ID 找到对应的博客信息的情况.</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">        Mockito.when(blogRepository.findById(id))</span><br><span class="line">                .thenReturn(Optional.ofNullable(<span class="literal">null</span>));</span><br><span class="line"></span><br><span class="line">        blogService.modifyTitileById(id, <span class="string">&quot;算法导论&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 验证 blogRepository.save(s) 方法并没有被调用过.</span></span><br><span class="line">        Mockito.verify(blogRepository, Mockito.never()).save(Mockito.any());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.springbootsample.service;
 
+import com.blinkfox.springbootsample.pojo.Blog;
+import com.blinkfox.springbootsample.repository.BlogRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
+/**
+ * BlogServiceTest.
+ *
+ * @author blinkfox on 2019-03-01.
+ */
+@RunWith(MockitoJUnitRunner.class)
+public class BlogServiceTest &#123;
+
+    @Mock
+    private BlogRepository blogRepository;
+
+    @InjectMocks
+    private BlogService blogService;
+
+    /**
+     * 测试service层中获取Spring相关博客的方法.
+     */
+    @Test
+    public void getSpringBlogs() &#123;
+        // 构造需要返回的博客信息集合数据.
+        Blog blog = new Blog()
+                .setId(&quot;1&quot;)
+                .setTitle(&quot;Spring Action&quot;);
+        List&lt;Blog&gt; blogList = new ArrayList&lt;&gt;();
+        blogList.add(blog);
+
+        Mockito.when(blogRepository.querySpringBlogs())
+                .thenReturn(blogList);
+        List&lt;Blog&gt; blogs = blogService.getSpringBlogs();
+
+        // 断言验证查询到的数据.
+        Assert.assertEquals(1, blogs.size());
+        Assert.assertEquals(&quot;Spring Action&quot;, blog.getTitle());
+    &#125;
+
+    /**
+     * 测试根据博客ID来修改该博客的名称成功时的情况.
+     */
+    @Test
+    public void modifyTitileById() &#123;
+        // Mock 相关数据和类方法的行为.
+        String id = &quot;1&quot;;
+        Mockito.when(blogRepository.findById(id))
+                .thenReturn(Optional.of(new Blog()));
+        Mockito.when(blogRepository.save(Mockito.any()))
+                .thenReturn(new Blog());
+
+        blogService.modifyTitileById(id, &quot;算法导论&quot;);
+
+        // 验证 blogRepository.save(s) 方法被调用过一次.
+        Mockito.verify(blogRepository).save(Mockito.any());
+    &#125;
+
+    /**
+     * 测试根据博客ID来修改该博客的名称失败时的情况.
+     */
+    @Test
+    public void modifyTitileByIdWithFailure() &#123;
+        // Mock 未根据 ID 找到对应的博客信息的情况.
+        String id = &quot;1&quot;;
+        Mockito.when(blogRepository.findById(id))
+                .thenReturn(Optional.ofNullable(null));
+
+        blogService.modifyTitileById(id, &quot;算法导论&quot;);
+
+        // 验证 blogRepository.save(s) 方法并没有被调用过.
+        Mockito.verify(blogRepository, Mockito.never()).save(Mockito.any());
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注意</strong>：这里的 <code>@RunWith</code> 采用的是 Mocktio 提供的 <code>MockitoJUnitRunner</code>。</p>
 </blockquote>
 <p>这样就完成了 Service 层的单元测试，也是我们业务开发中需要重点关注和测试业务逻辑的一层。</p>
 <h2 id="Controller-层的单元测试"><a href="#Controller-层的单元测试" class="headerlink" title="Controller 层的单元测试"></a>Controller 层的单元测试</h2><p>Controller 层测试的重点是测试接口是否能正常工作。可以用到 Spring Boot 中提供的 <code>@WebMvcTest</code> 注解来模拟 Web 层的单元测试。当然，也需要通过 Mock 的方式类隔离对 Service 层各个类的依赖影响。</p>
-<h3 id="新建-BlogController-类"><a href="#新建-BlogController-类" class="headerlink" title="新建 BlogController 类"></a>新建 BlogController 类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.pojo.Blog;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.service.BlogService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.ResponseEntity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PatchMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogController.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-02-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/blogs&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BlogController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> BlogService blogService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取所有 Spring 相关的博客信息.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Spring相关的博客信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;List&lt;Blog&gt;&gt; <span class="title function_">getSpringBlogs</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(blogService.getSpringBlogs());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据博客ID修改博客名称.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 博客ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> title 博客标题</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 空</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PatchMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Void&gt; <span class="title function_">modifyTitileById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> String id,</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;title&quot;)</span> String title)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            blogService.modifyTitileById(id, title);</span><br><span class="line">            log.info(<span class="string">&quot;修改博客名称成功.&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;&gt;(HttpStatus.OK);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;修改博客名称出错，id为【&#123;&#125;】.&quot;</span>, id);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="新建-BlogController-类"><a href="#新建-BlogController-类" class="headerlink" title="新建 BlogController 类"></a>新建 BlogController 类</h3><pre><code class="java">package com.blinkfox.springbootsample.controller;
 
+import com.blinkfox.springbootsample.pojo.Blog;
+import com.blinkfox.springbootsample.service.BlogService;
+
+import java.util.List;
+import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * BlogController.
+ *
+ * @author blinkfox on 2019-02-28.
+ */
+@Slf4j
+@RequestMapping(&quot;/blogs&quot;)
+@RestController
+public class BlogController &#123;
+
+    @Resource
+    private BlogService blogService;
+
+    /**
+     * 获取所有 Spring 相关的博客信息.
+     *
+     * @return Spring相关的博客信息
+     */
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Blog&gt;&gt; getSpringBlogs() &#123;
+        return ResponseEntity.ok(blogService.getSpringBlogs());
+    &#125;
+
+    /**
+     * 根据博客ID修改博客名称.
+     *
+     * @param id 博客ID
+     * @param title 博客标题
+     * @return 空
+     */
+    @PatchMapping(&quot;/&#123;id&#125;&quot;)
+    public ResponseEntity&lt;Void&gt; modifyTitileById(@PathVariable(&quot;id&quot;) String id,
+            @RequestParam(&quot;title&quot;) String title) &#123;
+        try &#123;
+            blogService.modifyTitileById(id, title);
+            log.info(&quot;修改博客名称成功.&quot;);
+            return new ResponseEntity&lt;&gt;(HttpStatus.OK);
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;修改博客名称出错，id为【&#123;&#125;】.&quot;, id);
+            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="BlogController-的单元测试"><a href="#BlogController-的单元测试" class="headerlink" title="BlogController 的单元测试"></a>BlogController 的单元测试</h3><p>通过 <code>BlogController</code> 可以生成和书写出其对应的单元测试类和测试方法，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.springbootsample.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.springbootsample.service.BlogService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mockito;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.mock.mockito.MockBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BlogControllerTest.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-03-02.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@WebMvcTest(BlogController.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BlogControllerTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MockBean</span></span><br><span class="line">    <span class="keyword">private</span> BlogService blogService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试获取所有 Spring 相关的博客信息.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception 异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getSpringBlogs</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Mockito.when(blogService.getSpringBlogs())</span><br><span class="line">                .thenReturn(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.mockMvc.perform(get(<span class="string">&quot;/blogs&quot;</span>))</span><br><span class="line">                .andExpect(status().isOk());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试修改博客标题成功时的情况.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception 异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyTitileById</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Mockito.doNothing()</span><br><span class="line">                .when(blogService).modifyTitileById(Mockito.anyString(), Mockito.anyString());</span><br><span class="line">        <span class="built_in">this</span>.mockMvc.perform(patch(<span class="string">&quot;/blogs/1?title=Spring实战&quot;</span>))</span><br><span class="line">                .andExpect(status().isOk());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试修改博客标题失败时的情况.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception 异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyTitileByIdWithException</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Mockito.doThrow(RuntimeException.class)</span><br><span class="line">                .when(blogService).modifyTitileById(Mockito.anyString(), Mockito.anyString());</span><br><span class="line">        <span class="built_in">this</span>.mockMvc.perform(patch(<span class="string">&quot;/blogs/1?title=Spring实战&quot;</span>))</span><br><span class="line">                .andExpect(status().is5xxServerError());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.springbootsample.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.blinkfox.springbootsample.service.BlogService;
+
+import java.util.ArrayList;
+import javax.annotation.Resource;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+/**
+ * BlogControllerTest.
+ *
+ * @author blinkfox on 2019-03-02.
+ */
+@RunWith(SpringRunner.class)
+@WebMvcTest(BlogController.class)
+public class BlogControllerTest &#123;
+
+    @Resource
+    private MockMvc mockMvc;
+
+    @MockBean
+    private BlogService blogService;
+
+    /**
+     * 测试获取所有 Spring 相关的博客信息.
+     *
+     * @throws Exception 异常
+     */
+    @Test
+    public void getSpringBlogs() throws Exception &#123;
+        Mockito.when(blogService.getSpringBlogs())
+                .thenReturn(new ArrayList&lt;&gt;());
+
+        this.mockMvc.perform(get(&quot;/blogs&quot;))
+                .andExpect(status().isOk());
+    &#125;
+
+    /**
+     * 测试修改博客标题成功时的情况.
+     *
+     * @throws Exception 异常
+     */
+    @Test
+    public void modifyTitileById() throws Exception &#123;
+        Mockito.doNothing()
+                .when(blogService).modifyTitileById(Mockito.anyString(), Mockito.anyString());
+        this.mockMvc.perform(patch(&quot;/blogs/1?title=Spring实战&quot;))
+                .andExpect(status().isOk());
+    &#125;
+
+    /**
+     * 测试修改博客标题失败时的情况.
+     *
+     * @throws Exception 异常
+     */
+    @Test
+    public void modifyTitileByIdWithException() throws Exception &#123;
+        Mockito.doThrow(RuntimeException.class)
+                .when(blogService).modifyTitileById(Mockito.anyString(), Mockito.anyString());
+        this.mockMvc.perform(patch(&quot;/blogs/1?title=Spring实战&quot;))
+                .andExpect(status().is5xxServerError());
+    &#125;
+
+&#125;
+</code></pre>
 <p>以上就完成了对 Controller 层的单元测试。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在 Spring Boot 中做单元测试的将会非常容易。上面只是 Spring Boot 中提供的部分方式，<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#boot-features-testing">Spring Boot 文档</a> 中还有其他更多的测试场景和测试方法供你去参考和使用。</p>
 

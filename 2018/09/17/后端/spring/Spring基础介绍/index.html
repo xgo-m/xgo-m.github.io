@@ -476,14 +476,57 @@
 <h2 id="二、Spring-项目快速搭建"><a href="#二、Spring-项目快速搭建" class="headerlink" title="二、Spring 项目快速搭建"></a>二、Spring 项目快速搭建</h2><p>这里我们使用目前 Java 主流的项目构建工具<a target="_blank" rel="noopener" href="http://maven.apache.org/">Maven</a>来搭建项目。</p>
 <h3 id="（一）Maven-介绍"><a href="#（一）Maven-介绍" class="headerlink" title="（一）Maven 介绍"></a>（一）Maven 介绍</h3><p>Apache Maven 是一个基于项目对象模型（Project Object Model，POM）的软件项目管理工具。Maven 可用来管理项目的依赖、编译、打包、文档等信息。使用 Maven 来管理项目时，项目依赖的 jar 包将不再包含在项目内，而是集中放置在用户目录下的 .m2 文件夹下。关于 Maven 的详细安装介绍可参考[这里][4]。</p>
 <h3 id="（二）创建项目"><a href="#（二）创建项目" class="headerlink" title="（二）创建项目"></a>（二）创建项目</h3><p>在创建项目之前，须确保你的计算机上已经安装好有 Java 和 Maven 环境。然后，打开终端通过以下简单的命令就可以在你的当前目录下创建一个 Jave web 的项目结构：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.blinkfox -DartifactId=springdemo -DpackageName=com.blinkfox.springdemo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">mvn archetype:generate -DgroupId=com.blinkfox -DartifactId=springdemo -DpackageName=com.blinkfox.springdemo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+</code></pre>
 <p>其中<code>-DgroupId=com.blinkfox</code>是组织名，<code>-DartifactId=springdemo</code>是该组织下的项目名称，<code>-DarchetypeArtifactId=maven-archetype-webapp</code>代表创建一个简单的 webapp 项目。</p>
 <p>创建项目的时候，Maven会自动下载一些需要用到的 jar 包和 Maven 插件。如果顺利创建成功的话，就会在你的当前目录下看到名为 springdemo 的项目，其中包含<code>src</code>的文件夹和<code>pom.xml</code>文件。且在你的终端会看到如下输出：</p>
 <p><img src="https://statics.sh1a.qingstor.com/2019/03/02/maven-build-project.png" alt="Maven创建项目成功"></p>
 <h3 id="（三）添加-Spring-依赖"><a href="#（三）添加-Spring-依赖" class="headerlink" title="（三）添加 Spring 依赖"></a>（三）添加 Spring 依赖</h3><p>接下来需要通过修改 pom.xml 来添加 Spring 的依赖，添加编译插件，且将编译级别设置为1.7，pom.xml文件的修改如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.blinkfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springdemo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>springdemo Maven Webapp<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>springdemo<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定maven的默认操作为 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">defaultGoal</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">defaultGoal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>$&#123;java.version&#125;<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>$&#123;java.version&#125;<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.blinkfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springdemo&lt;/artifactId&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springdemo Maven Webapp&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
 
+    &lt;properties&gt;
+        &lt;java.version&gt;1.7&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;4.3.3.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;finalName&gt;springdemo&lt;/finalName&gt;
+        &lt;!-- 指定maven的默认操作为 --&gt;
+        &lt;defaultGoal&gt;compile&lt;/defaultGoal&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;$&#123;java.version&#125;&lt;/source&gt;
+                    &lt;target&gt;$&#123;java.version&#125;&lt;/target&gt;
+                    &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
 <h2 id="三、Spring-基础配置"><a href="#三、Spring-基础配置" class="headerlink" title="三、Spring 基础配置"></a>三、Spring 基础配置</h2><p>Spring 框架本身有四大原则：</p>
 <ul>
 <li>使用 POJO 进行轻量级和最小侵入式开发</li>
@@ -511,8 +554,22 @@
 </ul>
 <p><code>@Autowired</code>、<code>@Inject</code>、<code>@Resource</code>可注解在 set 方法上或者属性上，推荐注解在属性上，优点是代码更少、层次更清晰。</p>
 <h4 id="2-代码示例"><a href="#2-代码示例" class="headerlink" title="2. 代码示例"></a>2. 代码示例</h4><p>（1）编写功能类的 Bean。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FunctionService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello &quot;</span> + word + <span class="string">&quot;!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+@Service
+public class FunctionService &#123;
+
+    public String sayHello(String word) &#123;
+        return &quot;Hello &quot; + word + &quot;!&quot;;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -520,8 +577,27 @@
 </ol>
 </blockquote>
 <p>（2）使用功能类的 Bean。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UseFunctionService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FunctionService functionService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> functionService.sayHello(word);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+@Service
+public class UseFunctionService &#123;
+
+    @Autowired
+    private FunctionService functionService;
+
+
+    public String sayHello(String word) &#123;
+        return functionService.sayHello(word);
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -530,8 +606,19 @@
 </ol>
 </blockquote>
 <p>（3）配置类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.blinkfox.service.impl&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DiConfig</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.config;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+@Configuration
+@ComponentScan(&quot;com.blinkfox.service.impl&quot;)
+public class DiConfig &#123;
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -540,8 +627,27 @@
 </ol>
 </blockquote>
 <p>（4）运行。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.maintest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.config.DiConfig;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.UseFunctionService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FunctionMain</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(DiConfig.class);</span><br><span class="line">        <span class="type">UseFunctionService</span> <span class="variable">useFunctionService</span> <span class="operator">=</span> context.getBean(UseFunctionService.class);</span><br><span class="line">        System.out.println(useFunctionService.sayHello(<span class="string">&quot;Spring&quot;</span>));</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.maintest;
 
+import com.blinkfox.config.DiConfig;
+import com.blinkfox.service.impl.UseFunctionService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+public class FunctionMain &#123;
+
+    public static void main(String[] args) &#123;
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(DiConfig.class);
+        UseFunctionService useFunctionService = context.getBean(UseFunctionService.class);
+        System.out.println(useFunctionService.sayHello(&quot;Spring&quot;));
+        context.close();
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -557,8 +663,20 @@
 </ul>
 <p>何时使用 Java 配置或者注解配置呢？我们主要的原则是：全局配置使用 Java 配置（如数据库相关配置、MVC相关配置），业务 Bean 的配置使用注解配置（@Service、@Component、@Repository、@Controller）。</p>
 <h4 id="2-Java配置代码示例"><a href="#2-Java配置代码示例" class="headerlink" title="2. Java配置代码示例"></a>2. Java配置代码示例</h4><p>（1）编写功能类的 Bean</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaConfigService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello &quot;</span> + word + <span class="string">&quot;!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+// 1
+public class JavaConfigService &#123;
+
+    public String sayHello(String word) &#123;
+        return &quot;Hello &quot; + word + &quot;!&quot;;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -566,8 +684,26 @@
 </ol>
 </blockquote>
 <p>（2）使用功能类的 Bean</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UseJavaConfigService</span> &#123;</span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">private</span> JavaConfigService javaConfigService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setJavaConfigService</span><span class="params">(JavaConfigService javaConfigService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.javaConfigService = javaConfigService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> javaConfigService.sayHello(word);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+// 1
+public class UseJavaConfigService &#123;
+    // 2
+    private JavaConfigService javaConfigService;
+
+    public void setJavaConfigService(JavaConfigService javaConfigService) &#123;
+        this.javaConfigService = javaConfigService;
+    &#125;
+
+    public String sayHello(String word) &#123;
+        return javaConfigService.sayHello(word);
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -576,8 +712,33 @@
 </ol>
 </blockquote>
 <p>（3）Java 配置类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.JavaConfigService;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.UseJavaConfigService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>  <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">public</span> JavaConfigService <span class="title function_">javaConfigService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">JavaConfigService</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> UseJavaConfigService <span class="title function_">useJavaConfigService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">UseJavaConfigService</span> <span class="variable">useJavaConfigService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UseJavaConfigService</span>();</span><br><span class="line">        useJavaConfigService.setJavaConfigService(javaConfigService()); <span class="comment">// 3</span></span><br><span class="line">        <span class="keyword">return</span> useJavaConfigService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.config;
 
+import com.blinkfox.service.impl.JavaConfigService;
+import com.blinkfox.service.impl.UseJavaConfigService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+@Configuration // 1
+public class JavaConfig &#123;
+
+    @Bean  // 2
+    public JavaConfigService javaConfigService() &#123;
+        return new JavaConfigService();
+    &#125;
+
+    @Bean
+    public UseJavaConfigService useJavaConfigService() &#123;
+        UseJavaConfigService useJavaConfigService = new UseJavaConfigService();
+        useJavaConfigService.setJavaConfigService(javaConfigService()); // 3
+        return useJavaConfigService;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -587,8 +748,27 @@
 </ol>
 </blockquote>
 <p>（4）运行</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.maintest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.config.JavaConfig;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.UseJavaConfigService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaConfigMain</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(JavaConfig.class);</span><br><span class="line">        <span class="type">UseJavaConfigService</span> <span class="variable">useJavaConfigService</span> <span class="operator">=</span> context.getBean(UseJavaConfigService.class);</span><br><span class="line">        System.out.println(useJavaConfigService.sayHello(<span class="string">&quot;Spring Java Config&quot;</span>));</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.maintest;
 
+import com.blinkfox.config.JavaConfig;
+import com.blinkfox.service.impl.UseJavaConfigService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+/**
+ * Created by blinkfox on 2016/10/27.
+ */
+public class JavaConfigMain &#123;
+
+    public static void main(String[] args) &#123;
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(JavaConfig.class);
+        UseJavaConfigService useJavaConfigService = context.getBean(UseJavaConfigService.class);
+        System.out.println(useJavaConfigService.sayHello(&quot;Spring Java Config&quot;));
+        context.close();
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="（三）AOP"><a href="#（三）AOP" class="headerlink" title="（三）AOP"></a>（三）AOP</h3><h4 id="1-重点说明-2"><a href="#1-重点说明-2" class="headerlink" title="1. 重点说明"></a>1. 重点说明</h4><p>AOP：面向切面编程，是面向对象编程（OOP）的补充。</p>
 <p>Spring 的 AOP 的存在目的是为了解耦。AOP 可以让一组类共享相同的行为。在 OOP 中只能通过继承和实现接口来共享相同的行为，从而使代码的耦合度增强，且类继承只能为单继承，阻碍更多行为添加到一组类上，AOP 弥补了 OOP 的不足。</p>
 <p>Spring 支持 AspectJ 的注解式切面编程。</p>
@@ -600,22 +780,120 @@
 </ul>
 <p>Spring本身在事务处理（@Transcational）和数据缓存（@Cacheable）等都使用注解拦截。下面示例将演示基于注解和方法规则的拦截方式，演示一种模拟记录操作的日志系统的实现。</p>
 <h4 id="2-注解拦截代码示例"><a href="#2-注解拦截代码示例" class="headerlink" title="2. 注解拦截代码示例"></a>2. 注解拦截代码示例</h4><p>（1）添加 Spring aop 支持及 AspectJ 依赖。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-aop&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;<span class="number">4.3</span><span class="number">.3</span>.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;<span class="number">1.8</span><span class="number">.9</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;<span class="number">1.8</span><span class="number">.9</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+    &lt;version&gt;4.3.3.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+    &lt;version&gt;1.8.9&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+    &lt;version&gt;1.8.9&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <p>（2）编写拦截规则的注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogAction &#123;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">name</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;这是默认的操作名称&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.annotation;
 
+import java.lang.annotation.*;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface LogAction &#123;
+
+    String name() default &quot;这是默认的操作名称&quot;;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：<br>注解本身是没有功能的，就和 xml 一样。注解和 xml 都是一种元数据，元数据即解释数据的数据，这就是所谓的配置。注解的功能来自用这个注解的地方。</p>
 </blockquote>
 <p>（3）编写使用注解的被拦截类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.annotation.LogAction;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoAnnotationService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LogAction(name = &quot;注解式拦截的 add 操作&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+import com.blinkfox.annotation.LogAction;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+@Service
+public class DemoAnnotationService &#123;
+
+    @LogAction(name = &quot;注解式拦截的 add 操作&quot;)
+    public void add() &#123;
+
+    &#125;
+
+&#125;
+</code></pre>
 <p>（4）编写使用方法规则被拦截规类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoMethodService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.service.impl;
 
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+@Service
+public class DemoMethodService &#123;
+
+    public void add() &#123;
+
+    &#125;
+
+&#125;
+</code></pre>
 <p>（5）编写切面。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.aop;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.annotation.LogAction;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.After;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.reflect.MethodSignature;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">// 1</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut(&quot;@annotation(com.blinkfox.annotation.LogAction)&quot;)</span> <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">annotationPointCut</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After(&quot;annotationPointCut()&quot;)</span> <span class="comment">// 4</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        <span class="type">MethodSignature</span> <span class="variable">signature</span> <span class="operator">=</span> (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> signature.getMethod();</span><br><span class="line">        <span class="type">LogAction</span> <span class="variable">logAction</span> <span class="operator">=</span> method.getAnnotation(LogAction.class);</span><br><span class="line">        System.out.println(<span class="string">&quot;---注解式拦截:&quot;</span> + logAction.name()); <span class="comment">// 5</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.blinkfox.service.impl.DemoMethodService.*(..))&quot;)</span> <span class="comment">// 6</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        <span class="type">MethodSignature</span> <span class="variable">signature</span> <span class="operator">=</span> (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> signature.getMethod();</span><br><span class="line">        System.out.println(<span class="string">&quot;---方法规则式拦截:&quot;</span> + method.getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.aop;
 
+import com.blinkfox.annotation.LogAction;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+@Aspect // 1
+@Component // 2
+public class LogAspect &#123;
+
+    @Pointcut(&quot;@annotation(com.blinkfox.annotation.LogAction)&quot;) // 3
+    public void annotationPointCut() &#123;
+
+    &#125;
+
+    @After(&quot;annotationPointCut()&quot;) // 4
+    public void after(JoinPoint joinPoint) &#123;
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        LogAction logAction = method.getAnnotation(LogAction.class);
+        System.out.println(&quot;---注解式拦截:&quot; + logAction.name()); // 5
+    &#125;
+
+    @After(&quot;execution(* com.blinkfox.service.impl.DemoMethodService.*(..))&quot;) // 6
+    public void before(JoinPoint joinPoint) &#123;
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        System.out.println(&quot;---方法规则式拦截:&quot; + method.getName());
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -628,8 +906,22 @@
 </ol>
 </blockquote>
 <p>（6）配置类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.EnableAspectJAutoProxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.blinkfox&quot;)</span></span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AopConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.config;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+@Configuration
+@ComponentScan(&quot;com.blinkfox&quot;)
+@EnableAspectJAutoProxy
+public class AopConfig &#123;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>代码解释</strong>：</p>
 <ol>
@@ -637,8 +929,30 @@
 </ol>
 </blockquote>
 <p>（6）运行。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.maintest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.blinkfox.config.AopConfig;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.DemoAnnotationService;</span><br><span class="line"><span class="keyword">import</span> com.blinkfox.service.impl.DemoMethodService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2016/10/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AopMain</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(AopConfig.class);</span><br><span class="line">        <span class="type">DemoAnnotationService</span> <span class="variable">demoAnnotationService</span> <span class="operator">=</span> context.getBean(DemoAnnotationService.class);</span><br><span class="line">        <span class="type">DemoMethodService</span> <span class="variable">demoMethodService</span> <span class="operator">=</span> context.getBean(DemoMethodService.class);</span><br><span class="line">        demoAnnotationService.add();</span><br><span class="line">        demoMethodService.add();</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.maintest;
 
+import com.blinkfox.config.AopConfig;
+import com.blinkfox.service.impl.DemoAnnotationService;
+import com.blinkfox.service.impl.DemoMethodService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+/**
+ * Created by blinkfox on 2016/10/29.
+ */
+public class AopMain &#123;
+
+    public static void main(String[] args) &#123;
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AopConfig.class);
+        DemoAnnotationService demoAnnotationService = context.getBean(DemoAnnotationService.class);
+        DemoMethodService demoMethodService = context.getBean(DemoMethodService.class);
+        demoAnnotationService.add();
+        demoMethodService.add();
+        context.close();
+    &#125;
+
+&#125;
+</code></pre>
 
                 
             </div>

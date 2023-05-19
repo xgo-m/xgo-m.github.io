@@ -435,33 +435,156 @@
 </ul>
 <h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/10/29/Java-design-singleton-uml.jpg" alt="单例模式UML类图"></p>
 <h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/10/29/Java-design-singleton-seq.jpg" alt="单例模式时序图"></p>
-<h2 id="代码实现方式"><a href="#代码实现方式" class="headerlink" title="代码实现方式"></a>代码实现方式</h2><h3 id="1-饿汉式（推荐使用）"><a href="#1-饿汉式（推荐使用）" class="headerlink" title="1. 饿汉式（推荐使用）"></a>1. 饿汉式（推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 饿汉式单例模式.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 全局唯一实例. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Singleton</span> <span class="variable">singleton</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码实现方式"><a href="#代码实现方式" class="headerlink" title="代码实现方式"></a>代码实现方式</h2><h3 id="1-饿汉式（推荐使用）"><a href="#1-饿汉式（推荐使用）" class="headerlink" title="1. 饿汉式（推荐使用）"></a>1. 饿汉式（推荐使用）</h3><pre><code class="java">/**
+ * 饿汉式单例模式.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public class Singleton &#123;
 
+    /** 全局唯一实例. */
+    private static final Singleton singleton = new Singleton();
+
+    private Singleton() &#123;&#125;
+
+    public static Singleton getSingleton() &#123;
+        return singleton;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：这种方式避免了多线程的同步问题，但不是懒加载。如果不需要懒加载的方式，推荐使用。</p>
 </blockquote>
-<h3 id="2-非线程安全懒汉式（不推荐使用）"><a href="#2-非线程安全懒汉式（不推荐使用）" class="headerlink" title="2. 非线程安全懒汉式（不推荐使用）"></a>2. 非线程安全懒汉式（不推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 非线程安全的懒汉式.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过懒加载的方式获取实例，但是非线程安全.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Singleton实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="literal">null</span>) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-非线程安全懒汉式（不推荐使用）"><a href="#2-非线程安全懒汉式（不推荐使用）" class="headerlink" title="2. 非线程安全懒汉式（不推荐使用）"></a>2. 非线程安全懒汉式（不推荐使用）</h3><pre><code class="java">/**
+ * 非线程安全的懒汉式.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public class Singleton &#123;
 
+    private static Singleton singleton;
+
+    private Singleton() &#123;&#125;
+
+    /**
+     * 通过懒加载的方式获取实例，但是非线程安全.
+     * @return Singleton实例
+     */
+    public static Singleton getSingleton() &#123;
+        if (singleton == null) &#123;
+            singleton = new Singleton();
+        &#125;
+        return singleton;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：是懒加载的方式，但非线程安全。不推荐使用。</p>
 </blockquote>
-<h3 id="3-低效的线程安全懒汉式（不推荐使用）"><a href="#3-低效的线程安全懒汉式（不推荐使用）" class="headerlink" title="3. 低效的线程安全懒汉式（不推荐使用）"></a>3. 低效的线程安全懒汉式（不推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 低效的线程安全的懒汉式.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过 synchronized 关键字来保证线程安全，也是懒加载的方式来获取实例.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Singleton实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="literal">null</span>) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-低效的线程安全懒汉式（不推荐使用）"><a href="#3-低效的线程安全懒汉式（不推荐使用）" class="headerlink" title="3. 低效的线程安全懒汉式（不推荐使用）"></a>3. 低效的线程安全懒汉式（不推荐使用）</h3><pre><code class="java">/**
+ * 低效的线程安全的懒汉式.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public class Singleton &#123;
 
+    private static Singleton singleton;
+
+    private Singleton() &#123;&#125;
+
+    /**
+     * 通过 synchronized 关键字来保证线程安全，也是懒加载的方式来获取实例.
+     * @return Singleton实例
+     */
+    public static synchronized Singleton getSingleton() &#123;
+        if (singleton == null) &#123;
+            singleton = new Singleton();
+        &#125;
+        return singleton;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：是懒加载的方式，也线程安全，但是效率很低。因为99%的情况下是不需要去同步的。不推荐使用。</p>
 </blockquote>
-<h3 id="4-双重校验锁线程安全懒汉式（不推荐使用）"><a href="#4-双重校验锁线程安全懒汉式（不推荐使用）" class="headerlink" title="4. 双重校验锁线程安全懒汉式（不推荐使用）"></a>4. 双重校验锁线程安全懒汉式（不推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 双重校验锁线程安全懒汉式.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过&#x27;双重校验锁&#x27;来更高效的保证线程安全，也是懒加载的方式来获取实例.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Singleton实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (singleton == <span class="literal">null</span>) &#123;</span><br><span class="line">                    singleton = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-双重校验锁线程安全懒汉式（不推荐使用）"><a href="#4-双重校验锁线程安全懒汉式（不推荐使用）" class="headerlink" title="4. 双重校验锁线程安全懒汉式（不推荐使用）"></a>4. 双重校验锁线程安全懒汉式（不推荐使用）</h3><pre><code class="java">/**
+ * 双重校验锁线程安全懒汉式.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public class Singleton &#123;
 
+    private static Singleton singleton;
+
+    private Singleton() &#123;&#125;
+
+    /**
+     * 通过&#39;双重校验锁&#39;来更高效的保证线程安全，也是懒加载的方式来获取实例.
+     * @return Singleton实例
+     */
+    public static Singleton getSingleton() &#123;
+        if (singleton == null) &#123;
+            synchronized (Singleton.class) &#123;
+                if (singleton == null) &#123;
+                    singleton = new Singleton();
+                &#125;
+            &#125;
+        &#125;
+        return singleton;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：是懒加载的方式，也线程安全，效率也不错。但受限于Jdk5以前的Java内存模型，仍然会有bug，Java5及之后才能正常达到单例效果。</p>
 </blockquote>
-<h3 id="5-枚举式（强烈推荐使用）"><a href="#5-枚举式（强烈推荐使用）" class="headerlink" title="5. 枚举式（强烈推荐使用）"></a>5. 枚举式（强烈推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 枚举方式的单例.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    INSTANCE;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-枚举式（强烈推荐使用）"><a href="#5-枚举式（强烈推荐使用）" class="headerlink" title="5. 枚举式（强烈推荐使用）"></a>5. 枚举式（强烈推荐使用）</h3><pre><code class="java">/**
+ * 枚举方式的单例.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public enum Singleton &#123;
 
+    INSTANCE;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：在<code>《Effective Java》</code>一书中强烈推荐使用枚举来实现单例模式，该方式简单可自由序列化；保证只有一个实例（即使使用反射机制也无法多次实例化一个枚举量）；线程安全。唯一的缺点是非懒加载方式。</p>
 </blockquote>
-<h3 id="6-静态内部类（推荐使用）"><a href="#6-静态内部类（推荐使用）" class="headerlink" title="6. 静态内部类（推荐使用）"></a>6. 静态内部类（推荐使用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过使用静态内部类的方式来实现懒加载且线程安全的创建单例.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-10-23.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 静态内部类.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">SingletonHolder</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="title function_">SingletonHolder</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton4</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过懒加载的方式获取Singleton唯一实例的方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Singleton实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-静态内部类（推荐使用）"><a href="#6-静态内部类（推荐使用）" class="headerlink" title="6. 静态内部类（推荐使用）"></a>6. 静态内部类（推荐使用）</h3><pre><code class="java">/**
+ * 通过使用静态内部类的方式来实现懒加载且线程安全的创建单例.
+ *
+ * @author blinkfox on 2017-10-23.
+ */
+public class Singleton &#123;
 
+    private Singleton() &#123;&#125;
+
+    /**
+     * 静态内部类.
+     */
+    private static final class SingletonHolder &#123;
+
+        private SingletonHolder() &#123;&#125;
+
+        private static Singleton4 instance = new Singleton();
+
+    &#125;
+
+    /**
+     * 通过懒加载的方式获取Singleton唯一实例的方法.
+     * @return Singleton实例
+     */
+    public static Singleton getInstance() &#123;
+        return SingletonHolder.instance;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：这种方式利用了<code>ClassLoader</code>的机制保证初始化<code>instance</code>时只有一个线程，其只有显示通过调用<code>getInstance</code>方法时，才会显示装载<code>SingletonHolder</code>类，从而实例化<code>instance</code>。</p>
 </blockquote>

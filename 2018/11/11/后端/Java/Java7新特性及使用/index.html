@@ -434,38 +434,94 @@
 </li>
 </ul>
 <h2 id="一、switch支持String"><a href="#一、switch支持String" class="headerlink" title="一、switch支持String"></a>一、switch支持String</h2><p><code>switch</code>现在可以接受<code>String</code>类型的参数。示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="keyword">switch</span>(s) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;quux&quot;</span>:</span><br><span class="line">    processQuux(s);</span><br><span class="line"><span class="comment">// fall-through</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;foo&quot;</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;bar&quot;</span>:</span><br><span class="line">    processFooOrBar(s);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;baz&quot;</span>:</span><br><span class="line">    processBaz(s);</span><br><span class="line">    <span class="comment">// fall-through</span></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    processDefault(s);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">String s = ...
+switch(s) &#123;
+case &quot;quux&quot;:
+    processQuux(s);
+// fall-through
+case &quot;foo&quot;:
+case &quot;bar&quot;:
+    processFooOrBar(s);
+    break;
+case &quot;baz&quot;:
+    processBaz(s);
+    // fall-through
+default:
+    processDefault(s);
+    break;
+&#125;
+</code></pre>
 <h2 id="二、try-with-resources"><a href="#二、try-with-resources" class="headerlink" title="二、try-with-resources"></a>二、try-with-resources</h2><p>Java中某些资源是需要手动关闭的，如<code>InputStream</code>，<code>Writer</code>，<code>Sockets</code>，<code>Connection</code>等。这个新的语言特性允许try语句本身申请更多的资源，这些资源作用于try代码块，并自动关闭。</p>
 <p>Java7之前的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    br = <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(path));</span><br><span class="line">    <span class="keyword">return</span> br.readLine();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    log.error(<span class="string">&quot;BufferedReader Exception&quot;</span>, e);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (br != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            br.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;BufferedReader close Exception&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">BufferedReader br = null;
+try &#123;
+    br = new BufferedReader(new FileReader(path));
+    return br.readLine();
+&#125; catch (Exception e) &#123;
+    log.error(&quot;BufferedReader Exception&quot;, e);
+&#125; finally &#123;
+    if (br != null) &#123;
+        try &#123;
+            br.close();
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;BufferedReader close Exception&quot;, e);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <p>Java7及之后的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(path)) &#123;</span><br><span class="line">    <span class="keyword">return</span> br.readLine();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    log.error(<span class="string">&quot;BufferedReader Exception&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">try (BufferedReader br = new BufferedReader(new FileReader(path)) &#123;
+    return br.readLine();
+&#125; catch (Exception e) &#123;
+    log.error(&quot;BufferedReader Exception&quot;, e);
+&#125;
+</code></pre>
 <h2 id="三、catch多个异常"><a href="#三、catch多个异常" class="headerlink" title="三、catch多个异常"></a>三、catch多个异常</h2><p>自Java7开始，<code>catch</code>中可以一次性捕捉多个异常做统一处理。示例如下：</p>
 <p>Java7之前的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ExceptionThrower</span> <span class="variable">thrower</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExceptionThrower</span>();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        thrower.manyExceptions();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExceptionA a) &#123;</span><br><span class="line">        System.out.println(a.getClass());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExceptionB b) &#123;</span><br><span class="line">        System.out.println(b.getClass());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExceptionC c) &#123;</span><br><span class="line">        System.out.println(c.getClass());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public void handle() &#123;
+    ExceptionThrower thrower = new ExceptionThrower();
+    try &#123;
+        thrower.manyExceptions();
+    &#125; catch (ExceptionA a) &#123;
+        System.out.println(a.getClass());
+    &#125; catch (ExceptionB b) &#123;
+        System.out.println(b.getClass());
+    &#125; catch (ExceptionC c) &#123;
+        System.out.println(c.getClass());
+    &#125;
+&#125;
+</code></pre>
 <p>Java7及之后的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ExceptionThrower</span> <span class="variable">thrower</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExceptionThrower</span>();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        thrower.manyExceptions();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExceptionA | ExceptionB ab) &#123;</span><br><span class="line">        System.out.println(ab.getClass());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExceptionC c) &#123;</span><br><span class="line">        System.out.println(c.getClass());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public void handle() &#123;
+    ExceptionThrower thrower = new ExceptionThrower();
+    try &#123;
+        thrower.manyExceptions();
+    &#125; catch (ExceptionA | ExceptionB ab) &#123;
+        System.out.println(ab.getClass());
+    &#125; catch (ExceptionC c) &#123;
+        System.out.println(c.getClass());
+    &#125;
+&#125;
+</code></pre>
 <h2 id="四、实例创建类型推断"><a href="#四、实例创建类型推断" class="headerlink" title="四、实例创建类型推断"></a>四、实例创建类型推断</h2><p>从Java7开始，泛型类的实例化也不用繁琐的将泛型声明再写一遍。示例如下：</p>
 <p>Java7之前的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, List&lt;String&gt;&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, List&lt;String&gt;&gt;();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;String, List&lt;String&gt;&gt;();
+</code></pre>
 <p>Java7及之后的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, List&lt;String&gt;&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;&gt;();
+</code></pre>
 <h2 id="五、数字字面量下划线分割"><a href="#五、数字字面量下划线分割" class="headerlink" title="五、数字字面量下划线分割"></a>五、数字字面量下划线分割</h2><p>很长的数字可读性不好，在Java 7中可以使用下划线分隔长<code>int</code>以及<code>long</code>型整数了。如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">creditCardNumber</span> <span class="operator">=</span> <span class="number">1234_5678_9012_3456L</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">ONE_MILLION</span> <span class="operator">=</span> <span class="number">1_000_000</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">float</span> <span class="variable">PI</span> <span class="operator">=</span> <span class="number">3.14_15F</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">long creditCardNumber = 1234_5678_9012_3456L;
+public static final int ONE_MILLION = 1_000_000;
+public static final float PI = 3.14_15F;
+</code></pre>
 <h2 id="六、二进制字面量"><a href="#六、二进制字面量" class="headerlink" title="六、二进制字面量"></a>六、二进制字面量</h2><p>现在可以使用0b前缀创建二进制字面量：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">binary</span> <span class="operator">=</span> <span class="number">0b1001_1001</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">int binary = 0b1001_1001;
+</code></pre>
 <p>使用二进制字面量这种表示方式，使用非常简短的代码就可将二进制字符转换为数据类型，如在<code>byte</code>或<code>short</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span> <span class="variable">aByte</span> <span class="operator">=</span> (<span class="type">byte</span>) <span class="number">0b001</span>;</span><br><span class="line"><span class="type">short</span> <span class="variable">aShort</span> <span class="operator">=</span> (<span class="type">short</span>) <span class="number">0b010</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">byte aByte = (byte) 0b001;
+short aShort = (short) 0b010;
+</code></pre>
 <h2 id="七、增强的文件系统"><a href="#七、增强的文件系统" class="headerlink" title="七、增强的文件系统"></a>七、增强的文件系统</h2><p>Java7 推出了全新的<code>NIO2.0 API</code>以此改变针对文件管理的不便，使得在<code>java.nio.file</code>包下使用<code>Path</code>、<code>Paths</code>、<code>Files</code>、<code>WatchService</code>、<code>FileSystem</code>等常用类型可以很好的简化开发人员对文件管理的编码工作。</p>
 <h3 id="1-Path接口和Paths类"><a href="#1-Path接口和Paths类" class="headerlink" title="1. Path接口和Paths类"></a>1. Path接口和Paths类</h3><p><code>Path</code>接口的某些功能其实可以和<code>java.io</code>包下的<code>File</code>类等价，当然这些功能仅限于只读操作。在实际开发过程中，开发人员可以联用<code>Path</code>接口和<code>Paths</code>类，从而获取文件的一系列上下文信息。</p>
 <ul>
@@ -475,8 +531,12 @@
 <li><code>Path getParent()</code>: 获取当前文件上级关联目录</li>
 </ul>
 <p>联用<code>Path</code>接口和<code>Paths</code>类型获取文件信息：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;G:/test/test.xml&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;文件节点数:&quot;</span> + path.getNameCount());</span><br><span class="line">System.out.println(<span class="string">&quot;文件名称:&quot;</span> + path.getFileName());</span><br><span class="line">System.out.println(<span class="string">&quot;文件根目录:&quot;</span> + path.getRoot());</span><br><span class="line">System.out.println(<span class="string">&quot;文件上级关联目录:&quot;</span> + path.getParent());</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Path path = Paths.get(&quot;G:/test/test.xml&quot;);
+System.out.println(&quot;文件节点数:&quot; + path.getNameCount());
+System.out.println(&quot;文件名称:&quot; + path.getFileName());
+System.out.println(&quot;文件根目录:&quot; + path.getRoot());
+System.out.println(&quot;文件上级关联目录:&quot; + path.getParent());
+</code></pre>
 <h3 id="2-Files类"><a href="#2-Files类" class="headerlink" title="2. Files类"></a>2. Files类</h3><p>联用<code>Path</code>接口和<code>Paths</code>类可以很方便的访问到目标文件的上下文信息。当然这些操作全都是只读的，如果开发人员想对文件进行其它非只读操作，比如文件的创建、修改、删除等操作，则可以使用<code>Files</code>类型进行操作。</p>
 <p>Files类型常用方法如下：</p>
 <ul>
@@ -486,8 +546,8 @@
 <li><code>Path move()</code>: 将指定目标路径的文件转移到其他路径下，并删除源文件</li>
 </ul>
 <p>使用<code>Files</code>类型复制、粘贴文件示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Files.copy(Paths.get(<span class="string">&quot;/test/src.xml&quot;</span>), Paths.get(<span class="string">&quot;/test/target.xml&quot;</span>));</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Files.copy(Paths.get(&quot;/test/src.xml&quot;), Paths.get(&quot;/test/target.xml&quot;));
+</code></pre>
 <p>使用<code>Files</code>类型来管理文件，相对于传统的I&#x2F;O方式来说更加方便和简单。因为具体的操作实现将全部移交给<code>NIO2.0 API</code>，开发人员则无需关注。</p>
 <h3 id="3-WatchService"><a href="#3-WatchService" class="headerlink" title="3. WatchService"></a>3. WatchService</h3><p>Java7 还为开发人员提供了一套全新的文件系统功能，那就是文件监测。在此或许有很多朋友并不知晓文件监测有何意义及目，那么请大家回想下调试成热发布功能后的Web容器。当项目迭代后并重新部署时，开发人员无需对其进行手动重启，因为Web容器一旦监测到文件发生改变后，便会自动去适应这些“变化”并重新进行内部装载。Web容器的热发布功能同样也是基于文件监测功能，所以不得不承认，文件监测功能的出现对于Java文件系统来说是具有重大意义的。</p>
 <p>文件监测是基于事件驱动的，事件触发是作为监测的先决条件。开发人员可以使用<code>java.nio.file</code>包下的<code>StandardWatchEventKinds</code>类型提供的3种字面常量来定义监测事件类型，值得注意的是监测事件需要和<code>WatchService</code>实例一起进行注册。</p>
@@ -498,8 +558,35 @@
 <li><code>ENTRY_MODIFY</code>：文件或文件夹粘贴事件；</li>
 </ul>
 <p>使用<code>WatchService</code>类实现文件监控完整示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testWatch</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">/* 监控目标路径 */</span></span><br><span class="line">    <span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;G:/&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">/* 创建文件监控对象. */</span></span><br><span class="line">        <span class="type">WatchService</span> <span class="variable">watchService</span> <span class="operator">=</span> FileSystems.getDefault().newWatchService();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 注册文件监控的所有事件类型. */</span></span><br><span class="line">        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,</span><br><span class="line">                StandardWatchEventKinds.ENTRY_MODIFY);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 循环监测文件. */</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">WatchKey</span> <span class="variable">watchKey</span> <span class="operator">=</span> watchService.take();</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* 迭代触发事件的所有文件 */</span></span><br><span class="line">            <span class="keyword">for</span> (WatchEvent&lt;?&gt; event : watchKey.pollEvents()) &#123;</span><br><span class="line">                System.out.println(event.context().toString() + <span class="string">&quot; 事件类型：&quot;</span> + event.kind());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!watchKey.reset()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public static void testWatch() &#123;
+    /* 监控目标路径 */
+    Path path = Paths.get(&quot;G:/&quot;);
+    try &#123;
+        /* 创建文件监控对象. */
+        WatchService watchService = FileSystems.getDefault().newWatchService();
 
+        /* 注册文件监控的所有事件类型. */
+        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
+                StandardWatchEventKinds.ENTRY_MODIFY);
+
+        /* 循环监测文件. */
+        while (true) &#123;
+            WatchKey watchKey = watchService.take();
+
+            /* 迭代触发事件的所有文件 */
+            for (WatchEvent&lt;?&gt; event : watchKey.pollEvents()) &#123;
+                System.out.println(event.context().toString() + &quot; 事件类型：&quot; + event.kind());
+            &#125;
+
+            if (!watchKey.reset()) &#123;
+                return;
+            &#125;
+        &#125;
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;
+</code></pre>
 <p>通过上述程序示例我们可以看出，使用<code>WatchService</code>接口进行文件监控非常简单和方便。首先我们需要定义好目标监控路径，然后调用<code>FileSystems</code>类型的<code>newWatchService()</code>方法创建<code>WatchService</code>对象。接下来我们还需使用<code>Path</code>接口的<code>register()</code>方法注册<code>WatchService</code>实例及监控事件。当这些基础作业层全部准备好后，我们再编写外围实时监测循环。最后迭代<code>WatchKey</code>来获取所有触发监控事件的文件即可。</p>
 <h2 id="八、Fork-x2F-Join框架"><a href="#八、Fork-x2F-Join框架" class="headerlink" title="八、Fork&#x2F;Join框架"></a>八、Fork&#x2F;Join框架</h2><h3 id="1-什么是Fork-x2F-Join框架"><a href="#1-什么是Fork-x2F-Join框架" class="headerlink" title="1. 什么是Fork&#x2F;Join框架"></a>1. 什么是Fork&#x2F;Join框架</h3><p>Java7提供的一个用于并行执行任务的框架，是一个把大任务分割成若干个小任务，最终汇总每个小任务结果后得到大任务结果的框架。</p>
 <p>Fork&#x2F;Join的运行流程图如下：</p>
@@ -515,13 +602,103 @@
 <h3 id="4-Fork-x2F-Join框架使用示例"><a href="#4-Fork-x2F-Join框架使用示例" class="headerlink" title="4. Fork&#x2F;Join框架使用示例"></a>4. Fork&#x2F;Join框架使用示例</h3><p>让我们通过一个简单的需求来使用下<code>Fork／Join</code>框架，需求是：计算<code>1 + 2 + 3 + 4</code>的结果。</p>
 <p>使用<code>Fork/Join</code>框架首先要考虑到的是如何分割任务，如果我们希望每个子任务最多执行两个数的相加，那么我们设置分割的阈值是<code>2</code>，由于是<code>4</code>个数字相加，所以<code>Fork/Join</code>框架会把这个任务<code>fork</code>成两个子任务，子任务一负责计算<code>1 + 2</code>，子任务二负责计算<code>3 + 4</code>，然后再<code>join</code>两个子任务的结果。</p>
 <p>因为是有结果的任务，所以必须继承<code>RecursiveTask</code>，实现代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blinkfox.test.other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ForkJoinPool;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.RecursiveTask;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CountTask.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2018-01-03.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CountTask</span> <span class="keyword">extends</span> <span class="title class_">RecursiveTask</span>&lt;Integer&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 阈值. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">THRESHOLD</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 计算的开始值. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> start;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 计算的结束值. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> end;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 计算的开始值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end 计算的结束值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CountTask</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.start = start;</span><br><span class="line">        <span class="built_in">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 执行计算的方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int型结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Integer <span class="title function_">compute</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果任务足够小就计算任务.</span></span><br><span class="line">        <span class="keyword">if</span> ((end - start) &lt;= THRESHOLD) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt;= end; i++) &#123;</span><br><span class="line">                sum += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果任务大于阈值，就分裂成两个子任务来计算.</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="type">CountTask</span> <span class="variable">leftTask</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountTask</span>(start, middle);</span><br><span class="line">            <span class="type">CountTask</span> <span class="variable">rightTask</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountTask</span>(middle + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 等待子任务执行完，并得到结果，再合并执行结果.</span></span><br><span class="line">            leftTask.fork();</span><br><span class="line">            rightTask.fork();</span><br><span class="line">            sum = leftTask.join() + rightTask.join();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">        <span class="type">ForkJoinPool</span> <span class="variable">fkPool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ForkJoinPool</span>();</span><br><span class="line">        <span class="type">CountTask</span> <span class="variable">task</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountTask</span>(<span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line">        Future&lt;Integer&gt; result = fkPool.submit(task);</span><br><span class="line">        System.out.println(<span class="string">&quot;result:&quot;</span> + result.get());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package com.blinkfox.test.other;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
+import java.util.concurrent.RecursiveTask;
+
+/**
+ * CountTask.
+ *
+ * @author blinkfox on 2018-01-03.
+ */
+public class CountTask extends RecursiveTask&lt;Integer&gt; &#123;
+
+    /** 阈值. */
+    public static final int THRESHOLD = 2;
+
+    /** 计算的开始值. */
+    private int start;
+
+    /** 计算的结束值. */
+    private int end;
+
+    /**
+     * 构造方法.
+     *
+     * @param start 计算的开始值
+     * @param end 计算的结束值
+     */
+    public CountTask(int start, int end) &#123;
+        this.start = start;
+        this.end = end;
+    &#125;
+
+    /**
+     * 执行计算的方法.
+     *
+     * @return int型结果
+     */
+    @Override
+    protected Integer compute() &#123;
+        int sum = 0;
+
+        // 如果任务足够小就计算任务.
+        if ((end - start) &lt;= THRESHOLD) &#123;
+            for (int i = start; i &lt;= end; i++) &#123;
+                sum += i;
+            &#125;
+        &#125; else &#123;
+            // 如果任务大于阈值，就分裂成两个子任务来计算.
+            int middle = (start + end) / 2;
+            CountTask leftTask = new CountTask(start, middle);
+            CountTask rightTask = new CountTask(middle + 1, end);
+
+            // 等待子任务执行完，并得到结果，再合并执行结果.
+            leftTask.fork();
+            rightTask.fork();
+            sum = leftTask.join() + rightTask.join();
+        &#125;
+        return sum;
+    &#125;
+
+    /**
+     * main方法.
+     *
+     * @param args 数组参数
+     */
+    public static void main(String[] args) throws ExecutionException, InterruptedException &#123;
+        ForkJoinPool fkPool = new ForkJoinPool();
+        CountTask task = new CountTask(1, 4);
+        Future&lt;Integer&gt; result = fkPool.submit(task);
+        System.out.println(&quot;result:&quot; + result.get());
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="九、其它"><a href="#九、其它" class="headerlink" title="九、其它"></a>九、其它</h2><h3 id="1-JDBC4-1规范"><a href="#1-JDBC4-1规范" class="headerlink" title="1. JDBC4.1规范"></a>1. JDBC4.1规范</h3><p>JDBC4.1主要更新了两个新特性，分别是：</p>
 <h4 id="1-Connection，ResultSet-和-Statement-都实现了Closeable-接口"><a href="#1-Connection，ResultSet-和-Statement-都实现了Closeable-接口" class="headerlink" title="(1). Connection，ResultSet 和 Statement 都实现了Closeable 接口"></a>(1). Connection，ResultSet 和 Statement 都实现了Closeable 接口</h4><p><code>Connection</code>，<code>ResultSet</code>和<code>Statement</code>都实现了<code>Closeable</code>接口，所有在<code>try-with-resources</code>语句中调用，就可以自动关闭相关资源了。</p>
 <h4 id="2-RowSet-1-1"><a href="#2-RowSet-1-1" class="headerlink" title="(2). RowSet 1.1"></a>(2). RowSet 1.1</h4><p>引入<code>RowSetFactory</code>接口和<code>RowSetProvider</code>类，可以创建JDBC driver支持的各种&#96;Rowsets。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RowSetFactory</span> <span class="variable">myRowSetFactory</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">JdbcRowSet</span> <span class="variable">jdbcRs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">Statement</span> <span class="variable">stmt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  myRowSetFactory = RowSetProvider.newFactory();<span class="comment">//用缺省的RowSetFactory 实现</span></span><br><span class="line">  jdbcRs = myRowSetFactory.createJdbcRowSet();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//创建一个 JdbcRowSet 对象，配置数据库连接属性</span></span><br><span class="line">  jdbcRs.setUrl(<span class="string">&quot;jdbc:myDriver:myAttribute&quot;</span>);</span><br><span class="line">  jdbcRs.setUsername(username);</span><br><span class="line">  jdbcRs.setPassword(password);</span><br><span class="line"></span><br><span class="line">  jdbcRs.setCommand(<span class="string">&quot;select ID from TEST&quot;</span>);</span><br><span class="line">  jdbcRs.execute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">RowSetFactory myRowSetFactory = null;
+JdbcRowSet jdbcRs = null;
+ResultSet rs = null;
+Statement stmt = null;
 
+try &#123;
+  myRowSetFactory = RowSetProvider.newFactory();//用缺省的RowSetFactory 实现
+  jdbcRs = myRowSetFactory.createJdbcRowSet();
+
+  //创建一个 JdbcRowSet 对象，配置数据库连接属性
+  jdbcRs.setUrl(&quot;jdbc:myDriver:myAttribute&quot;);
+  jdbcRs.setUsername(username);
+  jdbcRs.setPassword(password);
+
+  jdbcRs.setCommand(&quot;select ID from TEST&quot;);
+  jdbcRs.execute();
+&#125;
+</code></pre>
 <p><code>RowSetFactory</code>接口包括了创建不同类型的RowSet的方法：</p>
 <ul>
 <li>createCachedRowSet</li>

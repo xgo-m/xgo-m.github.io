@@ -430,20 +430,27 @@
 <h3 id="3-主要用途"><a href="#3-主要用途" class="headerlink" title="3. 主要用途"></a>3. 主要用途</h3><p><strong>反射最重要的用途就是开发各种通用框架</strong>。很多框架（比如Spring）都是配置化的（比如通过XML文件配置JavaBean,Action之类的），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射——运行时动态加载需要加载的对象。对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。</p>
 <h2 id="二、反射的使用"><a href="#二、反射的使用" class="headerlink" title="二、反射的使用"></a>二、反射的使用</h2><h3 id="1-获取Class对象"><a href="#1-获取Class对象" class="headerlink" title="1. 获取Class对象"></a>1. 获取Class对象</h3><p>反射的各种功能都需要通过Class对象来实现，因此，需要知道如何获取Class对象，主要有以下几种方式。</p>
 <h4 id="使用-Class-forName-的静态方法"><a href="#使用-Class-forName-的静态方法" class="headerlink" title="使用 Class.forName() 的静态方法"></a>使用 Class.forName() 的静态方法</h4><p><code>Class.forName(String className)</code>方法可以通过类或接口的名称（一个字符串或完全限定名）来获取对应的Class对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; cls = Class.forName(<span class="string">&quot;com.blinkfox.Zealot&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="直接获取某个类的class-最安全-x2F-性能最好"><a href="#直接获取某个类的class-最安全-x2F-性能最好" class="headerlink" title="直接获取某个类的class(最安全&#x2F;性能最好)"></a>直接获取某个类的class(最安全&#x2F;性能最好)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;String&gt; cls = String.class;</span><br></pre></td></tr></table></figure>
-
-<h4 id="调用某个对象的-getClass-方法"><a href="#调用某个对象的-getClass-方法" class="headerlink" title="调用某个对象的 getClass() 方法"></a>调用某个对象的 getClass() 方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;String&gt; cls = str.getClass();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Class&lt;?&gt; cls = Class.forName(&quot;com.blinkfox.Zealot&quot;);
+</code></pre>
+<h4 id="直接获取某个类的class-最安全-x2F-性能最好"><a href="#直接获取某个类的class-最安全-x2F-性能最好" class="headerlink" title="直接获取某个类的class(最安全&#x2F;性能最好)"></a>直接获取某个类的class(最安全&#x2F;性能最好)</h4><pre><code class="java">Class&lt;String&gt; cls = String.class;
+</code></pre>
+<h4 id="调用某个对象的-getClass-方法"><a href="#调用某个对象的-getClass-方法" class="headerlink" title="调用某个对象的 getClass() 方法"></a>调用某个对象的 getClass() 方法</h4><pre><code class="java">Class&lt;String&gt; cls = str.getClass();
+</code></pre>
 <h3 id="2-判断是否为某个类的实例"><a href="#2-判断是否为某个类的实例" class="headerlink" title="2. 判断是否为某个类的实例"></a>2. 判断是否为某个类的实例</h3><p>一般地，我们用<code>instanceof</code>关键字来判断是否为某个类的实例。同时我们也可以借助反射中Class对象的<code>isInstance()</code>方法来判断是否为某个类的实例，它是一个Native方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">boolean</span> <span class="title function_">isInstance</span><span class="params">(Object obj)</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public native boolean isInstance(Object obj);
+</code></pre>
 <h3 id="3-创建实例"><a href="#3-创建实例" class="headerlink" title="3. 创建实例"></a>3. 创建实例</h3><p>通过反射来生成对象主要有两种方式。</p>
-<h4 id="使用Class对象的newInstance-方法"><a href="#使用Class对象的newInstance-方法" class="headerlink" title="使用Class对象的newInstance()方法"></a>使用Class对象的newInstance()方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; c = String.class;</span><br><span class="line"><span class="type">Object</span> <span class="variable">str</span> <span class="operator">=</span> c.newInstance();</span><br></pre></td></tr></table></figure>
-
-<h4 id="通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance-方法"><a href="#通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance-方法" class="headerlink" title="通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance()方法"></a>通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance()方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取String所对应的Class对象</span></span><br><span class="line">Class&lt;?&gt; c = String.class;</span><br><span class="line"><span class="comment">// 获取String类带一个String参数的构造器</span></span><br><span class="line"><span class="type">Constructor</span> <span class="variable">constructor</span> <span class="operator">=</span> c.getConstructor(String.class);</span><br><span class="line"><span class="comment">// 根据构造器创建实例</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> constructor.newInstance(<span class="string">&quot;23333&quot;</span>);</span><br><span class="line">System.out.println(obj);</span><br></pre></td></tr></table></figure>
-
+<h4 id="使用Class对象的newInstance-方法"><a href="#使用Class对象的newInstance-方法" class="headerlink" title="使用Class对象的newInstance()方法"></a>使用Class对象的newInstance()方法</h4><pre><code class="java">Class&lt;?&gt; c = String.class;
+Object str = c.newInstance();
+</code></pre>
+<h4 id="通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance-方法"><a href="#通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance-方法" class="headerlink" title="通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance()方法"></a>通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance()方法</h4><pre><code class="java">// 获取String所对应的Class对象
+Class&lt;?&gt; c = String.class;
+// 获取String类带一个String参数的构造器
+Constructor constructor = c.getConstructor(String.class);
+// 根据构造器创建实例
+Object obj = constructor.newInstance(&quot;23333&quot;);
+System.out.println(obj);
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：这种方法可以用指定的构造器构造类的实例。</p>
 </blockquote>
@@ -451,27 +458,67 @@
 <ul>
 <li><code>getDeclaredMethods()</code>方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getDeclaredMethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public Method[] getDeclaredMethods() throws SecurityException
+</code></pre>
 <ul>
 <li><code>getMethods()</code>方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getMethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public Method[] getMethods() throws SecurityException
+</code></pre>
 <ul>
 <li><code>getMethod()</code>方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为方法的参数对应Class的对象。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method <span class="title function_">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public Method getMethod(String name, Class&lt;?&gt;... parameterTypes)
+</code></pre>
 <p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> IllegalAccessException,</span><br><span class="line">            InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        Class&lt;?&gt; c = MethodClass.class;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> c.newInstance();</span><br><span class="line">        Method[] methods = c.getMethods();</span><br><span class="line">        Method[] declaredMethods = c.getDeclaredMethods();</span><br><span class="line">        <span class="comment">//获取MethodClass类的add方法</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> c.getMethod(<span class="string">&quot;add&quot;</span>, <span class="type">int</span>.class, <span class="type">int</span>.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//getMethods()方法获取的所有方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;getMethods获取的方法：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Method m: methods) &#123;</span><br><span class="line">            System.out.println(m);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//getDeclaredMethods()方法获取的所有方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;getDeclaredMethods获取的方法：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Method m: declaredMethods) &#123;</span><br><span class="line">            System.out.println(m);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodClass</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">fuck</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
+public class Test &#123;
+
+    public static void test() throws IllegalAccessException,
+            InstantiationException, NoSuchMethodException, InvocationTargetException &#123;
+        Class&lt;?&gt; c = MethodClass.class;
+        Object object = c.newInstance();
+        Method[] methods = c.getMethods();
+        Method[] declaredMethods = c.getDeclaredMethods();
+        //获取MethodClass类的add方法
+        Method method = c.getMethod(&quot;add&quot;, int.class, int.class);
+
+        //getMethods()方法获取的所有方法
+        System.out.println(&quot;getMethods获取的方法：&quot;);
+        for(Method m: methods) &#123;
+            System.out.println(m);
+        &#125;
+
+        //getDeclaredMethods()方法获取的所有方法
+        System.out.println(&quot;getDeclaredMethods获取的方法：&quot;);
+        for(Method m: declaredMethods) &#123;
+            System.out.println(m);
+        &#125;
+    &#125;
+&#125;
+
+class MethodClass &#123;
+
+    public final int fuck = 3;
+
+    public int add(int a, int b) &#123;
+        return a + b;
+    &#125;
+
+    public int sub(int a, int b) &#123;
+        return a - b;
+    &#125;
+
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：通过<code>getMethods()</code>获取的方法可以获取到父类的方法,比如<code>java.lang.Object</code>下定义的各个方法。</p>
 </blockquote>
 <h3 id="5-获取构造方法"><a href="#5-获取构造方法" class="headerlink" title="5. 获取构造方法"></a>5. 获取构造方法</h3><p>获取类构造器的用法与上述获取方法的用法类似。主要是通过Class类的<code>getConstructor</code>方法得到<code>Constructor</code>类的一个实例，而Constructor类有一个<code>newInstance</code>方法可以创建一个对象实例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">newInstance</span><span class="params">(Object ... initargs)</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public T newInstance(Object ... initargs)
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：此方法可以根据传入的参数来调用对应的Constructor创建对象实例。</p>
 </blockquote>
@@ -482,14 +529,54 @@
 <li><code>Field[] getFields()</code>和<code>Field[] getDeclaredFields()</code>用法同上。</li>
 </ul>
 <h3 id="7-调用方法"><a href="#7-调用方法" class="headerlink" title="7. 调用方法"></a>7. 调用方法</h3><p>当我们从类中获取了一个方法后，我们就可以用invoke()方法来调用这个方法。invoke方法的原型为:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object obj, Object... args)</span> <span class="keyword">throws</span> IllegalAccessException, IllegalArgumentException,</span><br><span class="line"> InvocationTargetException</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public Object invoke(Object obj, Object... args) throws IllegalAccessException, IllegalArgumentException,
+ InvocationTargetException
+</code></pre>
 <p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException,</span><br><span class="line">            InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        Class&lt;?&gt; klass = MethodClass.class;</span><br><span class="line">        <span class="comment">//创建 MethodClass 的实例</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> klass.newInstance();</span><br><span class="line">        <span class="comment">//获取 MethodClass 类的add方法</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> klass.getMethod(<span class="string">&quot;add&quot;</span>, <span class="type">int</span>.class, <span class="type">int</span>.class);</span><br><span class="line">        <span class="comment">//调用 method 对应的方法 =&gt; add(1,4)</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(obj, <span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodClass</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">fuck</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class Test &#123;
 
+    public static void main(String[] args) throws IllegalAccessException,
+            InstantiationException, NoSuchMethodException, InvocationTargetException &#123;
+        Class&lt;?&gt; klass = MethodClass.class;
+        //创建 MethodClass 的实例
+        Object obj = klass.newInstance();
+        //获取 MethodClass 类的add方法
+        Method method = klass.getMethod(&quot;add&quot;, int.class, int.class);
+        //调用 method 对应的方法 =&gt; add(1,4)
+        Object result = method.invoke(obj, 1, 4);
+        System.out.println(result);
+    &#125;
+&#125;
+
+class MethodClass &#123;
+
+    public final int fuck = 3;
+
+    public int add(int a, int b) &#123;
+        return a + b;
+    &#125;
+
+    public int sub(int a, int b) &#123;
+        return a - b;
+    &#125;
+
+&#125;
+</code></pre>
 <h3 id="8-利用反射创建数组"><a href="#8-利用反射创建数组" class="headerlink" title="8. 利用反射创建数组"></a>8. 利用反射创建数组</h3><p>数组在Java里是比较特殊的一种类型，它可以赋值给一个<code>Object Reference</code>。下面我们看一看利用反射创建数组的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testArray</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">    <span class="comment">// 使用`java.lang.reflect.Array`反射创建长度为25的字符串数组.</span></span><br><span class="line">    Class&lt;?&gt; cls = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br><span class="line">    <span class="type">Object</span> <span class="variable">array</span> <span class="operator">=</span> Array.newInstance(cls, <span class="number">25</span>);</span><br><span class="line">    <span class="comment">// 往数组里添加内容</span></span><br><span class="line">    Array.set(array,<span class="number">0</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    Array.set(array,<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">    Array.set(array,<span class="number">2</span>, <span class="string">&quot;Go&quot;</span>);</span><br><span class="line">    Array.set(array,<span class="number">3</span>, <span class="string">&quot;Scala&quot;</span>);</span><br><span class="line">    Array.set(array,<span class="number">4</span>, <span class="string">&quot;Clojure&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取某一项的内容</span></span><br><span class="line">    System.out.println(Array.get(array, <span class="number">3</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public static void testArray() throws ClassNotFoundException &#123;
+    // 使用`java.lang.reflect.Array`反射创建长度为25的字符串数组.
+    Class&lt;?&gt; cls = Class.forName(&quot;java.lang.String&quot;);
+    Object array = Array.newInstance(cls, 25);
+    // 往数组里添加内容
+    Array.set(array,0, &quot;hello&quot;);
+    Array.set(array,1, &quot;Java&quot;);
+    Array.set(array,2, &quot;Go&quot;);
+    Array.set(array,3, &quot;Scala&quot;);
+    Array.set(array,4, &quot;Clojure&quot;);
+    // 获取某一项的内容
+    System.out.println(Array.get(array, 3));
+&#125;
+</code></pre>
 <h2 id="三、使用反射获取信息"><a href="#三、使用反射获取信息" class="headerlink" title="三、使用反射获取信息"></a>三、使用反射获取信息</h2><p>Class类提供了大量的实例方法来获取该Class对象所对应的详细信息，Class类大致包含如下方法，其中每个方法都包含多个重载版本，因此我们只是做简单的介绍，详细请参考<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">JDK文档</a>。</p>
 <h3 id="1-获取类内信息"><a href="#1-获取类内信息" class="headerlink" title="1. 获取类内信息"></a>1. 获取类内信息</h3><ul>
 <li>构造器: <code>Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)</code></li>
@@ -522,8 +609,79 @@
 <li><code>WildcardType</code>: 一种通配符类型表达式, 如<code>?</code>、<code>? extends Number</code>、<code>? super Integer</code></li>
 </ul>
 <p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; objectMap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(Map&lt;String, User&gt; map, String string)</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Map&lt;User, Bean&gt; <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试属性类型</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchFieldException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testFieldType</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> Client.class.getDeclaredField(<span class="string">&quot;objectMap&quot;</span>);</span><br><span class="line">        <span class="type">Type</span> <span class="variable">gType</span> <span class="operator">=</span> field.getGenericType();</span><br><span class="line">        <span class="comment">// 打印type与generic type的区别</span></span><br><span class="line">        System.out.println(field.getType());</span><br><span class="line">        System.out.println(gType);</span><br><span class="line">        System.out.println(<span class="string">&quot;**************&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (gType <span class="keyword">instanceof</span> ParameterizedType) &#123;</span><br><span class="line">            <span class="type">ParameterizedType</span> <span class="variable">pType</span> <span class="operator">=</span> (ParameterizedType) gType;</span><br><span class="line">            Type[] types = pType.getActualTypeArguments();</span><br><span class="line">            <span class="keyword">for</span> (Type type : types) &#123;</span><br><span class="line">                System.out.println(type.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试参数类型</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchMethodException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testParamType</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException &#123;</span><br><span class="line">        <span class="type">Method</span> <span class="variable">testMethod</span> <span class="operator">=</span> Client.class.getMethod(<span class="string">&quot;test&quot;</span>, Map.class, String.class);</span><br><span class="line">        Type[] parameterTypes = testMethod.getGenericParameterTypes();</span><br><span class="line">        <span class="keyword">for</span> (Type type : parameterTypes) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;type -&gt; &quot;</span> + type);</span><br><span class="line">            <span class="keyword">if</span> (type <span class="keyword">instanceof</span> ParameterizedType) &#123;</span><br><span class="line">                Type[] actualTypes = ((ParameterizedType) type).getActualTypeArguments();</span><br><span class="line">                <span class="keyword">for</span> (Type actualType : actualTypes) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;\tactual type -&gt; &quot;</span> + actualType);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试返回值类型</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchMethodException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testReturnType</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException &#123;</span><br><span class="line">        <span class="type">Method</span> <span class="variable">testMethod</span> <span class="operator">=</span> Client.class.getMethod(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        <span class="type">Type</span> <span class="variable">returnType</span> <span class="operator">=</span> testMethod.getGenericReturnType();</span><br><span class="line">        System.out.println(<span class="string">&quot;return type -&gt; &quot;</span> + returnType);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (returnType <span class="keyword">instanceof</span> ParameterizedType) &#123;</span><br><span class="line">            Type[] actualTypes = ((ParameterizedType) returnType).getActualTypeArguments();</span><br><span class="line">            <span class="keyword">for</span> (Type actualType : actualTypes) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;\tactual type -&gt; &quot;</span> + actualType);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class Client &#123;
 
+    private Map&lt;String, Object&gt; objectMap;
+
+    public void test(Map&lt;String, User&gt; map, String string) &#123;
+    &#125;
+
+    public Map&lt;User, Bean&gt; test() &#123;
+        return null;
+    &#125;
+
+    /**
+     * 测试属性类型
+     *
+     * @throws NoSuchFieldException
+     */
+    @Test
+    public void testFieldType() throws NoSuchFieldException &#123;
+        Field field = Client.class.getDeclaredField(&quot;objectMap&quot;);
+        Type gType = field.getGenericType();
+        // 打印type与generic type的区别
+        System.out.println(field.getType());
+        System.out.println(gType);
+        System.out.println(&quot;**************&quot;);
+        if (gType instanceof ParameterizedType) &#123;
+            ParameterizedType pType = (ParameterizedType) gType;
+            Type[] types = pType.getActualTypeArguments();
+            for (Type type : types) &#123;
+                System.out.println(type.toString());
+            &#125;
+        &#125;
+    &#125;
+
+    /**
+     * 测试参数类型
+     *
+     * @throws NoSuchMethodException
+     */
+    @Test
+    public void testParamType() throws NoSuchMethodException &#123;
+        Method testMethod = Client.class.getMethod(&quot;test&quot;, Map.class, String.class);
+        Type[] parameterTypes = testMethod.getGenericParameterTypes();
+        for (Type type : parameterTypes) &#123;
+            System.out.println(&quot;type -&gt; &quot; + type);
+            if (type instanceof ParameterizedType) &#123;
+                Type[] actualTypes = ((ParameterizedType) type).getActualTypeArguments();
+                for (Type actualType : actualTypes) &#123;
+                    System.out.println(&quot;\tactual type -&gt; &quot; + actualType);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    /**
+     * 测试返回值类型
+     *
+     * @throws NoSuchMethodException
+     */
+    @Test
+    public void testReturnType() throws NoSuchMethodException &#123;
+        Method testMethod = Client.class.getMethod(&quot;test&quot;);
+        Type returnType = testMethod.getGenericReturnType();
+        System.out.println(&quot;return type -&gt; &quot; + returnType);
+
+        if (returnType instanceof ParameterizedType) &#123;
+            Type[] actualTypes = ((ParameterizedType) returnType).getActualTypeArguments();
+            for (Type actualType : actualTypes) &#123;
+                System.out.println(&quot;\tactual type -&gt; &quot; + actualType);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <hr>
 <p>参考文档：<a target="_blank" rel="noopener" href="http://www.sczyh30.com/posts/Java/java-reflection-1/">Java反射基础</a></p>
 

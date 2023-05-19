@@ -436,8 +436,40 @@
 </li>
 </ul>
 <h2 id="一、Web-Services-Metadata"><a href="#一、Web-Services-Metadata" class="headerlink" title="一、Web Services Metadata"></a>一、Web Services Metadata</h2><p><code>WebService</code>是一种独立于特定语言、特定平台，基于网络的、分布式的模块化组件。是一个能够使用<code>xml</code>消息通过网络来访问的接口，这个接口描述了一组可访问的操作。在Java6中，在想要发布为<code>WebService</code>的类上加上<code>@WebService</code>的注解，这个类的方法就变为<code>WebService</code>方法了，再通过<code>Endpoint.publish()</code>方法发布这个服务。到此，一个最简单的<code>WebService</code>搞定。运行<code>main</code>方法，在浏览器里输入<code>http://localhost:8080/com.blinkfox.test.Hello?wsdl</code>，即可查看你WebService的WSDL信息。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.jws.WebService;</span><br><span class="line"><span class="keyword">import</span> javax.xml.ws.Endpoint;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hello.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-11-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebService</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Hello.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * sayHello.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name 名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello &quot;</span>.concat(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Endpoint.publish(<span class="string">&quot;http://localhost:8080/com.blinkfox.test.Hello&quot;</span>, <span class="keyword">new</span> <span class="title class_">Hello</span>());</span><br><span class="line">        log.info(<span class="string">&quot;调用成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import javax.jws.WebService;
+import javax.xml.ws.Endpoint;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Hello.
+ * @author blinkfox on 2017-11-28.
+ */
+@WebService
+public class Hello &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(Hello.class);
+
+    /**
+     * sayHello.
+     * @param name 名称
+     * @return 结果
+     */
+    public String sayHello(String name) &#123;
+        return &quot;Hello &quot;.concat(name);
+    &#125;
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) &#123;
+        Endpoint.publish(&quot;http://localhost:8080/com.blinkfox.test.Hello&quot;, new Hello());
+        log.info(&quot;调用成功!&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>Java 自从JDK5中添加了元数据功能(注解)之后,SUN几乎重构了整个J2EE体系，由于变化很大，干脆将名字也重构为Java EE，Java EE(当前版本为5.0)将元数据纳入很多规范当中，这其中就包括<code>Web Services</code>的相关规范，这显然比以前的JAX-RPC编程模型简单(当然, Axis的编程模型也很简单)。这里要谈的Web服务元数据(JSR 181)只是Java Web 服务规范中的一个,它跟Common Annotations, JAXB2, StAX, SAAJ和JAX-WS等共同构成Java EE 5的Web Services技术堆栈。</p>
 <p>下面介绍<code>JSR-181</code>里面各个元数据的相关参数及用途。</p>
 <table>
@@ -494,18 +526,185 @@
 </tbody></table>
 <h2 id="二、Scripting"><a href="#二、Scripting" class="headerlink" title="二、Scripting"></a>二、Scripting</h2><p>Java6增加了对动态语言的支持，原理上是将脚本语言编译成字节码，这样脚本语言也能享用Java平台的诸多优势，包括可移植性，安全等。另外由于现在是编译成字节码后再执行，所以比原来边解释边执行效率要高很多。可以很好的利用脚本语言的动态特性，主要支持的有<code>JavaSrcipt</code>、<code>Ruby</code>、<code>Python</code>等。</p>
 <p>以下使用<code>JavaScript</code>的脚本，代码示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.script.Invocable;</span><br><span class="line"><span class="keyword">import</span> javax.script.ScriptEngine;</span><br><span class="line"><span class="keyword">import</span> javax.script.ScriptEngineManager;</span><br><span class="line"><span class="keyword">import</span> javax.script.ScriptException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JsTest.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Hello.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ScriptException 脚本异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchMethodException 无方法异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ScriptException, NoSuchMethodException &#123;</span><br><span class="line">        <span class="type">ScriptEngineManager</span> <span class="variable">enjineManager</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ScriptEngineManager</span>();</span><br><span class="line">        <span class="type">ScriptEngine</span> <span class="variable">engine</span> <span class="operator">=</span> enjineManager.getEngineByName(<span class="string">&quot;JavaScript&quot;</span>);</span><br><span class="line"></span><br><span class="line">        String script=<span class="string">&quot;function hello(name)&#123;return &#x27;Hello &#x27; + name&#125;&quot;</span>;</span><br><span class="line">        engine.eval(script);</span><br><span class="line">        Invocable inv=(Invocable) engine;</span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> (String) inv.invokeFunction(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;blinkfox&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;脚本执行结果:&#123;&#125;&quot;</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * JsTest.
+ * @author blinkfox
+ * @version 1.0
+ *
+ */
+public class JsTest &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(Hello.class);
+
+    /**
+     * main方法.
+     * @param args 数组参数
+     * @throws ScriptException 脚本异常
+     * @throws NoSuchMethodException 无方法异常
+     */
+    public static void main(String[] args) throws ScriptException, NoSuchMethodException &#123;
+        ScriptEngineManager enjineManager = new ScriptEngineManager();
+        ScriptEngine engine = enjineManager.getEngineByName(&quot;JavaScript&quot;);
+
+        String script=&quot;function hello(name)&#123;return &#39;Hello &#39; + name&#125;&quot;;
+        engine.eval(script);
+        Invocable inv=(Invocable) engine;
+        String result = (String) inv.invokeFunction(&quot;hello&quot;, &quot;blinkfox&quot;);
+        log.info(&quot;脚本执行结果:&#123;&#125;&quot;, result);
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="三、Compiler-API"><a href="#三、Compiler-API" class="headerlink" title="三、Compiler API"></a>三、Compiler API</h2><p>在Java6中提供了一套<code>Compiler API</code>，定义在<code>JSR199</code>中, 提供在运行期动态编译java代码为字节码的功能。一套API就好比是在java程序中模拟javac程序，将Java源文件编译为class文件；其提供的默认实现也正是在文件系统上进行查找、编译工作的。<code>Compiler API</code>结合反射功能就可以实现动态的产生Java代码并编译执行这些代码，有点动态语言的特征。</p>
 <p>基本使用示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaCompilerAPICompiler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">compile</span><span class="params">(Path src, Path output)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">JavaCompiler</span> <span class="variable">compiler</span> <span class="operator">=</span> ToolProvider.getSystemJavaCompiler();</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">StandardJavaFileManager</span> <span class="variable">fileManager</span> <span class="operator">=</span> compiler.getStandardFileManager(<span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>)) &#123;</span><br><span class="line">            Iterable&lt;? <span class="keyword">extends</span> <span class="title class_">JavaFileObject</span>&gt; compilationUnits = fileManager.getJavaFileObjects(src.toFile());</span><br><span class="line">            Iterable&lt;String&gt; options = Arrays.asList(<span class="string">&quot;-d&quot;</span>, output.toString());</span><br><span class="line">            JavaCompiler.<span class="type">CompilationTask</span> <span class="variable">task</span> <span class="operator">=</span> compiler.getTask(<span class="literal">null</span>, fileManager, <span class="literal">null</span>, options, <span class="literal">null</span>, compilationUnits);</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> task.call();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class JavaCompilerAPICompiler &#123;
 
+    public void compile(Path src, Path output) throws IOException &#123;
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) &#123;
+            Iterable&lt;? extends JavaFileObject&gt; compilationUnits = fileManager.getJavaFileObjects(src.toFile());
+            Iterable&lt;String&gt; options = Arrays.asList(&quot;-d&quot;, output.toString());
+            JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, null, options, null, compilationUnits);
+            boolean result = task.call();
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="四、轻量级HTTP-server"><a href="#四、轻量级HTTP-server" class="headerlink" title="四、轻量级HTTP server"></a>四、轻量级HTTP server</h2><p>JDK6提供了一个轻量级的<code>Http Server API</code>，据此我们可以构建自己的嵌入式Http Server，它支持<code>Http</code>和<code>Https</code>协议,提供了HTTP1.1的部分实现，没有被实现的那部分可以通过扩展已有的Http Server API来实现，程序员必须自己实现<code>HttpHandler</code>接口，HttpServer会调用<code>HttpHandler</code>实现类的回调方法来处理客户端请求，在这里，我们把一个Http请求和它的响应称为一个交换,包装成<code>HttpExchange</code>类,HttpServer负责将<code>HttpExchange</code>传给<code>HttpHandler</code>实现类的回调方法。</p>
 <p>以下是通过JDK6新特性能够实现的HttpServer的示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sun.net.httpserver.HttpExchange;</span><br><span class="line"><span class="keyword">import</span> com.sun.net.httpserver.HttpHandler;</span><br><span class="line"><span class="keyword">import</span> com.sun.net.httpserver.HttpServer;</span><br><span class="line"><span class="keyword">import</span> com.sun.net.httpserver.spi.HttpServerProvider;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义的http服务器.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyHttpServer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 启动服务，监听来自客户端的请求.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException IO异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">httpserverService</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">HttpServerProvider</span> <span class="variable">provider</span> <span class="operator">=</span> HttpServerProvider.provider();</span><br><span class="line">        <span class="type">HttpServer</span> <span class="variable">httpserver</span> <span class="operator">=</span> provider.createHttpServer(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8888</span>), <span class="number">200</span>); <span class="comment">// 监听端口8888,能同时接受100个请求</span></span><br><span class="line">        httpserver.createContext(<span class="string">&quot;/mytest&quot;</span>, <span class="keyword">new</span> <span class="title class_">MyHttpHandler</span>());</span><br><span class="line">        httpserver.setExecutor(<span class="literal">null</span>);</span><br><span class="line">        httpserver.start();</span><br><span class="line">        System.out.println(<span class="string">&quot;server started&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Http请求处理类.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MyHttpHandler</span> <span class="keyword">implements</span> <span class="title class_">HttpHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(HttpExchange httpExchange)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">responseMsg</span> <span class="operator">=</span> <span class="string">&quot;ok&quot;</span>; <span class="comment">//响应信息</span></span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> httpExchange.getRequestBody(); <span class="comment">//获得输入流</span></span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(in));</span><br><span class="line">            <span class="type">String</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">while</span>((temp = reader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;client request:&quot;</span> + temp);</span><br><span class="line">            &#125;</span><br><span class="line">            httpExchange.sendResponseHeaders(<span class="number">200</span>, responseMsg.length()); <span class="comment">//设置响应头属性及响应信息的长度</span></span><br><span class="line">            <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> httpExchange.getResponseBody();  <span class="comment">//获得输出流</span></span><br><span class="line">            out.write(responseMsg.getBytes());</span><br><span class="line">            out.flush();</span><br><span class="line">            httpExchange.close();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        httpserverService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.spi.HttpServerProvider;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.HttpURLConnection;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Http服务器测试类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HttpTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ExecutorService</span> <span class="variable">exec</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">        <span class="comment">// 测试并发对MyHttpServer的影响</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            <span class="type">Runnable</span> <span class="variable">run</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">                <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        startWork();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            exec.execute(run);</span><br><span class="line">        &#125;</span><br><span class="line">        exec.shutdown();<span class="comment">// 关闭线程池</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">startWork</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://127.0.0.1:8888/mytest&quot;</span>);</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">urlConn</span> <span class="operator">=</span> (HttpURLConnection) url.openConnection();</span><br><span class="line">        urlConn.setDoOutput(<span class="literal">true</span>);</span><br><span class="line">        urlConn.setDoInput(<span class="literal">true</span>);</span><br><span class="line">        urlConn.setRequestMethod(<span class="string">&quot;POST&quot;</span>);</span><br><span class="line">        <span class="comment">// 测试内容包</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">teststr</span> <span class="operator">=</span> <span class="string">&quot;this is a test message&quot;</span>;</span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> urlConn.getOutputStream();</span><br><span class="line">        out.write(teststr.getBytes());</span><br><span class="line">        out.flush();</span><br><span class="line">        <span class="keyword">while</span> (urlConn.getContentLength() != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (urlConn.getResponseCode() == <span class="number">200</span>) &#123;</span><br><span class="line">                <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> urlConn.getInputStream();</span><br><span class="line">                <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(in));</span><br><span class="line">                <span class="type">String</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">                <span class="keyword">while</span> ((temp = reader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                    System.err.println(<span class="string">&quot;server response:&quot;</span> + temp);<span class="comment">// 打印收到的信息</span></span><br><span class="line">                &#125;</span><br><span class="line">                reader.close();</span><br><span class="line">                in.close();</span><br><span class="line">                urlConn.disconnect();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 
+/**
+ * 自定义的http服务器.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class MyHttpServer &#123;
+
+    /**
+     * 启动服务，监听来自客户端的请求.
+     *
+     * @throws IOException IO异常
+     */
+    private static void httpserverService() throws IOException &#123;
+        HttpServerProvider provider = HttpServerProvider.provider();
+        HttpServer httpserver = provider.createHttpServer(new InetSocketAddress(8888), 200); // 监听端口8888,能同时接受100个请求
+        httpserver.createContext(&quot;/mytest&quot;, new MyHttpHandler());
+        httpserver.setExecutor(null);
+        httpserver.start();
+        System.out.println(&quot;server started&quot;);
+    &#125;
+
+    /**
+     * Http请求处理类.
+     */
+    private static class MyHttpHandler implements HttpHandler &#123;
+
+        public void handle(HttpExchange httpExchange) throws IOException &#123;
+            String responseMsg = &quot;ok&quot;; //响应信息
+            InputStream in = httpExchange.getRequestBody(); //获得输入流
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String temp = null;
+            while((temp = reader.readLine()) != null) &#123;
+                System.out.println(&quot;client request:&quot; + temp);
+            &#125;
+            httpExchange.sendResponseHeaders(200, responseMsg.length()); //设置响应头属性及响应信息的长度
+            OutputStream out = httpExchange.getResponseBody();  //获得输出流
+            out.write(responseMsg.getBytes());
+            out.flush();
+            httpExchange.close();
+        &#125;
+
+    &#125;
+
+    public static void main(String[] args) throws IOException &#123;
+        httpserverService();
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * Http服务器测试类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class HttpTest &#123;
+
+    public static void main(String[] args) &#123;
+        ExecutorService exec = Executors.newCachedThreadPool();
+        // 测试并发对MyHttpServer的影响
+        for (int i = 0; i &lt; 20; i++) &#123;
+            Runnable run = new Runnable() &#123;
+                public void run() &#123;
+                    try &#123;
+                        startWork();
+                    &#125; catch (IOException e) &#123;
+                        e.printStackTrace();
+                    &#125;
+                &#125;
+            &#125;;
+            exec.execute(run);
+        &#125;
+        exec.shutdown();// 关闭线程池
+    &#125;
+
+    public static void startWork() throws IOException &#123;
+        URL url = new URL(&quot;http://127.0.0.1:8888/mytest&quot;);
+        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+        urlConn.setDoOutput(true);
+        urlConn.setDoInput(true);
+        urlConn.setRequestMethod(&quot;POST&quot;);
+        // 测试内容包
+        String teststr = &quot;this is a test message&quot;;
+        OutputStream out = urlConn.getOutputStream();
+        out.write(teststr.getBytes());
+        out.flush();
+        while (urlConn.getContentLength() != -1) &#123;
+            if (urlConn.getResponseCode() == 200) &#123;
+                InputStream in = urlConn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String temp = &quot;&quot;;
+                while ((temp = reader.readLine()) != null) &#123;
+                    System.err.println(&quot;server response:&quot; + temp);// 打印收到的信息
+                &#125;
+                reader.close();
+                in.close();
+                urlConn.disconnect();
+            &#125;
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="五、Common-annotations"><a href="#五、Common-annotations" class="headerlink" title="五、Common annotations"></a>五、Common annotations</h2><p><code>Common annotations</code>原本是Java EE 5.0(JSR 244)规范的一部分，现在SUN把它的一部分放到了Java SE 6.0中.随着Annotation元数据功能(JSR 175)加入到Java SE 5.0里面，很多Java 技术(比如EJB,Web Services)都会用Annotation部分代替XML文件来配置运行参数（或者说是支持声明式编程,如EJB的声明式事务）, 如果这些技术为通用目的都单独定义了自己的Annotations,显然有点重复建设, 所以,为其他相关的Java技术定义一套公共的Annotation是有价值的，可以避免重复建设的同时，也保证Java SE和Java EE 各种技术的一致性。</p>
 <p>下面列举出<code>Common Annotations 1.0</code>里面的10个<code>Annotations</code>：</p>
 <table>
@@ -650,47 +849,468 @@
 </tbody></table>
 <p>下面代码演示了如何通过StAX读取xml文档和生成xml文档：</p>
 <p>需要读取的xml文件：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">catalogs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">catalog</span> <span class="attr">id</span>=<span class="string">&quot;001&quot;</span>&gt;</span>Book<span class="tag">&lt;/<span class="name">catalog</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">catalog</span> <span class="attr">id</span>=<span class="string">&quot;002&quot;</span>&gt;</span>Video<span class="tag">&lt;/<span class="name">catalog</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">catalogs</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;catalogs&gt;
+    &lt;catalog id=&quot;001&quot;&gt;Book&lt;/catalog&gt;
+    &lt;catalog id=&quot;002&quot;&gt;Video&lt;/catalog&gt;
+&lt;/catalogs&gt;
+</code></pre>
 <p>读和写XML文件的Java代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.xml.namespace.QName;</span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.*;</span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.events.StartElement;</span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.events.XMLEvent;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stax测试类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaxTester</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据StAX读取XML文件.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> XMLStreamException XML流异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> FileNotFoundException 文件未找到异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">readXxmlByStax</span><span class="params">()</span> <span class="keyword">throws</span> XMLStreamException, FileNotFoundException &#123;</span><br><span class="line">        <span class="type">XMLInputFactory</span> <span class="variable">xmlif</span> <span class="operator">=</span> XMLInputFactory.newInstance();</span><br><span class="line">        <span class="type">XMLEventReader</span> <span class="variable">xmler</span> <span class="operator">=</span> xmlif.createXMLEventReader(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;G:\\test\\test.xml&quot;</span>));</span><br><span class="line">        XMLEvent event;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">while</span> (xmler.hasNext()) &#123;</span><br><span class="line">            event = xmler.nextEvent();</span><br><span class="line">            <span class="keyword">if</span> (event.isStartElement()) &#123; <span class="comment">//如果解析的是起始标记</span></span><br><span class="line">                <span class="type">StartElement</span> <span class="variable">element</span> <span class="operator">=</span> event.asStartElement();</span><br><span class="line">                sb.append(<span class="string">&quot;&lt;&quot;</span>);</span><br><span class="line">                sb.append(element.getName());</span><br><span class="line">                <span class="keyword">if</span>(element.getName().getLocalPart().equals(<span class="string">&quot;catalog&quot;</span>)) &#123;</span><br><span class="line">                    sb.append(<span class="string">&quot; id=/&quot;</span>);</span><br><span class="line">                    sb.append(element.getAttributeByName(<span class="keyword">new</span> <span class="title class_">QName</span>(<span class="string">&quot;id&quot;</span>)).getValue());</span><br><span class="line">                    sb.append(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                sb.append(<span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.isCharacters()) &#123; <span class="comment">//如果解析的是文本内容</span></span><br><span class="line">                sb.append(event.asCharacters().getData());</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(event.isEndElement()) &#123; <span class="comment">//如果解析的是结束标记</span></span><br><span class="line">                sb.append(<span class="string">&quot;&lt;/&quot;</span>);</span><br><span class="line">                sb.append(event.asEndElement().getName());</span><br><span class="line">                sb.append(<span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sb);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据StAX写入XML文件.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> XMLStreamException XML流异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> FileNotFoundException 文件未找到异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">writeXmlByStax</span><span class="params">()</span> <span class="keyword">throws</span> XMLStreamException, FileNotFoundException &#123;</span><br><span class="line">        <span class="type">XMLOutputFactory</span> <span class="variable">xmlof</span> <span class="operator">=</span> XMLOutputFactory.newInstance();</span><br><span class="line">        <span class="type">XMLStreamWriter</span> <span class="variable">xmlw</span> <span class="operator">=</span> xmlof.createXMLStreamWriter(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;G:\\test\\output.xml&quot;</span>));</span><br><span class="line">        <span class="comment">// 写入默认的 XML 声明到xml文档</span></span><br><span class="line">        xmlw.writeStartDocument();</span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="comment">// 写入注释到xml文档</span></span><br><span class="line">        xmlw.writeComment(<span class="string">&quot;testing comment&quot;</span>);</span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="comment">// 写入一个catalogs根元素</span></span><br><span class="line">        xmlw.writeStartElement(<span class="string">&quot;catalogs&quot;</span>);</span><br><span class="line">        xmlw.writeNamespace(<span class="string">&quot;myNS&quot;</span>, <span class="string">&quot;http://blinkfox.com&quot;</span>);</span><br><span class="line">        xmlw.writeAttribute(<span class="string">&quot;owner&quot;</span>,<span class="string">&quot;Chinajash&quot;</span>);</span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="comment">// 写入子元素catalog</span></span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;    &quot;</span>);</span><br><span class="line">        xmlw.writeStartElement(<span class="string">&quot;http://blinkfox.com&quot;</span>, <span class="string">&quot;catalog&quot;</span>);</span><br><span class="line">        xmlw.writeAttribute(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;007&quot;</span>);</span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;Apparel&quot;</span>);</span><br><span class="line">        <span class="comment">// 写入catalog元素的结束标签</span></span><br><span class="line">        xmlw.writeEndElement();</span><br><span class="line">        <span class="comment">// 写入catalogs元素的结束标签</span></span><br><span class="line">        xmlw.writeCharacters(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        xmlw.writeEndElement();</span><br><span class="line">        <span class="comment">// 结束 XML 文档</span></span><br><span class="line">        xmlw.writeEndDocument();</span><br><span class="line">        xmlw.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;生成xml文件成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> XMLStreamException XML流异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> FileNotFoundException 文件未找到异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> XMLStreamException, FileNotFoundException &#123;</span><br><span class="line">        readXxmlByStax();</span><br><span class="line">        writeXmlByStax();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import javax.xml.namespace.QName;
+import javax.xml.stream.*;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
+/**
+ * Stax测试类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class StaxTester &#123;
+
+    /**
+     * 根据StAX读取XML文件.
+     *
+     * @throws XMLStreamException XML流异常
+     * @throws FileNotFoundException 文件未找到异常
+     */
+    private static void readXxmlByStax() throws XMLStreamException, FileNotFoundException &#123;
+        XMLInputFactory xmlif = XMLInputFactory.newInstance();
+        XMLEventReader xmler = xmlif.createXMLEventReader(new FileInputStream(&quot;G:\\test\\test.xml&quot;));
+        XMLEvent event;
+        StringBuilder sb = new StringBuilder();
+        while (xmler.hasNext()) &#123;
+            event = xmler.nextEvent();
+            if (event.isStartElement()) &#123; //如果解析的是起始标记
+                StartElement element = event.asStartElement();
+                sb.append(&quot;&lt;&quot;);
+                sb.append(element.getName());
+                if(element.getName().getLocalPart().equals(&quot;catalog&quot;)) &#123;
+                    sb.append(&quot; id=/&quot;);
+                    sb.append(element.getAttributeByName(new QName(&quot;id&quot;)).getValue());
+                    sb.append(&quot;/&quot;);
+                &#125;
+                sb.append(&quot;&gt;&quot;);
+            &#125; else if (event.isCharacters()) &#123; //如果解析的是文本内容
+                sb.append(event.asCharacters().getData());
+            &#125; else if(event.isEndElement()) &#123; //如果解析的是结束标记
+                sb.append(&quot;&lt;/&quot;);
+                sb.append(event.asEndElement().getName());
+                sb.append(&quot;&gt;&quot;);
+            &#125;
+        &#125;
+        System.out.println(sb);
+    &#125;
+
+    /**
+     * 根据StAX写入XML文件.
+     *
+     * @throws XMLStreamException XML流异常
+     * @throws FileNotFoundException 文件未找到异常
+     */
+    private static void writeXmlByStax() throws XMLStreamException, FileNotFoundException &#123;
+        XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
+        XMLStreamWriter xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(&quot;G:\\test\\output.xml&quot;));
+        // 写入默认的 XML 声明到xml文档
+        xmlw.writeStartDocument();
+        xmlw.writeCharacters(&quot;\n&quot;);
+        // 写入注释到xml文档
+        xmlw.writeComment(&quot;testing comment&quot;);
+        xmlw.writeCharacters(&quot;\n&quot;);
+        // 写入一个catalogs根元素
+        xmlw.writeStartElement(&quot;catalogs&quot;);
+        xmlw.writeNamespace(&quot;myNS&quot;, &quot;http://blinkfox.com&quot;);
+        xmlw.writeAttribute(&quot;owner&quot;,&quot;Chinajash&quot;);
+        xmlw.writeCharacters(&quot;\n&quot;);
+        // 写入子元素catalog
+        xmlw.writeCharacters(&quot;    &quot;);
+        xmlw.writeStartElement(&quot;http://blinkfox.com&quot;, &quot;catalog&quot;);
+        xmlw.writeAttribute(&quot;id&quot;,&quot;007&quot;);
+        xmlw.writeCharacters(&quot;Apparel&quot;);
+        // 写入catalog元素的结束标签
+        xmlw.writeEndElement();
+        // 写入catalogs元素的结束标签
+        xmlw.writeCharacters(&quot;\n&quot;);
+        xmlw.writeEndElement();
+        // 结束 XML 文档
+        xmlw.writeEndDocument();
+        xmlw.close();
+        System.out.println(&quot;生成xml文件成功!&quot;);
+    &#125;
+
+    /**
+     * main方法.
+     *
+     * @param args 数组参数
+     * @throws XMLStreamException XML流异常
+     * @throws FileNotFoundException 文件未找到异常
+     */
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException &#123;
+        readXxmlByStax();
+        writeXmlByStax();
+    &#125;
+
+&#125;
+</code></pre>
 <p>运行上面程序后，控制台输出如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;catalogs&gt;</span><br><span class="line">    &lt;catalog <span class="built_in">id</span>=/001/&gt;Book&lt;/catalog&gt;</span><br><span class="line">    &lt;catalog <span class="built_in">id</span>=/002/&gt;Video&lt;/catalog&gt;</span><br><span class="line">&lt;/catalogs&gt;</span><br><span class="line">生成xml文件成功!</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">&lt;catalogs&gt;
+    &lt;catalog id=/001/&gt;Book&lt;/catalog&gt;
+    &lt;catalog id=/002/&gt;Video&lt;/catalog&gt;
+&lt;/catalogs&gt;
+生成xml文件成功!
+</code></pre>
 <p>产生的<code>output.xml</code>文件如下:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> ?&gt;</span></span><br><span class="line"><span class="comment">&lt;!--testing comment--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">catalogs</span> <span class="attr">xmlns:myNS</span>=<span class="string">&quot;http://blinkfox.com&quot;</span> <span class="attr">owner</span>=<span class="string">&quot;Chinajash&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">myNS:catalog</span> <span class="attr">id</span>=<span class="string">&quot;007&quot;</span>&gt;</span>Apparel<span class="tag">&lt;/<span class="name">myNS:catalog</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">catalogs</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;!--testing comment--&gt;
+&lt;catalogs xmlns:myNS=&quot;http://blinkfox.com&quot; owner=&quot;Chinajash&quot;&gt;
+    &lt;myNS:catalog id=&quot;007&quot;&gt;Apparel&lt;/myNS:catalog&gt;
+&lt;/catalogs&gt;
+</code></pre>
 <h2 id="七、JAXB2"><a href="#七、JAXB2" class="headerlink" title="七、JAXB2"></a>七、JAXB2</h2><p><code>JAXB</code>是<code>Java Architecture for XML Binding</code>的缩写，可以将一个Java对象转变成为XML格式，反之亦然。我们把对象与关系数据库之间的映射称为ORM, 其实也可以把对象与XML之间的映射称为<code>OXM</code>(Object XML Mapping). 原来JAXB是Java EE的一部分，在JDK6中，SUN将其放到了Java SE中，这也是SUN的一贯做法。JDK6中自带的这个JAXB版本是2.0, 比起1.0(JSR 31)来，JAXB2(JSR 222)用JDK5的新特性<code>Annotation</code>来标识要作绑定的类和属性等，这就极大简化了开发的工作量。实际上，在Java EE 5.0中，EJB和Web Services也通过Annotation来简化开发工作。另外,JAXB2在底层是用StAX(JSR 173)来处理XML文档。 下面用代码演示在JDK6中如何来用<code>JAXB2</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Gender性别枚举类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Gender</span> &#123;</span><br><span class="line"></span><br><span class="line">    MALE(<span class="literal">true</span>),</span><br><span class="line"></span><br><span class="line">    FEMALE (<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> code 性别值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Gender(<span class="type">boolean</span> code) &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * Gender性别枚举类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public enum Gender &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.xml.bind.annotation.XmlAttribute;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.annotation.XmlElement;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Address地址类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@XmlAttribute</span></span><br><span class="line">    String country;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    String state;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    String city;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    String street;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 由于没有添加<span class="doctag">@XmlElement</span>,所以该元素不会出现在输出的xml中. */</span></span><br><span class="line">    String zipcode;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 默认的空构造方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Address</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Address</span><span class="params">(String country, String state, String city, String street, String zipcode)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.country = country;</span><br><span class="line">        <span class="built_in">this</span>.state = state;</span><br><span class="line">        <span class="built_in">this</span>.city = city;</span><br><span class="line">        <span class="built_in">this</span>.street = street;</span><br><span class="line">        <span class="built_in">this</span>.zipcode = zipcode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * country的getter方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> country</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCountry</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> country;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    MALE(true),
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.annotation.XmlAttribute;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.annotation.XmlElement;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.annotation.XmlRootElement;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Person类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@XmlRootElement</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** birthday将作为person的子元素. */</span></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    Calendar birthDay;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** name将作为person的的一个属性. */</span></span><br><span class="line">    <span class="meta">@XmlAttribute</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** address将作为person的子元素. */</span></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    Address address;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** gender将作为person的子元素. */</span></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    Gender gender;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** job将作为person的子元素. */</span></span><br><span class="line">    <span class="meta">@XmlElement</span></span><br><span class="line">    String job;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 默认的空构造方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(Calendar birthDay, String name, Address address, Gender gender, String job)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.birthDay = birthDay;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">        <span class="built_in">this</span>.gender = gender;</span><br><span class="line">        <span class="built_in">this</span>.job = job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * address的getter方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> address</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Address <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    FEMALE (false);
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileWriter;</span><br><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.JAXBContext;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.Marshaller;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.Unmarshaller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.IOUtils;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JAXB2测试类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JAXB2Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(JAXB2Test.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Address</span>(<span class="string">&quot;中国&quot;</span>, <span class="string">&quot;北京&quot;</span>, <span class="string">&quot;北京&quot;</span>, <span class="string">&quot;上地&quot;</span>, <span class="string">&quot;100080&quot;</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(Calendar.getInstance(),<span class="string">&quot;JAXB2&quot;</span>, address, Gender.MALE, <span class="string">&quot;软件工程师&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">FileReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">FileWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 生成xml文件.</span></span><br><span class="line">            <span class="type">JAXBContext</span> <span class="variable">context</span> <span class="operator">=</span> JAXBContext.newInstance(Person.class);</span><br><span class="line">            writer = <span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;G:/test/person.xml&quot;</span>);</span><br><span class="line">            <span class="type">Marshaller</span> <span class="variable">m</span> <span class="operator">=</span> context.createMarshaller();</span><br><span class="line">            m.marshal(p, writer);</span><br><span class="line">            log.info(<span class="string">&quot;生成person.xml文件成功!&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 读取xml文件.</span></span><br><span class="line">            reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;G:/test/person.xml&quot;</span>);</span><br><span class="line">            <span class="type">Unmarshaller</span> <span class="variable">um</span> <span class="operator">=</span> context.createUnmarshaller();</span><br><span class="line">            <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> (Person) um.unmarshal(reader);</span><br><span class="line">            log.info(<span class="string">&quot;Country:&#123;&#125;&quot;</span>, p2.getAddress().getCountry());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;生成和读取XML文件出错！&quot;</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            IOUtils.closeQuietly(writer);</span><br><span class="line">            IOUtils.closeQuietly(reader);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    private boolean code;
 
+    /**
+     * 构造方法.
+     * @param code 性别值
+     */
+    Gender(boolean code) &#123;
+        this.code = code;
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
+/**
+ * Address地址类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class Address &#123;
+
+    @XmlAttribute
+    String country;
+
+    @XmlElement
+    String state;
+
+    @XmlElement
+    String city;
+
+    @XmlElement
+    String street;
+
+    /** 由于没有添加@XmlElement,所以该元素不会出现在输出的xml中. */
+    String zipcode;
+
+    /**
+     * 默认的空构造方法.
+     */
+    public Address() &#123;
+        super();
+    &#125;
+
+    public Address(String country, String state, String city, String street, String zipcode) &#123;
+        this.country = country;
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    &#125;
+
+    /**
+     * country的getter方法.
+     *
+     * @return country
+     */
+    public String getCountry() &#123;
+        return country;
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">import java.util.Calendar;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * Person类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+@XmlRootElement
+public class Person &#123;
+
+    /** birthday将作为person的子元素. */
+    @XmlElement
+    Calendar birthDay;
+
+    /** name将作为person的的一个属性. */
+    @XmlAttribute
+    String name;
+
+    /** address将作为person的子元素. */
+    @XmlElement
+    Address address;
+
+    /** gender将作为person的子元素. */
+    @XmlElement
+    Gender gender;
+
+    /** job将作为person的子元素. */
+    @XmlElement
+    String job;
+
+    /**
+     * 默认的空构造方法.
+     */
+    public Person() &#123;
+        super();
+    &#125;
+
+    public Person(Calendar birthDay, String name, Address address, Gender gender, String job) &#123;
+        this.birthDay = birthDay;
+        this.name = name;
+        this.address = address;
+        this.gender = gender;
+        this.job = job;
+    &#125;
+
+    /**
+     * address的getter方法.
+     * @return address
+     */
+    public Address getAddress() &#123;
+        return address;
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Calendar;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * JAXB2测试类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class JAXB2Test &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(JAXB2Test.class);
+
+    public static void main(String[] args) &#123;
+        Address address = new Address(&quot;中国&quot;, &quot;北京&quot;, &quot;北京&quot;, &quot;上地&quot;, &quot;100080&quot;);
+        Person p = new Person(Calendar.getInstance(),&quot;JAXB2&quot;, address, Gender.MALE, &quot;软件工程师&quot;);
+
+        FileReader reader = null;
+        FileWriter writer = null;
+        try &#123;
+            // 生成xml文件.
+            JAXBContext context = JAXBContext.newInstance(Person.class);
+            writer = new FileWriter(&quot;G:/test/person.xml&quot;);
+            Marshaller m = context.createMarshaller();
+            m.marshal(p, writer);
+            log.info(&quot;生成person.xml文件成功!&quot;);
+
+            // 读取xml文件.
+            reader = new FileReader(&quot;G:/test/person.xml&quot;);
+            Unmarshaller um = context.createUnmarshaller();
+            Person p2 = (Person) um.unmarshal(reader);
+            log.info(&quot;Country:&#123;&#125;&quot;, p2.getAddress().getCountry());
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;生成和读取XML文件出错！&quot;, e);
+        &#125; finally &#123;
+            IOUtils.closeQuietly(writer);
+            IOUtils.closeQuietly(reader);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <p>运行该程序，我们会得到一个<code>person.xml</code>的文件，内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> standalone=<span class="string">&quot;yes&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">person</span> <span class="attr">name</span>=<span class="string">&quot;JAXB2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">birthDay</span>&gt;</span>2017-12-04T17:16:19.226+08:00<span class="tag">&lt;/<span class="name">birthDay</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">address</span> <span class="attr">country</span>=<span class="string">&quot;中国&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">state</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">state</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">city</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">city</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">street</span>&gt;</span>上地<span class="tag">&lt;/<span class="name">street</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gender</span>&gt;</span>MALE<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">job</span>&gt;</span>软件工程师<span class="tag">&lt;/<span class="name">job</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+&lt;person name=&quot;JAXB2&quot;&gt;
+    &lt;birthDay&gt;2017-12-04T17:16:19.226+08:00&lt;/birthDay&gt;
+    &lt;address country=&quot;中国&quot;&gt;
+        &lt;state&gt;北京&lt;/state&gt;
+        &lt;city&gt;北京&lt;/city&gt;
+        &lt;street&gt;上地&lt;/street&gt;
+    &lt;/address&gt;
+    &lt;gender&gt;MALE&lt;/gender&gt;
+    &lt;job&gt;软件工程师&lt;/job&gt;
+&lt;/person&gt;
+</code></pre>
 <h2 id="八、Console"><a href="#八、Console" class="headerlink" title="八、Console"></a>八、Console</h2><p>JDK6中提供了<code>java.io.Console</code>类专用来访问基于字符的控制台设备。你的程序如果要与Windows下的cmd或者Linux下的Terminal交互,就可以用Console类代劳. 但我们不总是能得到可用的Console, 一个JVM是否有可用的Console依赖于底层平台和JVM如何被调用。如果JVM是在交互式命令行(比如Windows的cmd)中启动的,并且输入输出没有重定向到另外的地方，那么就可以得到一个可用的Console实例。下面代码演示了Console类的用法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Console;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Jdk6之Console测试类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConsoleTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 获得Console实例，并判断console是否可用</span></span><br><span class="line">        <span class="type">Console</span> <span class="variable">console</span> <span class="operator">=</span> System.console();</span><br><span class="line">        <span class="keyword">if</span> (console != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 读取整行字符和密码，密码输入时不会显示</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(console.readLine(<span class="string">&quot;请输入用户名:&quot;</span>));</span><br><span class="line">            <span class="type">String</span> <span class="variable">pwd</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(console.readPassword(<span class="string">&quot;再输入密码:&quot;</span>));</span><br><span class="line">            console.printf(<span class="string">&quot;用户名是:&quot;</span> + user + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            console.printf(<span class="string">&quot;密码是:&quot;</span> + pwd + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Console不可用!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import java.io.Console;
 
+/**
+ * Jdk6之Console测试类.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class ConsoleTest &#123;
+
+    public static void main(String[] args) &#123;
+        // 获得Console实例，并判断console是否可用
+        Console console = System.console();
+        if (console != null) &#123;
+            // 读取整行字符和密码，密码输入时不会显示
+            String user = new String(console.readLine(&quot;请输入用户名:&quot;));
+            String pwd = new String(console.readPassword(&quot;再输入密码:&quot;));
+            console.printf(&quot;用户名是:&quot; + user + &quot;\n&quot;);
+            console.printf(&quot;密码是:&quot; + pwd + &quot;\n&quot;);
+        &#125; else &#123;
+            System.out.println(&quot;Console不可用!&quot;);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <p>编译该代码，并在命令行中输入：<code>java ConsoleTest</code>，然后即可运行，运行示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请输入用户名:张三</span><br><span class="line">再输入密码:</span><br><span class="line">打印出的用户名是:张三</span><br><span class="line">打印出的密码是:123456</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">请输入用户名:张三
+再输入密码:
+打印出的用户名是:张三
+打印出的密码是:123456
+</code></pre>
 <blockquote>
 <p><strong>注</strong>: 在这里可以看到输入密码时,控制台时不显示这些密码字符的,但是程序可以得到输入的密码字符串,这与Linux下面输入密码的情况是一样的。</p>
 </blockquote>
 <h2 id="九、Java-DB-Derby"><a href="#九、Java-DB-Derby" class="headerlink" title="九、Java DB(Derby)"></a>九、Java DB(Derby)</h2><p>从JDK6开始，JDK目录中新增了一个名为<code>db</code>的目录。这便是 Java 6 的新成员：Java DB。这是一个纯 Java 实现、开源的数据库管理系统（DBMS），源于 Apache 软件基金会（ASF）名下的项目<code>Derby</code>。它只有 2MB 大小，对比动辄上 G 的数据库来说可谓袖珍。但这并不妨碍 Derby 功能齐备，支持几乎大部分的数据库应用所需要的特性。JDK6.0里面带的这个Derby的版本是10.2.1.7,支持存储过程和触发器；有两种运行模式，一种是作为嵌入式数据库，另一种是作为网络数据库。前者的数据库服务器和客户端都在同一个JVM里面运行，后者允许数据库服务器端和客户端不在同一个JVM里面，而且允许这两者在不同的物理机器上。值得注意的是JDK6里面的这个Derby支持JDK6的新特性<code>JDBC 4.0</code>规范(JSR 221)。</p>
 <p>下面分两种情况演示一下如何用代码操作Derby数据库，一种是嵌入式数据库，一种是网络数据库。</p>
-<h3 id="1-嵌入式数据库"><a href="#1-嵌入式数据库" class="headerlink" title="1. 嵌入式数据库"></a>1. 嵌入式数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.blinkfox.learn.jdbc.JdbcDaoHelper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Derby内嵌数据库测试示例.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmbeddedDerbyTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(EmbeddedDerbyTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Derby驱动,在derby.jar里面. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DRIVER</span> <span class="operator">=</span> <span class="string">&quot;org.apache.derby.jdbc.EmbeddedDriver&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 连接Derby的url，create=true表示当数据库不存在时就创建它. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">URL</span> <span class="operator">=</span> <span class="string">&quot;jdbc:derby:EmbeddedDB;create=true&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">Statement</span> <span class="variable">st</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(DRIVER);</span><br><span class="line">            conn = DriverManager.getConnection(URL);<span class="comment">//启动嵌入式数据库</span></span><br><span class="line">            st = conn.createStatement();</span><br><span class="line">            st.execute(<span class="string">&quot;create table foo (FOOID INT NOT NULL, FOONAME VARCHAR(30) NOT NULL)&quot;</span>); <span class="comment">//创建foo表</span></span><br><span class="line">            st.executeUpdate(<span class="string">&quot;insert into foo(FOOID,FOONAME) values (1, &#x27;blinkfox&#x27;)&quot;</span>); <span class="comment">//插入一条数据</span></span><br><span class="line">            rs = st.executeQuery(<span class="string">&quot;select * from foo&quot;</span>);<span class="comment">//读取刚插入的数据</span></span><br><span class="line">            <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> rs.getInt(<span class="number">1</span>);</span><br><span class="line">                <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> rs.getString(<span class="number">2</span>);</span><br><span class="line">                log.info(<span class="string">&quot;查询结果：id = &#123;&#125;; name = &#123;&#125;&quot;</span>, id, name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;使用Derby数据库出错!&quot;</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JdbcDaoHelper.close(rs);</span><br><span class="line">            JdbcDaoHelper.close(st);</span><br><span class="line">            JdbcDaoHelper.close(conn);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-嵌入式数据库"><a href="#1-嵌入式数据库" class="headerlink" title="1. 嵌入式数据库"></a>1. 嵌入式数据库</h3><pre><code class="java">import com.blinkfox.learn.jdbc.JdbcDaoHelper;
 
+import java.sql.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Derby内嵌数据库测试示例.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class EmbeddedDerbyTest &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(EmbeddedDerbyTest.class);
+
+    /** Derby驱动,在derby.jar里面. */
+    private static final String DRIVER = &quot;org.apache.derby.jdbc.EmbeddedDriver&quot;;
+
+    /** 连接Derby的url，create=true表示当数据库不存在时就创建它. */
+    private static final String URL = &quot;jdbc:derby:EmbeddedDB;create=true&quot;;
+
+    /**
+     * main方法.
+     *
+     * @param args 数组参数
+     */
+    public static void main(String[] args) &#123;
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        try &#123;
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);//启动嵌入式数据库
+            st = conn.createStatement();
+            st.execute(&quot;create table foo (FOOID INT NOT NULL, FOONAME VARCHAR(30) NOT NULL)&quot;); //创建foo表
+            st.executeUpdate(&quot;insert into foo(FOOID,FOONAME) values (1, &#39;blinkfox&#39;)&quot;); //插入一条数据
+            rs = st.executeQuery(&quot;select * from foo&quot;);//读取刚插入的数据
+            while (rs.next()) &#123;
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                log.info(&quot;查询结果：id = &#123;&#125;; name = &#123;&#125;&quot;, id, name);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;使用Derby数据库出错!&quot;, e);
+        &#125; finally &#123;
+            JdbcDaoHelper.close(rs);
+            JdbcDaoHelper.close(st);
+            JdbcDaoHelper.close(conn);
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <p>运行上面程序后，会在当前目录生成名为<code>EmbeddedDB</code>的文件夹，既是<code>EmbeddedDB</code>数据库的数据文件存放的地方，控制台将输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询结果：<span class="built_in">id</span> = 1; name = blinkfox</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">查询结果：id = 1; name = blinkfox
+</code></pre>
+<h3 id="2-网络数据库"><a href="#2-网络数据库" class="headerlink" title="2. 网络数据库"></a>2. 网络数据库</h3><pre><code class="java">import java.io.PrintWriter;
+import java.sql.DriverManager;
 
-<h3 id="2-网络数据库"><a href="#2-网络数据库" class="headerlink" title="2. 网络数据库"></a>2. 网络数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.derby.drda.NetworkServerControl;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Derby网络数据库测试示例.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-12-04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NetworkServerDerbyTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(NetworkServerDerbyTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Derby驱动,在derbyclient.jar里面. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DRIVER</span> <span class="operator">=</span> <span class="string">&quot;org.apache.derby.jdbc.ClientDriver&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 连接Derby的url. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">URL</span> <span class="operator">=</span> <span class="string">&quot;jdbc:derby://localhost:1527/NetworkDB;create=true&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;创建Derby网络服务器,默认端口是1527,也可以通过运行&lt;Derby_Home&gt;/frameworks/NetworkServer/bin/startNetworkServer.bat</span></span><br><span class="line"><span class="comment">     来创建并启动Derby网络服务器,如果是Unix,用startNetworkServer.ksh&lt;/p&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">NetworkServerControl</span> <span class="variable">derbyServer</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//NetworkServerControl类在derbynet.jar里面</span></span><br><span class="line">            derbyServer = <span class="keyword">new</span> <span class="title class_">NetworkServerControl</span>();</span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">pw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(System.out); <span class="comment">//用系统输出作为Derby数据库的输出</span></span><br><span class="line">            derbyServer.start(pw); <span class="comment">//启动Derby服务器</span></span><br><span class="line">            Class.forName(DRIVER);</span><br><span class="line">            DriverManager.getConnection(URL);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;操作Derby网络数据库异常!&quot;</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (derbyServer != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    derbyServer.shutdown();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    log.error(<span class="string">&quot;关闭Derby网络数据库异常!&quot;</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+import org.apache.derby.drda.NetworkServerControl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Derby网络数据库测试示例.
+ *
+ * @author blinkfox on 2017-12-04.
+ */
+public class NetworkServerDerbyTest &#123;
+
+    private static final Logger log = LoggerFactory.getLogger(NetworkServerDerbyTest.class);
+
+    /** Derby驱动,在derbyclient.jar里面. */
+    private static final String DRIVER = &quot;org.apache.derby.jdbc.ClientDriver&quot;;
+
+    /** 连接Derby的url. */
+    private static final String URL = &quot;jdbc:derby://localhost:1527/NetworkDB;create=true&quot;;
+
+    /**
+     * main方法.
+     * &lt;p&gt;创建Derby网络服务器,默认端口是1527,也可以通过运行&lt;Derby_Home&gt;/frameworks/NetworkServer/bin/startNetworkServer.bat
+     来创建并启动Derby网络服务器,如果是Unix,用startNetworkServer.ksh&lt;/p&gt;
+     *
+     * @param args 数组参数
+     */
+    public static void main(String[] args) &#123;
+        NetworkServerControl derbyServer = null;
+        try &#123;
+            //NetworkServerControl类在derbynet.jar里面
+            derbyServer = new NetworkServerControl();
+            PrintWriter pw = new PrintWriter(System.out); //用系统输出作为Derby数据库的输出
+            derbyServer.start(pw); //启动Derby服务器
+            Class.forName(DRIVER);
+            DriverManager.getConnection(URL);
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;操作Derby网络数据库异常!&quot;, e);
+        &#125; finally &#123;
+            if (derbyServer != null) &#123;
+                try &#123;
+                    derbyServer.shutdown();
+                &#125; catch (Exception e) &#123;
+                    log.error(&quot;关闭Derby网络数据库异常!&quot;, e);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
 <p>运行上面程序后,会在当前目录生成名为<code>NetworkDB</code>的文件夹。关于<code>Derby</code>的详细情况,请参考<a target="_blank" rel="noopener" href="http://db.apache.org/derby">http://db.apache.org/derby</a>。</p>
 <h2 id="十、JDBC-4-0"><a href="#十、JDBC-4-0" class="headerlink" title="十、JDBC 4.0"></a>十、JDBC 4.0</h2><p>在 Java SE 6 所提供的诸多新特性和改进中，值得一提的是为 Java 程序提供数据库访问机制的 JDBC 版本升级到了 4.0, 这个以 JSR-221 为代号的版本，提供了更加便利的代码编写机制及柔性，并且支持更多的数据类型。JDBC4.0 主要有以下改进和新特性。</p>
 <ul>
@@ -733,18 +1353,19 @@
 <ul>
 <li><code>newSetFromMap(Map)</code>: 从通用的Map实现中创建一个通用的Set实现。Java集合中有<code>IdentityHashMap</code>，但是没有<code>IdentityHashSet</code>类，我们可以通过这样的方式来实现：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Object&gt; identityHashSet = Collections.newSetFromMap(<span class="keyword">new</span> <span class="title class_">IdentityHashMap</span>&lt;Object, Boolean&gt;());</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">Set&lt;Object&gt; identityHashSet = Collections.newSetFromMap(new IdentityHashMap&lt;Object, Boolean&gt;());
+</code></pre>
 <ul>
 <li><code>asLifoQueue(Deque)</code>: 通过传入<code>Deque</code>得到一个后进先出(LIFO)的队列。</li>
 </ul>
 <p>现在<code>Arrays</code>工具类，具有<code>copyOf</code>和<code>copyOfRange</code>方法，可以有效地调整，截断或复制所有类型的数组的子数组。</p>
 <p>以前是这样实现的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] newArray = <span class="keyword">new</span> <span class="title class_">int</span>[newLength];</span><br><span class="line">System.arraycopy(oldArray, <span class="number">0</span>, newArray, <span class="number">0</span>, oldArray.length);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">int[] newArray = new int[newLength];
+System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+</code></pre>
 <p>现在可以这样实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] newArray = Arrays.copyOf(a, newLength);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">int[] newArray = Arrays.copyOf(a, newLength);
+</code></pre>
 <hr>
 <p>参考文档：</p>
 <p>-<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/features-141434.html">JavaSE6 Features and Enhancements</a><br>-<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004417536">Java6的新特性</a><br>-<a target="_blank" rel="noopener" href="http://my.csdn.net/Chinajash">chinajash</a></p>

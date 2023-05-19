@@ -589,10 +589,11 @@
 <p>(27). 结构甚于约定，坚守结构甚于约定的设计决策。</p>
 <p>(28). 封装条件，如果没有if或while语句的上下文，布尔逻辑就难以理解。应该把解释了条件意图的函数抽离出来。</p>
 <p>例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(shouldBeDeleted(timer))</span><br></pre></td></tr></table></figure>
+<pre><code class="java">if(shouldBeDeleted(timer))
+</code></pre>
 <p>要好于</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(timer.hasExpired() &amp;&amp; !timer.isRecurrent())</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">if(timer.hasExpired() &amp;&amp; !timer.isRecurrent())
+</code></pre>
 <p>(29). 避免否定性条件，尽可能将条件表示为肯定形式。</p>
 <p>(30). 函数只该做一件事</p>
 <p>(31). 掩蔽时序耦合，排列函数参数，好让它们被调用的次序显而易见。</p>

@@ -438,22 +438,147 @@
 <h3 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/decorator-structure.jpg" alt="装饰模式结构图"></p>
 <h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/decorator-seq.jpg" alt="装饰模式时序图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先定义一个抽象构件接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象构件</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Component</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接口方法</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 抽象构件
+ * Created by blinkfox on 16-6-26.
+ */
+public interface Component &#123;
 
+    // 接口方法
+    void operate();
+
+&#125;
+</code></pre>
 <p>然后是具体构件实现类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体构件</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteComponent</span> <span class="keyword">implements</span> <span class="title class_">Component</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 具体实现方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;do Something...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 具体构件
+ * Created by blinkfox on 16-6-26.
+ */
+public class ConcreteComponent implements Component &#123;
 
+    /**
+     * 具体实现方法
+     */
+    @Override
+    public void operate() &#123;
+        System.out.println(&quot;do Something...&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>接着是装饰角色：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 装饰角色</span></span><br><span class="line"><span class="comment"> * 维持一个指向Component对象的引用，并定义一个与 Component接口一致的接口。</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Decorator</span> <span class="keyword">implements</span> <span class="title class_">Component</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Component component;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过构造函数传递被修饰者</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> component</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Decorator</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 委托给被修饰者执行</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component.operate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 装饰角色
+ * 维持一个指向Component对象的引用，并定义一个与 Component接口一致的接口。
+ * Created by blinkfox on 16-6-26.
+ */
+public class Decorator implements Component &#123;
 
+    private Component component;
+
+    /**
+     * 通过构造函数传递被修饰者
+     * @param component
+     */
+    public Decorator(Component component) &#123;
+        this.component = component;
+    &#125;
+
+    /**
+     * 委托给被修饰者执行
+     */
+    @Override
+    public void operate() &#123;
+        this.component.operate();
+    &#125;
+
+&#125;
+</code></pre>
 <p>下面是具体的装饰类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的装饰类1</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteDecorator1</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过构造函数传递被修饰者</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> component</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ConcreteDecorator1</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义自己的修饰方法1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;method1修饰...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 重写父类的operate方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.method1();</span><br><span class="line">        <span class="built_in">super</span>.operate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 具体的装饰类1
+ * Created by blinkfox on 16-6-26.
+ */
+public class ConcreteDecorator1 extends Decorator &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的装饰类2</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteDecorator2</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过构造函数传递被修饰者</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> component</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ConcreteDecorator2</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义自己的修饰方法2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;method2修饰...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 重写父类的operate方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.method2();</span><br><span class="line">        <span class="built_in">super</span>.operate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /**
+     * 通过构造函数传递被修饰者
+     * @param component
+     */
+    public ConcreteDecorator1(Component component) &#123;
+        super(component);
+    &#125;
 
+    /**
+     * 定义自己的修饰方法1
+     */
+    private void method1() &#123;
+        System.out.println(&quot;method1修饰...&quot;);
+    &#125;
+
+    /**
+     * 重写父类的operate方法
+     */
+    public void operate() &#123;
+        this.method1();
+        super.operate();
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体的装饰类2
+ * Created by blinkfox on 16-6-26.
+ */
+public class ConcreteDecorator2 extends Decorator &#123;
+
+    /**
+     * 通过构造函数传递被修饰者
+     * @param component
+     */
+    public ConcreteDecorator2(Component component) &#123;
+        super(component);
+    &#125;
+
+    /**
+     * 定义自己的修饰方法2
+     */
+    private void method2() &#123;
+        System.out.println(&quot;method2修饰...&quot;);
+    &#125;
+
+    /**
+     * 重写父类的operate方法
+     */
+    public void operate() &#123;
+        this.method2();
+        super.operate();
+    &#125;
+
+&#125;
+</code></pre>
 <p>最后是客户端的场景类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 装饰模式的客户端场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16-6-26.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Component</span> <span class="variable">component</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteComponent</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第一修饰</span></span><br><span class="line">        component = <span class="keyword">new</span> <span class="title class_">ConcreteDecorator1</span>(component);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二修饰</span></span><br><span class="line">        component = <span class="keyword">new</span> <span class="title class_">ConcreteDecorator2</span>(component);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 修饰后运行</span></span><br><span class="line">        component.operate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 装饰模式的客户端场景类
+ * Created by blinkfox on 16-6-26.
+ */
+public class Client &#123;
 
+    public static void main(String[] args) &#123;
+        Component component = new ConcreteComponent();
+
+        // 第一修饰
+        component = new ConcreteDecorator1(component);
+
+        // 第二修饰
+        component = new ConcreteDecorator2(component);
+
+        // 修饰后运行
+        component.operate();
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><h3 id="总体分析"><a href="#总体分析" class="headerlink" title="总体分析"></a>总体分析</h3><ul>
 <li><strong>与继承关系相比，关联关系的主要优势在于不会破坏类的封装性，而且继承是一种耦合度较大的静态关系，无法在程序运行时动态扩展</strong>。在软件开发阶段，关联关系虽然不会比继承关系减少编码量，但是到了软件维护阶段，由于关联关系使系统具有较好的松耦合性，因此使得系统更加容易维护。当然，<em>关联关系的缺点是比继承关系要创建更多的对象</em>。</li>
 <li><strong>使用装饰模式来实现扩展比继承更加灵活，它以对客户透明的方式动态地给一个对象附加更多的责任</strong>。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</li>

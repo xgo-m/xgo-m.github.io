@@ -424,41 +424,442 @@
 <blockquote>
 <p><strong>注意</strong>：<code>poi-tl</code>只能生成<code>docx</code>文件，对word2007之前的<code>doc</code>文档则不支持。</p>
 </blockquote>
-<h3 id="Maven引入"><a href="#Maven引入" class="headerlink" title="Maven引入"></a>Maven引入</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.deepoove<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-tl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="Maven引入"><a href="#Maven引入" class="headerlink" title="Maven引入"></a>Maven引入</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.deepoove&lt;/groupId&gt;
+    &lt;artifactId&gt;poi-tl&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>：该包带入了<code>POI3.16</code>，如果系统中本身有低于<code>3.15</code>版本的<code>POI</code>，需要排除掉，否则生成Word时会报错。</p>
 </blockquote>
 <h3 id="demo示例"><a href="#demo示例" class="headerlink" title="demo示例"></a>demo示例</h3><p>首先，制作一个用于测试的word模版，使用<code>poi-tl</code>的标记语法做如下标记，如下图所示：</p>
 <p><img src="https://statics.sh1a.qingstor.com/2018/10/01/test-word-template.jpg" alt="测试word模版"></p>
 <p>然后，构造一个需要渲染的model JavaBean类，如果有多个Bean，貌似只能通过继承来复用属性，采用组合的方式是渲染不了的，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BaseProp</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-06-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseProp</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> String baseProp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> baseProp 基础属性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseProp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getBaseProp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> baseProp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBaseProp</span><span class="params">(String baseProp)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.baseProp = baseProp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * BaseProp
+ * @author blinkfox on 2017-06-28.
+ */
+public class BaseProp &#123;
+    
+    protected String baseProp;
+    
+    /**
+     * 构造方法.
+     * @param baseProp 基础属性
+     */
+    public BaseProp() &#123;
+        super();
+    &#125;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试旅游信息的bean.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-06-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Travel</span> <span class="keyword">extends</span> <span class="title class_">BaseProp</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String smallTitle;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String startDate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String endDate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> money;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String place1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String place2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PictureRenderData pic;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Travel</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*getter和setter方法.*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTitle</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTitle</span><span class="params">(String title)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getSmallTitle</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> smallTitle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSmallTitle</span><span class="params">(String smallTitle)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.smallTitle = smallTitle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getStartDate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> startDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStartDate</span><span class="params">(String startDate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.startDate = startDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getEndDate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> endDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setEndDate</span><span class="params">(String endDate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.endDate = endDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getCount</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCount</span><span class="params">(<span class="type">int</span> count)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getMoney</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMoney</span><span class="params">(<span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.money = money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPlace1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> place1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPlace1</span><span class="params">(String place1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.place1 = place1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPlace2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> place2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPlace2</span><span class="params">(String place2)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.place2 = place2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> PictureRenderData <span class="title function_">getPic</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPic</span><span class="params">(PictureRenderData pic)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.pic = pic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public String getBaseProp() &#123;
+        return baseProp;
+    &#125;
 
+    public void setBaseProp(String baseProp) &#123;
+        this.baseProp = baseProp;
+    &#125;
+    
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 测试旅游信息的bean.
+ * @author blinkfox on 2017-06-28.
+ */
+public class Travel extends BaseProp &#123;
+
+    private String title;
+
+    private String smallTitle;
+
+    private String startDate;
+
+    private String endDate;
+
+    private int count;
+
+    private double money;
+
+    private String place1;
+
+    private String place2;
+
+    private PictureRenderData pic;
+
+    /**
+     * 构造方法.
+     */
+    public Travel() &#123;
+        super();
+    &#125;
+
+    /*getter和setter方法.*/
+
+    public String getTitle() &#123;
+        return title;
+    &#125;
+
+    public void setTitle(String title) &#123;
+        this.title = title;
+    &#125;
+
+    public String getSmallTitle() &#123;
+        return smallTitle;
+    &#125;
+
+    public void setSmallTitle(String smallTitle) &#123;
+        this.smallTitle = smallTitle;
+    &#125;
+
+    public String getStartDate() &#123;
+        return startDate;
+    &#125;
+
+    public void setStartDate(String startDate) &#123;
+        this.startDate = startDate;
+    &#125;
+
+    public String getEndDate() &#123;
+        return endDate;
+    &#125;
+
+    public void setEndDate(String endDate) &#123;
+        this.endDate = endDate;
+    &#125;
+
+    public int getCount() &#123;
+        return count;
+    &#125;
+
+    public void setCount(int count) &#123;
+        this.count = count;
+    &#125;
+
+    public double getMoney() &#123;
+        return money;
+    &#125;
+
+    public void setMoney(double money) &#123;
+        this.money = money;
+    &#125;
+
+    public String getPlace1() &#123;
+        return place1;
+    &#125;
+
+    public void setPlace1(String place1) &#123;
+        this.place1 = place1;
+    &#125;
+
+    public String getPlace2() &#123;
+        return place2;
+    &#125;
+
+    public void setPlace2(String place2) &#123;
+        this.place2 = place2;
+    &#125;
+
+    public PictureRenderData getPic() &#123;
+        return pic;
+    &#125;
+
+    public void setPic(PictureRenderData pic) &#123;
+        this.pic = pic;
+    &#125;
+
+&#125;
+</code></pre>
 <p>最后，是模拟调用示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * poi-tl库的使用示例.</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 2017/6/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PoitlTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(PoitlTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 项目资源路径. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">PATH</span> <span class="operator">=</span> <span class="string">&quot;F:/poitl-test/web&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** word模板路径. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DOC_PATH</span> <span class="operator">=</span> PATH + <span class="string">&quot;/template/test/test.docx&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 图片路径. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">PIC_PATH</span> <span class="operator">=</span> PATH + <span class="string">&quot;/template/test/pic.png&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 输出文件及路径. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">OUTPUT_PATH</span> <span class="operator">=</span> <span class="string">&quot;G:/test/poitl_out_word.docx&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造Bean型的data数据.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> map</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Travel <span class="title function_">buildBeanData</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Travel</span> <span class="variable">travel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Travel</span>();</span><br><span class="line">        travel.setTitle(<span class="string">&quot;我的旅游日记&quot;</span>);</span><br><span class="line">        travel.setSmallTitle(<span class="string">&quot;再写日记&quot;</span>);</span><br><span class="line">        travel.setStartDate(<span class="string">&quot;2017-01-01&quot;</span>);</span><br><span class="line">        travel.setEndDate(<span class="string">&quot;2017-06-28&quot;</span>);</span><br><span class="line">        travel.setCount(<span class="number">3</span>);</span><br><span class="line">        travel.setPlace1(<span class="string">&quot;九寨沟&quot;</span>);</span><br><span class="line">        travel.setPlace2(<span class="string">&quot;天涯海角&quot;</span>);</span><br><span class="line">        travel.setMoney(<span class="number">1872.52</span>);</span><br><span class="line">        travel.setPic(<span class="keyword">new</span> <span class="title class_">PictureRenderData</span>(<span class="number">600</span>, <span class="number">400</span>, PIC_PATH));</span><br><span class="line">        travel.setBaseProp(<span class="string">&quot;这是&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> travel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main方法.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args 数组参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">XWPFTemplate</span> <span class="variable">template</span> <span class="operator">=</span> XWPFTemplate.compile(DOC_PATH).render(buildBeanData());</span><br><span class="line"></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(OUTPUT_PATH);</span><br><span class="line">        template.write(out);</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">        template.close();</span><br><span class="line">        log.info(<span class="string">&quot;通过&#x27;poi-tl&#x27;导出word成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * poi-tl库的使用示例.
+ * Created by blinkfox on 2017/6/27.
+ */
+public class PoitlTest &#123;
 
+    private static final Logger log = LoggerFactory.getLogger(PoitlTest.class);
+
+    /** 项目资源路径. */
+    private static final String PATH = &quot;F:/poitl-test/web&quot;;
+
+    /** word模板路径. */
+    private static final String DOC_PATH = PATH + &quot;/template/test/test.docx&quot;;
+
+    /** 图片路径. */
+    private static final String PIC_PATH = PATH + &quot;/template/test/pic.png&quot;;
+
+    /** 输出文件及路径. */
+    private static final String OUTPUT_PATH = &quot;G:/test/poitl_out_word.docx&quot;;
+
+    /**
+     * 构造Bean型的data数据.
+     * @return map
+     */
+    private static Travel buildBeanData() &#123;
+        Travel travel = new Travel();
+        travel.setTitle(&quot;我的旅游日记&quot;);
+        travel.setSmallTitle(&quot;再写日记&quot;);
+        travel.setStartDate(&quot;2017-01-01&quot;);
+        travel.setEndDate(&quot;2017-06-28&quot;);
+        travel.setCount(3);
+        travel.setPlace1(&quot;九寨沟&quot;);
+        travel.setPlace2(&quot;天涯海角&quot;);
+        travel.setMoney(1872.52);
+        travel.setPic(new PictureRenderData(600, 400, PIC_PATH));
+        travel.setBaseProp(&quot;这是&quot;);
+        return travel;
+    &#125;
+
+    /**
+     * main方法.
+     * @param args 数组参数
+     */
+    public static void main(String[] args) throws IOException &#123;
+        XWPFTemplate template = XWPFTemplate.compile(DOC_PATH).render(buildBeanData());
+
+        FileOutputStream out = new FileOutputStream(OUTPUT_PATH);
+        template.write(out);
+        out.flush();
+        out.close();
+        template.close();
+        log.info(&quot;通过&#39;poi-tl&#39;导出word成功!&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>最后，在导出的文件夹中可查看生成的word文件，如下所示：</p>
 <p><img src="https://statics.sh1a.qingstor.com/2018/10/01/test-out-result.jpg" alt="生成的Word文件结果"></p>
 <h2 id="Java调用PhantomJS导出Ehcarts图片"><a href="#Java调用PhantomJS导出Ehcarts图片" class="headerlink" title="Java调用PhantomJS导出Ehcarts图片"></a>Java调用PhantomJS导出Ehcarts图片</h2><h3 id="PhantomJS介绍"><a href="#PhantomJS介绍" class="headerlink" title="PhantomJS介绍"></a>PhantomJS介绍</h3><p><code>PhantomJS</code>是一个基于<code>webkit</code>内核的无头浏览器，即没有UI界面的一个浏览器，只是其内的点击、翻页等人为相关操作需要程序设计实现。<code>PhantomJS</code>提供JavaScript API接口，即通过编写js程序可以直接与<code>webkit</code>内核交互，在此之上可以结合Java语言等，通过java调用js等相关操作，从而解决了以前<code>c/c++</code>才能比较好的基于<code>webkit</code>开发优质采集器的限制。</p>
 <h3 id="PhantomJS的安装配置"><a href="#PhantomJS的安装配置" class="headerlink" title="PhantomJS的安装配置"></a>PhantomJS的安装配置</h3><h4 id="windows环境"><a href="#windows环境" class="headerlink" title="windows环境"></a>windows环境</h4><p>如果是在windows环境下，则在官网下载解压到某个目录后，将其bin目录加入到<code>path</code>变量中即可。</p>
 <h4 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h4><p>如果是在<code>Linux</code>环境下，在官网下载解压后，同样需要将<code>PhantomJS</code>的<code>bin</code>目录加入到<code>path</code>环境变量中，参考的命令和配置如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑配置文件.</span></span><br><span class="line">vi ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将PhantomJS的bin目录加入到PATH环境变量中.</span></span><br><span class="line"><span class="built_in">export</span> PHANTOMJS_HOME=/home/blinkfox/Documents/phantomjs-2.1.1-linux-x86_64</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PHANTOMJS_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出vi编辑器，使用source命令让刚才的配置即时生效.</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试PhantomJS是否安装成功，如果打出了版本信息，即安装成功.</span></span><br><span class="line">phantomjs -v</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 编辑配置文件.
+vi ~/.bashrc
 
+# 将PhantomJS的bin目录加入到PATH环境变量中.
+export PHANTOMJS_HOME=/home/blinkfox/Documents/phantomjs-2.1.1-linux-x86_64
+export PATH=$&#123;PHANTOMJS_HOME&#125;/bin:$PATH
+
+# 退出vi编辑器，使用source命令让刚才的配置即时生效.
+source ~/.bashrc
+
+# 测试PhantomJS是否安装成功，如果打出了版本信息，即安装成功.
+phantomjs -v
+</code></pre>
 <h3 id="demo示例-1"><a href="#demo示例-1" class="headerlink" title="demo示例"></a>demo示例</h3><p>这个demo的需求是这样的，我们使用Java调用<code>PhantomJS</code>的指令来在服务端加载含<code>ECharts</code>统计的图<code>html</code>文件，然后调用<code>ECharts</code>的生成图片方法，将图片传输到Java后台最终实现保存图片到指定路径中。</p>
 <p>首先，制作<code>ECharts</code>的html页面，示例页面如下代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>测试的ECharts数据统计图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;main&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:560px; height:270px;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/lib/jquery/jquery-1.9.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/lib/echarts/v3/echarts.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 基于准备好的dom，初始化echarts实例</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> myChart = echarts.<span class="title function_">init</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;main&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 指定图表的配置项和数据</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> option = &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">title</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">text</span>: <span class="string">&#x27;ECharts 入门示例&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">animation</span>: <span class="literal">false</span>, <span class="comment">// 关闭动画效果</span></span></span><br><span class="line"><span class="language-javascript">    <span class="attr">tooltip</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">legend</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>:[<span class="string">&#x27;销量&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">xAxis</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: [<span class="string">&quot;衬衫&quot;</span>,<span class="string">&quot;羊毛衫&quot;</span>,<span class="string">&quot;雪纺衫&quot;</span>,<span class="string">&quot;裤子&quot;</span>,<span class="string">&quot;高跟鞋&quot;</span>,<span class="string">&quot;袜子&quot;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">yAxis</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">series</span>: [&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&#x27;销量&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">type</span>: <span class="string">&#x27;bar&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: [<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">20</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;]</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 使用刚指定的配置项和数据显示图表。</span></span></span><br><span class="line"><span class="language-javascript">myChart.<span class="title function_">setOption</span>(option);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">/**</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"> * ajax传输图片信息.</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"> */</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">postImage</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 向后台发起请求保存图片到指定目录.</span></span></span><br><span class="line"><span class="language-javascript">    $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">type</span>: <span class="string">&#x27;POST&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">url</span>: <span class="string">&#x27;/test/saveImage&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: &#123;<span class="attr">picInfo</span>: myChart.<span class="title function_">getDataURL</span>()&#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;通过post请求传输数据成功!&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;测试的ECharts数据统计图&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
+    &lt;div id=&quot;main&quot; style=&quot;width:560px; height:270px;&quot;&gt;&lt;/div&gt;
 
+&lt;script type=&quot;text/javascript&quot; src=&quot;/js/lib/jquery/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/js/lib/echarts/v3/echarts.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+
+// 指定图表的配置项和数据
+var option = &#123;
+    title: &#123;
+        text: &#39;ECharts 入门示例&#39;
+    &#125;,
+    animation: false, // 关闭动画效果
+    tooltip: &#123;&#125;,
+    legend: &#123;
+        data:[&#39;销量&#39;]
+    &#125;,
+    xAxis: &#123;
+        data: [&quot;衬衫&quot;,&quot;羊毛衫&quot;,&quot;雪纺衫&quot;,&quot;裤子&quot;,&quot;高跟鞋&quot;,&quot;袜子&quot;]
+    &#125;,
+    yAxis: &#123;&#125;,
+    series: [&#123;
+        name: &#39;销量&#39;,
+        type: &#39;bar&#39;,
+        data: [5, 20, 36, 10, 10, 20]
+    &#125;]
+&#125;;
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+/**
+ * ajax传输图片信息.
+ */
+function postImage() &#123;
+    // 向后台发起请求保存图片到指定目录.
+    $.ajax(&#123;
+        type: &#39;POST&#39;,
+        url: &#39;/test/saveImage&#39;,
+        data: &#123;picInfo: myChart.getDataURL()&#125;,
+        success: function() &#123;
+            console.log(&#39;通过post请求传输数据成功!&#39;);
+        &#125;
+    &#125;);
+&#125;
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <p>然后，使用<code>Servlet</code>来写一个服务端代码，用来获取<code>Base64</code>的图片信息并在后端解析保存图片，<code>Servlet</code>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 保存Echarts统计图片的Servlet.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-06-28.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SaveImageServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(SaveImageServlet.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 执行获取echarts图片的post请求.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request req</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response resp</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ServletException Servlet异常.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException IO异常.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="comment">// 获取图片信息.</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">picInfo</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;picInfo&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(picInfo)) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;picInfo为空,未从前台获取到base64图片信息!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.getAndsaveImage(picInfo, <span class="string">&quot;G:/test/image1.png&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取并保存图片到本地.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> picInfo 图片信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> imagePath 图片保存的路径</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">getAndsaveImage</span><span class="params">(String picInfo, String imagePath)</span> &#123;</span><br><span class="line">        <span class="comment">// 传递过程中  &quot;+&quot; 变为了 &quot; &quot;.</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">newPicInfo</span> <span class="operator">=</span> picInfo.replaceAll(<span class="string">&quot; &quot;</span>, <span class="string">&quot;+&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">picPath</span> <span class="operator">=</span> decodeBase64(newPicInfo, <span class="keyword">new</span> <span class="title class_">File</span>(imagePath));</span><br><span class="line">        log.warn(<span class="string">&quot;从echarts中生成图片的的路径为:&#123;&#125;&quot;</span>, picPath);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解析Base64位信息并输出到某个目录下面.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> base64Info base64串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> picPath 生成的文件路径</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 文件地址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">decodeBase64</span><span class="params">(String base64Info, File picPath)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(base64Info)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据中：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABI4AAAEsCAYAAAClh/jbAAA ...  在&quot;base64,&quot;之后的才是图片信息</span></span><br><span class="line">        String[] arr = base64Info.split(<span class="string">&quot;base64,&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将图片输出到系统某目录.</span></span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 使用了Apache commons codec的包来解析Base64</span></span><br><span class="line">            <span class="type">byte</span>[] buffer = Base64.decodeBase64(arr[<span class="number">1</span>]);</span><br><span class="line">            out = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(picPath);</span><br><span class="line">            out.write(buffer);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;解析Base64图片信息并保存到某目录下出错!&quot;</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            IOUtils.closeQuietly(out);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> picPath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 保存Echarts统计图片的Servlet.
+ * @author blinkfox on 2017-06-28.
+ */
+public class SaveImageServlet extends HttpServlet &#123;
 
+    private static final long serialVersionUID = 1L;
+
+    private static final Logger log = LoggerFactory.getLogger(SaveImageServlet.class);
+
+    /**
+     * 执行获取echarts图片的post请求.
+     * @param request req
+     * @param response resp
+     * @throws ServletException Servlet异常.
+     * @throws IOException IO异常.
+     */
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+        // 获取图片信息.
+        String picInfo = request.getParameter(&quot;picInfo&quot;);
+        if (StringUtils.isBlank(picInfo)) &#123;
+            log.error(&quot;picInfo为空,未从前台获取到base64图片信息!&quot;);
+            return;
+        &#125;
+
+        this.getAndsaveImage(picInfo, &quot;G:/test/image1.png&quot;);
+    &#125;
+
+    /**
+     * 获取并保存图片到本地.
+     * @param picInfo 图片信息
+     * @param imagePath 图片保存的路径
+     */
+    private void getAndsaveImage(String picInfo, String imagePath) &#123;
+        // 传递过程中  &quot;+&quot; 变为了 &quot; &quot;.
+        String newPicInfo = picInfo.replaceAll(&quot; &quot;, &quot;+&quot;);
+        String picPath = decodeBase64(newPicInfo, new File(imagePath));
+        log.warn(&quot;从echarts中生成图片的的路径为:&#123;&#125;&quot;, picPath);
+    &#125;
+
+    /**
+     * 解析Base64位信息并输出到某个目录下面.
+     * @param base64Info base64串
+     * @param picPath 生成的文件路径
+     * @return 文件地址
+     */
+    private String decodeBase64(String base64Info, File picPath) &#123;
+        if (StringUtils.isEmpty(base64Info)) &#123;
+            return null;
+        &#125;
+
+        // 数据中：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABI4AAAEsCAYAAAClh/jbAAA ...  在&quot;base64,&quot;之后的才是图片信息
+        String[] arr = base64Info.split(&quot;base64,&quot;);
+
+        // 将图片输出到系统某目录.
+        OutputStream out = null;
+        try &#123;
+            // 使用了Apache commons codec的包来解析Base64
+            byte[] buffer = Base64.decodeBase64(arr[1]);
+            out = new FileOutputStream(picPath);
+            out.write(buffer);
+        &#125; catch (IOException e) &#123;
+            log.error(&quot;解析Base64图片信息并保存到某目录下出错!&quot;, e);
+        &#125; finally &#123;
+            IOUtils.closeQuietly(out);
+        &#125;
+
+        return picPath;
+    &#125;
+
+&#125;
+</code></pre>
 <p>然后，是书写PhantomJS脚本<code>echarts_load.js</code>来加载和调用图片下载的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> system = <span class="built_in">require</span>(<span class="string">&#x27;system&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).<span class="title function_">create</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果是windows,设置编码为gbk，防止中文乱码,Linux本身是UTF-8</span></span><br><span class="line"><span class="keyword">var</span> osName = system.<span class="property">os</span>.<span class="property">name</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;os name:&#x27;</span> + osName);</span><br><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;windows&#x27;</span> === osName.<span class="title function_">toLowerCase</span>()) &#123;</span><br><span class="line">    phantom.<span class="property">outputEncoding</span>=<span class="string">&quot;gbk&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取第二个参数(即请求地址url).</span></span><br><span class="line"><span class="keyword">var</span> url = system.<span class="property">args</span>[<span class="number">1</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;url:&#x27;</span> + url);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示控制台日志.</span></span><br><span class="line">page.<span class="property">onConsoleMessage</span> = <span class="keyword">function</span>(<span class="params">msg, lineNum, sourceId</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;CONSOLE: &#x27;</span> + msg + <span class="string">&#x27; (from line #&#x27;</span> + lineNum + <span class="string">&#x27; in &quot;&#x27;</span> + sourceId + <span class="string">&#x27;&quot;)&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打开给定url的页面.</span></span><br><span class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>();</span><br><span class="line">page.<span class="title function_">open</span>(url, <span class="keyword">function</span>(<span class="params">status</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (status == <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;echarts页面加载完成,加载耗时:&#x27;</span> + (<span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>() - start) + <span class="string">&#x27; ms&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 由于echarts动画效果，延迟500毫秒确保图片渲染完毕再调用下载图片方法.</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            page.evaluate(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="title function_">postImage</span>();</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;调用了echarts的下载图片功能.&quot;</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面加载失败 Page failed to load!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3秒后再关闭浏览器.</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        phantom.<span class="title function_">exit</span>();</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var system = require(&#39;system&#39;);
+var page = require(&#39;webpage&#39;).create();
 
+// 如果是windows,设置编码为gbk，防止中文乱码,Linux本身是UTF-8
+var osName = system.os.name;
+console.log(&#39;os name:&#39; + osName);
+if (&#39;windows&#39; === osName.toLowerCase()) &#123;
+    phantom.outputEncoding=&quot;gbk&quot;;
+&#125;
+
+// 获取第二个参数(即请求地址url).
+var url = system.args[1];
+console.log(&#39;url:&#39; + url);
+
+// 显示控制台日志.
+page.onConsoleMessage = function(msg, lineNum, sourceId) &#123;
+    console.log(&#39;CONSOLE: &#39; + msg + &#39; (from line #&#39; + lineNum + &#39; in &quot;&#39; + sourceId + &#39;&quot;)&#39;);
+&#125;;
+
+//打开给定url的页面.
+var start = new Date().getTime();
+page.open(url, function(status) &#123;
+    if (status == &#39;success&#39;) &#123;
+        console.log(&#39;echarts页面加载完成,加载耗时:&#39; + (new Date().getTime() - start) + &#39; ms&#39;);
+
+        // 由于echarts动画效果，延迟500毫秒确保图片渲染完毕再调用下载图片方法.
+        setTimeout(function() &#123;
+            page.evaluate(function() &#123;
+                postImage();
+                console.log(&quot;调用了echarts的下载图片功能.&quot;);
+            &#125;);
+        &#125;, 500);
+    &#125; else &#123;
+        console.log(&quot;页面加载失败 Page failed to load!&quot;);
+    &#125;
+
+    // 3秒后再关闭浏览器.
+    setTimeout(function() &#123;
+        phantom.exit();
+    &#125;, 3000);
+&#125;);
+</code></pre>
 <p>最后，是使用<code>Java</code>来调用<code>PhantomJS</code>的指令，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * HttpTest.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2017-06-28.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HttpTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(HttpTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">PHANTOM_PATH</span> <span class="operator">=</span> <span class="string">&quot;phantomjs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里我的test.js是保存在G盘下面的phantomjs目录</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TEST_JS</span> <span class="operator">=</span> <span class="string">&quot;G:/test/phantom/test.js &quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> String <span class="title function_">downloadImage</span><span class="params">(String url)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">cmdStr</span> <span class="operator">=</span> PHANTOM_PATH + TEST_JS + url;</span><br><span class="line">        log.info(<span class="string">&quot;命令行字符串:&#123;&#125;&quot;</span>, cmdStr);</span><br><span class="line"></span><br><span class="line">        <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            rt.exec(cmdStr);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;执行phantomjs的指令失败！请检查是否安装有PhantomJs的环境或配置path路径！PhantomJs详情参考这里:http://phantomjs.org&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * main.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args args</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException IO异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        downloadImage(<span class="string">&quot;http://127.0.0.1:8080/test/echart_test/test_echarts.html&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * HttpTest.
+ * @author blinkfox on 2017-06-28.
+ * @version 1.0
+ */
+public class HttpTest &#123;
 
+    private static final Logger log = LoggerFactory.getLogger(HttpTest.class);
+
+    private static final String PHANTOM_PATH = &quot;phantomjs&quot;;
+
+    //这里我的test.js是保存在G盘下面的phantomjs目录
+    private static final String TEST_JS = &quot;G:/test/phantom/test.js &quot;;
+
+    public void String downloadImage(String url) throws IOException &#123;
+        String cmdStr = PHANTOM_PATH + TEST_JS + url;
+        log.info(&quot;命令行字符串:&#123;&#125;&quot;, cmdStr);
+
+        Runtime rt = Runtime.getRuntime();
+        try &#123;
+            rt.exec(cmdStr);
+        &#125; catch (IOException e) &#123;
+            log.error(&quot;执行phantomjs的指令失败！请检查是否安装有PhantomJs的环境或配置path路径！PhantomJs详情参考这里:http://phantomjs.org&quot;, e);
+        &#125;
+    &#125;
+
+    /**
+     * main.
+     * @param args args
+     * @throws IOException IO异常
+     */
+    public static void main(String[] args) throws IOException &#123;
+        downloadImage(&quot;http://127.0.0.1:8080/test/echart_test/test_echarts.html&quot;);
+    &#125;
+
+&#125;
+</code></pre>
 <p>通过调用测试代码即可在指定目录生成<code>Echarts</code>的图片啦！</p>
 <p>联系上面生成<code>Word</code>的功能，两个功能一结合即可动态导出<code>ECharts</code>图片到<code>Word</code>文件中。</p>
 

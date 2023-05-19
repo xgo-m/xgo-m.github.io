@@ -453,10 +453,85 @@
 <li><strong>操作结果</strong>：数据库字段类型为 <code>int</code> 型，只能下拉选择一个选项值来进行<strong>等值查询</strong>（<code>=</code>）；</li>
 <li><strong>操作时间</strong>：数据库字段类型为 <code>datetime</code> 型，可以选择开始时间或者结束时间来进行<strong>区间查询</strong>（<code>BETWEEN ? AND ?</code>、<code>&gt;=</code>、<code>&lt;=</code>）；</li>
 </ul>
-<h3 id="MyBatis-的-SQL-写法"><a href="#MyBatis-的-SQL-写法" class="headerlink" title="MyBatis 的 SQL 写法"></a>MyBatis 的 SQL 写法</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.blinkfox.example.repository.mapper.OperationLogMapper&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- MyBatis 映射字段为 Bean 的 resultMap. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;operationLogMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.blinkfox.example.repository.pojo.OperationLog&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;c_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;c_title&quot;</span> <span class="attr">property</span>=<span class="string">&quot;title&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;n_type&quot;</span> <span class="attr">property</span>=<span class="string">&quot;type&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;n_result&quot;</span> <span class="attr">property</span>=<span class="string">&quot;result&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;dt_create_time&quot;</span> <span class="attr">property</span>=<span class="string">&quot;createTime&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;c_description&quot;</span> <span class="attr">property</span>=<span class="string">&quot;description&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- MyBatis 动态查询操作日志的 SQL. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;queryOperationLogs&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;operationLogMap&quot;</span>&gt;</span></span><br><span class="line">        SELECT</span><br><span class="line">            ol.c_id,</span><br><span class="line">            ol.c_title,</span><br><span class="line">            ol.n_type,</span><br><span class="line">            ol.n_result,</span><br><span class="line">            ol.dt_create_time,</span><br><span class="line">            ol.c_description</span><br><span class="line">        FROM</span><br><span class="line">            t_operation_log AS ol</span><br><span class="line">        <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">&quot;WHERE&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;&quot;</span> <span class="attr">suffixOverrides</span>=<span class="string">&quot;AND&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.result != null and log.result != 0&quot;</span>&gt;</span></span><br><span class="line">                ol.n_result = #&#123;log.result&#125; AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.title != null and log.title != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">                ol.c_title like CONCAT(&#x27;%&#x27;, #&#123;log.title&#125;, &#x27;%&#x27;) AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.typeList != null&quot;</span>&gt;</span></span><br><span class="line">                ol.n_type in</span><br><span class="line">                <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;log.typeList&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">                    #&#123;item&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">                AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.startTime != null and log.endTime != null&quot;</span>&gt;</span></span><br><span class="line">                ol.dt_create_time BETWEEN #&#123;log.startTime&#125; AND #&#123;log.endTime&#125; AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.startTime != null and log.endTime == null&quot;</span>&gt;</span></span><br><span class="line">                ol.dt_create_time <span class="symbol">&amp;gt;</span>= #&#123;log.startTime&#125; AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;log.startTime == null and log.endTime != null&quot;</span>&gt;</span></span><br><span class="line">                ol.dt_create_time <span class="symbol">&amp;lt;</span>= #&#123;log.endTime&#125; AND</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="MyBatis-的-SQL-写法"><a href="#MyBatis-的-SQL-写法" class="headerlink" title="MyBatis 的 SQL 写法"></a>MyBatis 的 SQL 写法</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.blinkfox.example.repository.mapper.OperationLogMapper&quot;&gt;
 
-<h3 id="Fenix-的-SQL-写法"><a href="#Fenix-的-SQL-写法" class="headerlink" title="Fenix 的 SQL 写法"></a>Fenix 的 SQL 写法</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 操作日志的 SQL 仓库. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">fenixs</span> <span class="attr">namespace</span>=<span class="string">&quot;OperationLogRepository&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 多条件模糊分页查询操作日志的示例 SQL. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fenix</span> <span class="attr">id</span>=<span class="string">&quot;queryOperationLogs&quot;</span> <span class="attr">removeIfExist</span>=<span class="string">&quot;1 = 1 AND &quot;</span>&gt;</span></span><br><span class="line">        SELECT</span><br><span class="line">            ol.id,</span><br><span class="line">            ol.title,</span><br><span class="line">            ol.type,</span><br><span class="line">            ol.result,</span><br><span class="line">            ol.createTime,</span><br><span class="line">            ol.description</span><br><span class="line">        FROM</span><br><span class="line">            OperationLog AS ol</span><br><span class="line">        WHERE</span><br><span class="line">            1 = 1</span><br><span class="line">        <span class="tag">&lt;<span class="name">andLike</span> <span class="attr">field</span>=<span class="string">&quot;ol.title&quot;</span> <span class="attr">value</span>=<span class="string">&quot;log.title&quot;</span> <span class="attr">match</span>=<span class="string">&quot;log.title != empty&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">andIn</span> <span class="attr">field</span>=<span class="string">&quot;ol.type&quot;</span> <span class="attr">value</span>=<span class="string">&quot;log.typeList&quot;</span> <span class="attr">match</span>=<span class="string">&quot;log.typeList != empty&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">andEqual</span> <span class="attr">field</span>=<span class="string">&quot;ol.result&quot;</span> <span class="attr">value</span>=<span class="string">&quot;log.result&quot;</span> <span class="attr">match</span>=<span class="string">&quot;log.result != empty&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">andBetween</span> <span class="attr">field</span>=<span class="string">&quot;ol.createTime&quot;</span> <span class="attr">start</span>=<span class="string">&quot;log.startTime&quot;</span> <span class="attr">end</span>=<span class="string">&quot;log.endTime&quot;</span> <span class="attr">match</span>=<span class="string">&quot;(log.startTime != empty) || (log.endTime != empty)&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fenix</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">fenixs</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    &lt;!-- MyBatis 映射字段为 Bean 的 resultMap. --&gt;
+    &lt;resultMap id=&quot;operationLogMap&quot; type=&quot;com.blinkfox.example.repository.pojo.OperationLog&quot;&gt;
+        &lt;id column=&quot;c_id&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;c_title&quot; property=&quot;title&quot;/&gt;
+        &lt;result column=&quot;n_type&quot; property=&quot;type&quot;/&gt;
+        &lt;result column=&quot;n_result&quot; property=&quot;result&quot;/&gt;
+        &lt;result column=&quot;dt_create_time&quot; property=&quot;createTime&quot;/&gt;
+        &lt;result column=&quot;c_description&quot; property=&quot;description&quot;/&gt;
+    &lt;/resultMap&gt;
 
+    &lt;!-- MyBatis 动态查询操作日志的 SQL. --&gt;
+    &lt;select id=&quot;queryOperationLogs&quot; resultMap=&quot;operationLogMap&quot;&gt;
+        SELECT
+            ol.c_id,
+            ol.c_title,
+            ol.n_type,
+            ol.n_result,
+            ol.dt_create_time,
+            ol.c_description
+        FROM
+            t_operation_log AS ol
+        &lt;trim prefix=&quot;WHERE&quot; suffix=&quot;&quot; suffixOverrides=&quot;AND&quot;&gt;
+            &lt;if test=&quot;log.result != null and log.result != 0&quot;&gt;
+                ol.n_result = #&#123;log.result&#125; AND
+            &lt;/if&gt;
+            &lt;if test=&quot;log.title != null and log.title != &#39;&#39;&quot;&gt;
+                ol.c_title like CONCAT(&#39;%&#39;, #&#123;log.title&#125;, &#39;%&#39;) AND
+            &lt;/if&gt;
+            &lt;if test=&quot;log.typeList != null&quot;&gt;
+                ol.n_type in
+                &lt;foreach collection=&quot;log.typeList&quot; index=&quot;index&quot; item=&quot;item&quot; open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot;&gt;
+                    #&#123;item&#125;
+                &lt;/foreach&gt;
+                AND
+            &lt;/if&gt;
+            &lt;if test=&quot;log.startTime != null and log.endTime != null&quot;&gt;
+                ol.dt_create_time BETWEEN #&#123;log.startTime&#125; AND #&#123;log.endTime&#125; AND
+            &lt;/if&gt;
+            &lt;if test=&quot;log.startTime != null and log.endTime == null&quot;&gt;
+                ol.dt_create_time &amp;gt;= #&#123;log.startTime&#125; AND
+            &lt;/if&gt;
+            &lt;if test=&quot;log.startTime == null and log.endTime != null&quot;&gt;
+                ol.dt_create_time &amp;lt;= #&#123;log.endTime&#125; AND
+            &lt;/if&gt;
+        &lt;/trim&gt;
+    &lt;/select&gt;
+
+&lt;/mapper&gt;
+</code></pre>
+<h3 id="Fenix-的-SQL-写法"><a href="#Fenix-的-SQL-写法" class="headerlink" title="Fenix 的 SQL 写法"></a>Fenix 的 SQL 写法</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!-- 操作日志的 SQL 仓库. --&gt;
+&lt;fenixs namespace=&quot;OperationLogRepository&quot;&gt;
+
+    &lt;!-- 多条件模糊分页查询操作日志的示例 SQL. --&gt;
+    &lt;fenix id=&quot;queryOperationLogs&quot; removeIfExist=&quot;1 = 1 AND &quot;&gt;
+        SELECT
+            ol.id,
+            ol.title,
+            ol.type,
+            ol.result,
+            ol.createTime,
+            ol.description
+        FROM
+            OperationLog AS ol
+        WHERE
+            1 = 1
+        &lt;andLike field=&quot;ol.title&quot; value=&quot;log.title&quot; match=&quot;log.title != empty&quot;/&gt;
+        &lt;andIn field=&quot;ol.type&quot; value=&quot;log.typeList&quot; match=&quot;log.typeList != empty&quot;/&gt;
+        &lt;andEqual field=&quot;ol.result&quot; value=&quot;log.result&quot; match=&quot;log.result != empty&quot;/&gt;
+        &lt;andBetween field=&quot;ol.createTime&quot; start=&quot;log.startTime&quot; end=&quot;log.endTime&quot; match=&quot;(log.startTime != empty) || (log.endTime != empty)&quot;/&gt;
+    &lt;/fenix&gt;
+
+&lt;/fenixs&gt;
+</code></pre>
 <h3 id="MyBatis-与-Fenix-的比较总结"><a href="#MyBatis-与-Fenix-的比较总结" class="headerlink" title="MyBatis 与 Fenix 的比较总结"></a>MyBatis 与 Fenix 的比较总结</h3><p><code>MyBatis</code> 和 <code>Fenix</code> 的 SQL 有以下几个差异点：</p>
 <ul>
 <li>MyBatis 只能写原生 SQL，无法享受跨数据库时的兼容性；由于 Fenix 是基于 Spring Data JPA 的扩展，即可以写 <code>JPQL</code> 语句，也可以写原生 <code>SQL</code> 语句，上述示例中写的是 <code>JPQL</code> 语句，SQL 的字段表达上更简洁。</li>
@@ -472,20 +547,49 @@
 <blockquote>
 <p><strong>注</strong>：如果不是 Spring Boot 项目，请参看<a target="_blank" rel="noopener" href="https://blinkfox.github.io/fenix/#/quick-install?id=not-spring-boot-project">这里</a>。</p>
 </blockquote>
-<h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.blinkfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fenix-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">&#x27;com.blinkfox:fenix-spring-boot-starter:1.0.1&#x27;</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.blinkfox&lt;/groupId&gt;
+    &lt;artifactId&gt;fenix-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><pre><code class="bash">compile &#39;com.blinkfox:fenix-spring-boot-starter:1.0.1&#39;
+</code></pre>
 <h3 id="激活-Fenix-FactoryBean"><a href="#激活-Fenix-FactoryBean" class="headerlink" title="激活 Fenix FactoryBean"></a>激活 Fenix FactoryBean</h3><p>然后需要在你的 Spring Boot 应用的 <code>@EnableJpaRepositories</code> 注解中，配置<br><code>repositoryFactoryBeanClass</code> 的属性值为 <code>FenixJpaRepositoryFactoryBean.class</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请在 Spring Boot 应用中配置 &#123;<span class="doctag">@link</span> EnableJpaRepositories#repositoryFactoryBeanClass&#125;</span></span><br><span class="line"><span class="comment"> * 的值为 &#123;<span class="doctag">@link</span> FenixJpaRepositoryFactoryBean&#125;.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> blinkfox on 2019-08-15.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EnableJpaRepositories(repositoryFactoryBeanClass = FenixJpaRepositoryFactoryBean.class)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 请在 Spring Boot 应用中配置 &#123;@link EnableJpaRepositories#repositoryFactoryBeanClass&#125;
+ * 的值为 &#123;@link FenixJpaRepositoryFactoryBean&#125;.
+ *
+ * @author blinkfox on 2019-08-15.
+ */
+@EnableJpaRepositories(repositoryFactoryBeanClass = FenixJpaRepositoryFactoryBean.class)
+@SpringBootApplication
+public class DemoApplication &#123;
 
+    public static void main(String[] args) &#123;
+        SpringApplication.run(DemoApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
 <blockquote>
 <p><strong>注</strong>： <code>FenixJpaRepositoryFactoryBean</code> 继承自 Spring Data JPA 默认的 <code>JpaRepositoryFactoryBean</code>。所以，Fenix 与 JPA 的各种注解和特性完全兼容，并提供了更加强大的 <code>@QueryFenix</code> 注解。</p>
 </blockquote>
 <h3 id="application-yml-配置项"><a href="#application-yml-配置项" class="headerlink" title="application.yml 配置项"></a>application.yml 配置项</h3><p>要修改 Fenix 的配置信息，你需要在你的 Spring Boot 项目中，在 <code>application.yml</code> 或者 <code>application.properties</code> 中去修改配置信息。</p>
 <p>以下通过 <code>application.yml</code> 文件来说明 Fenix 中的几个配置项、默认值和说明信息，供你参考。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fenix 的几个配置项、默认值及详细说明，通常情况下你不需要填写这些配置信息.</span></span><br><span class="line"><span class="attr">fenix:</span></span><br><span class="line">  <span class="comment"># 成功加载 Fenix 配置信息后，是否打印启动 banner，默认 true.</span></span><br><span class="line">  <span class="attr">print-banner:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 是否打印 Fenix 生成的 SQL 信息，默认为空.</span></span><br><span class="line">  <span class="comment"># 当该值为空时，会读取 &#x27;spring.jpa.show-sql&#x27; 的值，为 true 就打印 SQL 信息，否则不打印.</span></span><br><span class="line">  <span class="comment"># 当该值为 true 时，就打印 SQL 信息，否则不打印. 生产环境不建议设置为 true.</span></span><br><span class="line">  <span class="attr">print-sql:</span></span><br><span class="line">  <span class="comment"># 扫描 Fenix XML 文件的所在位置，默认是 fenix 目录及子目录，可以用 yaml 文件方式配置多个值.</span></span><br><span class="line">  <span class="attr">xml-locations:</span> <span class="string">fenix</span></span><br><span class="line">  <span class="comment"># 扫描你自定义的 XML 标签处理器的位置，默认为空，可以是包路径，也可以是 Java 或 class 文件的全路径名</span></span><br><span class="line">  <span class="comment"># 可以配置多个值，不过一般情况下，你不自定义自己的 XML 标签和处理器的话，不需要配置这个值.</span></span><br><span class="line">  <span class="attr">handler-locations:</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="yaml"># Fenix 的几个配置项、默认值及详细说明，通常情况下你不需要填写这些配置信息.
+fenix:
+  # 成功加载 Fenix 配置信息后，是否打印启动 banner，默认 true.
+  print-banner: true
+  # 是否打印 Fenix 生成的 SQL 信息，默认为空.
+  # 当该值为空时，会读取 &#39;spring.jpa.show-sql&#39; 的值，为 true 就打印 SQL 信息，否则不打印.
+  # 当该值为 true 时，就打印 SQL 信息，否则不打印. 生产环境不建议设置为 true.
+  print-sql:
+  # 扫描 Fenix XML 文件的所在位置，默认是 fenix 目录及子目录，可以用 yaml 文件方式配置多个值.
+  xml-locations: fenix
+  # 扫描你自定义的 XML 标签处理器的位置，默认为空，可以是包路径，也可以是 Java 或 class 文件的全路径名
+  # 可以配置多个值，不过一般情况下，你不自定义自己的 XML 标签和处理器的话，不需要配置这个值.
+  handler-locations:
+</code></pre>
 <h2 id="开源许可证"><a href="#开源许可证" class="headerlink" title="开源许可证"></a>开源许可证</h2><p>本 <code>Fenix</code> 的 Spring Data JPA 扩展库遵守 <a target="_blank" rel="noopener" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a> 许可证。</p>
 
                 

@@ -422,18 +422,46 @@
 <li>API简单易用</li>
 <li>易于集成或定制修改，仅一个<a target="_blank" rel="noopener" href="https://github.com/blinkfox/mini-table/blob/master/src/main/java/com/blinkfox/minitable/MiniTable.java">Java</a>文件，且代码规范</li>
 </ul>
-<h2 id="集成使用"><a href="#集成使用" class="headerlink" title="集成使用"></a>集成使用</h2><h3 id="Maven集成"><a href="#Maven集成" class="headerlink" title="Maven集成"></a>Maven集成</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.blinkfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mini-table<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="API-使用"><a href="#API-使用" class="headerlink" title="API 使用"></a>API 使用</h3><h4 id="示例1（无标题）"><a href="#示例1（无标题）" class="headerlink" title="示例1（无标题）"></a>示例1（无标题）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">table</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MiniTable</span>()</span><br><span class="line">        .addHeaders(<span class="string">&quot;header1&quot;</span>, <span class="string">&quot;header2&quot;</span>)</span><br><span class="line">        .addDatas(<span class="string">&quot;col11&quot;</span>, <span class="string">&quot;col12&quot;</span>)</span><br><span class="line">        .addDatas(<span class="string">&quot;col21&quot;</span>, <span class="string">&quot;col22&quot;</span>)</span><br><span class="line">        .render();</span><br><span class="line">System.out.println(table);</span><br></pre></td></tr></table></figure>
-
+<h2 id="集成使用"><a href="#集成使用" class="headerlink" title="集成使用"></a>集成使用</h2><h3 id="Maven集成"><a href="#Maven集成" class="headerlink" title="Maven集成"></a>Maven集成</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.blinkfox&lt;/groupId&gt;
+    &lt;artifactId&gt;mini-table&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="API-使用"><a href="#API-使用" class="headerlink" title="API 使用"></a>API 使用</h3><h4 id="示例1（无标题）"><a href="#示例1（无标题）" class="headerlink" title="示例1（无标题）"></a>示例1（无标题）</h4><pre><code class="java">String table = new MiniTable()
+        .addHeaders(&quot;header1&quot;, &quot;header2&quot;)
+        .addDatas(&quot;col11&quot;, &quot;col12&quot;)
+        .addDatas(&quot;col21&quot;, &quot;col22&quot;)
+        .render();
+System.out.println(table);
+</code></pre>
 <p>输出结果:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+---------+---------+</span><br><span class="line">| header1 | header2 |</span><br><span class="line">+---------+---------+</span><br><span class="line">|  col11  |  col12  |</span><br><span class="line">|  col21  |  col22  |</span><br><span class="line">+---------+---------+</span><br></pre></td></tr></table></figure>
-
-<h4 id="示例2（有标题）"><a href="#示例2（有标题）" class="headerlink" title="示例2（有标题）"></a>示例2（有标题）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">table</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MiniTable</span>(<span class="string">&quot;The Title&quot;</span>)</span><br><span class="line">        .addHeaders(<span class="string">&quot;Name&quot;</span>, <span class="string">&quot;Sex&quot;</span>, <span class="string">&quot;Age&quot;</span>, <span class="string">&quot;Email&quot;</span>, <span class="string">&quot;Phone&quot;</span>)</span><br><span class="line">        .addDatas(<span class="string">&quot;LiLei&quot;</span>, <span class="string">&quot;male&quot;</span>, <span class="number">25</span>, <span class="string">&quot;lilei@gmail.com&quot;</span>, <span class="string">&quot;13809345219&quot;</span>)</span><br><span class="line">        .addDatas(<span class="string">&quot;hanMeiMei&quot;</span>, <span class="string">&quot;female&quot;</span>, <span class="number">23</span>, <span class="string">&quot;hmm@163.com&quot;</span>, <span class="string">&quot;13515343853&quot;</span>)</span><br><span class="line">        .addDatas(<span class="string">&quot;ZhangSan&quot;</span>, <span class="string">&quot;female&quot;</span>, <span class="number">32</span>, <span class="string">&quot;zhangsan@gmail.com&quot;</span>, <span class="string">&quot;13920199836&quot;</span>)</span><br><span class="line">        .render();</span><br><span class="line">System.out.println(table);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">+---------+---------+
+| header1 | header2 |
++---------+---------+
+|  col11  |  col12  |
+|  col21  |  col22  |
++---------+---------+
+</code></pre>
+<h4 id="示例2（有标题）"><a href="#示例2（有标题）" class="headerlink" title="示例2（有标题）"></a>示例2（有标题）</h4><pre><code class="java">String table = new MiniTable(&quot;The Title&quot;)
+        .addHeaders(&quot;Name&quot;, &quot;Sex&quot;, &quot;Age&quot;, &quot;Email&quot;, &quot;Phone&quot;)
+        .addDatas(&quot;LiLei&quot;, &quot;male&quot;, 25, &quot;lilei@gmail.com&quot;, &quot;13809345219&quot;)
+        .addDatas(&quot;hanMeiMei&quot;, &quot;female&quot;, 23, &quot;hmm@163.com&quot;, &quot;13515343853&quot;)
+        .addDatas(&quot;ZhangSan&quot;, &quot;female&quot;, 32, &quot;zhangsan@gmail.com&quot;, &quot;13920199836&quot;)
+        .render();
+System.out.println(table);
+</code></pre>
 <p>输出结果:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-------------------------------------------------------------+</span><br><span class="line">|                          The Title                          |</span><br><span class="line">+-----------+--------+-----+--------------------+-------------+</span><br><span class="line">|   Name    |  Sex   | Age |       Email        |    Phone    |</span><br><span class="line">+-----------+--------+-----+--------------------+-------------+</span><br><span class="line">|   LiLei   |  male  | 25  |  lilei@gmail.com   | 13809345219 |</span><br><span class="line">| hanMeiMei | female | 23  |    hmm@163.com     | 13515343853 |</span><br><span class="line">| ZhangSan  | female | 32  | zhangsan@gmail.com | 13920199836 |</span><br><span class="line">+-----------+--------+-----+--------------------+-------------+</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">+-------------------------------------------------------------+
+|                          The Title                          |
++-----------+--------+-----+--------------------+-------------+
+|   Name    |  Sex   | Age |       Email        |    Phone    |
++-----------+--------+-----+--------------------+-------------+
+|   LiLei   |  male  | 25  |  lilei@gmail.com   | 13809345219 |
+| hanMeiMei | female | 23  |    hmm@163.com     | 13515343853 |
+| ZhangSan  | female | 32  | zhangsan@gmail.com | 13920199836 |
++-----------+--------+-----+--------------------+-------------+
+</code></pre>
 <h2 id="许可证"><a href="#许可证" class="headerlink" title="许可证"></a>许可证</h2><p>本 <a target="_blank" rel="noopener" href="https://github.com/blinkfox/mini-table">mini-table</a> 类库遵守 <a target="_blank" rel="noopener" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a> 许可证。</p>
 
                 

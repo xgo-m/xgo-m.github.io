@@ -438,20 +438,171 @@
 </ul>
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/10/17/mediator.jpg" alt="命令模式结构图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先，是抽象的<code>Mediator</code>类和具体的<code>ConcreteMediator</code>类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通用抽象中介者类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Mediator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 定义同事类1. */</span></span><br><span class="line">    <span class="keyword">protected</span> ConcreteColleague1 colleague1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 定义同事类2. */</span></span><br><span class="line">    <span class="keyword">protected</span> ConcreteColleague2 colleague2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* getter 和 setter 方法 */</span></span><br><span class="line">    <span class="keyword">public</span> ConcreteColleague1 <span class="title function_">getColleague1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> colleague1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setColleague1</span><span class="params">(ConcreteColleague1 colleague1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.colleague1 = colleague1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> ConcreteColleague2 <span class="title function_">getColleague2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> colleague2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setColleague2</span><span class="params">(ConcreteColleague2 colleague2)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.colleague2 = colleague2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 中介者模式的抽象业务逻辑1.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">doSomething1</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 中介者模式的抽象业务逻辑2.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">doSomething2</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 通用抽象中介者类.
+ *
+ * Created by blinkfox on 16/8/21.
+ */
+public abstract class Mediator &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的通用中介者类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteMediator</span> <span class="keyword">extends</span> <span class="title class_">Mediator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 中介者模式的具体业务逻辑1.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.colleague1.selfMethod1();</span><br><span class="line">        <span class="built_in">super</span>.colleague2.selfMethod2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 中介者模式的具体业务逻辑2.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.colleague1.selfMethod1();</span><br><span class="line">        <span class="built_in">super</span>.colleague2.selfMethod2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /** 定义同事类1. */
+    protected ConcreteColleague1 colleague1;
 
+    /** 定义同事类2. */
+    protected ConcreteColleague2 colleague2;
+
+    /* getter 和 setter 方法 */
+    public ConcreteColleague1 getColleague1() &#123;
+        return colleague1;
+    &#125;
+
+    public void setColleague1(ConcreteColleague1 colleague1) &#123;
+        this.colleague1 = colleague1;
+    &#125;
+
+    public ConcreteColleague2 getColleague2() &#123;
+        return colleague2;
+    &#125;
+
+    public void setColleague2(ConcreteColleague2 colleague2) &#123;
+        this.colleague2 = colleague2;
+    &#125;
+
+    /**
+     * 中介者模式的抽象业务逻辑1.
+     */
+    public abstract void doSomething1();
+
+    /**
+     * 中介者模式的抽象业务逻辑2.
+     */
+    public abstract void doSomething2();
+
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体的通用中介者类.
+ *
+ * Created by blinkfox on 16/8/21.
+ */
+public class ConcreteMediator extends Mediator &#123;
+
+    /**
+     * 中介者模式的具体业务逻辑1.
+     */
+    @Override
+    public void doSomething1() &#123;
+        super.colleague1.selfMethod1();
+        super.colleague2.selfMethod2();
+    &#125;
+
+    /**
+     * 中介者模式的具体业务逻辑2.
+     */
+    @Override
+    public void doSomething2() &#123;
+        super.colleague1.selfMethod1();
+        super.colleague2.selfMethod2();
+    &#125;
+
+&#125;
+</code></pre>
 <p>其实，是抽象的<code>Colleague</code>类和具体的<code>ConcreteColleague</code>类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象的同事类.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Colleague</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 中介者. */</span></span><br><span class="line">    <span class="keyword">protected</span> Mediator mediator;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Colleague</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.mediator = mediator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 抽象的同事类.
+ *
+ * Created by blinkfox on 16/8/21.
+ */
+public abstract class Colleague &#123;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的同事类1.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteColleague1</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ConcreteColleague1</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(mediator);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自有方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">selfMethod1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;------ConcreteColleague1-处理自己的业务逻辑1--------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 依赖方法.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">depMethod1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;------ConcreteColleague1-委托给中介者的业务逻辑1--------&quot;</span>);</span><br><span class="line">        <span class="built_in">super</span>.mediator.doSomething1();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    /** 中介者. */
+    protected Mediator mediator;
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的同事类2.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteColleague2</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ConcreteColleague2</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(mediator);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自有方法2.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">selfMethod2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;------ConcreteColleague2-处理自己的业务逻辑2--------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 依赖方法2.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">depMethod2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;------ConcreteColleague2-委托给中介者的业务逻辑2--------&quot;</span>);</span><br><span class="line">        <span class="built_in">super</span>.mediator.doSomething2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public Colleague(Mediator mediator) &#123;
+        this.mediator = mediator;
+    &#125;
 
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体的同事类1.
+ *
+ * Created by blinkfox on 16/8/21.
+ */
+public class ConcreteColleague1 extends Colleague &#123;
+
+    public ConcreteColleague1(Mediator mediator) &#123;
+        super(mediator);
+    &#125;
+
+    /**
+     * 自有方法.
+     */
+    public void selfMethod1() &#123;
+        System.out.println(&quot;------ConcreteColleague1-处理自己的业务逻辑1--------&quot;);
+    &#125;
+
+    /**
+     * 依赖方法.
+     */
+    public void depMethod1() &#123;
+        System.out.println(&quot;------ConcreteColleague1-委托给中介者的业务逻辑1--------&quot;);
+        super.mediator.doSomething1();
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code class="java">/**
+ * 具体的同事类2.
+ *
+ * Created by blinkfox on 16/8/21.
+ */
+public class ConcreteColleague2 extends Colleague &#123;
+
+    public ConcreteColleague2(Mediator mediator) &#123;
+        super(mediator);
+    &#125;
+
+    /**
+     * 自有方法2.
+     */
+    public void selfMethod2() &#123;
+        System.out.println(&quot;------ConcreteColleague2-处理自己的业务逻辑2--------&quot;);
+    &#125;
+
+    /**
+     * 依赖方法2.
+     */
+    public void depMethod2() &#123;
+        System.out.println(&quot;------ConcreteColleague2-委托给中介者的业务逻辑2--------&quot;);
+        super.mediator.doSomething2();
+    &#125;
+
+&#125;
+</code></pre>
 <p>以下是中介者模式的客户端场景类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 中介者模式的场景类</span></span><br><span class="line"><span class="comment"> * Created by blinkfox on 16/8/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MediatorClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Mediator</span> <span class="variable">mediator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteMediator</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">ConcreteColleague1</span> <span class="variable">colleague1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteColleague1</span>(mediator);</span><br><span class="line">        <span class="type">ConcreteColleague2</span> <span class="variable">colleague2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteColleague2</span>(mediator);</span><br><span class="line">        mediator.setColleague1(colleague1);</span><br><span class="line">        mediator.setColleague2(colleague2);</span><br><span class="line"></span><br><span class="line">        colleague1.depMethod1();</span><br><span class="line">        colleague2.depMethod2();</span><br><span class="line">        mediator.doSomething1();</span><br><span class="line">        mediator.doSomething2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">/**
+ * 中介者模式的场景类
+ * Created by blinkfox on 16/8/21.
+ */
+public class MediatorClient &#123;
 
+    public static void main(String[] args) &#123;
+        Mediator mediator = new ConcreteMediator();
+
+        ConcreteColleague1 colleague1 = new ConcreteColleague1(mediator);
+        ConcreteColleague2 colleague2 = new ConcreteColleague2(mediator);
+        mediator.setColleague1(colleague1);
+        mediator.setColleague2(colleague2);
+
+        colleague1.depMethod1();
+        colleague2.depMethod2();
+        mediator.doSomething1();
+        mediator.doSomething2();
+    &#125;
+
+&#125;
+</code></pre>
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><p>中介者模式可以使对象之间的关系数量急剧减少。</p>
 <p>中介者承担两方面的职责：</p>
 <ul>
