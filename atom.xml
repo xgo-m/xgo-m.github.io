@@ -6,7 +6,7 @@
   <link href="https://xgo-m.github.io/atom.xml" rel="self"/>
   
   <link href="https://xgo-m.github.io/"/>
-  <updated>2023-05-19T09:10:24.608Z</updated>
+  <updated>2023-05-19T10:04:36.801Z</updated>
   <id>https://xgo-m.github.io/</id>
   
   <author>
@@ -17,11 +17,186 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>软件设计师-知识点整理</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-zhi-dao/ruan-jian-she-ji-shi-zhi-shi-dian-zheng-li/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-zhi-dao/ruan-jian-she-ji-shi-zhi-shi-dian-zheng-li/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一-计算机组成&quot;&gt;&lt;a href=&quot;#一-计算机组成&quot; class=&quot;headerlink&quot; title=&quot;一 计算机组成&quot;&gt;&lt;/a&gt;一 计算机组成&lt;/h2&gt;&lt;h3 id=&quot;CPU&quot;&gt;&lt;a href=&quot;#CPU&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一章：创建和销毁对象</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;考虑静态工厂方法而不是构造函数&quot;&gt;&lt;a href=&quot;#考虑静态工厂方法而不是构造函数&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章：对于所有对象都通用的方法（1）之重写 equals 时请遵守通用约定</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-10-xiang-chong-xie-equals-shi-qing-zun-shou-tong-yong-yue-ding/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-10-xiang-chong-xie-equals-shi-qing-zun-shou-tong-yong-yue-ding/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;重写-equals-时请遵守通用约定&quot;&gt;&lt;a href=&quot;#重写-equals-时请遵守通用约定&quot; class=&quot;headerlink&quot; title=&quot;重写 equals 时请遵守通用约定&quot;&gt;&lt;/a&gt;重写 equals</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章：对于所有对象都通用的方法（2）之当重写 equals 方法时总要重写 hashCode 方法</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-11-xiang-dang-chong-xie-equals-fang-fa-shi-ye-yao-chong-xie-hashcode-fang-fa/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-11-xiang-dang-chong-xie-equals-fang-fa-shi-ye-yao-chong-xie-hashcode-fang-fa/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;当重写-equals-方法时总要重写-hashCode-方法&quot;&gt;&lt;a href=&quot;#当重写-equals-方法时总要重写-hashCode-方法&quot; class=&quot;headerlink&quot; title=&quot;当重写 equals 方法时总要重写 hashCode</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章：对于所有对象都通用的方法（3）之始终重写 toString 方法</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-12-xiang-shi-zhong-chong-xie-tostring-fang-fa/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-12-xiang-shi-zhong-chong-xie-tostring-fang-fa/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;始终重写-toString-方法&quot;&gt;&lt;a href=&quot;#始终重写-toString-方法&quot; class=&quot;headerlink&quot; title=&quot;始终重写 toString 方法&quot;&gt;&lt;/a&gt;始终重写 toString</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章：对于所有对象都通用的方法（4）之谨慎地重写 clone 方法</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-13-xiang-jin-shen-di-chong-xie-clone-fang-fa/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-13-xiang-jin-shen-di-chong-xie-clone-fang-fa/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;谨慎地重写-clone-方法&quot;&gt;&lt;a href=&quot;#谨慎地重写-clone-方法&quot; class=&quot;headerlink&quot; title=&quot;谨慎地重写 clone 方法&quot;&gt;&lt;/a&gt;谨慎地重写 clone</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章：对于所有对象都通用的方法（5）之考虑实现 Comparable 接口</title>
+    <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-14-xiang-kao-lu-shi-xian-comparable-jie-kou/"/>
+    <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-14-xiang-kao-lu-shi-xian-comparable-jie-kou/</id>
+    <published>2019-10-15T08:38:00.000Z</published>
+    <updated>2023-05-19T10:04:36.801Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;考虑实现-Comparable-接口&quot;&gt;&lt;a href=&quot;#考虑实现-Comparable-接口&quot; class=&quot;headerlink&quot; title=&quot;考虑实现 Comparable 接口&quot;&gt;&lt;/a&gt;考虑实现 Comparable</summary>
+        
+      
+    
+    
+    
+    <category term="编程书籍" scheme="https://xgo-m.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+    <category term="book" scheme="https://xgo-m.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Fenix — 比 MyBatis 更加强大的 Spring Data JPA 扩展库</title>
     <link href="https://xgo-m.github.io/2019/08/19/hou-duan/jpa/fenix-bi-mybatis-geng-jia-qiang-da-de-spring-data-jpa-kuo-zhan-ku/"/>
     <id>https://xgo-m.github.io/2019/08/19/hou-duan/jpa/fenix-bi-mybatis-geng-jia-qiang-da-de-spring-data-jpa-kuo-zhan-ku/</id>
     <published>2019-08-19T16:10:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -51,7 +226,7 @@
     <link href="https://xgo-m.github.io/2019/03/02/hou-duan/spring/springboot2.x-dan-yuan-ce-shi/"/>
     <id>https://xgo-m.github.io/2019/03/02/hou-duan/spring/springboot2.x-dan-yuan-ce-shi/</id>
     <published>2019-03-02T09:20:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -85,7 +260,7 @@
     <link href="https://xgo-m.github.io/2019/02/14/hou-duan/java/java-dai-ma-xing-neng-ping-gu-ku-stalker-jie-shao/"/>
     <id>https://xgo-m.github.io/2019/02/14/hou-duan/java/java-dai-ma-xing-neng-ping-gu-ku-stalker-jie-shao/</id>
     <published>2019-02-14T04:00:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -112,7 +287,7 @@
     <link href="https://xgo-m.github.io/2019/01/25/hou-duan/java/yi-ge-ji-jian-de-java-ascii-biao-ge-sheng-cheng-ku/"/>
     <id>https://xgo-m.github.io/2019/01/25/hou-duan/java/yi-ge-ji-jian-de-java-ascii-biao-ge-sheng-cheng-ku/</id>
     <published>2019-01-25T02:34:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -140,7 +315,7 @@
     <link href="https://xgo-m.github.io/2018/12/18/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-qiao-jie-mo-shi/"/>
     <id>https://xgo-m.github.io/2018/12/18/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-qiao-jie-mo-shi/</id>
     <published>2018-12-18T16:20:00.000Z</published>
-    <updated>2023-05-19T09:10:24.612Z</updated>
+    <updated>2023-05-19T10:04:36.801Z</updated>
     
     
       
@@ -167,7 +342,7 @@
     <link href="https://xgo-m.github.io/2018/12/12/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-gua-pei-qi-mo-shi/"/>
     <id>https://xgo-m.github.io/2018/12/12/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-gua-pei-qi-mo-shi/</id>
     <published>2018-12-12T14:00:00.000Z</published>
-    <updated>2023-05-19T09:10:24.612Z</updated>
+    <updated>2023-05-19T10:04:36.805Z</updated>
     
     
       
@@ -194,7 +369,7 @@
     <link href="https://xgo-m.github.io/2018/11/23/ruan-jian-she-ji/ruan-jian-cheng-xu-she-ji-yuan-ze/"/>
     <id>https://xgo-m.github.io/2018/11/23/ruan-jian-she-ji/ruan-jian-cheng-xu-she-ji-yuan-ze/</id>
     <published>2018-11-23T16:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.612Z</updated>
+    <updated>2023-05-19T10:04:36.805Z</updated>
     
     
       
@@ -223,7 +398,7 @@
     <link href="https://xgo-m.github.io/2018/11/22/ruan-jian-gong-ju/devops/gitlab-ci-jie-shao-he-shi-yong/"/>
     <id>https://xgo-m.github.io/2018/11/22/ruan-jian-gong-ju/devops/gitlab-ci-jie-shao-he-shi-yong/</id>
     <published>2018-11-22T15:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.801Z</updated>
     
     
       
@@ -252,7 +427,7 @@
     <link href="https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/markdown/vue-wen-dang-feng-ge-de-typora-zhu-ti/"/>
     <id>https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/markdown/vue-wen-dang-feng-ge-de-typora-zhu-ti/</id>
     <published>2018-11-18T16:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.801Z</updated>
     
     
       
@@ -282,7 +457,7 @@
     <link href="https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/cpu-duo-ji-huan-cun/"/>
     <id>https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/cpu-duo-ji-huan-cun/</id>
     <published>2018-11-18T13:55:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.801Z</updated>
     
     
       
@@ -307,7 +482,7 @@
     <link href="https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/"/>
     <id>https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/</id>
     <published>2018-11-15T14:50:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -334,7 +509,7 @@
     <link href="https://xgo-m.github.io/2018/11/14/hou-duan/java/java8-xin-te-xing-ji-shi-yong-er/"/>
     <id>https://xgo-m.github.io/2018/11/14/hou-duan/java/java8-xin-te-xing-ji-shi-yong-er/</id>
     <published>2018-11-14T14:00:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -359,7 +534,7 @@
     <link href="https://xgo-m.github.io/2018/11/13/hou-duan/java/java8-xin-te-xing-ji-shi-yong-yi/"/>
     <id>https://xgo-m.github.io/2018/11/13/hou-duan/java/java8-xin-te-xing-ji-shi-yong-yi/</id>
     <published>2018-11-13T14:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
+    <updated>2023-05-19T10:04:36.797Z</updated>
     
     
       
@@ -376,184 +551,6 @@
     
     
     <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java7新特性及使用</title>
-    <link href="https://xgo-m.github.io/2018/11/11/hou-duan/java/java7-xin-te-xing-ji-shi-yong/"/>
-    <id>https://xgo-m.github.io/2018/11/11/hou-duan/java/java7-xin-te-xing-ji-shi-yong/</id>
-    <published>2018-11-11T16:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;新特性列表&quot;&gt;&lt;a href=&quot;#新特性列表&quot; class=&quot;headerlink&quot; title=&quot;新特性列表&quot;&gt;&lt;/a&gt;新特性列表&lt;/h2&gt;&lt;p&gt;以下是Java7中的引入的部分新特性。关于Java7更详细的介绍可参考&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java6新特性及使用</title>
-    <link href="https://xgo-m.github.io/2018/11/11/hou-duan/java/java6-xin-te-xing-ji-shi-yong/"/>
-    <id>https://xgo-m.github.io/2018/11/11/hou-duan/java/java6-xin-te-xing-ji-shi-yong/</id>
-    <published>2018-11-11T14:40:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;新特性列表&quot;&gt;&lt;a href=&quot;#新特性列表&quot; class=&quot;headerlink&quot; title=&quot;新特性列表&quot;&gt;&lt;/a&gt;新特性列表&lt;/h2&gt;&lt;p&gt;以下是Java6中的引入的部分新特性，相比Java5的新特性就少了很多了。关于Java6更详细的介绍可参考&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java5新特性及使用</title>
-    <link href="https://xgo-m.github.io/2018/11/08/hou-duan/java/java5-xin-te-xing-ji-shi-yong/"/>
-    <id>https://xgo-m.github.io/2018/11/08/hou-duan/java/java5-xin-te-xing-ji-shi-yong/</id>
-    <published>2018-11-08T16:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;新特性列表&quot;&gt;&lt;a href=&quot;#新特性列表&quot; class=&quot;headerlink&quot; title=&quot;新特性列表&quot;&gt;&lt;/a&gt;新特性列表&lt;/h2&gt;&lt;p&gt;以下是Java5中的引入的部分新特性，关于更详细的新特性了解，可参考&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java注解的理解和应用</title>
-    <link href="https://xgo-m.github.io/2018/11/07/hou-duan/java/java-zhu-jie-de-li-jie-he-ying-yong/"/>
-    <id>https://xgo-m.github.io/2018/11/07/hou-duan/java/java-zhu-jie-de-li-jie-he-ying-yong/</id>
-    <published>2018-11-07T16:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.608Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;h3 id=&quot;1-什么是注解&quot;&gt;&lt;a href=&quot;#1-什么是注解&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java反射基础</title>
-    <link href="https://xgo-m.github.io/2018/11/07/hou-duan/java/java-fan-she-ji-chu/"/>
-    <id>https://xgo-m.github.io/2018/11/07/hou-duan/java/java-fan-she-ji-chu/</id>
-    <published>2018-11-07T13:40:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一、概述&quot;&gt;&lt;a href=&quot;#一、概述&quot; class=&quot;headerlink&quot; title=&quot;一、概述&quot;&gt;&lt;/a&gt;一、概述&lt;/h2&gt;&lt;h3 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO 知识整理</title>
-    <link href="https://xgo-m.github.io/2018/11/05/hou-duan/java/java-io-zhi-shi-zheng-li/"/>
-    <id>https://xgo-m.github.io/2018/11/05/hou-duan/java/java-io-zhi-shi-zheng-li/</id>
-    <published>2018-11-05T03:30:00.000Z</published>
-    <updated>2023-05-19T09:10:24.604Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;各IO类关系梳理&quot;&gt;&lt;a href=&quot;#各IO类关系梳理&quot; class=&quot;headerlink&quot; title=&quot;各IO类关系梳理&quot;&gt;&lt;/a&gt;各IO类关系梳理&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;InputStream: Java</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java面向对象设计之责任链模式</title>
-    <link href="https://xgo-m.github.io/2018/11/04/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-ze-ren-lian-mo-shi/"/>
-    <id>https://xgo-m.github.io/2018/11/04/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-ze-ren-lian-mo-shi/</id>
-    <published>2018-11-04T14:00:00.000Z</published>
-    <updated>2023-05-19T09:10:24.612Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;模式动机&quot;&gt;&lt;a href=&quot;#模式动机&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="软件设计" scheme="https://xgo-m.github.io/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-    <category term="设计模式" scheme="https://xgo-m.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

@@ -1,0 +1,1635 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="第一章：创建和销毁对象, 小青蛙, 河豚">
+    <meta name="description" content="瞳凝秋水剑流星，裁诗为骨玉为神；翩翩白衣云端客，生死为谁一掷轻。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>第一章：创建和销毁对象 | 小青蛙</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小青蛙" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小青蛙</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小青蛙</div>
+        <div class="logo-desc">
+            
+            瞳凝秋水剑流星，裁诗为骨玉为神；翩翩白衣云端客，生死为谁一掷轻。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">第一章：创建和销毁对象</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/book/">
+                                <span class="chip bg-color">book</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/" class="post-category">
+                                编程书籍
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-15
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    18.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    71 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="考虑静态工厂方法而不是构造函数"><a href="#考虑静态工厂方法而不是构造函数" class="headerlink" title="考虑静态工厂方法而不是构造函数"></a>考虑静态工厂方法而不是构造函数</h2><p>&amp;emsp;&amp;emsp;类允许客户端获取实例的传统方法是提供公共构造器。还有一种技术应该是每个程序猿的工具箱的一部分。一个类可以提供一个公共静态工厂方法，它仅仅是一个返回类实例的静态方法。下面是布尔（基本类型 boolean 的包装类）的一个简单示例。这个方法将一个布尔原始值转换成布尔对象引用：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Boolean</span> <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> b <span class="token operator">?</span> <span class="token class-name">Boolean</span><span class="token punctuation">.</span><span class="token constant">TRUE</span> <span class="token operator">:</span> <span class="token class-name">Boolean</span><span class="token punctuation">.</span><span class="token constant">FALSE</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;<strong>注意</strong>：静态工厂方法与设计模式 [Gamma95] 的工厂方法模式不同，在该项中描述的静态工厂方法并不等同于设计模式中的工厂方法模式。</p>
+<p>&amp;emsp;&amp;emsp;一个类可以为其客户提供静态工厂方法，而不是公共构造函数。提供静态工厂方法而不是公共构造函数既有优点也有缺点。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的一个优点是，它们是有名称的，而构造函数的名称都是一样的</strong>。如果构造函数的参数本身不能描述返回的对象，那么使用一个精心命名的静态工厂更容易使用，并且生成的客户端代码更容易阅读。例如<code>BigInteger</code>的一个构造函数：<code>BigInteger(int, int, Random)</code>，这个构造函数返回一个<code>BigInteger</code>有可能是一个质数，使用一个精心命名的静态工厂方法会更容易描述该方法返回的 BigInteger 类型，比如<code>BigInteger.probablePrime</code>（这是在 Java 4 中添加的）。</p>
+<p>&amp;emsp;&amp;emsp;一个类只能有一个带有给定签名的构造函数。程序猿可以通过提供两个构造函数来绕过这个限制，这些构造函数的参数列表只在参数类型的顺序上有所不同。这是个相当坏的主意。这样使用这个 API 的用户永远无法记住应该使用哪个构造函数，并且最终会调用错误的构造函数。使用这些构造函数的人在不阅读引用类文档的情况下是不知道代码是干什么的。</p>
+<p>&amp;emsp;&amp;emsp;因为静态工厂方法有名称，所以就不会有这个限制，在一个类需要使用多个签名、多个构造函数的情况下，用静态工厂方法代替构造函数，并仔细选择方法的名称就可以突出构造函数之间的差异了。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的第二个优点是，与构造函数不同，它们不需要在每次被调用时创建一个新对象</strong>。这允许不可变类（第 17 项）使用预先构造的实例，或者在构建时缓存实例，并重复分发它们，以避免创建不必要的重复对象。<code>Boolean.valueOf(boolean)</code>方法使用了这种方式：它从不创建对象。这种技术类似于享元模式[Gamma95]。如果经常请求等效对象，特别是当它们的创建成本很高时，它可以极大地提高性能。</p>
+<p>&amp;emsp;&amp;emsp;静态工厂方法从重复调用中返回相同的对象的能力允许类在任何时候保持对实例的严格控制。这样做的类被认为是实例控制的。编写实例控制类的原因有几个。实例控制允许一个类保证它是一个单例（第 3 项）或非实例化的（第 4 项），并且它允许一个不可变的值类（第 17 项）来保证没有两个相等的实例存在：当且仅当<code>a==b</code>成立时，<code>a.equals(b)</code>返回<code>true</code>，这是享元模式 [Gamma95] 的基础，枚举类型就提供了这种保证。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的第三个优点是，与构造函数不同，它们返回的对象可以是返回类型的任何子类的实例对象</strong>。这使在选择返回的对象的类时具有很大的灵活性。</p>
+<p>&amp;emsp;&amp;emsp;这种灵活性的一个应用是，API 可以返回对象，同时又不会使对象的类变成公有的，以这种方式隐藏实现类会使 API 变得非常简洁。这种技术适用于基于接口的框架(interface-based frameworks，见第 20 项)，因为在这种框架中，接口为静态工厂方法提供了自然返回类型。</p>
+<p>&amp;emsp;&amp;emsp;在 Java 8 之前，接口不能有静态方法。按照惯例，名为 Type 的接口的静态工厂方法被放置在一个不可实例化的名为 Types 的配套类(noninstantiable companion class)（第 4 项）中。例如，Java Collections Framework 有 45 个便利实现，分别提供了不可修改的集合、同步集合等等。几乎所有这些实现都通过静态工厂方法在一个不可实例化的类(java.util.Collections)中导出。所有返回对象的类都是非公有的。</p>
+<p>&amp;emsp;&amp;emsp;现在的 Collections Framework API 比导出的 45 个独立的公有类的那种实现方式要小得多，每种便利的实现都对应一个类。这不仅仅减少了 API 的数量，还包括概念上的权重：程序猿必须掌握的概念的数量和难度，以便使用 API。程序猿知道返回的对象正好有其接口指定的 API，因此不需要为实现类去阅读额外的类文档。此外，这种工厂方法要求客户端通过接口而不是实现类来引用返回的对象，这通常是很好的实践方式（第 64 项）。</p>
+<p>&amp;emsp;&amp;emsp;从 Java 8 开始，消除了接口不能包含静态方法的限制，因此通常没有理由为接口提供不可实例化的伴随类。许多公共静态成员应该放在接口本身中。但请注意，可能仍有必要将大量实现代码放在这些静态方法后面的单独的包私有类中。这是因为 Java 8 要求接口的所有静态成员都是公共的。Java 9 允许私有静态方法，但静态字段和静态成员类的属性依然是要求是公共的。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的第四个优点是，静态工厂方法所返回的对象的类可以随着每次调用而变化，这取决于静态工厂方法的参数值</strong>。只要返回的类型是声明的类的子类都是允许的。返回对象的类也可能随着发行版本的不同而不同。</p>
+<p>&amp;emsp;&amp;emsp;在<code>EnumSet</code>类（第 36 项）中没有公有的构造方法，只有静态工厂方法。在 OpenJDK 实现中的，它们返回两个子类之一的实例，具体取决于基础枚举类型的大小：如果它有 64 个或更少的元素，就像大多数枚举类型所做的那样，静态工厂返回一个<code>RegularEnumSet</code>实例, 它由单个<code>long</code>的支持；如果枚举类型有 65 个或更多元素，则工厂将返回一个由长数组支持的<code>JumboEnumSet</code>实例。</p>
+<p>&amp;emsp;&amp;emsp;这两个实现类的存在对于客户端是不可见的。如果 RegularEnumSet 不再为小枚举类型提供性能优势可以从未来版本中删除，没有任何不良影响。 同样，未来如果证明有利于性能，则可以添加<code>EnumSet</code>的第三或第四个实现。客户即不知道也不关心他们从工厂中获取的对象的类型，他们只关心它是<code>EnumSet</code>的一些子类。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的第五个优点是，返回的对象所属的类，在编写包含该静态工厂方法的类时可以不必存在</strong>。这种灵活的静态工厂方法构成了服务提供者框架(Service Provider Framework)的基础，例如 JDBC(Java 数据库连接，Java Database Connectivity)API。服务提供者框架是提供者实现服务的系统，系统使实现可用于客户端，将客户端与实现分离【微服务】。</p>
+<p>&amp;emsp;&amp;emsp;服务提供者框架中有三个基本组件：服务接口【提供者】，代表一个实现；提供者注册 API【注册中心】，提供者用于注册实现；以及服务访问 API【消费者】，客户端使用它来获取服务的实例。服务访问 API 可以允许客户端指定用于选择实现的标准。 如果没有这样的标准，API 将返回默认实现的实例，或允许客户端循环遍历所有可用的实现。服务访问 API 是灵活的静态工厂，它构成了服务提供者框架的基础。</p>
+<p>&amp;emsp;&amp;emsp;服务提供者框架的可选第四个组件是服务提供者接口，它描述了生成服务接口实例的工厂对象。在缺少服务提供者接口的情况下，必须反复实例化实现(第 65 项)。对于 JDBC，Connection 扮演服务接口的一部分，DriverManager.registerDriver 是提供者注册 API，DriverManager.getConnection 是服务访问 API，Driver 是服务提供者接口。</p>
+<p>&amp;emsp;&amp;emsp;服务提供者框架模式有许多变体。例如，服务访问 API 可以向客户端返回比提供者提供的服务接口更丰富的服务接口。这是桥接模式 [Gamma95] 。依赖注入框架（第 5 项）可视为强大的服务提供者。从 Java 6 开始，该平台包含一个通用服务提供程序框架 java.util.ServiceLoader，因此你不需要（通常不应该）自己编写（第 59 项）。JDBC 不使用 ServiceLoader，因为前者早于后者。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的主要限制在于，类如果不含公有的或者受保护的构造器，就不能被子类化</strong>。例如：不可能将 Collections Framework 中的任何方便的实现类子类化。但是这也许会因祸得福，因为它鼓励程序猿使用组合，而不是继承（第 18 项），并且要求必须是不可变的（第 17 项）。</p>
+<p>&amp;emsp;&amp;emsp;<strong>静态工厂方法的第二个缺点是程序猿很难找到它们</strong>。它们不像构造函数那样在 API 文档中脱颖而出，因此很难弄清楚如何实例化提供静态工厂方法而不是构造函数的类。Javadoc 工具有一天可能会引起对静态工厂方法的注意。在此期间，你可以通过引起对类或接口文档中的静态工厂的注意并遵守常见的命名约定来减少此问题。以下是静态工厂方法的一些常用名称。 这份清单远非详尽无遗：</p>
+<ul>
+<li>from：一种类型转换方法，它接受单个参数并返回此类型的相应实例，例如：<code>Date d = Date.from(instant);</code></li>
+<li>of：一种聚合方法，它接受多个参数并返回包含它们的此类型的实例，例如：<code>Set&lt;Rank&gt; faceCards = EnumSet.of(JACK, QUEEN, KING);</code></li>
+<li>valueOf：一个更详细的替代方案，例如：<code>BigInteger prime = BigInteger.valueOf(Integer.MAX_VALUE);</code></li>
+<li>instance or getInstance：返回由其参数（如果有）描述的实例，但不能说它具有相同的值，例如：<code>StackWalker luke = StackWalker.getInstance(options);</code></li>
+<li>create or newInstance：与 instance 或 getInstance 类似，不同之处在于该方法保证每个调用都返回一个新实例，例如：<code>Object newArray = Array.newInstance(classObject, arrayLen);</code></li>
+<li>getType：与 getInstance 类似，是在工厂方法位于不同的类中时使用它。Type 指的是工厂方法返回的对象类型，例如：<code>FileStore fs = Files.getFileStore(path);</code></li>
+<li>newType：与 newInstance 类似，是在工厂方法位于不同的类中时使用它。Type 指的是工厂方法返回的对象类型，例如：<code>BufferedReader br = Files.newBufferedReader(path);</code></li>
+<li>type：获取 Type 和 new Type 一个简明替代的方法，比如：<code>List&lt;Complaint&gt; litany = Collections.list(legacyLitany);</code></li>
+</ul>
+<p>&amp;emsp;&amp;emsp;总之，静态工厂方法和公共构造函数都有它们的用途，理解它们的相对优点是值得的。通常静态工厂是优选的，不要在第一反应就是使用构造函数，应当先考虑使用静态工厂方法。</p>
+<h2 id="当面临多个参数的构造器时考虑使用构建器"><a href="#当面临多个参数的构造器时考虑使用构建器" class="headerlink" title="当面临多个参数的构造器时考虑使用构建器"></a>当面临多个参数的构造器时考虑使用构建器</h2><p>&amp;emsp;&amp;emsp;静态工厂和构造器有个共同的局限性：他们都不能很好地扩展到大量的可选参数。考虑用一个类表示包装食品外面显示的营养成分标签。这些标签中有几个域是必需的：每份的含量、每罐的含量以及每份的卡路里，还有超过 20 个可选域：总脂肪、饱和脂肪量、转化脂肪、胆固醇、钠等等。大多数产品在某几个可选域中都会有非零的值。</p>
+<p>&amp;emsp;&amp;emsp;对于这样的类，应该采用哪种构造器或者静态方法来编写呢？程序猿一向习惯采用重叠构造器（telescoping constructor）模式，在这种模式下，提供一个只有必要参数的构造器，第二个构造器有一个可选参数，第三个有两个可选参数，以此类推，最后一个构造器包含所有可选参数。下面有个示例，为了简单起见，它显示四个可选域：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Telescoping constructor pattern - does not scale well!</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NutritionFacts</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servingSize<span class="token punctuation">;</span> <span class="token comment">// (mL) required</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servings<span class="token punctuation">;</span> <span class="token comment">// (per container) required</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> calories<span class="token punctuation">;</span> <span class="token comment">// (per serving) optional</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> fat<span class="token punctuation">;</span> <span class="token comment">// (g/serving) optional</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> sodium<span class="token punctuation">;</span> <span class="token comment">// (mg/serving) optional</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> carbohydrate<span class="token punctuation">;</span> <span class="token comment">// (g/serving) optional</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">(</span>servingSize<span class="token punctuation">,</span> servings<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">,</span> <span class="token keyword">int</span> calories<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">(</span>servingSize<span class="token punctuation">,</span> servings<span class="token punctuation">,</span> calories<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">,</span> <span class="token keyword">int</span> calories<span class="token punctuation">,</span> <span class="token keyword">int</span> fat<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">(</span>servingSize<span class="token punctuation">,</span> servings<span class="token punctuation">,</span> calories<span class="token punctuation">,</span> fat<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">,</span> <span class="token keyword">int</span> calories<span class="token punctuation">,</span> <span class="token keyword">int</span> fat<span class="token punctuation">,</span> <span class="token keyword">int</span> sodium<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">(</span>servingSize<span class="token punctuation">,</span> servings<span class="token punctuation">,</span> calories<span class="token punctuation">,</span> fat<span class="token punctuation">,</span> sodium<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">,</span> <span class="token keyword">int</span> calories<span class="token punctuation">,</span> <span class="token keyword">int</span> fat<span class="token punctuation">,</span> <span class="token keyword">int</span> sodium<span class="token punctuation">,</span> <span class="token keyword">int</span> carbohydrate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>servingSize <span class="token operator">=</span> servingSize<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>servings <span class="token operator">=</span> servings<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>calories <span class="token operator">=</span> calories<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>fat <span class="token operator">=</span> fat<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>sodium <span class="token operator">=</span> sodium<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>carbohydrate <span class="token operator">=</span> carbohydrate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;当你想要创建实例的时候，就利用参数列表最短的构造器，但该列表中包含了要设置的所有参数：<code>NutritionFacts cocaCola = new NutritionFacts(240, 8, 100, 0, 35, 27);</code>这个构造器调用通常需要许多你本不想设置的参数，但还是不得不为它们传递值。在这个例子中，我们给 fat 传递了一个值为 0。如果”仅仅”是这 6 个参数，看起来还不算太糟，问题是随着参数数目的增加，它很快就失去了控制。</p>
+<p>&amp;emsp;&amp;emsp;总的来说，使用重叠构造器模式是可行的，但是当有很多参数的时候就很难编写客户端代码，也很难去阅读它们。如果读者想要知道这些值代表什么意思，就必须仔细地数着这些参数来探个究竟。一长串类型相同的参数会导致一些微妙的错误，如果客户端不小心颠倒了其中两个参数的顺序，编译器也不会报错，但是程序在运行的时候就会出现错误的行为。</p>
+<p>&amp;emsp;&amp;emsp;遇到许多构造器参数的时候，还有第二种代替方法，即 JavaBean 模式，在这种模式下，调用一个无参构造器来创建对象，然后调用<code>setter</code>方法来设置每个必要的参数，以及每个相关的可选参数：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// JavaBeans Pattern - allows inconsistency, mandates mutability</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NutritionFacts</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Parameters initialized to default values (if any)</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> servingSize <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Required; no default value</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> servings <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Required; no default value</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> calories <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> fat <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> sodium <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> carbohydrate <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+    <span class="token comment">// Setters</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setServingSize</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> servingSize <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setServings</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> servings <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCalories</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> calories <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFat</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> fat <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSodium</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> sodium <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCarbohydrate</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> carbohydrate <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这种模式弥补了重叠构造器模式的不足。说得明白一点，就是创建实例很容易，这样产生的代码读起来也很容易。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">NutritionFacts</span> cocaCola <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cocaCola<span class="token punctuation">.</span><span class="token function">setServingSize</span><span class="token punctuation">(</span><span class="token number">240</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cocaCola<span class="token punctuation">.</span><span class="token function">setServings</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cocaCola<span class="token punctuation">.</span><span class="token function">setCalories</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cocaCola<span class="token punctuation">.</span><span class="token function">setSodium</span><span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cocaCola<span class="token punctuation">.</span><span class="token function">setCarbohydrate</span><span class="token punctuation">(</span><span class="token number">27</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;遗憾的是，这种 JavaBean 模式自身有很严重的缺点。因为构造过程被分到了几个调用中，在构造的过程中 JavaBean 可能处于不一致的状态。类无法通过检验构造器参数的有效性来保证一致性。试图使用处于不一致状态的对象，将会导致失败，这种失败与包含错误的代码大相径庭，因此它调试起来十分困难。与此相关的另一点不足在于，JavaBean 模式阻止了把类做成了不可变的可能（第 17 项），这就需要程序猿付出额外的努力来保证它的线程安全。</p>
+<p>&amp;emsp;&amp;emsp;在构造器完成构造对象之前进行加锁，完成构造之后进行解锁，这就能弥补以上的不足之处，但是这种方式十分笨拙，在实践中很少使用。此外，它甚至会在运行时出现错误，因为编译器无法确保程序猿会在使用构造器之前进行加锁操作。</p>
+<p>&amp;emsp;&amp;emsp;幸运的是，还有第三种替代方法，结合了重叠构造器的安全性和 JavaBean 模式的可读性。这就是 Builder 模式 [Gamma95] 的一种形式。不直接生成想要的对象，而是让客户端调用一个带有所有必需参数的构造器方法（或者静态工厂方法）去获得一个 builder 对象，然后客户端在<code>builder</code>对象上调用类似于 setter 的方法来设置每个相关的可选参数。最后，客户端调用无参的<code>build</code>方法来生成不可变的对象。这个<code>builder</code>通常是它构建的类的静态成员类（第 24 项）。下面就是它的示例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Builder Pattern</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NutritionFacts</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servingSize<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servings<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> calories<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> fat<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> sodium<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> carbohydrate<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Builder</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// Required parameters</span>
+        <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servingSize<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> servings<span class="token punctuation">;</span>
+        <span class="token comment">// Optional parameters - initialized to default values</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> calories <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> fat <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> sodium <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> carbohydrate <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span><span class="token punctuation">(</span><span class="token keyword">int</span> servingSize<span class="token punctuation">,</span> <span class="token keyword">int</span> servings<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>servingSize <span class="token operator">=</span> servingSize<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>servings <span class="token operator">=</span> servings<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span> <span class="token function">calories</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            calories <span class="token operator">=</span> val<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span> <span class="token function">fat</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            fat <span class="token operator">=</span> val<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span> <span class="token function">sodium</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sodium <span class="token operator">=</span> val<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span> <span class="token function">carbohydrate</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            carbohydrate <span class="token operator">=</span> val<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">NutritionFacts</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">NutritionFacts</span><span class="token punctuation">(</span><span class="token class-name">Builder</span> builder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        servingSize <span class="token operator">=</span> builder<span class="token punctuation">.</span>servingSize<span class="token punctuation">;</span>
+        servings <span class="token operator">=</span> builder<span class="token punctuation">.</span>servings<span class="token punctuation">;</span>
+        calories <span class="token operator">=</span> builder<span class="token punctuation">.</span>calories<span class="token punctuation">;</span>
+        fat <span class="token operator">=</span> builder<span class="token punctuation">.</span>fat<span class="token punctuation">;</span>
+        sodium <span class="token operator">=</span> builder<span class="token punctuation">.</span>sodium<span class="token punctuation">;</span>
+        carbohydrate <span class="token operator">=</span> builder<span class="token punctuation">.</span>carbohydrate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;<code>NutritionFacts</code>是不可变的，所有默认参数值都单独放在一个地方。<code>builder</code>的<code>setter</code>方法返回的是<code>builder</code>本身，以便可以把调用连接起来。下面是客户端代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">NutritionFacts</span> cocaCola <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NutritionFacts<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span><span class="token number">240</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">calories</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sodium</span><span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">carbohydrate</span><span class="token punctuation">(</span><span class="token number">27</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这样的客户端代码是很容易编写的，更重要的是，阅读起来很容易。Builder 模式模仿了 Python 和 Scala 中的命名可选参数。</p>
+<p>&amp;emsp;&amp;emsp;为简洁起见，省略了有效性检查。要尽快检测无效参数，请在构建器的构造函数和方法中检查参数有效性。检查构建方法调用的构造函数中涉及多个参数的不变量。要确保这些不变量不受攻击，请在从构建器复制参数后对对象字段执行检查（第 50 项）。如果检查失败，则抛出<code>IllegalArgumentException</code>（第 72 项），其详细消息指示哪些参数无效（第 75 项）。</p>
+<p>&amp;emsp;&amp;emsp;Builder 模式非常适合类层次结构。使用并行的构建器层次结构，每个构建器都嵌套在相应的类中。抽象类有抽象构建器; 具体课程有混凝土建造者。例如，在代表各种批萨的层次结构的根部考虑使用一个抽象类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Builder pattern for class hierarchies</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Pizza</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">Topping</span> <span class="token punctuation">&#123;</span> <span class="token constant">HAM</span><span class="token punctuation">,</span> <span class="token constant">MUSHROOM</span><span class="token punctuation">,</span> <span class="token constant">ONION</span><span class="token punctuation">,</span> <span class="token constant">PEPPER</span><span class="token punctuation">,</span> <span class="token constant">SAUSAGE</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">final</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Topping</span><span class="token punctuation">></span></span> toppings<span class="token punctuation">;</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Builder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Builder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">EnumSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Topping</span><span class="token punctuation">></span></span> toppings <span class="token operator">=</span> <span class="token class-name">EnumSet</span><span class="token punctuation">.</span><span class="token function">noneOf</span><span class="token punctuation">(</span><span class="token class-name">Topping</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token function">addTopping</span><span class="token punctuation">(</span><span class="token class-name">Topping</span> topping<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            toppings<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>topping<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">abstract</span> <span class="token class-name">Pizza</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Subclasses must override this method to return "this"</span>
+        <span class="token keyword">protected</span> <span class="token keyword">abstract</span> <span class="token class-name">T</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token class-name">Pizza</span><span class="token punctuation">(</span><span class="token class-name">Builder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> builder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        toppings <span class="token operator">=</span> builder<span class="token punctuation">.</span>toppings<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// See Item 50</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;注意下这个 Pizza 类，Builder 是具有递归类型参数的通用类型（第 30 项）。这与抽象方法 self 一起允许方法链在子类中正常工作，而不需要强制转换。Java 缺乏自我类型这一事实的解决方法被称为模拟自我类型习语(This workaround for the fact that Java lacks a self type is known as the simulated self-type idiom.)。</p>
+<p>&amp;emsp;&amp;emsp;这是<code>Pizza</code>的两个具体子类，其中一个代表标准的纽约式披萨，另一个代表<code>calzone</code>。 前者具有所需的大小参数，而后者允许你指定酱汁应该在内部还是外部：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NyPizza</span> <span class="token keyword">extends</span> <span class="token class-name">Pizza</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">Size</span> <span class="token punctuation">&#123;</span> <span class="token constant">SMALL</span><span class="token punctuation">,</span> <span class="token constant">MEDIUM</span><span class="token punctuation">,</span> <span class="token constant">LARGE</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Size</span> size<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Builder</span> <span class="token keyword">extends</span> <span class="token class-name">Pizza<span class="token punctuation">.</span>Builder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Builder</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Size</span> size<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span><span class="token punctuation">(</span><span class="token class-name">Size</span> size<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>size <span class="token operator">=</span> <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token class-name">NyPizza</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">NyPizza</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token annotation punctuation">@Override</span> <span class="token keyword">protected</span> <span class="token class-name">Builder</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">NyPizza</span><span class="token punctuation">(</span><span class="token class-name">Builder</span> builder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>builder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        size <span class="token operator">=</span> builder<span class="token punctuation">.</span>size<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Calzone</span> <span class="token keyword">extends</span> <span class="token class-name">Pizza</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> sauceInside<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Builder</span> <span class="token keyword">extends</span> <span class="token class-name">Pizza<span class="token punctuation">.</span>Builder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Builder</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">private</span> <span class="token keyword">boolean</span> sauceInside <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// Default</span>
+        <span class="token keyword">public</span> <span class="token class-name">Builder</span> <span class="token function">sauceInside</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sauceInside <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token class-name">Calzone</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Calzone</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token annotation punctuation">@Override</span> <span class="token keyword">protected</span> <span class="token class-name">Builder</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">Calzone</span><span class="token punctuation">(</span><span class="token class-name">Builder</span> builder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>builder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sauceInside <span class="token operator">=</span> builder<span class="token punctuation">.</span>sauceInside<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;请注意，每个子类的构建器中的构建方法被声明为返回正确的子类：<code>NyPizza.Builder</code>的构建方法返回<code>NyPizza</code>，而<code>Calzone.Builder</code>中的构建方法返回<code>Calzone</code>。这种技术，其中子类方法声明的返回类型是在超类中声明的返回类型的子类型，称为协变返回类型，它允许客户使用这些构建器而无需进行创建。</p>
+<p>&amp;emsp;&amp;emsp;这些“分层构建器”的客户端代码基本上与简单的<code>NutritionFacts</code>构建器的代码相同。为简洁起见，下面显示的示例客户端代码假定枚举常量上的静态导入：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">NyPizza</span> pizza <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NyPizza<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span><span class="token constant">SMALL</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addTopping</span><span class="token punctuation">(</span><span class="token constant">SAUSAGE</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addTopping</span><span class="token punctuation">(</span><span class="token constant">ONION</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Calzone</span> calzone <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Calzone<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addTopping</span><span class="token punctuation">(</span><span class="token constant">HAM</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sauceInside</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;构建器相对于构造函数的一个小优点是构建器可以有多个可变参数，因为每个参数都是在自己的方法中指定的。除此之外，构建器可以将传递给一个方法的多个参数通过多次调用方法的方式聚合到一个字段中，就如之前<code>addTopping</code>方法中所演示的那样。</p>
+<p>&amp;emsp;&amp;emsp;Builder 模式非常灵活。可以重复使用单个构建器来构建多个对象。可以在构建方法的调用之间调整构建器的参数，以改变创建的对象。构建器可以在创建对象时自动填充某些字段，例如每次创建对象时增加的序列号。</p>
+<p>&amp;emsp;&amp;emsp;Builder 模式也有缺点。要创建对象，必须先创建其构建器。虽然在实践中创建此构建器的成本可能不太明显，但在性能关键的情况下可能会出现问题。此外，Builder 模式比重叠构造函数的模式更冗长，因此只有在有足够的参数（例如四个或更多）时才值得去使用它。但请记住，你可能希望在将来添加更多的参数。但是如果你从构造函数或静态工厂开始并在类进化到参数数量失控时才切换到构建器，那些过时的构造器和静态工厂就会显得非常不协调。因此，最好一开始就考虑使用构造器。</p>
+<p>&amp;emsp;&amp;emsp;简而言之，如果类的构造器或者静态工厂方法中具有多个参数，设计这种类时，Builder 模式就是种不错的选择，特别是当大多数参数都是可选的时候。与使用传统的重叠构造器模式相比，使用 Builder 模式的客户端代码更易于阅读和编写，构建器也比 JavaBean 更加安全。</p>
+<h2 id="用私有构造器或者枚举类型强化-Singleton-属性"><a href="#用私有构造器或者枚举类型强化-Singleton-属性" class="headerlink" title="用私有构造器或者枚举类型强化 Singleton 属性"></a>用私有构造器或者枚举类型强化 Singleton 属性</h2><p>&amp;emsp;&amp;emsp;Singleton 指仅仅被实例化一次的类 [Gamma95]。Singleton 通常代表无状态的对象，例如函数（第 24 项）或者本质上唯一的系统组件。使类成为 Singleton 会使它的客户端测试变得十分困难，因为除非它实现了作为其类型的接口，否则不可能将模拟实现替换为单例。</p>
+<p>&amp;emsp;&amp;emsp;实现单例的方法有两种。 两者都基于保持构造函数私有并导出公共静态成员以提供对唯一实例的访问。 在一种方法中，该成员是 final 字段：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Singleton with public final field</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Elvis</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Elvis</span> <span class="token constant">INSTANCE</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Elvis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">Elvis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">leaveTheBuilding</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;私有构造器只调用一次，用来初始化静态变量<code>Elvis.INSTANCE</code>。由于缺少<code>public</code>或者<code>protect</code>属性的构造器，这就保证了<code>Elvis</code>的全局一致性：一旦<code>Evlis</code>类被实例化，只会存在一个<code>Elvis</code>实例，不多也不少。客户端所做的任何事情都无法改变这一点，但有一点需要注意：享有特权的客户端可以借助<code>AccessibleObject.setAccessible</code>方法反射性地调用私有构造函数（第 65 项）。如果你需要防御此攻击，请修改构造函数以使其在要求创建第二个实例时抛出异常。</p>
+<p>&amp;emsp;&amp;emsp;在实现 Singleton 的第二种方法中，公有的成员是个静态工厂方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Singleton with static factory</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Elvis</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Elvis</span> <span class="token constant">INSTANCE</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Elvis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">Elvis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Elvis</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token constant">INSTANCE</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">leaveTheBuilding</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;对于静态方法<code>Elvis.getInstance</code>的所有调用，都会返回同一个对象引用，所以，永远不会创建其他的<code>Elvis</code>实例（上述提醒依然适用）。</p>
+<p>&amp;emsp;&amp;emsp;公有域方法的主要好处在于，组成类的成员的声明很清楚地声明了这个类是一个 Singleton：公有的静态域是 final 的，所以该域总是包含同一个对象的引用。第二个好处就是它更加简单。</p>
+<p>&amp;emsp;&amp;emsp;工厂方法的优势之一在于，它提供了灵活性：在不改变其 API 的前提下，我们可以改变类是否应该为 Singleton 的想法。工厂方法返回唯一实例，但是，它可以很容易被修改，比如改成每个调用该方法的线程返回一个唯一的实例。第二个优点是，如果你的应用需要，你可以编写泛型单例工厂（第 30 项）。使用静态工厂的最后一个优点是一个方法引用可以当成一个提供者，例如<code>Elvis::instance</code>提供的是&lt;Elvis&gt;。除非跟这些优点有所关联，否则使用公有域的方法更可取。(A final advantage of using a static factory is that a method reference can be used as a supplier, for example Elvis::instance is a Supplier&lt;Elvis&gt; .Unless one of these advantages is relevant, the public field approach is preferable.)</p>
+<p>&amp;emsp;&amp;emsp;为了利用这其中一种方法实现的 Singleton 类变成可序列化的(第 12 章)，仅仅在声明中加上“implements Serializable”是不够的。为了维护并保证 Singleton，必须声明所有实例域都是瞬时(transient)的，并提供一个<code>readResolve</code>方法(第 89 项)。否则，每次反序列化时，都会创建一个新的实例，在我们的示例中，会导致“假冒的 Elvis”。为了防止这种情况，要在 Elvis 类中加入下面这个 readResolve 方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// readResolve method to preserve singleton property</span>
+<span class="token keyword">private</span> <span class="token class-name">Object</span> <span class="token function">readResolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Return the one true Elvis and let the garbage collector</span>
+    <span class="token comment">// take care of the Elvis impersonator.</span>
+    <span class="token keyword">return</span> <span class="token constant">INSTANCE</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;实现 Singleton 还有第三种方法。只需要编写一个包含单个元素的枚举类型：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Enum singleton - the preferred approach</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">Elvis</span> <span class="token punctuation">&#123;</span>
+    <span class="token constant">INSTANCE</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">leaveTheBuilding</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这种方法类似于使用公有域的方法，但它更简洁，免费提供序列化机制，并提供了对多个实例化的铁定保证，即使面对复杂的序列化或反射攻击。这种方法可能会有点不自然，但单元素枚举类型通常是实现单例的最佳方法。请注意，如果你的单例必须扩展<code>Enum</code>以外的超类，则不能使用此方法（尽管你可以声明枚举来实现接口）。</p>
+<p>&amp;emsp;&amp;emsp;有时候你会想要编写一个只包含一组静态方法和静态字段的类。这种类名声很不好，因为有些人为了避免使用面向对象的思维方式而滥用这样的类(some people abuse them to avoid thinking in terms of objects)，但是他们确实有它们特有的用处。我们可以使用这种类，以<code>java.lang.Math</code>或者<code>java.util.Arrays</code>的方式对原始值或数组的相关方法组织起来。它们还可以用于以<code>java.util.Collections</code>的方式，把实现特定接口的对象上的静态方法（包括工厂：第 1 项）组织起来。（从 Java 8 开始，你也可以将这些方法放在接口中，假设它是你自己修改的)。最后，这些类可以用于将<code>final</code>类的方法组织起来，通过这种方式用来取代扩展该类的做法。</p>
+<p>&amp;emsp;&amp;emsp;这种工具类不希望被实例化，实例化对它没有任何意义。然而，在没有显式构造函数的情况下，编译器会默认提供一个公共的、无参的默认构造函数。对于用户而言，这个构造器与其他构造器没有任何区别。在已发行的 API 中常常可以看到一些被无意识地实例化的类。</p>
+<p>&amp;emsp;&amp;emsp;企图通过将该类做成抽象类来强制该类不可被实例化，这是行不通的。该类可以被子类化，并且该子类也可以被实例化。这样做甚至会误导用户，以为这种类是专门为了继承而设计的（第 19 项）。然而，有一些简单的习惯用法可以确保类不可被实例化。由于只有当类不包含显示的构造器时，编译器才会生成缺省的构造器，因此我们只要让这个类包含私有构造器，他就不能被实例化了：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Noninstantiable utility class</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UtilityClass</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Suppress default constructor for noninstantiability</span>
+    <span class="token keyword">private</span> <span class="token class-name">UtilityClass</span><span class="token punctuation">(</span><span class="token punctuation">(</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">AssertionError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">// Remainder omitted</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;因为显示构造函数是私有的，所以它在类外是不可访问的，<code>AssertionError</code>不是必需的，但是它可以避免不小心在类的内部调用构造器。它保证该类在任何情况下都不会实例化。这种习惯用法有点违背直觉，好像构造器就是专门设计成不能被调用一样。因此明智的做法就是在代码中增加一条注释，如上所示。</p>
+<p>&amp;emsp;&amp;emsp;这种习惯用法也有副作用，它使得一个类不能拥有子类。因为子类的所有构造函数都必须显示或者隐式地调用父类的构造函数，在这种情形下，子类就没有可用的并且可以访问的父类构造器了。</p>
+<h2 id="固定资源首选使用依赖注入"><a href="#固定资源首选使用依赖注入" class="headerlink" title="固定资源首选使用依赖注入"></a>固定资源首选使用依赖注入</h2><p>&amp;emsp;&amp;emsp;许多类依赖于一个或多个底层资源。例如，拼写检查器依赖于字典。常见的做法是将这些类实现为静态实用程序类(第 4 项)：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Inappropriate use of static utility - inflexible &amp; untestable!</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpellChecker</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Lexicon</span> dictionary <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">SpellChecker</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// Noninstantiable</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token class-name">String</span> word<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">suggestions</span><span class="token punctuation">(</span><span class="token class-name">String</span> typo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;同样的，将它们作为单例实现的情况并不少见(第 3 项)：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Inappropriate use of singleton - inflexible &amp; untestable!</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpellChecker</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Lexicon</span> dictionary <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">SpellChecker</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token constant">INSTANCE</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SpellChecker</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token class-name">String</span> word<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">suggestions</span><span class="token punctuation">(</span><span class="token class-name">String</span> typo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这些方法都不令人满意，因为它们假设只有一本值得使用的字典。在实践中，每种语言都有自己的字典，特殊字典用于特殊词汇。而且，可能需要使用特殊字典进行测试。假设单本字典就足以满足所有情况，这是一厢情愿的想法。</p>
+<p>&amp;emsp;&amp;emsp;你可以尝试让 SpellChecker 支持多个词典，方法是使字典字段为非 final 域，并添加一个方法来更改现有拼写检查器中的字典，但这在并发时设置会很笨拙，容易出错并且不可行。静态实用程序类和单例不适用于将底层资源作为参数的类(Static utility classes and singletons are inappropriate for classes whose behavior is parameterized by an underlying resource.)。</p>
+<p>&amp;emsp;&amp;emsp;所需要的是能够支持类的多个实例（在我们的示例中为 SpellChecker），每个实例都使用客户端所需的资源（在我们的示例中为字典）。满足此要求的简单模式是在创建新实例时将资源传递给构造函数。这是依赖注入的一种形式：字典是拼写检查器的依赖项，并在创建时注入拼写检查器。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Dependency injection provides flexibility and testability</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpellChecker</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Lexicon</span> dictionary<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">SpellChecker</span><span class="token punctuation">(</span><span class="token class-name">Lexicon</span> dictionary<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>dictionary <span class="token operator">=</span> <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>dictionary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token class-name">String</span> word<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">suggestions</span><span class="token punctuation">(</span><span class="token class-name">String</span> typo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这种依赖注入很简单，以至于程序猿用了很多年却不知道它有一个名称。虽然我们的拼写检查器只有一个资源(字典)，但是依赖注入可以使用任意数量的资源和任意的依赖关系，它保留了不变性(第 17 项)，因此多个客户端可以共享依赖对象（假设客户端需要相同的底层资源）。依赖注入同样适用于构造函数、静态工厂（第 1 项）和构建器（第 2 项）。</p>
+<p>&amp;emsp;&amp;emsp;将资源工厂传递给构造函数就会变成一个有用的模式。工厂是一个对象，通过重复调用这个工厂可以创建某个类型的实例对象。这些就是工厂方法模式 [Gamma95]。Java 8 中引入的 Supplier&lt;T&gt;;接口非常适合体现工厂。在输入上采用 Supplier&lt;T&gt;的方法通常应该使用泛型（第 31 项）约束工厂的类型参数，以允许客户端传入创建指定类型的任何子类型的工厂。例如，这是一种使用客户提供的工厂生成马赛克来生成每个图块的方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Mosaic</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">Supplier</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Tile</span><span class="token punctuation">></span></span> tileFactory<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;尽管依赖注入极大地提高了灵活性和可测试性，但它可能会使大型项目更加混乱，这些项目通常包含数千个依赖项。通过使用依赖注入框架，例如 Dagger [Dagger]，Guice [Guice]或 Spring [Spring]，可以消除这种混乱。这些框架的使用超出了本书的范围，但请注意，为手动依赖注入而设计的 API 可以轻松地适用于这些框架。</p>
+<p>&amp;emsp;&amp;emsp;总之，如果有一个类依赖一个或多个底层资源的类，并且底层资源类影响了类的行为，不要使用单例或静态实用程序类来实现它，并且不要让类直接创建这些资源(do not use a singleton or static utility class to implement a class that depends on one or more underlying resources whose behavior affects that of the class)。相反，将资源或工厂传递给构造函数（或静态工厂或构建器）。这种做法称为依赖注入，将极大地增强类的灵活性，可重用性和可测试性。</p>
+<h2 id="避免创建不需要的对象"><a href="#避免创建不需要的对象" class="headerlink" title="避免创建不需要的对象"></a>避免创建不需要的对象</h2><p>&amp;emsp;&amp;emsp;一般来说，最好能重用对象而不是在每次需要的时候就创建一个相同功能的新对象。重用的方式既快速，又流行。如果对象是不可变(immutable)的（第 17 项），那么就能重复使用它。</p>
+<p>&amp;emsp;&amp;emsp;作为一个极端的反面例子，考虑下面的语句：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"bikini"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// DON'T DO THIS!</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;该语句每次被执行的时候都创建一个新的 String 实例，但是这些对象的创建并不都是必要的。传递给 String 构造器的参数<code>(&quot;bikini&quot;)</code>本身就是一个 String 实例，功能方面等同于构造器创建的所有对象。如果这种方法是用在一个循环中，或者是在一个被频繁调用的方法中，就会创建出成千上万的不必要的 String 实例。</p>
+<p>&amp;emsp;&amp;emsp;改进后的版本如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token string">"bikini"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这个版本只用了一个 String 实例，而不是每次执行时都创建一个新的实例。除此之外，它可以保证，对于所有在同一台虚拟机中运行的代码，只要它们包含相同的字符串字面常量，该对象就会被重用 [JLS, 3.10.5]。</p>
+<p>&amp;emsp;&amp;emsp;对于同时提供了静态工厂方法（第 1 项）和构造器的不可变类，通常可以使用静态工厂方法而不是构造器，这样可以经常避免创建不必要的对象。例如，这个静态工厂方法<code>Boolean.valueOf(String)</code>总是优先于在 Java 9 中抛弃的构造器 <code>Boolean(String)</code>。构造函数必须在每次调用时创建一个新对象，而工厂方法从不需要这样做，也不会在实践中。除了重用不可变对象之外，如果你知道它们不会被修改，你还可以重用可变对象。</p>
+<p>&amp;emsp;&amp;emsp;有些对象的创建比其他对象的代价大，如果你需要反复创建这种代价大的对象，建议将其缓存起来以便重复使用。不幸的是，当你创建这样一个对象时，并不总是很明显。假设你想编写一个方法来确定一个字符串是否是一个有效的罗马数字。使用正则表达式是最简单的方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Performance can be greatly improved!</span>
+<span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">isRomanNumeral</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">return</span> s<span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span><span class="token string">"^(?=.)M*(C[MD]|D?C&#123;0,3&#125;)"</span>
+        <span class="token operator">+</span> <span class="token string">"(X[CL]|L?X&#123;0,3&#125;)(I[XV]|V?I&#123;0,3&#125;)$"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;此实现的问题在于它依赖于<code>String.matches</code>方法。虽然<code>String.matches</code>是检查字符串是否与正则表达式匹配的最简单方法，但它不适合在性能关键的情况下重复使用。问题是它在内部为正则表达式创建了一个 Pattern 实例，并且只使用它一次，之后它就可能会被垃圾回收机制回收。创建 Pattern 实例的代价很大，因为它需要将正则表达式编译为有限状态机(because it requires compiling the regular expression into a finite state machine)。</p>
+<p>&amp;emsp;&amp;emsp;为了提高性能，将正则表达式显式编译为 Pattern 实例(不可变)作为类初始化的一部分，对其进行缓存，并在每次调用 isRomanNumeral 方法时重用相同的实例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Reusing expensive object for improved performance</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RomanNumerals</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Pattern</span> <span class="token constant">ROMAN</span> <span class="token operator">=</span> <span class="token class-name">Pattern</span><span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>
+        <span class="token string">"^(?=.)M*(C[MD]|D?C&#123;0,3&#125;)"</span>
+        <span class="token operator">+</span> <span class="token string">"(X[CL]|L?X&#123;0,3&#125;)(I[XV]|V?I&#123;0,3&#125;)$"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">isRomanNumeral</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token constant">ROMAN</span><span class="token punctuation">.</span><span class="token function">matcher</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;如果经常调用的话，改进版本的 isRomanNumeral 可以显着提高性能。在我的机器上，原始版本在 8 个字符的输入字符串上需要 1.1μs，而改进版本需要 0.17μs，这是 6.5 倍的速度。不仅提高了性能，而且功能更加明了。为不可见的 Pattern 实例创建一个静态的 final 字段，我们可以给它一个名字，它比正则表达式本身更具有可读性。</p>
+<p>&amp;emsp;&amp;emsp;如果初始化包含改进版本的 isRimanNumberal 方法的类时，但是从不调用该方法，则不需要初始化字段 ROMAN。在第一次调用 isRimanNumberal 方法时，可以通过延迟初始化字段（第 83 项）来消除使用时未初始化的影响，但不建议这样做。延迟初始化的做法通常都有一个情况，那就是它会把实现复杂化，从而导致无法测试它的性能改进情况。</p>
+<p>&amp;emsp;&amp;emsp;当一个对象是不可变的，那么就可以安全地重复使用它，但是在其他情况下，它并不是那么明显，甚至违反直觉。这时候可以考虑使用适配器 [Gamma95]，也称为视图。适配器是委托给支持对象的对象(An adapter is an object that delegates to a backing object)，它提供一个备用接口。因为适配器的状态不超过其支持对象的状态，所以不需要为给定对象创建一个给定适配器的多个实例。</p>
+<p>&amp;emsp;&amp;emsp;例如，Map 接口的 keySet 方法返回 Map 对象的 Set 视图，该视图由 Map 中的所有键组成。看起来，似乎每次调用 keySet 都必须创建一个新的 Set 实例，但是对给定 Map 对象上的 keySet 的每次调用都可能返回相同的 Set 实例。尽管返回的 Set 实例通常是可变的，但所有返回的对象在功能上都是相同的：当其中一个返回的对象发生更改时，所有其他对象也会发生更改，因为它们都由相同的 Map 实例支持。虽然创建 keySet 视图对象的多个实例在很大程度上是无害的，但不必要这样做，并且这样做没有任何好处。</p>
+<p>&amp;emsp;&amp;emsp;创建不必要的对象的另一种方式是自动装箱，它允许程序猿将基本类型和装箱基本类型(Boxed Primitive Type)混用，按需自动装箱和拆箱。自动装箱使得基本类型和装箱基本类型之间的差别变得模糊起来，但是并没有完全消除。它们在语义上还有微妙的差别，在性能上也有着比较明显的差别（第 61 项）。请考虑以下方法，该方法计算所有正整数值的总和，为此，程序必须使用 long 类型，因为 int 类型无法容纳所有正整数的总和：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Hideously slow! Can you spot the object creation?</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">long</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Long</span> sum <span class="token operator">=</span> <span class="token number">0L</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">long</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        sum <span class="token operator">+=</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这段程序算出的答案是正确的，但是比实际情况要更慢一些，只因为错打了一个字符。变量 sum 被声明成 Long 而不是 long，意味着程序构造了大约 2^31 个多余的 Long 实例（大约每次往 Long sum 中增加 long 时构造一个实例）。将 sum 的声明从 Long 改成 long，在我的机器上运行时间从 43 秒减少到了 6 秒。结论很明显：要优先使用基本类型而不是装箱基本类型，要当心无意识的自动装箱。</p>
+<p>&amp;emsp;&amp;emsp;不要错误地认为本项所介绍的内容暗示着“创建对象的代价非常昂贵，我们就应该尽可能地避免创建对象”。相反，由于小对象的构造器只做很少量的显示工作，所以，小对象的创建和回收动作是非常廉价的，特别是在现代的 JVM 实现上更是如此。通过创建附加的对象，提升程序的清晰性、简洁性和功能性，这通常是件好事。</p>
+<p>&amp;emsp;&amp;emsp;反之，通过维护自己的对象池(object pool)来避免创建对象并不是一种好的做法，除非池中的对象是非常重量级的。真正正确使用对象池的经典对象示例就是数据库连接池。建立数据库连接的代价是非常昂贵的，因此重用这些对象非常有意义。但是，通常来说，维护自己的对象池必定会把代码弄得很乱，同时增加内存占用，而且会影响性能。现代的 JVM 实现具有高度优化的垃圾回收器，其性能很容易就会超过轻量级对象池的性能。</p>
+<p>&amp;emsp;&amp;emsp;与本项对应的是第 50 项的“保护性拷贝”的内容。该项说得是：你应该重用已经存在的对象，而不是去创建一个新的对象。然而第 50 项说的是：你应该创建一个新的对象而不是重用一个已经存在的对象。注意，在提倡使用保护性拷贝的时候，因重用对象而付出的代价要远远大于因创建重复对象而付出的代价。必要时如果没能实施保护性拷贝，将会导致潜在的错误和安全漏洞，而不必要地创建对象则只会影响程序的风格和性能。</p>
+<h2 id="清除过期对象的引用"><a href="#清除过期对象的引用" class="headerlink" title="清除过期对象的引用"></a>清除过期对象的引用</h2><p>&amp;emsp;&amp;emsp;当你从手动管理内存的语言(比如 C 或者 C++)转换到具有垃圾回收功能的语言的时候，程序猿的工作就会变得更加容易，因为当你用完了对象之后，他们就会被自动回收。当你第一次经历对象回收功能的时候，会觉得这简直有点不可思议。这很容易给你留下这样的印象，认为自己不再需要考虑内存管理的事情了，其实不然。</p>
+<p>&amp;emsp;&amp;emsp;考虑下面这个简单的栈实现的例子：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Can you spot the "memory leak"?</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Stack</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> elements<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">DEFAULT_INITIAL_CAPACITY</span> <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Stack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        elements <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token constant">DEFAULT_INITIAL_CAPACITY</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token class-name">Object</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">ensureCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        elements<span class="token punctuation">[</span>size<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">EmptyStackException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> elements<span class="token punctuation">[</span><span class="token operator">--</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">/**
+     * Ensure space for at least one more element, roughly
+     * doubling the capacity each time the array needs to grow.
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">ensureCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>elements<span class="token punctuation">.</span>length <span class="token operator">==</span> size<span class="token punctuation">)</span>
+            elements <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elements<span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> size <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这个程序没有明显的错误(它的通用版本请见 29 项)。无论如何测试，它都会成功地通过每一项测试，但是这个程序中隐藏着一个问题。简而言之，该程序存在“内存泄漏”，由于垃圾收集器的活动增加或者内存占用增加，程序性能的降低会逐渐表现出来。在极端的情况下，这种内存泄漏会导致磁盘分页(Disk Paging)，甚至导致程序失败并出现 OutOfMemoryError，但这种失败情形相对比较少见。</p>
+<p>&amp;emsp;&amp;emsp;那么，程序中哪里发生了内存泄漏呢？如果一个栈先是增长，然后再收缩，那么，从栈中弹出来的对象将不会被当做垃圾回收，即使使用栈的程序不再引用这些对象，它们也不会回收，因为，栈内部维护着对这些对象的过期引用(obsolete references)，所谓的过期引用，是指永远也不会再被解除的引用。在本例中，凡是在 element 数组的“活动部分”(active portion)之外的任何引用都是过期的。活动部分是指 element 中下标小于 size 的那些元素。</p>
+<p>&amp;emsp;&amp;emsp;具有垃圾收集功能的编程语言中的内存泄漏（更恰当地称为无意识的对象保留）是隐蔽的。如果无意中保留了对象引用，则不仅将该对象从垃圾回收中排除，而且该对象引用的任何对象也是如此，以此类推。即使无意中保留了少量对象引用，也会阻止许多对象被垃圾回收器收集，对性能可能产生很大影响。</p>
+<p>&amp;emsp;&amp;emsp;这类问题的修复方法很简单：一旦对象引用已经过期，只需要清空这些引用即可。对于上述例子中的 Stack 类而言，只要一个单元被弹出栈，指向它的引用就过期了，pop 方法的修订版本如下所示：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">EmptyStackException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Object</span> result <span class="token operator">=</span> elements<span class="token punctuation">[</span><span class="token operator">--</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    elements<span class="token punctuation">[</span>size<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// Eliminate obsolete reference</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;清空过期引用的另一个好处是，如果它们以后又被错误地解除引用，程序就会立即抛出 NullPointerException 异常，而不是悄悄地错误运行下去。尽快检测出程序中的错误总是有益的。</p>
+<p>&amp;emsp;&amp;emsp;当程序猿第一次被这种类似的问题困扰的时候，它们往往会过分小心：对于每一个对象的引用，一旦程序不再用到它，就把它清空。其实这样做即没必要，也不是我们所期望的，因为这样做会把程序代码弄得很乱。清空对象引用应该是一种例外，而不是一种规范行为。消除过期引用最好的方法是让包含该引用的变量结束其生命周期。如果你是在最紧凑的作用域范围内定义每一个变量(第 57 项)，这种情形就会自然而然地发生。</p>
+<p>&amp;emsp;&amp;emsp;那么，何时应该清空引用呢？Stack 类的哪方面特性使它易于遭受内存泄漏的影响呢？简而言之，问题在于，Stack 类自己管理内存(manage its own memory)、存储池(storage pool)包含了 elements 数组（对象引用单元，而不是对象本身）的元素。数组活动区域（同前面的定义）中的元素是已分配的(allocated)，而数组其余部分的元素则是自由的(free)。但是垃圾回收器无法知道这一点；对于垃圾回收器而言，elements 数组中的所有对象引用都同等有效。只有程序猿知道数组的非活动部分是不重要的。程序猿可以把这个情况告知垃圾回收器，做法很简单：一旦数组元素变成了非活动部分的一部分，程序猿就手动清空这些数组元素。</p>
+<p>&amp;emsp;&amp;emsp;通常来说，只要类是自己管理内存，程序猿就应该警惕内存泄漏问题。一旦元素被释放掉，则该元素中包含的任何对象引用都应该被清空。</p>
+<p>&amp;emsp;&amp;emsp;内存泄漏的另一个常见来源是缓存。一旦你把对象引用放到缓存中，它就很容易被遗忘掉，从而使得它在很长一段时间没有使用，但是却仍然留在缓存中。对于这个问题，这里有好几种解决方案。如果你正好要实现这样的缓存，只要在缓存之外存在对某个项的键的引用，该项就有意义，那么就可以用 WeakHashMap 代表缓存，当缓存中的项过期之后，它们就会自动被删除。记住只有当所要的缓存项的生命周期是由该键的外部引用而不是由值决定时，WeakHashMap 才有用处。</p>
+<p>&amp;emsp;&amp;emsp;更为常见的情形则是，“缓存项的生命周期是否有意义”并不是很容易确定，随着时间的推移，其中的项会变得越来越没有价值。在这种情况下，缓存应该时不时地清除掉没用的项。这项清除工作可以由一个后台线程(可能是 Timer 或者 ScheduledThreadPoolExecutor)来完成，或者也可以在给缓存添加新项的时候顺便进行清理。LinkedHashMap 类利用它的 removeEldestEntry 方法可以很容易地实现后一种方案。对于更加复杂的缓存，必须直接使用 java.lang.ref。</p>
+<p>&amp;emsp;&amp;emsp;内存泄漏的第三个常见来源是监听器和其他回调。如果你实现了一个 API，客户端在这个 API 中注册回调，却没有显示地取消注册，那么除非你采取某些动作，否则他们就会积累下来。确保回调立即被当做垃圾回收的最佳方法是只保存他们的弱引用(weak reference)，例如，只将它们保存成 WeakHashMap 中的键。</p>
+<p>&amp;emsp;&amp;emsp;由于内存泄漏通常不会表现出明显的失败迹象，所以他们可以在一个系统中存在很多年。往往只有通过仔细检查代码，或者借助于 Heap 剖析工具(Heap Profiler)才能发现内存泄漏问题。因此，如果能在内存泄漏发生之前就知道如何预测此类问题，并阻止它们发生，那是最好不过的了。</p>
+<h2 id="避免使用终结方法和清理方法（Avoid-finalizers-and-cleaners）"><a href="#避免使用终结方法和清理方法（Avoid-finalizers-and-cleaners）" class="headerlink" title="避免使用终结方法和清理方法（Avoid finalizers and cleaners）"></a>避免使用终结方法和清理方法（Avoid finalizers and cleaners）</h2><p>&amp;emsp;&amp;emsp;终结方法是不可预测的，通常很危险，一般情况下是不必要的(Finalizers are unpredictable, often dangerous, and generally unnecessary.)。使用终结方法会导致行为不稳定，降低性能，以及可移植性问题。当然，终结方法也有可用之处，我们将在本项的最后再做介绍；但是，作为一项规则，我们应该避免使用它们。在 Java 9 中，终结方法已经过时了，但是在 Java 库中还在使用。Java 9 中替代终结方法的方式是清理方法。清理方法比终结方法危险性更低，但仍然是不可预测的，性能低，而且是不必要的(Cleaners are less dangerous than finalizers, but still unpredictable, slow, and generally unnecessary)。</p>
+<p>&amp;emsp;&amp;emsp;提醒 C++ 程序员不要将终结方法或清理方法视为 Java 的 C++ 析构函数的类比。在 C++ 中，析构函数是回收与对象关联的资源的常用方法，对象是构造函数的必要对应物。在 Java 中，当一个对象无法访问时，垃圾回收器会回收与对象相关联的内存，而不需要程序员的特别处理(requiring no special effort on the part of the programmer)。C++ 的析构函数也可以被用来回收其他的非内存资源。在 Java 中，使用 try-with-resources 或者 try-finally 块来完成这个目的。</p>
+<p>&amp;emsp;&amp;emsp;终结方法或者清理方法的缺点在于不能保证会被及时地执行[JLS, 12.6]。从一个对象变成不可达开始，到它的终结方法或清理方法被执行，所花费的这段时间是任意长的(也就是说我们无法预知一个对象在销毁之后和执行终结方法和清理方法之间的间隔时间)。这意味着，对时间有严格要求(time-critical)的任务不应该由终结方法或清理方法来完成。例如，用终结方法来关闭已经打开的文件，这是严重的错误，因为打开文件的描述符是一种有限的资源。如果由于系统在运行终结方法或清理方法时延迟而导致许多文件处于打开状态，则程序可能会因为无法再打开文件而运行失败。</p>
+<p>&amp;emsp;&amp;emsp;执行终结算法和清除方法的及时性主要取决于垃圾回收算法，垃圾回收算法在不同的 JVM 实现中大相径庭。如果程序依赖于终结方法或清理方法被执行的时间点，这个程序可能在你测试它的 JVM 上完美运行，然而在你最重要客户的 JVM 平台上却运行失败，这完全是有可能的。</p>
+<p>&amp;emsp;&amp;emsp;延迟终结过程并不只是一个理论问题。为类提供终结方法可以延迟其实例的回收过程。一位同事在调试一个长期运行的 GUI 应用程序的时候，该应用程序莫名其妙地出现 OutOfMemoryError 错误而死亡。分析表明，该应用程序死亡的时候，其终结方法队列中有数千个图形对象正在等待被回收和终结。遗憾的是，终结方法所在的线程优先级比应用程序其他线程的要低得多，所以对象没有在符合回收条件的时候及时被回收( so objects were not getting finalized at the rate they became eligible for finalization)。语言规范并不保证哪个线程将会执行终结方法，所以，除了避免使用终结方法之外，并没有很轻便的办法能够避免这样的问题。在这方面，清理方法比终结方法要好一些，因为类的创建者可以控制他们自己的清理线程，但是清理方法仍然是在后台运行，还是在垃圾收集器的控制下，因此无法保证及时清理。</p>
+<p>&amp;emsp;&amp;emsp;语言规范不仅不保证终结方法会被及时地执行，而且根本就不保证它们会被执行。当一个程序终止的时候，某些已经无法访问的对象上的终结方法却根本没有被执行，这完全是有可能的。因此，你不应该依赖终结方法或者清理方法来更新重要的持久状态。例如，依赖终结方法或者清理方法来释放共享资源（比如数据库）上的永久锁，很容易让整个分布式系统垮掉。</p>
+<p>&amp;emsp;&amp;emsp;不要被<code>System.gc</code>和<code>System.runFinalization</code>这两个方法所诱惑，他们确实增加了终结方法和清理方法被执行的机会，但是他们不保证终结方法或清理方法一定会被执行。唯一声称保证这两个方法一定会被执行的方法是<code>System.runFinalizersOnExit</code>，以及它臭名昭著的孪生兄弟<code>Runtime.runFinalizersOnExit</code>。这两个方法都有致命的缺陷，已经被废弃了[ThreadStop]。</p>
+<p>&amp;emsp;&amp;emsp;终结方法的另一个问题是忽略了在终止过程中被抛出的未捕获的异常，那么该对象的终结过程也会终止(Another problem with finalizers is that an uncaught exception thrown during finalization is ignored, and finalization of that object terminates)[JLS, 12.6]。未捕获的异常会使对象处于破坏的状态(a corrupt state)。如果另一个线程企图使用这种被破坏的对象，则可能发生任何不确定的行为。正常情况下，未被捕获的异常将会使线程终止，并打印出堆栈信息，但是，如果异常发生在终止过程中，则不会如此，甚至连警告都不会打印出来。清理方法就不会有这种问题，因为使用清理方法的库可以控制其所在的线程。</p>
+<p>&amp;emsp;&amp;emsp;使用终结方法和清理方法会严重影响性能。在我的机器上，创建一个简单的 AutoCloseable 对象，使用 try-with-resources 关闭它，并让垃圾收集器回收它的时间大约是 12 ns。使用终结方法之后时间增加到 550ns。换句话说，用终结方法创建和销毁对象慢了大约 50 倍。这主要是因为终结器会抑制有效的垃圾收集。如下所述，如果你使用清理方法或终结方法去清理类的所有实例，清理方法和终结方法的速度是差不多的（在我的机器上每个实例大约 500ns），但是如果你只是把这两个方法作为安全保障(safety net)的话，清理方法比终结方法快很多。在这种情况下，在我的机器上创建，清理 d 和销毁一个对象大约需要 66 ns，这意味着如果你不使用它，你需要支付五倍（而不是五十）安全保障的成本(which means you pay a factor of five (not fifty) for the insurance of a safety net if you don’t use it)。</p>
+<p>&amp;emsp;&amp;emsp;终结方法有一个很严重的安全问题：它们会打开你的类直到终结方法对其进行攻击(they open your class up to finalizer attacks)。使用终结方法进行攻击的原理很简单(The idea behind a finalizer attack is simple)：如果从构造方法或将其序列化的等价方法(readObject 和 readResolve[第 12 章])中抛出异常，恶意子类的终结方法可以在部分构造的对象上运行，这些对象应该“死在藤上(died on the vine)”。这些终结方法可以在一个静态域上记录下这些对象的引用，保护它们不被垃圾回收器回收。一旦这些异常的对象被记录下来，在这个对象上调用任意方法是一件简单的事情，这些方法本来就不应该被允许存在。从构造函数中抛出异常应足以防止对象的创建，在终结方法中，事实并非如此(Throwing an exception from a constructor should be sufficient to prevent an object from coming into existence; in the presence of finalizers, it is not)。这种攻击会产生可怕的后果。final 修饰的类不会受到终结方法的攻击，因为没人可以编写 final 类的恶意子类。要保护非 final 类受到终结方法的攻击，请编写一个不执行任何操作的 final finalize 方法。</p>
+<p>&amp;emsp;&amp;emsp;某些类（比如文件或线程）封装了需要终止的资源，对于这些类的对象，你应该用什么方法来替代终结方法和清理方法呢？(So what should you do instead of writing a finalizer or cleaner for a class whose objects encapsulate resources that require termination, such as files or threads?)对于这些类，你只需要让其实现<code>AutoCloseable</code>接口，并要求其客户端在每个实例不再需要的时候调用实例上的<code>close</code>方法，通常使用 try-with-resources 来确保即使出现异常时资源也会被终止(第 9 项)。值得一提的一个细节是实例必须跟踪其本身是否已被关闭：<code>close</code>方法必须在一个字段中记录这个实例已经无效，而其他方法必须检查此字段并抛出 IllegalStateException（如果其他方法在实例关闭之后被调用）。</p>
+<p>&amp;emsp;&amp;emsp;那么清理方法和终结方法有什么作用呢？它们可能有两种合理的用途。第一种用途是，当对象的所有者忘记调用其终止方法的情况下充当安全网(safety net)。虽然不能保证清理方法或终结方法能够及时调用（或者根本不运行），晚一点释放关键资源总比永远不释放要好。如果你正在考虑编写这样的一个安全网终结方法，就要考虑清楚，这种额外的保护是否值得你付出这份额外的代价。某些 Java 类库（如 FileInputStream、FileOutputStream、ThreadPoolExecutor、和 java.sql.Connection）具有充当安全网终结方法。</p>
+<p>&amp;emsp;&amp;emsp;清理方法的第二个合理用途与对象的本地对等体(native peers)有关。本地对等体是普通对象通过本机方法委托的本机(非 Java)对象，因为本地对等体不是普通对象，因此垃圾收集器不会知道它，并且在回收 Java 对等体时无法回收它。假设性能可接受并且本地对等体没有关键资源，则清理方法或终结方法可以是用于该任务的适当工具。如果性能不可接受或者本机对等体拥有必须回收的资源，则该类应该具有 close 方法，这正如之前所说的。</p>
+<p>&amp;emsp;&amp;emsp;清理方法使用起来有一点棘手。下面是一个使用 Room 类简单演示。让我们假设在 rooms 回收之前必须进行清理。这个 Room 类实现了<code>AutoCloseable</code>接口；事实上，它的自动清理安全网采用的是清理方法的实现仅仅是一个实现细节(the fact that its automatic cleaning safety net uses a cleaner is merely an implementation detail)。跟终结方法不一样的是，清理方法不会污染类的公共 API：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// An autocloseable class using a cleaner as a safety net</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Room</span> <span class="token keyword">implements</span> <span class="token class-name">AutoCloseable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Cleaner</span> cleaner <span class="token operator">=</span> <span class="token class-name">Cleaner</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Resource that requires cleaning. Must not refer to Room!</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">State</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> numJunkPiles<span class="token punctuation">;</span> <span class="token comment">// Number of junk piles in this room</span>
+        <span class="token class-name">State</span><span class="token punctuation">(</span><span class="token keyword">int</span> numJunkPiles<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>numJunkPiles <span class="token operator">=</span> numJunkPiles<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// Invoked by close method or cleaner</span>
+        <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Cleaning room"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            numJunkPiles <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// The state of this room, shared with our cleanable</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">State</span> state<span class="token punctuation">;</span>
+    <span class="token comment">// Our cleanable. Cleans the room when it’s eligible for gc</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Cleaner<span class="token punctuation">.</span>Cleanable</span> cleanable<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Room</span><span class="token punctuation">(</span><span class="token keyword">int</span> numJunkPiles<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        state <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">State</span><span class="token punctuation">(</span>numJunkPiles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cleanable <span class="token operator">=</span> cleaner<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cleanable<span class="token punctuation">.</span><span class="token function">clean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;静态嵌套 State 类包含清理程序清理 Room 所需的资源。 在这种情况下，它只是 numJunkPiles 字段，它表示 room 的混乱程度。更现实的是，它可能是一个包含指向本地对等体的指针的 final long。State 实现了 Runnable，它的 run 方法最多被调用一次，当我们在 Room 构造函数中使用我们的清理器注册 State 实例时，我们得到了 Cleanable。对 run 方法的调用将由以下两种方法之一触发：通常是通过调用 Room 的 close 方法调用 Cleanable 的 clean 方法来触发。如果客户端无法在 Room 实例符合垃圾收集条件时调用 close 方法，则清理器将（希望）调用 State 的 run 方法。</p>
+<p>&amp;emsp;&amp;emsp;State 实例不引用其 Room 实例至关重要。如果是这样，它将创建一个循环，以防止 Room 实例符合垃圾收集的资格（以及自动清理）。因此，State 必须是静态嵌套类，因为非静态嵌套类包含对其封闭实例的引用(第 24 项)。使用 lambda 同样不可取，因为它们可以轻松捕获对封闭对象的引用。</p>
+<p>&amp;emsp;&amp;emsp;正如我们之前所说，Room 的清洁剂仅用作安全网。如果客户端在 try-with-resource 块中包围所有 Room 实例，则永远不需要自动清理。这个表现良好的客户端演示了这种行为：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Adult</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">Room</span> myRoom <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Goodbye"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;正如你所期望的那样，运行 Adult 程序会打印 Goodbye，然后是 Cleaning Room。但是，这个永远不会清理 room 的不合理的程序怎么样呢？</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Teenager</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">new</span> <span class="token class-name">Room</span><span class="token punctuation">(</span><span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Peace out"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;你可能希望它打印出 Peace out，然后是 Cleaning Room，但在我的机器上，它从不打印 Cleaning Room; 它只是退出。这是我们之前谈到的不可预测性。 Cleaner 规范说：“在<code>System.exit</code>期间清理方法的行为是特定实现的。不保证是否调用清理操作。”虽然规范没有说明，但正常程序退出也是如此。在我的机器上，将<code>System.gc()</code>添加到 Teenager 类的 main 方法就足以让它在退出之前打印 Cleaning Room，但不能保证你会在你的机器上看到相同的行为。</p>
+<p>&amp;emsp;&amp;emsp;总之，除了作为安全网或终止非关键的本机资源之外，不要使用清理方法，也不要使用 Java 9 之前的版本（终结方法）。即使这样，也要注意不确定性和影响性能导致的后果(Even then, beware the indeterminacy and performance consequences)。</p>
+<h3 id="try-with-resources-优先于-try-finally"><a href="#try-with-resources-优先于-try-finally" class="headerlink" title="try-with-resources 优先于 try-finally"></a>try-with-resources 优先于 try-finally</h3><p>&amp;emsp;&amp;emsp;Java 库包含许多必须通过调用 close 方法手动关闭的资源。示例包括 InputStream，OutputStream 和 java.sql.Connection。关闭资源经常被客户忽视，可预见的可怕性能后果。虽然其中许多资源使用终结方法作为安全网，但终结方法不能很好地工作(第 8 项)。</p>
+<p>&amp;emsp;&amp;emsp;在之前的做法中(Historically)，try-finally 语句是保证资源正确关闭的最佳方式，即使出现异常或在 return 的时候(even in the face of an exception or return)：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// try-finally - No longer the best way to close resources!</span>
+<span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">firstLineOfFile</span><span class="token punctuation">(</span><span class="token class-name">String</span> path<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">BufferedReader</span> br <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> br<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        br<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这看起来并不差，但是当你添加第二个资源的时候，它会变得很糟糕：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// try-finally is ugly when used with more than one resource!</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span><span class="token class-name">String</span> src<span class="token punctuation">,</span> <span class="token class-name">String</span> dst<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>dst<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token constant">BUFFER_SIZE</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>n <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        in<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;可能很难相信，但即使是优秀的程序猿也会在大多数时候弄错。对于初学者来说，我在 Java Puzzlers [Bloch05]的第 88 页上弄错了，多年来没有人注意到。事实上，2007 年 Java 库中 close 方法的三分之二使用是错误的。</p>
+<p>&amp;emsp;&amp;emsp;即使是使用 try-finally 语句关闭资源的正确代码，如前两个代码示例所示，也有一个微妙的缺陷。try 块和 finally 块中的代码都能够抛出异常。例如，在 firstLineOfFile 方法中，对 readLine 的调用可能由于底层物理设备中的故障而引发异常，并且由于相同的原因，对 close 的调用可能会失败。在这种情况下，第二个异常完全覆盖了第一个异常。异常堆栈跟踪中没有第一个异常的记录，这可能会使实际系统中的调试变得非常复杂 - 通常第一个异常才是你要查看并诊断问题的关键所在(usually it’s the first exception that you want to see in order to diagnose the problem)。虽然有可能编写代码来抑制第二个异常而支持第一个异常，但几乎没有人这样做，因为它太冗余了。</p>
+<p>&amp;emsp;&amp;emsp;当 Java 7 引入了 try-with-resources 语句[JLS，14.20.3]时，所有这些问题都得到了一并解决。要使用此构造，资源必须实现 AutoCloseable 接口，该接口由单个返回类型为 void 的 close 方法组成。Java 库和第三方库中的许多类和接口现在实现或继承 AutoCloseable。如果编写一个代表必须关闭的资源的类( If you write a class that represents a resource that must be closed)，那么你的类也应该实现 AutoCloseable。</p>
+<p>&amp;emsp;&amp;emsp;以下是我们的第一个示例使用 try-with-resources 的方式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// try-with-resources - the the best way to close resources!</span>
+<span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">firstLineOfFile</span><span class="token punctuation">(</span><span class="token class-name">String</span> path<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">BufferedReader</span> br <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> br<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;以下是我们的第二个示例如何使用 try-with-resources:</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// try-with-resources on multiple resources - short and sweet</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span><span class="token class-name">String</span> src<span class="token punctuation">,</span> <span class="token class-name">String</span> dst<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>dst<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token constant">BUFFER_SIZE</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>n <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;try-with-resources 版本不仅比原始版本更短，更易读，而且它们提供了更好的诊断功能。考虑 firstLineOfFile 方法。如果 readLine 调用和关闭(不可见)资源时抛出异常，则后一个异常被抑制而有利于前者(the latter exception is suppressed in favor of the former)。实际上，可以抑制多个异常以保留你实际想要查看的异常。这些被抑制的异常不是被丢弃; 它们被打印在跟踪的堆栈中，并带有一个表示它们被压制了的符号。你还可以使用 getSuppressed 方法以编程的方式访问它们，该方法已添加到 Java 7 中的 Throwable 中。</p>
+<p>&amp;emsp;&amp;emsp;你可以将 try 子句放在 try-with-resources 语句中，就像在常规的 try-finally 语句中一样。这允许你处理异常，而不会使用另一层嵌套来破坏你的代码。作为一个有点设计想法的例子(As a slightly contrived example)，这里是我们的 firstLineOfFile 方法的一个版本，它不会抛出异常，但如果无法打开文件或读取文件时，则返回默认值：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// try-with-resources with a catch clause</span>
+<span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">firstLineOfFile</span><span class="token punctuation">(</span><span class="token class-name">String</span> path<span class="token punctuation">,</span> <span class="token class-name">String</span> defaultVal<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">BufferedReader</span> br <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> br<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> defaultVal<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&amp;emsp;&amp;emsp;这里经验教训是很明确的(The lesson is clear)：在处理必须关闭的资源时，相比于 try-finally，始终优先使用 try-with-resources。生成的代码更短更清晰，它生成的异常更有用。try-with-resources 语句可以在使用必须关闭的资源的同同时轻松编写正确的代码，使用 try-finally 几乎是不可能的。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">小青蛙</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/">https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">小青蛙</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/book/">
+                                    <span class="chip bg-color">book</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/15/bian-cheng-zhi-dao/ruan-jian-she-ji-shi-zhi-shi-dian-zheng-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="软件设计师-知识点整理">
+                        
+                        <span class="card-title">软件设计师-知识点整理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                    编程之道
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-10-xiang-chong-xie-equals-shi-qing-zun-shou-tong-yong-yue-ding/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="第二章：对于所有对象都通用的方法（1）之重写 equals 时请遵守通用约定">
+                        
+                        <span class="card-title">第二章：对于所有对象都通用的方法（1）之重写 equals 时请遵守通用约定</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%A6%E7%B1%8D/" class="post-category">
+                                    编程书籍
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/book/">
+                        <span class="chip bg-color">book</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s14 m12 l12 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <span id="year">2019</span>
+            &nbsp;Design by&nbsp;<a href="/about" target="_blank">小青蛙</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">255.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+    </div>
+    <div class="center-align social-link social-statis">
+    <a href="https://github.com/xgo-m" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
