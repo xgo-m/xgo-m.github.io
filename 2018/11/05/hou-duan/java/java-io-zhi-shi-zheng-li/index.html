@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -575,191 +578,191 @@
 <li><code>abstract void flush()</code>: 刷新流。</li>
 <li><code>abstract void close()</code>: 关闭流，但要先刷新它。</li>
 </ul>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h3 id="FileInputStream-和-FileOutputStream"><a href="#FileInputStream-和-FileOutputStream" class="headerlink" title="FileInputStream 和 FileOutputStream"></a>FileInputStream 和 FileOutputStream</h3><pre><code class="java">/**
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h3 id="FileInputStream-和-FileOutputStream"><a href="#FileInputStream-和-FileOutputStream" class="headerlink" title="FileInputStream 和 FileOutputStream"></a>FileInputStream 和 FileOutputStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 测试复制文件a.txt中的内容到b.txt文件中.
- */
-private static void testCopyByFileStream() &#123;
-    try (
-        InputStream in = new FileInputStream(&quot;G:/test/a.txt&quot;);
-        OutputStream out = new FileOutputStream(&quot;G:/test/b.txt&quot;, true)
-    ) &#123;
-        int len;
-        byte[] b = new byte[1024];
-        while ((len = in.read(b)) != -1) &#123;
-            out.write(b, 0, len);
-        &#125;
-    &#125; catch (IOException e) &#123;
-        log.error(&quot;文件读取写入失败!&quot;, e);
-    &#125;
-&#125;
-</code></pre>
-<h3 id="BufferedInputStream-和-BufferedOutputStream"><a href="#BufferedInputStream-和-BufferedOutputStream" class="headerlink" title="BufferedInputStream 和 BufferedOutputStream"></a>BufferedInputStream 和 BufferedOutputStream</h3><pre><code class="java">/**
- * 测试通过 BufferedInputStream 和 BufferedOutputStream 来复制文件a.txt中的内容到b.txt文件中.
- */
-private static void testCopyByBufferedStream() &#123;
-    try (
-        InputStream in = new BufferedInputStream(new FileInputStream(&quot;G:/test/a.txt&quot;));
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(&quot;G:/test/b.txt&quot;))
-    ) &#123;
-        int len;
-        byte[] b = new byte[1024];
-        while ((len = in.read(b)) != -1) &#123;
-            out.write(b, 0, len);
-        &#125;
-    &#125; catch (IOException e) &#123;
-        log.error(&quot;通过缓冲区的方式来做文件读取写入失败!&quot;, e);
-    &#125;
-&#125;
-</code></pre>
-<h3 id="ByteArrayOutputStream"><a href="#ByteArrayOutputStream" class="headerlink" title="ByteArrayOutputStream"></a>ByteArrayOutputStream</h3><pre><code class="java">/**
- * 测试将内容写入到ByteArrayOutputStream中并打印出来，不需要关闭流.
- */
-private static void testByByteArrayStream() &#123;
-    ByteArrayOutputStream byteOut = new ByteArrayOutputStream(8);
-    String str = &quot;Hello World!&quot;;
-    try &#123;
-        byteOut.write(str.getBytes());
-    &#125; catch (IOException e) &#123;
-        log.error(&quot;写入字节数据出错!&quot;, e);
-    &#125;
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testCopyByFileStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span>
+        <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/b.txt"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"文件读取写入失败!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    byte[] buf = byteOut.toByteArray();
-    for (byte b : buf) &#123;
-        log.info(&quot;&#123;&#125;&quot;, (char) b);
-    &#125;
-&#125;
-</code></pre>
-<h3 id="PipedInputStream-和-PipedOutputStream"><a href="#PipedInputStream-和-PipedOutputStream" class="headerlink" title="PipedInputStream 和 PipedOutputStream"></a>PipedInputStream 和 PipedOutputStream</h3><pre><code class="java">/**
+<h3 id="BufferedInputStream-和-BufferedOutputStream"><a href="#BufferedInputStream-和-BufferedOutputStream" class="headerlink" title="BufferedInputStream 和 BufferedOutputStream"></a>BufferedInputStream 和 BufferedOutputStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 测试通过 BufferedInputStream 和 BufferedOutputStream 来复制文件a.txt中的内容到b.txt文件中.
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testCopyByBufferedStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span>
+        <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedInputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedOutputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/b.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"通过缓冲区的方式来做文件读取写入失败!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ByteArrayOutputStream"><a href="#ByteArrayOutputStream" class="headerlink" title="ByteArrayOutputStream"></a>ByteArrayOutputStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 测试将内容写入到ByteArrayOutputStream中并打印出来，不需要关闭流.
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testByByteArrayStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ByteArrayOutputStream</span> byteOut <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        byteOut<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"写入字节数据出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf <span class="token operator">=</span> byteOut<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">byte</span> b <span class="token operator">:</span> buf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="PipedInputStream-和-PipedOutputStream"><a href="#PipedInputStream-和-PipedOutputStream" class="headerlink" title="PipedInputStream 和 PipedOutputStream"></a>PipedInputStream 和 PipedOutputStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 发送消息的线程.
  *
  * @author blinkfox on 2017/10/19.
- */
-public class Sender extends Thread &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Sender</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(Sender.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">Sender</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** 管道输出流对象,它和管道输入流(PipedInputStream)对象绑定.从而可以将数据发送给“管道输入流”. */
-    private PipedOutputStream pipedOut;
+    <span class="token comment">/** 管道输出流对象,它和管道输入流(PipedInputStream)对象绑定.从而可以将数据发送给“管道输入流”. */</span>
+    <span class="token keyword">private</span> <span class="token class-name">PipedOutputStream</span> pipedOut<span class="token punctuation">;</span>
 
-    public Sender(PipedOutputStream pipedOut) &#123;
-        this.pipedOut = pipedOut;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Sender</span><span class="token punctuation">(</span><span class="token class-name">PipedOutputStream</span> pipedOut<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pipedOut <span class="token operator">=</span> pipedOut<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public PipedOutputStream getPipedOut() &#123;
-        return pipedOut;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">PipedOutputStream</span> <span class="token function">getPipedOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> pipedOut<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    @Override
-    public void run() &#123;
-        String strInfo = &quot;Hello World!&quot; ;
-        try &#123;
-            pipedOut.write(strInfo.getBytes());
-            pipedOut.close();
-        &#125; catch (IOException e) &#123;
-            log.error(&quot;向管道中写入数据出错!&quot;, e);
-        &#125;
-    &#125;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> strInfo <span class="token operator">=</span> <span class="token string">"Hello World!"</span> <span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            pipedOut<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>strInfo<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            pipedOut<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"向管道中写入数据出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 接收消息的线程.
  *
  * @author blinkfox on 2017/10/19.
- */
-public class Receiver extends Thread &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Receiver</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(Receiver.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">Receiver</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** 管道输入流对象,它和管道输出流(PipedOutputStream)对象绑定.从而可以接收“管道输出流”的数据. */
-    private PipedInputStream pipedIn;
+    <span class="token comment">/** 管道输入流对象,它和管道输出流(PipedOutputStream)对象绑定.从而可以接收“管道输出流”的数据. */</span>
+    <span class="token keyword">private</span> <span class="token class-name">PipedInputStream</span> pipedIn<span class="token punctuation">;</span>
 
-    public Receiver(PipedInputStream pipedIn) &#123;
-        this.pipedIn = pipedIn;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Receiver</span><span class="token punctuation">(</span><span class="token class-name">PipedInputStream</span> pipedIn<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pipedIn <span class="token operator">=</span> pipedIn<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public PipedInputStream getPipedIn() &#123;
-        return pipedIn;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">PipedInputStream</span> <span class="token function">getPipedIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> pipedIn<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    @Override
-    public void run() &#123;
-        byte[] buf = new byte[2048];
-        try &#123;
-            int len = pipedIn.read(buf);
-            log.info(&quot;&#123;&#125;&quot;, new String(buf, 0, len));
-            pipedIn.close();
-        &#125; catch (IOException e) &#123;
-            log.error(&quot;从管道中读取数据出错!&quot;, e);
-        &#125;
-    &#125;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">2048</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> len <span class="token operator">=</span> pipedIn<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            pipedIn<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"从管道中读取数据出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * PipedInputStream 和 PipedOutputStream 的测试类.
  *
  * @author blinkfox on 2017/10/19.
- */
-public class PipedStreamTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PipedStreamTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(PipedStreamTest.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">PipedStreamTest</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 主入口方法.
      * @param args 字符串数组参数
-     */
-    public static void main(String[] args) &#123;
-        Sender sender = new Sender(new PipedOutputStream());
-        Receiver receiver = new Receiver(new PipedInputStream());
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Sender</span> sender <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sender</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PipedOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Receiver</span> receiver <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Receiver</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PipedInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        try &#123;
-            // 将管道输入流和管道的输出流进行连接.
-            receiver.getPipedIn().connect(sender.getPipedOut());
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 将管道输入流和管道的输出流进行连接.</span>
+            receiver<span class="token punctuation">.</span><span class="token function">getPipedIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span>sender<span class="token punctuation">.</span><span class="token function">getPipedOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            // 启动线程
-            sender.start();
-            receiver.start();
-        &#125; catch (IOException e) &#123;
-            log.info(&quot;发送接收消息出错!&quot;, e);
-        &#125;
-    &#125;
+            <span class="token comment">// 启动线程</span>
+            sender<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            receiver<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"发送接收消息出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<h3 id="SequenceInputStream"><a href="#SequenceInputStream" class="headerlink" title="SequenceInputStream"></a>SequenceInputStream</h3><pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="SequenceInputStream"><a href="#SequenceInputStream" class="headerlink" title="SequenceInputStream"></a>SequenceInputStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 测试使用 testBySequenceStream 合并输入流来统一读取写入.
- */
-private static void testBySequenceStream() &#123;
-    try (
-        InputStream in1 = new FileInputStream(&quot;G:/test/a.txt&quot;);
-        InputStream in2 = new FileInputStream(&quot;G:/test/b.txt&quot;);
-        OutputStream out = new FileOutputStream(&quot;G:/test/c.txt&quot;);
-        SequenceInputStream seqIn = new SequenceInputStream(in1, in2)
-    ) &#123;
-        int len = 0;
-        while ((len = seqIn.read()) != -1) &#123;
-            out.write(len);
-        &#125;
-    &#125; catch (IOException e) &#123;
-        log.error(&quot;合并输入流写入失败!&quot;, e);
-    &#125;
-&#125;
-</code></pre>
-<h3 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h3><pre><code class="java">/**
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testBySequenceStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">(</span>
+        <span class="token class-name">InputStream</span> in1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">InputStream</span> in2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/b.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"G:/test/c.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">SequenceInputStream</span> seqIn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SequenceInputStream</span><span class="token punctuation">(</span>in1<span class="token punctuation">,</span> in2<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> seqIn<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"合并输入流写入失败!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 测试使用 PrintStream 将数据输出到指定的文件.
- */
-private static void testOutputByPrintStream() &#123;
-    System.out.println(&quot;Hello World!&quot;);
-    File file = new File(&quot;G:/test/d.txt&quot;);
-    try &#123;
-        System.setOut(new PrintStream(new FileOutputStream(file)));
-    &#125; catch (FileNotFoundException e) &#123;
-        e.printStackTrace();
-    &#125;
-    System.out.println(&quot;这些内容在文件中才能看到哦！&quot;);
-&#125;
-</code></pre>
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testOutputByPrintStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"G:/test/d.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">setOut</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PrintStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">FileNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"这些内容在文件中才能看到哦！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ul>
 <li>单一职责原则：每一个IO类的都具有单独的功能和职责，需要对某种类型的流做修改时，只需要修改具体对应的IO流类即可。</li>
 <li>里氏替换原则：子类完全实现了父类的方法，且有自己的个性，子类覆盖或实现父类的方法时输入参数和返回结果的范围没有变化。</li>

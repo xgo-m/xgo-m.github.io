@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -432,122 +435,123 @@
 <h3 id="2-结构图："><a href="#2-结构图：" class="headerlink" title="2. 结构图："></a>2. 结构图：</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/21/state-structure.jpg" alt="状态模式结构图"></p>
 <h3 id="3-时序图："><a href="#3-时序图：" class="headerlink" title="3. 时序图："></a>3. 时序图：</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/21/state-seq.jpg" alt="状态模式时序图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先，是抽象的状态角色接口：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象状态角色
  * Created by blinkfox on 16/7/12.
- */
-public interface IState &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IState</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 抽象方法1
-     */
-    void handle1();
+     */</span>
+    <span class="token keyword">void</span> <span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 抽象方法2
-     */
-    void handle2();
+     */</span>
+    <span class="token keyword">void</span> <span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>接下来，是多个具体的状态角色类，分别如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体状态角色类1
  * Created by blinkfox on 16/7/12.
- */
-public class ConcreteState1 implements IState &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteState1</span> <span class="token keyword">implements</span> <span class="token class-name">IState</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体状态角色类1中的方法1
-     */
-    @Override
-    public void handle1() &#123;
-        System.out.println(&quot;执行了具体状态角色类1中的方法1...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行了具体状态角色类1中的方法1..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体状态角色类1中的方法2
-     */
-    @Override
-    public void handle2() &#123;
-        System.out.println(&quot;执行了具体状态角色类1中的方法2...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行了具体状态角色类1中的方法2..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体状态角色类2
  * Created by blinkfox on 16/7/12.
- */
-public class ConcreteState2 implements IState &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteState2</span> <span class="token keyword">implements</span> <span class="token class-name">IState</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体状态角色类2中的方法1
-     */
-    @Override
-    public void handle1() &#123;
-        System.out.println(&quot;执行了具体状态角色类2中的方法1...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行了具体状态角色类2中的方法1..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体状态角色类2中的方法2
-     */
-    @Override
-    public void handle2() &#123;
-        System.out.println(&quot;执行了具体状态角色类2中的方法2...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行了具体状态角色类2中的方法2..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后，是环境类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 环境角色类
  * Created by blinkfox on 16/7/12.
- */
-public class Context &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Context</span> <span class="token punctuation">&#123;</span>
 
-    // 当前状态
-    private IState state;
+    <span class="token comment">// 当前状态</span>
+    <span class="token keyword">private</span> <span class="token class-name">IState</span> state<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 构造方法
      * @param state
-     */
-    public Context(IState state) &#123;
-        this.state = state;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token class-name">IState</span> state<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> state<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 方法1
-     */
-    public void handle1() &#123;
-        this.state.handle1();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 方法2
-     */
-    public void handle2() &#123;
-        this.state.handle2();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是用于测试状态模式的客户端场景类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 状态模式的客户端场景累
  * Created by blinkfox on 16/7/12.
- */
-public class StateClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StateClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Context context = new Context(new ConcreteState1());
-        context.handle1();
-        context.handle2();
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Context</span> context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ConcreteState1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">handle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">handle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><ul>
 <li>状态模式描述了对象状态的变化以及对象如何在每一种状态下表现出不同的行为。</li>
 <li>状态模式的关键是引入了一个抽象接口来专门表示对象的状态，这个类我们叫做抽象状态接口，而对象的每一种具体状态类都实现了该类，并在不同具体状态类中实现了不同状态的行为，包括各种状态之间的转换。</li>

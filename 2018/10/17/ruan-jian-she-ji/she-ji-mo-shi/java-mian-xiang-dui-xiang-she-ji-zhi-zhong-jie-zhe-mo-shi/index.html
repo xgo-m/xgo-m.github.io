@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -439,171 +442,171 @@
 </ul>
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/10/17/mediator.jpg" alt="命令模式结构图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先，是抽象的<code>Mediator</code>类和具体的<code>ConcreteMediator</code>类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 通用抽象中介者类.
  *
  * Created by blinkfox on 16/8/21.
- */
-public abstract class Mediator &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Mediator</span> <span class="token punctuation">&#123;</span>
 
-    /** 定义同事类1. */
-    protected ConcreteColleague1 colleague1;
+    <span class="token comment">/** 定义同事类1. */</span>
+    <span class="token keyword">protected</span> <span class="token class-name">ConcreteColleague1</span> colleague1<span class="token punctuation">;</span>
 
-    /** 定义同事类2. */
-    protected ConcreteColleague2 colleague2;
+    <span class="token comment">/** 定义同事类2. */</span>
+    <span class="token keyword">protected</span> <span class="token class-name">ConcreteColleague2</span> colleague2<span class="token punctuation">;</span>
 
-    /* getter 和 setter 方法 */
-    public ConcreteColleague1 getColleague1() &#123;
-        return colleague1;
-    &#125;
+    <span class="token comment">/* getter 和 setter 方法 */</span>
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteColleague1</span> <span class="token function">getColleague1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> colleague1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setColleague1(ConcreteColleague1 colleague1) &#123;
-        this.colleague1 = colleague1;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setColleague1</span><span class="token punctuation">(</span><span class="token class-name">ConcreteColleague1</span> colleague1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>colleague1 <span class="token operator">=</span> colleague1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public ConcreteColleague2 getColleague2() &#123;
-        return colleague2;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteColleague2</span> <span class="token function">getColleague2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> colleague2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setColleague2(ConcreteColleague2 colleague2) &#123;
-        this.colleague2 = colleague2;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setColleague2</span><span class="token punctuation">(</span><span class="token class-name">ConcreteColleague2</span> colleague2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>colleague2 <span class="token operator">=</span> colleague2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 中介者模式的抽象业务逻辑1.
-     */
-    public abstract void doSomething1();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">doSomething1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 中介者模式的抽象业务逻辑2.
-     */
-    public abstract void doSomething2();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">doSomething2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体的通用中介者类.
  *
  * Created by blinkfox on 16/8/21.
- */
-public class ConcreteMediator extends Mediator &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteMediator</span> <span class="token keyword">extends</span> <span class="token class-name">Mediator</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 中介者模式的具体业务逻辑1.
-     */
-    @Override
-    public void doSomething1() &#123;
-        super.colleague1.selfMethod1();
-        super.colleague2.selfMethod2();
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomething1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>colleague1<span class="token punctuation">.</span><span class="token function">selfMethod1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>colleague2<span class="token punctuation">.</span><span class="token function">selfMethod2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 中介者模式的具体业务逻辑2.
-     */
-    @Override
-    public void doSomething2() &#123;
-        super.colleague1.selfMethod1();
-        super.colleague2.selfMethod2();
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomething2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>colleague1<span class="token punctuation">.</span><span class="token function">selfMethod1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>colleague2<span class="token punctuation">.</span><span class="token function">selfMethod2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>其实，是抽象的<code>Colleague</code>类和具体的<code>ConcreteColleague</code>类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象的同事类.
  *
  * Created by blinkfox on 16/8/21.
- */
-public abstract class Colleague &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Colleague</span> <span class="token punctuation">&#123;</span>
 
-    /** 中介者. */
-    protected Mediator mediator;
+    <span class="token comment">/** 中介者. */</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Mediator</span> mediator<span class="token punctuation">;</span>
 
-    public Colleague(Mediator mediator) &#123;
-        this.mediator = mediator;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Colleague</span><span class="token punctuation">(</span><span class="token class-name">Mediator</span> mediator<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>mediator <span class="token operator">=</span> mediator<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体的同事类1.
  *
  * Created by blinkfox on 16/8/21.
- */
-public class ConcreteColleague1 extends Colleague &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteColleague1</span> <span class="token keyword">extends</span> <span class="token class-name">Colleague</span> <span class="token punctuation">&#123;</span>
 
-    public ConcreteColleague1(Mediator mediator) &#123;
-        super(mediator);
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteColleague1</span><span class="token punctuation">(</span><span class="token class-name">Mediator</span> mediator<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>mediator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 自有方法.
-     */
-    public void selfMethod1() &#123;
-        System.out.println(&quot;------ConcreteColleague1-处理自己的业务逻辑1--------&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">selfMethod1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"------ConcreteColleague1-处理自己的业务逻辑1--------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 依赖方法.
-     */
-    public void depMethod1() &#123;
-        System.out.println(&quot;------ConcreteColleague1-委托给中介者的业务逻辑1--------&quot;);
-        super.mediator.doSomething1();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">depMethod1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"------ConcreteColleague1-委托给中介者的业务逻辑1--------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>mediator<span class="token punctuation">.</span><span class="token function">doSomething1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体的同事类2.
  *
  * Created by blinkfox on 16/8/21.
- */
-public class ConcreteColleague2 extends Colleague &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteColleague2</span> <span class="token keyword">extends</span> <span class="token class-name">Colleague</span> <span class="token punctuation">&#123;</span>
 
-    public ConcreteColleague2(Mediator mediator) &#123;
-        super(mediator);
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteColleague2</span><span class="token punctuation">(</span><span class="token class-name">Mediator</span> mediator<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>mediator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 自有方法2.
-     */
-    public void selfMethod2() &#123;
-        System.out.println(&quot;------ConcreteColleague2-处理自己的业务逻辑2--------&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">selfMethod2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"------ConcreteColleague2-处理自己的业务逻辑2--------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 依赖方法2.
-     */
-    public void depMethod2() &#123;
-        System.out.println(&quot;------ConcreteColleague2-委托给中介者的业务逻辑2--------&quot;);
-        super.mediator.doSomething2();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">depMethod2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"------ConcreteColleague2-委托给中介者的业务逻辑2--------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span>mediator<span class="token punctuation">.</span><span class="token function">doSomething2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>以下是中介者模式的客户端场景类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 中介者模式的场景类
  * Created by blinkfox on 16/8/21.
- */
-public class MediatorClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MediatorClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Mediator mediator = new ConcreteMediator();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Mediator</span> mediator <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteMediator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        ConcreteColleague1 colleague1 = new ConcreteColleague1(mediator);
-        ConcreteColleague2 colleague2 = new ConcreteColleague2(mediator);
-        mediator.setColleague1(colleague1);
-        mediator.setColleague2(colleague2);
+        <span class="token class-name">ConcreteColleague1</span> colleague1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteColleague1</span><span class="token punctuation">(</span>mediator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">ConcreteColleague2</span> colleague2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteColleague2</span><span class="token punctuation">(</span>mediator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mediator<span class="token punctuation">.</span><span class="token function">setColleague1</span><span class="token punctuation">(</span>colleague1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mediator<span class="token punctuation">.</span><span class="token function">setColleague2</span><span class="token punctuation">(</span>colleague2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        colleague1.depMethod1();
-        colleague2.depMethod2();
-        mediator.doSomething1();
-        mediator.doSomething2();
-    &#125;
+        colleague1<span class="token punctuation">.</span><span class="token function">depMethod1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        colleague2<span class="token punctuation">.</span><span class="token function">depMethod2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mediator<span class="token punctuation">.</span><span class="token function">doSomething1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mediator<span class="token punctuation">.</span><span class="token function">doSomething2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><p>中介者模式可以使对象之间的关系数量急剧减少。</p>
 <p>中介者承担两方面的职责：</p>
 <ul>

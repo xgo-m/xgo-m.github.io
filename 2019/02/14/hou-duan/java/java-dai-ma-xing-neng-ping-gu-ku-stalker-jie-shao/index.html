@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -428,87 +431,87 @@
 <li>API简单易用</li>
 <li>易于集成或扩展</li>
 </ul>
-<h2 id="Maven集成"><a href="#Maven集成" class="headerlink" title="Maven集成"></a>Maven集成</h2><pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.blinkfox&lt;/groupId&gt;
-    &lt;artifactId&gt;stalker&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<h2 id="Maven集成"><a href="#Maven集成" class="headerlink" title="Maven集成"></a>Maven集成</h2><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.blinkfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>stalker<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="API-介绍和使用"><a href="#API-介绍和使用" class="headerlink" title="API 介绍和使用"></a>API 介绍和使用</h2><h3 id="预先准备"><a href="#预先准备" class="headerlink" title="预先准备"></a>预先准备</h3><p>在对Java方法做性能测试之前，先准备好待测试的类和方法：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 用于测量（仅测试使用）该类中的方法的执行耗时的类.
  *
  * @author blinkfox on 2019-02-03.
- */
-public class MyTestService &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyTestService</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(MyTestService.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">MyTestService</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 测试方法1，模拟业务代码耗时 2~5 ms，且会有约 1% 的几率执行异常.
-     */
-    public void hello() &#123;
-        // 模拟运行时抛出异常.
-        if (new Random().nextInt(100) == 5) &#123;
-            throw new MyServiceException(&quot;My Service Exception.&quot;);
-        &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 模拟运行时抛出异常.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MyServiceException</span><span class="token punctuation">(</span><span class="token string">"My Service Exception."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        // 模拟运行占用约 2~5 ms 的时间.
-        this.sleep(2L + new Random().nextInt(3));
-    &#125;
+        <span class="token comment">// 模拟运行占用约 2~5 ms 的时间.</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2L</span> <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 测试方法2，模拟业务代码运行占用约 2 ms 的时间.
-     */
-    public void fastHello() &#123;
-        this.sleep(2L);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">fastHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 本线程调用该方法时，睡眠指定时间，用来模拟业务耗时.
      *
      * @param time 时间
-     */
-    private void sleep(long time) &#123;
-        try &#123;
-            Thread.sleep(time);
-        &#125; catch (InterruptedException e) &#123;
-            log.info(&quot;InterruptedException&quot;, e);
-            Thread.currentThread().interrupt();
-        &#125;
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token keyword">long</span> time<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"InterruptedException"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">interrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="Stalker类"><a href="#Stalker类" class="headerlink" title="Stalker类"></a>Stalker类</h3><h4 id="1-最简示例"><a href="#1-最简示例" class="headerlink" title="1. 最简示例"></a>1. 最简示例</h4><p>以下代码将会预热<code>5</code>次，然后在单线程下正式执行<code>10</code>次，从而将运行结果计算统计并输出出来：</p>
-<pre><code class="java">public static void main(String[] args) &#123;
-    Stalker.run(() -&gt; new MyTestService().hello());
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Stalker</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">new</span> <span class="token class-name">MyTestService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>以上结果将默认在控制台输出：</p>
-<pre><code class="bash">+-----------------------------------------------------------------------------------------------------------------------------------------+
-|                                  threads: 1, concurrens: 1, warmups:5, runs: 10, printErrorLog: false                                   |
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">+-----------------------------------------------------------------------------------------------------------------------------------------+
+<span class="token operator">|</span>                                  threads: <span class="token number">1</span>, concurrens: <span class="token number">1</span>, warmups:5, runs: <span class="token number">10</span>, printErrorLog: <span class="token boolean">false</span>                                   <span class="token operator">|</span>
 +---+----------+-------+---------+---------+----------+---------+---------+---------+---------+---------------------+---------------------+
-|   |  Costs   | Total | Success | Failure |   Sum    |   Avg   |   Min   |   Max   | StdDev  | 95% LowerConfidence | 95% UpperConfidence |
+<span class="token operator">|</span>   <span class="token operator">|</span>  Costs   <span class="token operator">|</span> Total <span class="token operator">|</span> Success <span class="token operator">|</span> Failure <span class="token operator">|</span>   Sum    <span class="token operator">|</span>   Avg   <span class="token operator">|</span>   Min   <span class="token operator">|</span>   Max   <span class="token operator">|</span> StdDev  <span class="token operator">|</span> <span class="token number">95</span>% LowerConfidence <span class="token operator">|</span> <span class="token number">95</span>% UpperConfidence <span class="token operator">|</span>
 +---+----------+-------+---------+---------+----------+---------+---------+---------+---------+---------------------+---------------------+
-| 1 | 35.33 ms |  10   |   10    |    0    | 35.29 ms | 3.53 ms | 2.56 ms | 4.81 ms | 0.85 ms |       3.0 ms        |       4.06 ms       |
-+---+----------+-------+---------+---------+----------+---------+---------+---------+---------+---------------------+---------------------+
-</code></pre>
+<span class="token operator">|</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">35.33</span> ms <span class="token operator">|</span>  <span class="token number">10</span>   <span class="token operator">|</span>   <span class="token number">10</span>    <span class="token operator">|</span>    <span class="token number">0</span>    <span class="token operator">|</span> <span class="token number">35.29</span> ms <span class="token operator">|</span> <span class="token number">3.53</span> ms <span class="token operator">|</span> <span class="token number">2.56</span> ms <span class="token operator">|</span> <span class="token number">4.81</span> ms <span class="token operator">|</span> <span class="token number">0.85</span> ms <span class="token operator">|</span>       <span class="token number">3.0</span> ms        <span class="token operator">|</span>       <span class="token number">4.06</span> ms       <span class="token operator">|</span>
++---+----------+-------+---------+---------+----------+---------+---------+---------+---------+---------------------+---------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h4 id="2-更全示例"><a href="#2-更全示例" class="headerlink" title="2. 更全示例"></a>2. 更全示例</h4><p>以下代码表示，两个方法<code>hello()</code>和<code>fastHello()</code>将会预热<code>1000</code>次，在<code>1000</code>个线程<code>200</code>个并发下，每次执行<code>10</code>次：</p>
-<pre><code class="java">Stalker.run(Options.of(1000, 200).warmups(1000).runs(10),
-        () -&gt; new MyTestService().hello(),
-        () -&gt; new MyTestService().fastHello());
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Stalker</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">Options</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">warmups</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">runs</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">new</span> <span class="token class-name">MyTestService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">new</span> <span class="token class-name">MyTestService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fastHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>以上结果将默认在控制台输出：</p>
-<pre><code class="bash">+------------------------------------------------------------------------------------------------------------------------------------------+
-|                               threads: 1000, concurrens: 200, warmups:1000, runs: 10, printErrorLog: false                               |
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">+------------------------------------------------------------------------------------------------------------------------------------------+
+<span class="token operator">|</span>                               threads: <span class="token number">1000</span>, concurrens: <span class="token number">200</span>, warmups:1000, runs: <span class="token number">10</span>, printErrorLog: <span class="token boolean">false</span>                               <span class="token operator">|</span>
 +---+-----------+-------+---------+---------+---------+---------+---------+----------+---------+---------------------+---------------------+
-|   |   Costs   | Total | Success | Failure |   Sum   |   Avg   |   Min   |   Max    | StdDev  | 95% LowerConfidence | 95% UpperConfidence |
+<span class="token operator">|</span>   <span class="token operator">|</span>   Costs   <span class="token operator">|</span> Total <span class="token operator">|</span> Success <span class="token operator">|</span> Failure <span class="token operator">|</span>   Sum   <span class="token operator">|</span>   Avg   <span class="token operator">|</span>   Min   <span class="token operator">|</span>   Max    <span class="token operator">|</span> StdDev  <span class="token operator">|</span> <span class="token number">95</span>% LowerConfidence <span class="token operator">|</span> <span class="token number">95</span>% UpperConfidence <span class="token operator">|</span>
 +---+-----------+-------+---------+---------+---------+---------+---------+----------+---------+---------------------+---------------------+
-| 1 | 454.33 ms | 10000 |  9900   |   100   | 36.79 s | 3.72 ms | 2.01 ms | 11.89 ms | 1.31 ms |       3.69 ms       |       3.74 ms       |
-| 2 | 159.94 ms | 10000 |  10000  |    0    | 21.72 s | 2.17 ms | 2.01 ms | 3.24 ms  | 0.15 ms |       2.17 ms       |       2.18 ms       |
-+---+-----------+-------+---------+---------+---------+---------+---------+----------+---------+---------------------+---------------------+
-</code></pre>
+<span class="token operator">|</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">454.33</span> ms <span class="token operator">|</span> <span class="token number">10000</span> <span class="token operator">|</span>  <span class="token number">9900</span>   <span class="token operator">|</span>   <span class="token number">100</span>   <span class="token operator">|</span> <span class="token number">36.79</span> s <span class="token operator">|</span> <span class="token number">3.72</span> ms <span class="token operator">|</span> <span class="token number">2.01</span> ms <span class="token operator">|</span> <span class="token number">11.89</span> ms <span class="token operator">|</span> <span class="token number">1.31</span> ms <span class="token operator">|</span>       <span class="token number">3.69</span> ms       <span class="token operator">|</span>       <span class="token number">3.74</span> ms       <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">2</span> <span class="token operator">|</span> <span class="token number">159.94</span> ms <span class="token operator">|</span> <span class="token number">10000</span> <span class="token operator">|</span>  <span class="token number">10000</span>  <span class="token operator">|</span>    <span class="token number">0</span>    <span class="token operator">|</span> <span class="token number">21.72</span> s <span class="token operator">|</span> <span class="token number">2.17</span> ms <span class="token operator">|</span> <span class="token number">2.01</span> ms <span class="token operator">|</span> <span class="token number">3.24</span> ms  <span class="token operator">|</span> <span class="token number">0.15</span> ms <span class="token operator">|</span>       <span class="token number">2.17</span> ms       <span class="token operator">|</span>       <span class="token number">2.18</span> ms       <span class="token operator">|</span>
++---+-----------+-------+---------+---------+---------+---------+---------+----------+---------+---------------------+---------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>结果说明：</p>
 <ul>
 <li><code>Costs</code>: 实际正式运行所消耗的总时间</li>
@@ -558,10 +561,10 @@ public class MyTestService &#123;
 <li><code>Options outputs(MeasureOutput... measureOutputs)</code>: 自定义设置 Options 实例的 MeasureOutput 输出通道</li>
 </ul>
 <h3 id="Assert类"><a href="#Assert类" class="headerlink" title="Assert类"></a>Assert类</h3><p>Assert类主要用来做断言使用。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><pre><code class="java">Assert.assertFaster(Options.of(),
-        () -&gt; new MyTestService().fastHello(),
-        () -&gt; new MyTestService().hello());
-</code></pre>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">assertFaster</span><span class="token punctuation">(</span><span class="token class-name">Options</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">new</span> <span class="token class-name">MyTestService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fastHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">new</span> <span class="token class-name">MyTestService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="许可证"><a href="#许可证" class="headerlink" title="许可证"></a>许可证</h2><p>本 <a target="_blank" rel="noopener" href="https://github.com/blinkfox/stalker">stalker</a> 类库遵守 <a target="_blank" rel="noopener" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a> 许可证。</p>
 
                 

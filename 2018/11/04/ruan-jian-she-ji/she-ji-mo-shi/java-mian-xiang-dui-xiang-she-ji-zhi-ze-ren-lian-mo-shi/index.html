@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -431,132 +434,132 @@
 <p>在责任链模式里，由每一个请求处理者对象对其下家的引用而连接起来形成一条请求处理链。请求将在这条链上一直传递，直到链上的某一个请求处理者能够处理此请求。<strong>发出这个请求的客户端并不知道链上的哪一个请求处理者将处理这个请求，这使得系统可以在不影响客户端的情况下动态地重新组织链和分配责任</strong>。</p>
 <h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/11/04/chain-of-responsibility.png" alt="责任链模式UML类图"></p>
 <h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>首先，责任链模式的核心在于对请求处理者的抽象。在实现过程中，抽象处理者一般会被设定为<strong>抽象类</strong>，其典型实现代码如下所示：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 责任连模式的抽象处理者角色.
  *
  * Created by blinkfox on 16/7/11.
- */
-public abstract class Handler &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Handler</span> <span class="token punctuation">&#123;</span>
 
-    /** 后继处理者角色. */
-    protected Handler nextHandler;
+    <span class="token comment">/** 后继处理者角色. */</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Handler</span> nextHandler<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 处理请求的抽象方法.
      *
      * @param condition 条件
-     */
-    public abstract void handle(String condition);
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">String</span> condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * nextHandler的Setter方法.
      *
      * @param nextHandler 后继处理器
-     */
-    public void setNextHandler(Handler nextHandler) &#123;
-        this.nextHandler = nextHandler;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNextHandler</span><span class="token punctuation">(</span><span class="token class-name">Handler</span> nextHandler<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>nextHandler <span class="token operator">=</span> nextHandler<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>其次，是若干个具体的处理角色类。</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体处理角色1.
  *
  * Created by blinkfox on 16/7/11.
- */
-public class ConcreteHandler1 extends Handler &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteHandler1</span> <span class="token keyword">extends</span> <span class="token class-name">Handler</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体处理角色1的处理方法.
      *
      * @param condition 条件
-     */
-    @Override
-    public void handle(String condition) &#123;
-        // 如果是自己的责任，就自己处理，负责传给下家处理
-        if (&quot;ConcreteHandler1&quot;.equals(condition)) &#123;
-            System.out.println( &quot;具体处理角色1的处理方法handled1...&quot;);
-        &#125; else &#123;
-            System.out.println( &quot;具体处理角色1 通过...&quot;);
-            nextHandler.handle(condition);
-        &#125;
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">String</span> condition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 如果是自己的责任，就自己处理，负责传给下家处理</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"ConcreteHandler1"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">"具体处理角色1的处理方法handled1..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">"具体处理角色1 通过..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            nextHandler<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体处理角色2.
  *
  * Created by blinkfox on 16/7/11.
- */
-public class ConcreteHandler2 extends Handler &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteHandler2</span> <span class="token keyword">extends</span> <span class="token class-name">Handler</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体处理角色2的处理方法.
      *
      * @param condition 条件
-     */
-    @Override
-    public void handle(String condition) &#123;
-        // 如果是自己的责任，就自己处理，负责传给下家处理
-        if (&quot;ConcreteHandler2&quot;.equals(condition)) &#123;
-            System.out.println( &quot;具体处理角色2的处理方法handled1...&quot;);
-        &#125; else &#123;
-            System.out.println( &quot;具体处理角色2 通过...&quot;);
-            nextHandler.handle(condition);
-        &#125;
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">String</span> condition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 如果是自己的责任，就自己处理，负责传给下家处理</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"ConcreteHandler2"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">"具体处理角色2的处理方法handled1..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">"具体处理角色2 通过..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            nextHandler<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体处理角色n.
  *
  * Created by blinkfox on 16/7/11.
- */
-public class ConcreteHandlerN extends Handler &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteHandlerN</span> <span class="token keyword">extends</span> <span class="token class-name">Handler</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 这里假设n是链的最后一个节点必须处理掉.
      * 在实际情况下，可能出现环，或者是树形，这里并不一定是最后一个节点.
      *
      * @param condition 参数条件
-     */
-    @Override
-    public void handle(String condition) &#123;
-        System.out.println( &quot;具体处理角色n的处理方法 结束...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">String</span> condition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">"具体处理角色n的处理方法 结束..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是客户端场景类，代码调用示例如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 责任连模式的客户端场景类.
  *
  * Created by blinkfox on 16/7/11.
- */
-public class ChainClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ChainClient</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 主入口方法.
      *
      * @param args 数组参数
-     */
-    public static void main(String[] args) &#123;
-        Handler handler1 = new ConcreteHandler1();
-        Handler handler2 = new ConcreteHandler2();
-        Handler handlern = new ConcreteHandlerN();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Handler</span> handler1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteHandler1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Handler</span> handler2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteHandler2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Handler</span> handlern <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteHandlerN</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        handler1.setNextHandler(handler2);
-        handler2.setNextHandler(handlern);
+        handler1<span class="token punctuation">.</span><span class="token function">setNextHandler</span><span class="token punctuation">(</span>handler2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        handler2<span class="token punctuation">.</span><span class="token function">setNextHandler</span><span class="token punctuation">(</span>handlern<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        //假设这个请求是ConcreteHandler2的责任
-        handler1.handle(&quot;ConcreteHandler2&quot;);
-    &#125;
+        <span class="token comment">//假设这个请求是ConcreteHandler2的责任</span>
+        handler1<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token string">"ConcreteHandler2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注</strong>：责任链模式并不创建职责链，职责链的创建工作必须由系统的其他部分来完成，一般由使用该责任链的客户端创建。职责链模式降低了请求的发送者和请求处理者之间的耦合，从而使得多个请求处理者都有机会处理这个请求。</p>
 </blockquote>

@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -425,442 +428,442 @@
 <blockquote>
 <p><strong>注意</strong>：<code>poi-tl</code>只能生成<code>docx</code>文件，对word2007之前的<code>doc</code>文档则不支持。</p>
 </blockquote>
-<h3 id="Maven引入"><a href="#Maven引入" class="headerlink" title="Maven引入"></a>Maven引入</h3><pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.deepoove&lt;/groupId&gt;
-    &lt;artifactId&gt;poi-tl&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<h3 id="Maven引入"><a href="#Maven引入" class="headerlink" title="Maven引入"></a>Maven引入</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.deepoove<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>poi-tl<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注</strong>：该包带入了<code>POI3.16</code>，如果系统中本身有低于<code>3.15</code>版本的<code>POI</code>，需要排除掉，否则生成Word时会报错。</p>
 </blockquote>
 <h3 id="demo示例"><a href="#demo示例" class="headerlink" title="demo示例"></a>demo示例</h3><p>首先，制作一个用于测试的word模版，使用<code>poi-tl</code>的标记语法做如下标记，如下图所示：</p>
 <p><img src="https://statics.sh1a.qingstor.com/2018/10/01/test-word-template.jpg" alt="测试word模版"></p>
 <p>然后，构造一个需要渲染的model JavaBean类，如果有多个Bean，貌似只能通过继承来复用属性，采用组合的方式是渲染不了的，代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * BaseProp
  * @author blinkfox on 2017-06-28.
- */
-public class BaseProp &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BaseProp</span> <span class="token punctuation">&#123;</span>
     
-    protected String baseProp;
+    <span class="token keyword">protected</span> <span class="token class-name">String</span> baseProp<span class="token punctuation">;</span>
     
-    /**
+    <span class="token comment">/**
      * 构造方法.
      * @param baseProp 基础属性
-     */
-    public BaseProp() &#123;
-        super();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">BaseProp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getBaseProp() &#123;
-        return baseProp;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getBaseProp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> baseProp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setBaseProp(String baseProp) &#123;
-        this.baseProp = baseProp;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBaseProp</span><span class="token punctuation">(</span><span class="token class-name">String</span> baseProp<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>baseProp <span class="token operator">=</span> baseProp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 测试旅游信息的bean.
  * @author blinkfox on 2017-06-28.
- */
-public class Travel extends BaseProp &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Travel</span> <span class="token keyword">extends</span> <span class="token class-name">BaseProp</span> <span class="token punctuation">&#123;</span>
 
-    private String title;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> title<span class="token punctuation">;</span>
 
-    private String smallTitle;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> smallTitle<span class="token punctuation">;</span>
 
-    private String startDate;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> startDate<span class="token punctuation">;</span>
 
-    private String endDate;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> endDate<span class="token punctuation">;</span>
 
-    private int count;
+    <span class="token keyword">private</span> <span class="token keyword">int</span> count<span class="token punctuation">;</span>
 
-    private double money;
+    <span class="token keyword">private</span> <span class="token keyword">double</span> money<span class="token punctuation">;</span>
 
-    private String place1;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> place1<span class="token punctuation">;</span>
 
-    private String place2;
+    <span class="token keyword">private</span> <span class="token class-name">String</span> place2<span class="token punctuation">;</span>
 
-    private PictureRenderData pic;
+    <span class="token keyword">private</span> <span class="token class-name">PictureRenderData</span> pic<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 构造方法.
-     */
-    public Travel() &#123;
-        super();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Travel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /*getter和setter方法.*/
+    <span class="token comment">/*getter和setter方法.*/</span>
 
-    public String getTitle() &#123;
-        return title;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setTitle(String title) &#123;
-        this.title = title;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>title <span class="token operator">=</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getSmallTitle() &#123;
-        return smallTitle;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getSmallTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> smallTitle<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setSmallTitle(String smallTitle) &#123;
-        this.smallTitle = smallTitle;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSmallTitle</span><span class="token punctuation">(</span><span class="token class-name">String</span> smallTitle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>smallTitle <span class="token operator">=</span> smallTitle<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getStartDate() &#123;
-        return startDate;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getStartDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> startDate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setStartDate(String startDate) &#123;
-        this.startDate = startDate;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setStartDate</span><span class="token punctuation">(</span><span class="token class-name">String</span> startDate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>startDate <span class="token operator">=</span> startDate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getEndDate() &#123;
-        return endDate;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getEndDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> endDate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setEndDate(String endDate) &#123;
-        this.endDate = endDate;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEndDate</span><span class="token punctuation">(</span><span class="token class-name">String</span> endDate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>endDate <span class="token operator">=</span> endDate<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public int getCount() &#123;
-        return count;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setCount(int count) &#123;
-        this.count = count;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCount</span><span class="token punctuation">(</span><span class="token keyword">int</span> count<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">=</span> count<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public double getMoney() &#123;
-        return money;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> money<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setMoney(double money) &#123;
-        this.money = money;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setMoney</span><span class="token punctuation">(</span><span class="token keyword">double</span> money<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>money <span class="token operator">=</span> money<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getPlace1() &#123;
-        return place1;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getPlace1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> place1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setPlace1(String place1) &#123;
-        this.place1 = place1;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setPlace1</span><span class="token punctuation">(</span><span class="token class-name">String</span> place1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>place1 <span class="token operator">=</span> place1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getPlace2() &#123;
-        return place2;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getPlace2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> place2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setPlace2(String place2) &#123;
-        this.place2 = place2;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setPlace2</span><span class="token punctuation">(</span><span class="token class-name">String</span> place2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>place2 <span class="token operator">=</span> place2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public PictureRenderData getPic() &#123;
-        return pic;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">PictureRenderData</span> <span class="token function">getPic</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> pic<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public void setPic(PictureRenderData pic) &#123;
-        this.pic = pic;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setPic</span><span class="token punctuation">(</span><span class="token class-name">PictureRenderData</span> pic<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pic <span class="token operator">=</span> pic<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是模拟调用示例：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * poi-tl库的使用示例.
  * Created by blinkfox on 2017/6/27.
- */
-public class PoitlTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PoitlTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(PoitlTest.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">PoitlTest</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** 项目资源路径. */
-    private static final String PATH = &quot;F:/poitl-test/web&quot;;
+    <span class="token comment">/** 项目资源路径. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">PATH</span> <span class="token operator">=</span> <span class="token string">"F:/poitl-test/web"</span><span class="token punctuation">;</span>
 
-    /** word模板路径. */
-    private static final String DOC_PATH = PATH + &quot;/template/test/test.docx&quot;;
+    <span class="token comment">/** word模板路径. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">DOC_PATH</span> <span class="token operator">=</span> <span class="token constant">PATH</span> <span class="token operator">+</span> <span class="token string">"/template/test/test.docx"</span><span class="token punctuation">;</span>
 
-    /** 图片路径. */
-    private static final String PIC_PATH = PATH + &quot;/template/test/pic.png&quot;;
+    <span class="token comment">/** 图片路径. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">PIC_PATH</span> <span class="token operator">=</span> <span class="token constant">PATH</span> <span class="token operator">+</span> <span class="token string">"/template/test/pic.png"</span><span class="token punctuation">;</span>
 
-    /** 输出文件及路径. */
-    private static final String OUTPUT_PATH = &quot;G:/test/poitl_out_word.docx&quot;;
+    <span class="token comment">/** 输出文件及路径. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">OUTPUT_PATH</span> <span class="token operator">=</span> <span class="token string">"G:/test/poitl_out_word.docx"</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 构造Bean型的data数据.
      * @return map
-     */
-    private static Travel buildBeanData() &#123;
-        Travel travel = new Travel();
-        travel.setTitle(&quot;我的旅游日记&quot;);
-        travel.setSmallTitle(&quot;再写日记&quot;);
-        travel.setStartDate(&quot;2017-01-01&quot;);
-        travel.setEndDate(&quot;2017-06-28&quot;);
-        travel.setCount(3);
-        travel.setPlace1(&quot;九寨沟&quot;);
-        travel.setPlace2(&quot;天涯海角&quot;);
-        travel.setMoney(1872.52);
-        travel.setPic(new PictureRenderData(600, 400, PIC_PATH));
-        travel.setBaseProp(&quot;这是&quot;);
-        return travel;
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Travel</span> <span class="token function">buildBeanData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Travel</span> travel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Travel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">"我的旅游日记"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setSmallTitle</span><span class="token punctuation">(</span><span class="token string">"再写日记"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setStartDate</span><span class="token punctuation">(</span><span class="token string">"2017-01-01"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setEndDate</span><span class="token punctuation">(</span><span class="token string">"2017-06-28"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setCount</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setPlace1</span><span class="token punctuation">(</span><span class="token string">"九寨沟"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setPlace2</span><span class="token punctuation">(</span><span class="token string">"天涯海角"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setMoney</span><span class="token punctuation">(</span><span class="token number">1872.52</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setPic</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PictureRenderData</span><span class="token punctuation">(</span><span class="token number">600</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token constant">PIC_PATH</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        travel<span class="token punctuation">.</span><span class="token function">setBaseProp</span><span class="token punctuation">(</span><span class="token string">"这是"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> travel<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
      * @param args 数组参数
-     */
-    public static void main(String[] args) throws IOException &#123;
-        XWPFTemplate template = XWPFTemplate.compile(DOC_PATH).render(buildBeanData());
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">XWPFTemplate</span> template <span class="token operator">=</span> <span class="token class-name">XWPFTemplate</span><span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span><span class="token constant">DOC_PATH</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token function">buildBeanData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        FileOutputStream out = new FileOutputStream(OUTPUT_PATH);
-        template.write(out);
-        out.flush();
-        out.close();
-        template.close();
-        log.info(&quot;通过&#39;poi-tl&#39;导出word成功!&quot;);
-    &#125;
+        <span class="token class-name">FileOutputStream</span> out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token constant">OUTPUT_PATH</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        template<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>out<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        template<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"通过'poi-tl'导出word成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，在导出的文件夹中可查看生成的word文件，如下所示：</p>
 <p><img src="https://statics.sh1a.qingstor.com/2018/10/01/test-out-result.jpg" alt="生成的Word文件结果"></p>
 <h2 id="Java调用PhantomJS导出Ehcarts图片"><a href="#Java调用PhantomJS导出Ehcarts图片" class="headerlink" title="Java调用PhantomJS导出Ehcarts图片"></a>Java调用PhantomJS导出Ehcarts图片</h2><h3 id="PhantomJS介绍"><a href="#PhantomJS介绍" class="headerlink" title="PhantomJS介绍"></a>PhantomJS介绍</h3><p><code>PhantomJS</code>是一个基于<code>webkit</code>内核的无头浏览器，即没有UI界面的一个浏览器，只是其内的点击、翻页等人为相关操作需要程序设计实现。<code>PhantomJS</code>提供JavaScript API接口，即通过编写js程序可以直接与<code>webkit</code>内核交互，在此之上可以结合Java语言等，通过java调用js等相关操作，从而解决了以前<code>c/c++</code>才能比较好的基于<code>webkit</code>开发优质采集器的限制。</p>
 <h3 id="PhantomJS的安装配置"><a href="#PhantomJS的安装配置" class="headerlink" title="PhantomJS的安装配置"></a>PhantomJS的安装配置</h3><h4 id="windows环境"><a href="#windows环境" class="headerlink" title="windows环境"></a>windows环境</h4><p>如果是在windows环境下，则在官网下载解压到某个目录后，将其bin目录加入到<code>path</code>变量中即可。</p>
 <h4 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h4><p>如果是在<code>Linux</code>环境下，在官网下载解压后，同样需要将<code>PhantomJS</code>的<code>bin</code>目录加入到<code>path</code>环境变量中，参考的命令和配置如下：</p>
-<pre><code class="bash"># 编辑配置文件.
-vi ~/.bashrc
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 编辑配置文件.</span>
+<span class="token function">vi</span> ~/.bashrc
 
-# 将PhantomJS的bin目录加入到PATH环境变量中.
-export PHANTOMJS_HOME=/home/blinkfox/Documents/phantomjs-2.1.1-linux-x86_64
-export PATH=$&#123;PHANTOMJS_HOME&#125;/bin:$PATH
+<span class="token comment"># 将PhantomJS的bin目录加入到PATH环境变量中.</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">PHANTOMJS_HOME</span><span class="token operator">=</span>/home/blinkfox/Documents/phantomjs-2.1.1-linux-x86_64
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token variable">$&#123;PHANTOMJS_HOME&#125;</span>/bin:<span class="token environment constant">$PATH</span>
 
-# 退出vi编辑器，使用source命令让刚才的配置即时生效.
-source ~/.bashrc
+<span class="token comment"># 退出vi编辑器，使用source命令让刚才的配置即时生效.</span>
+<span class="token builtin class-name">source</span> ~/.bashrc
 
-# 测试PhantomJS是否安装成功，如果打出了版本信息，即安装成功.
-phantomjs -v
-</code></pre>
+<span class="token comment"># 测试PhantomJS是否安装成功，如果打出了版本信息，即安装成功.</span>
+phantomjs <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="demo示例-1"><a href="#demo示例-1" class="headerlink" title="demo示例"></a>demo示例</h3><p>这个demo的需求是这样的，我们使用Java调用<code>PhantomJS</code>的指令来在服务端加载含<code>ECharts</code>统计的图<code>html</code>文件，然后调用<code>ECharts</code>的生成图片方法，将图片传输到Java后台最终实现保存图片到指定路径中。</p>
 <p>首先，制作<code>ECharts</code>的html页面，示例页面如下代码如下：</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;
-&lt;title&gt;测试的ECharts数据统计图&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
-    &lt;div id=&quot;main&quot; style=&quot;width:560px; height:270px;&quot;&gt;&lt;/div&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>测试的ECharts数据统计图<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>main<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span>560px<span class="token punctuation">;</span> <span class="token property">height</span><span class="token punctuation">:</span>270px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;/js/lib/jquery/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;/js/lib/echarts/v3/echarts.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/js/lib/jquery/jquery-1.9.1.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/js/lib/echarts/v3/echarts.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
 
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+<span class="token comment">// 基于准备好的dom，初始化echarts实例</span>
+<span class="token keyword">var</span> myChart <span class="token operator">=</span> echarts<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'main'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// 指定图表的配置项和数据
-var option = &#123;
-    title: &#123;
-        text: &#39;ECharts 入门示例&#39;
-    &#125;,
-    animation: false, // 关闭动画效果
-    tooltip: &#123;&#125;,
-    legend: &#123;
-        data:[&#39;销量&#39;]
-    &#125;,
-    xAxis: &#123;
-        data: [&quot;衬衫&quot;,&quot;羊毛衫&quot;,&quot;雪纺衫&quot;,&quot;裤子&quot;,&quot;高跟鞋&quot;,&quot;袜子&quot;]
-    &#125;,
-    yAxis: &#123;&#125;,
-    series: [&#123;
-        name: &#39;销量&#39;,
-        type: &#39;bar&#39;,
-        data: [5, 20, 36, 10, 10, 20]
-    &#125;]
-&#125;;
+<span class="token comment">// 指定图表的配置项和数据</span>
+<span class="token keyword">var</span> option <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">text</span><span class="token operator">:</span> <span class="token string">'ECharts 入门示例'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">animation</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 关闭动画效果</span>
+    <span class="token literal-property property">tooltip</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">legend</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'销量'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">xAxis</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"衬衫"</span><span class="token punctuation">,</span><span class="token string">"羊毛衫"</span><span class="token punctuation">,</span><span class="token string">"雪纺衫"</span><span class="token punctuation">,</span><span class="token string">"裤子"</span><span class="token punctuation">,</span><span class="token string">"高跟鞋"</span><span class="token punctuation">,</span><span class="token string">"袜子"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">yAxis</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">series</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'销量'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'bar'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-// 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
+<span class="token comment">// 使用刚指定的配置项和数据显示图表。</span>
+myChart<span class="token punctuation">.</span><span class="token function">setOption</span><span class="token punctuation">(</span>option<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * ajax传输图片信息.
- */
-function postImage() &#123;
-    // 向后台发起请求保存图片到指定目录.
-    $.ajax(&#123;
-        type: &#39;POST&#39;,
-        url: &#39;/test/saveImage&#39;,
-        data: &#123;picInfo: myChart.getDataURL()&#125;,
-        success: function() &#123;
-            console.log(&#39;通过post请求传输数据成功!&#39;);
-        &#125;
-    &#125;);
-&#125;
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+ */</span>
+<span class="token keyword">function</span> <span class="token function">postImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 向后台发起请求保存图片到指定目录.</span>
+    $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/test/saveImage'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">picInfo</span><span class="token operator">:</span> myChart<span class="token punctuation">.</span><span class="token function">getDataURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'通过post请求传输数据成功!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后，使用<code>Servlet</code>来写一个服务端代码，用来获取<code>Base64</code>的图片信息并在后端解析保存图片，<code>Servlet</code>代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 保存Echarts统计图片的Servlet.
  * @author blinkfox on 2017-06-28.
- */
-public class SaveImageServlet extends HttpServlet &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SaveImageServlet</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">&#123;</span>
 
-    private static final long serialVersionUID = 1L;
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">1L</span><span class="token punctuation">;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(SaveImageServlet.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">SaveImageServlet</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 执行获取echarts图片的post请求.
      * @param request req
      * @param response resp
      * @throws ServletException Servlet异常.
      * @throws IOException IO异常.
-     */
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
-        // 获取图片信息.
-        String picInfo = request.getParameter(&quot;picInfo&quot;);
-        if (StringUtils.isBlank(picInfo)) &#123;
-            log.error(&quot;picInfo为空,未从前台获取到base64图片信息!&quot;);
-            return;
-        &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doPost</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 获取图片信息.</span>
+        <span class="token class-name">String</span> picInfo <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"picInfo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>picInfo<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"picInfo为空,未从前台获取到base64图片信息!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        this.getAndsaveImage(picInfo, &quot;G:/test/image1.png&quot;);
-    &#125;
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAndsaveImage</span><span class="token punctuation">(</span>picInfo<span class="token punctuation">,</span> <span class="token string">"G:/test/image1.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 获取并保存图片到本地.
      * @param picInfo 图片信息
      * @param imagePath 图片保存的路径
-     */
-    private void getAndsaveImage(String picInfo, String imagePath) &#123;
-        // 传递过程中  &quot;+&quot; 变为了 &quot; &quot;.
-        String newPicInfo = picInfo.replaceAll(&quot; &quot;, &quot;+&quot;);
-        String picPath = decodeBase64(newPicInfo, new File(imagePath));
-        log.warn(&quot;从echarts中生成图片的的路径为:&#123;&#125;&quot;, picPath);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">getAndsaveImage</span><span class="token punctuation">(</span><span class="token class-name">String</span> picInfo<span class="token punctuation">,</span> <span class="token class-name">String</span> imagePath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 传递过程中  "+" 变为了 " ".</span>
+        <span class="token class-name">String</span> newPicInfo <span class="token operator">=</span> picInfo<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">,</span> <span class="token string">"+"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> picPath <span class="token operator">=</span> <span class="token function">decodeBase64</span><span class="token punctuation">(</span>newPicInfo<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>imagePath<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">"从echarts中生成图片的的路径为:&#123;&#125;"</span><span class="token punctuation">,</span> picPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 解析Base64位信息并输出到某个目录下面.
      * @param base64Info base64串
      * @param picPath 生成的文件路径
      * @return 文件地址
-     */
-    private String decodeBase64(String base64Info, File picPath) &#123;
-        if (StringUtils.isEmpty(base64Info)) &#123;
-            return null;
-        &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> <span class="token function">decodeBase64</span><span class="token punctuation">(</span><span class="token class-name">String</span> base64Info<span class="token punctuation">,</span> <span class="token class-name">File</span> picPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>base64Info<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        // 数据中：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABI4AAAEsCAYAAAClh/jbAAA ...  在&quot;base64,&quot;之后的才是图片信息
-        String[] arr = base64Info.split(&quot;base64,&quot;);
+        <span class="token comment">// 数据中：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABI4AAAEsCAYAAAClh/jbAAA ...  在"base64,"之后的才是图片信息</span>
+        <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> base64Info<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"base64,"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 将图片输出到系统某目录.
-        OutputStream out = null;
-        try &#123;
-            // 使用了Apache commons codec的包来解析Base64
-            byte[] buffer = Base64.decodeBase64(arr[1]);
-            out = new FileOutputStream(picPath);
-            out.write(buffer);
-        &#125; catch (IOException e) &#123;
-            log.error(&quot;解析Base64图片信息并保存到某目录下出错!&quot;, e);
-        &#125; finally &#123;
-            IOUtils.closeQuietly(out);
-        &#125;
+        <span class="token comment">// 将图片输出到系统某目录.</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 使用了Apache commons codec的包来解析Base64</span>
+            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">decodeBase64</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>picPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"解析Base64图片信息并保存到某目录下出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeQuietly</span><span class="token punctuation">(</span>out<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        return picPath;
-    &#125;
+        <span class="token keyword">return</span> picPath<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后，是书写PhantomJS脚本<code>echarts_load.js</code>来加载和调用图片下载的代码：</p>
-<pre><code class="javascript">var system = require(&#39;system&#39;);
-var page = require(&#39;webpage&#39;).create();
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> system <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'system'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> page <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// 如果是windows,设置编码为gbk，防止中文乱码,Linux本身是UTF-8
-var osName = system.os.name;
-console.log(&#39;os name:&#39; + osName);
-if (&#39;windows&#39; === osName.toLowerCase()) &#123;
-    phantom.outputEncoding=&quot;gbk&quot;;
-&#125;
+<span class="token comment">// 如果是windows,设置编码为gbk，防止中文乱码,Linux本身是UTF-8</span>
+<span class="token keyword">var</span> osName <span class="token operator">=</span> system<span class="token punctuation">.</span>os<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'os name:'</span> <span class="token operator">+</span> osName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'windows'</span> <span class="token operator">===</span> osName<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    phantom<span class="token punctuation">.</span>outputEncoding<span class="token operator">=</span><span class="token string">"gbk"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-// 获取第二个参数(即请求地址url).
-var url = system.args[1];
-console.log(&#39;url:&#39; + url);
+<span class="token comment">// 获取第二个参数(即请求地址url).</span>
+<span class="token keyword">var</span> url <span class="token operator">=</span> system<span class="token punctuation">.</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'url:'</span> <span class="token operator">+</span> url<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// 显示控制台日志.
-page.onConsoleMessage = function(msg, lineNum, sourceId) &#123;
-    console.log(&#39;CONSOLE: &#39; + msg + &#39; (from line #&#39; + lineNum + &#39; in &quot;&#39; + sourceId + &#39;&quot;)&#39;);
-&#125;;
+<span class="token comment">// 显示控制台日志.</span>
+page<span class="token punctuation">.</span><span class="token function-variable function">onConsoleMessage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">msg<span class="token punctuation">,</span> lineNum<span class="token punctuation">,</span> sourceId</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'CONSOLE: '</span> <span class="token operator">+</span> msg <span class="token operator">+</span> <span class="token string">' (from line #'</span> <span class="token operator">+</span> lineNum <span class="token operator">+</span> <span class="token string">' in "'</span> <span class="token operator">+</span> sourceId <span class="token operator">+</span> <span class="token string">'")'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-//打开给定url的页面.
-var start = new Date().getTime();
-page.open(url, function(status) &#123;
-    if (status == &#39;success&#39;) &#123;
-        console.log(&#39;echarts页面加载完成,加载耗时:&#39; + (new Date().getTime() - start) + &#39; ms&#39;);
+<span class="token comment">//打开给定url的页面.</span>
+<span class="token keyword">var</span> start <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+page<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">status</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">==</span> <span class="token string">'success'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'echarts页面加载完成,加载耗时:'</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">' ms'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 由于echarts动画效果，延迟500毫秒确保图片渲染完毕再调用下载图片方法.
-        setTimeout(function() &#123;
-            page.evaluate(function() &#123;
-                postImage();
-                console.log(&quot;调用了echarts的下载图片功能.&quot;);
-            &#125;);
-        &#125;, 500);
-    &#125; else &#123;
-        console.log(&quot;页面加载失败 Page failed to load!&quot;);
-    &#125;
+        <span class="token comment">// 由于echarts动画效果，延迟500毫秒确保图片渲染完毕再调用下载图片方法.</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            page<span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">postImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"调用了echarts的下载图片功能."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"页面加载失败 Page failed to load!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    // 3秒后再关闭浏览器.
-    setTimeout(function() &#123;
-        phantom.exit();
-    &#125;, 3000);
-&#125;);
-</code></pre>
+    <span class="token comment">// 3秒后再关闭浏览器.</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        phantom<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是使用<code>Java</code>来调用<code>PhantomJS</code>的指令，代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * HttpTest.
  * @author blinkfox on 2017-06-28.
  * @version 1.0
- */
-public class HttpTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HttpTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(HttpTest.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">HttpTest</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    private static final String PHANTOM_PATH = &quot;phantomjs&quot;;
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">PHANTOM_PATH</span> <span class="token operator">=</span> <span class="token string">"phantomjs"</span><span class="token punctuation">;</span>
 
-    //这里我的test.js是保存在G盘下面的phantomjs目录
-    private static final String TEST_JS = &quot;G:/test/phantom/test.js &quot;;
+    <span class="token comment">//这里我的test.js是保存在G盘下面的phantomjs目录</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">TEST_JS</span> <span class="token operator">=</span> <span class="token string">"G:/test/phantom/test.js "</span><span class="token punctuation">;</span>
 
-    public void String downloadImage(String url) throws IOException &#123;
-        String cmdStr = PHANTOM_PATH + TEST_JS + url;
-        log.info(&quot;命令行字符串:&#123;&#125;&quot;, cmdStr);
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token class-name">String</span> <span class="token function">downloadImage</span><span class="token punctuation">(</span><span class="token class-name">String</span> url<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> cmdStr <span class="token operator">=</span> <span class="token constant">PHANTOM_PATH</span> <span class="token operator">+</span> <span class="token constant">TEST_JS</span> <span class="token operator">+</span> url<span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"命令行字符串:&#123;&#125;"</span><span class="token punctuation">,</span> cmdStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Runtime rt = Runtime.getRuntime();
-        try &#123;
-            rt.exec(cmdStr);
-        &#125; catch (IOException e) &#123;
-            log.error(&quot;执行phantomjs的指令失败！请检查是否安装有PhantomJs的环境或配置path路径！PhantomJs详情参考这里:http://phantomjs.org&quot;, e);
-        &#125;
-    &#125;
+        <span class="token class-name">Runtime</span> rt <span class="token operator">=</span> <span class="token class-name">Runtime</span><span class="token punctuation">.</span><span class="token function">getRuntime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            rt<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>cmdStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"执行phantomjs的指令失败！请检查是否安装有PhantomJs的环境或配置path路径！PhantomJs详情参考这里:http://phantomjs.org"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * main.
      * @param args args
      * @throws IOException IO异常
-     */
-    public static void main(String[] args) throws IOException &#123;
-        downloadImage(&quot;http://127.0.0.1:8080/test/echart_test/test_echarts.html&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">downloadImage</span><span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:8080/test/echart_test/test_echarts.html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>通过调用测试代码即可在指定目录生成<code>Echarts</code>的图片啦！</p>
 <p>联系上面生成<code>Word</code>的功能，两个功能一结合即可动态导出<code>ECharts</code>图片到<code>Word</code>文件中。</p>
 

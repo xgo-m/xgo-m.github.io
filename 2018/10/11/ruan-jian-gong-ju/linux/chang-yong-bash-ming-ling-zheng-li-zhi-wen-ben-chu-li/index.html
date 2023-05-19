@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -417,118 +420,116 @@
             <div id="articleContent">
                 <h2 id="1-sort-文本排序"><a href="#1-sort-文本排序" class="headerlink" title="1. sort - 文本排序"></a>1. sort - 文本排序</h2><p><code>sort</code>命令用于将文本文件的行排序。默认情况下，<code>sort</code>命令是按照字符串的字母顺序排序。</p>
 <p>sort 的常用命令如下：</p>
-<pre><code class="bash"># 将文本内容按字母顺序排序
-sort example.txt
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 将文本内容按字母顺序排序</span>
+<span class="token function">sort</span> example.txt
 
-# 使用 -u 选项，移除所有重复行后排序
-sort -u example.txt
+<span class="token comment"># 使用 -u 选项，移除所有重复行后排序</span>
+<span class="token function">sort</span> <span class="token parameter variable">-u</span> example.txt
 
-# 使用 -n 选项，将令数字按数值的大小排序
-sort -n example.txt
+<span class="token comment"># 使用 -n 选项，将令数字按数值的大小排序</span>
+<span class="token function">sort</span> <span class="token parameter variable">-n</span> example.txt
 
-# 使用 -r 选项，以倒序方式排序
-sort -n -r example.txt
+<span class="token comment"># 使用 -r 选项，以倒序方式排序</span>
+<span class="token function">sort</span> <span class="token parameter variable">-n</span> <span class="token parameter variable">-r</span> example.txt
 
-# 同时将 file1、file2 的内容排序
-sort file1 file2
-</code></pre>
+<span class="token comment"># 同时将 file1、file2 的内容排序</span>
+<span class="token function">sort</span> file1 file2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="2-uniq-文本去重"><a href="#2-uniq-文本去重" class="headerlink" title="2.uniq - 文本去重"></a>2.uniq - 文本去重</h2><p><code>uniq</code>命令用于移除或发现文件中重复的条目。</p>
-<pre><code class="bash"># 它将移除文件中重复的行并显示单一行
-uniq example.txt
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 它将移除文件中重复的行并显示单一行</span>
+<span class="token function">uniq</span> example.txt
 
-# 可以统计重复行出现的次数
-uniq -c example.txt
+<span class="token comment"># 可以统计重复行出现的次数</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-c</span> example.txt
 
-# 使用 -d 选项，只显示文件中有重复的行并只显示一次
-uniq -d example.txt
+<span class="token comment"># 使用 -d 选项，只显示文件中有重复的行并只显示一次</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-d</span> example.txt
 
-# 使用 -D 选项，显示文件中所有重复的行
-uniq -D example.txt
+<span class="token comment"># 使用 -D 选项，显示文件中所有重复的行</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-D</span> example.txt
 
-# 使用 -u 选项，只显示文件中不重复的行
-uniq -u example.txt
+<span class="token comment"># 使用 -u 选项，只显示文件中不重复的行</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-u</span> example.txt
 
-# 使用 -w 选项，限制 uniq 命令只比较每行的前 3 个字符是否重复
-uniq -w 3 example.txt
+<span class="token comment"># 使用 -w 选项，限制 uniq 命令只比较每行的前 3 个字符是否重复</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-w</span> <span class="token number">3</span> example.txt
 
-# 使用 -s 选项，避免 uniq 命令比较每行的前 3 个字符，只比较后面的字符是否重复
-uniq -s 3 example.txt
+<span class="token comment"># 使用 -s 选项，避免 uniq 命令比较每行的前 3 个字符，只比较后面的字符是否重复</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-s</span> <span class="token number">3</span> example.txt
 
-# 使用 -f 选项，避免 uniq 命令比较第一列的内容，只比较后面的字符是否重复
-uniq -f 1 example.txt
-</code></pre>
+<span class="token comment"># 使用 -f 选项，避免 uniq 命令比较第一列的内容，只比较后面的字符是否重复</span>
+<span class="token function">uniq</span> <span class="token parameter variable">-f</span> <span class="token number">1</span> example.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="3-tr-替换或删除字符"><a href="#3-tr-替换或删除字符" class="headerlink" title="3.tr - 替换或删除字符"></a>3.tr - 替换或删除字符</h2><p><code>tr</code>命令主要用于删除文件中控制字符或进行字符转换。使用<code>tr</code>时要转换两个字符串：字符串 1 用于查询，字符串 2 用于处理各种转换。<code>tr</code>刚执行时，字符串 1 中的字符被映射到字符串 2 中的字符，然后转换操作开始。</p>
 <p><code>tr</code>命令的语法如下所示：</p>
-<pre><code class="bash">tr [OPTION]... SET1 [SET2]
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tr</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. SET1 <span class="token punctuation">[</span>SET2<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>常用命令示例：</p>
-<pre><code class="bash"># 若要将大括号转换为小括号
-tr &#39;&#123;&#125;&#39; &#39;()&#39; &lt; textfile &gt; newfile
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 若要将大括号转换为小括号</span>
+<span class="token function">tr</span> <span class="token string">'&#123;&#125;'</span> <span class="token string">'()'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 若要将大括号转换成方括号
-tr &#39;&#123;&#125;&#39; &#39;\[]&#39; &lt; textfile &gt; newfile
+<span class="token comment"># 若要将大括号转换成方括号</span>
+<span class="token function">tr</span> <span class="token string">'&#123;&#125;'</span> <span class="token string">'\[]'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 若要将小写字符转换成大写，请输入：
-tr &#39;a-z&#39; &#39;A-Z&#39; &lt; textfile &gt; newfile
+<span class="token comment"># 若要将小写字符转换成大写，请输入：</span>
+<span class="token function">tr</span> <span class="token string">'a-z'</span> <span class="token string">'A-Z'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 若要创建一个文件中的单词列表
-tr -cs &#39;[:lower:][:upper:]&#39; &#39;[\n*]&#39; &lt; textfile &gt; newfile
+<span class="token comment"># 若要创建一个文件中的单词列表</span>
+<span class="token function">tr</span> <span class="token parameter variable">-cs</span> <span class="token string">'[:lower:][:upper:]'</span> <span class="token string">'[\n*]'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 若要从某个文件中删除所有空字符
-tr -d &#39;\0&#39; &lt; textfile &gt; newfile
+<span class="token comment"># 若要从某个文件中删除所有空字符</span>
+<span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'\0'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 若要用单独的换行替换每一序列的一个或多个换行，请输入：
-tr -s &#39;\n&#39; &lt; textfile &gt; newfile
+<span class="token comment"># 若要用单独的换行替换每一序列的一个或多个换行，请输入：</span>
+<span class="token function">tr</span> <span class="token parameter variable">-s</span> <span class="token string">'\n'</span> <span class="token operator">&lt;</span> textfile <span class="token operator">></span> newfile
 
-# 要以单个“#”字符替换 &lt;space&gt; 字符类中的每个字符序列
-tr -s &#39;[:space:]&#39; &#39;[#*]&#39;
-</code></pre>
+<span class="token comment"># 要以单个“#”字符替换 &lt;space> 字符类中的每个字符序列</span>
+<span class="token function">tr</span> <span class="token parameter variable">-s</span> <span class="token string">'[:space:]'</span> <span class="token string">'[#*]'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="4-grep-查找字符串"><a href="#4-grep-查找字符串" class="headerlink" title="4.grep - 查找字符串"></a>4.grep - 查找字符串</h2><p><code>grep</code>命令用于搜索文本或指定的文件中与指定的字符串或模式相匹配的行。默认情况下，<code>grep</code>命令只显示匹配的行。</p>
 <p><code>grep</code>命令的语法如下所示：</p>
-<pre><code class="bash">grep [OPTION]... PATTERN [FILE]...
-grep [OPTION]... [-e PATTERN | -f FILE] [FILE]...
-</code></pre>
-<pre><code class="bash"># `grep`命令查找文件/etc/passwd 中帐号 blinkfox 的信息
-grep blinkfox /etc/passwd
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">grep</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. PATTERN <span class="token punctuation">[</span>FILE<span class="token punctuation">]</span><span class="token punctuation">..</span>.
+<span class="token function">grep</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. <span class="token punctuation">[</span>-e PATTERN <span class="token operator">|</span> <span class="token parameter variable">-f</span> FILE<span class="token punctuation">]</span> <span class="token punctuation">[</span>FILE<span class="token punctuation">]</span><span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-# 使用 -i 选项，强制 grep 命令忽略搜索关键字的大小写
-grep -i blinkfox /etc/passwd
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># `grep`命令查找文件/etc/passwd 中帐号 blinkfox 的信息</span>
+<span class="token function">grep</span> blinkfox /etc/passwd
 
-# 使用 -r 选项，可以递归搜索指定目录下的所有文件
-grep -r blinkfox /etc/
+<span class="token comment"># 使用 -i 选项，强制 grep 命令忽略搜索关键字的大小写</span>
+<span class="token function">grep</span> <span class="token parameter variable">-i</span> blinkfox /etc/passwd
 
-# 使用 -w 选项，只匹配包含指定单词的行
-grep -w blinkfox /etc/
+<span class="token comment"># 使用 -r 选项，可以递归搜索指定目录下的所有文件</span>
+<span class="token function">grep</span> <span class="token parameter variable">-r</span> blinkfox /etc/
 
-# 使用 -c 选项，报告文件或文本中模式被匹配的次数
-grep -c blinkfox /etc/passwd
+<span class="token comment"># 使用 -w 选项，只匹配包含指定单词的行</span>
+<span class="token function">grep</span> <span class="token parameter variable">-w</span> blinkfox /etc/
 
-# 使用 -n 选项，显示每一个匹配的行的行号
-grep -n blinkfox /etc/passwd
+<span class="token comment"># 使用 -c 选项，报告文件或文本中模式被匹配的次数</span>
+<span class="token function">grep</span> <span class="token parameter variable">-c</span> blinkfox /etc/passwd
 
-# 使用 -v 选项，可以输出除匹配指定模式的行以外的其他所有行
-grep -v blinkfox /etc/passwd
+<span class="token comment"># 使用 -n 选项，显示每一个匹配的行的行号</span>
+<span class="token function">grep</span> <span class="token parameter variable">-n</span> blinkfox /etc/passwd
 
-# 使用 --color 选项，在输出中将匹配的字符串以彩色的形式标出
-grep --color blinkfox /etc/passwd
-</code></pre>
+<span class="token comment"># 使用 -v 选项，可以输出除匹配指定模式的行以外的其他所有行</span>
+<span class="token function">grep</span> <span class="token parameter variable">-v</span> blinkfox /etc/passwd
+
+<span class="token comment"># 使用 --color 选项，在输出中将匹配的字符串以彩色的形式标出</span>
+<span class="token function">grep</span> <span class="token parameter variable">--color</span> blinkfox /etc/passwd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="5-diff-比较两个文件"><a href="#5-diff-比较两个文件" class="headerlink" title="5.diff - 比较两个文件"></a>5.diff - 比较两个文件</h2><p><code>diff</code>命令用于比较两个文件，并找出它们之间的不同。<code>diff</code>命令的语法如下所示：</p>
-<pre><code class="bash">diff [OPTION]... from-file to-file
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">diff</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. from-file to-file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>常用使用方式如下：</p>
-<pre><code class="bash"># 比较两个文件
-diff nsswitch.conf nsswitch.conf.org
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 比较两个文件</span>
+<span class="token function">diff</span> nsswitch.conf nsswitch.conf.org
 
-# 使用 -w 选项，比较时忽略空格
-diff -w nsswitch.conf nsswitch.conf.org
+<span class="token comment"># 使用 -w 选项，比较时忽略空格</span>
+<span class="token function">diff</span> <span class="token parameter variable">-w</span> nsswitch.conf nsswitch.conf.org
 
-# 使用 -y 选项，以并排的格式输出两个文件的比较结果
-diff -y nsswitch.conf nsswitch.conf.org
+<span class="token comment"># 使用 -y 选项，以并排的格式输出两个文件的比较结果</span>
+<span class="token function">diff</span> <span class="token parameter variable">-y</span> nsswitch.conf nsswitch.conf.org
 
-使用 -c 选项，以上下对比的格式输出两个文件的比较结果
-diff -c nsswitch.conf nsswitch.conf.org
-</code></pre>
-
+使用 <span class="token parameter variable">-c</span> 选项，以上下对比的格式输出两个文件的比较结果
+<span class="token function">diff</span> <span class="token parameter variable">-c</span> nsswitch.conf nsswitch.conf.org<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

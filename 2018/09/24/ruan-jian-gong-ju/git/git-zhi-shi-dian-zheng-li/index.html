@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -451,22 +454,22 @@
 </ul>
 <h3 id="1-文件状态"><a href="#1-文件状态" class="headerlink" title="(1).文件状态"></a>(1).文件状态</h3><p>Git 有三种状态，你的文件可能处于其中之一：**已提交(<code>committed</code>)<strong>、</strong>已修改(<code>modified</code>)<strong>和</strong>已暂存(<code>staged</code>)**。</p>
 <h2 id="3-Git配置系统级、全局、当前仓库用户名、邮箱的命令"><a href="#3-Git配置系统级、全局、当前仓库用户名、邮箱的命令" class="headerlink" title="3. Git配置系统级、全局、当前仓库用户名、邮箱的命令"></a>3. Git配置系统级、全局、当前仓库用户名、邮箱的命令</h2><p>系统级、全局、当前仓库选项分别是:仓库-system、-global、-local(或默认不填)</p>
-<pre><code class="bash">git config --global user.name &quot;Jerry Mouse&quot;
-git config --global user.email &quot;jerry@yiibai.com&quot;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"Jerry Mouse"</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"jerry@yiibai.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p>列出Git设置</p>
-<pre><code class="bash">
-git config --list
-git config -l
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
+<span class="token function">git</span> config <span class="token parameter variable">--list</span>
+<span class="token function">git</span> config <span class="token parameter variable">-l</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="4-Git-fetch和pull的区别"><a href="#4-Git-fetch和pull的区别" class="headerlink" title="4. Git fetch和pull的区别"></a>4. Git fetch和pull的区别</h2><ul>
 <li><code>git fetch</code>：相当于是从远程获取最新版本到本地，不会自动merge.</li>
 <li><code>git pull</code>：相当于是从远程获取最新版本并merge到本地.</li>
 </ul>
-<h3 id="1-git-fetch示例："><a href="#1-git-fetch示例：" class="headerlink" title="(1). git fetch示例："></a>(1). git fetch示例：</h3><pre><code class="bash">Git fetch origin master
-git log -p master..origin/master
-git merge origin/master
-</code></pre>
+<h3 id="1-git-fetch示例："><a href="#1-git-fetch示例：" class="headerlink" title="(1). git fetch示例："></a>(1). git fetch示例：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Git fetch origin master
+<span class="token function">git</span> log <span class="token parameter variable">-p</span> master<span class="token punctuation">..</span>origin/master
+<span class="token function">git</span> merge origin/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>以上命令的含义：</p>
 <ul>
 <li>首先从远程的<code>origin</code>的<code>master</code>主分支下载最新的版本到<code>origin/master</code>分支上</li>
@@ -474,8 +477,8 @@ git merge origin/master
 <li>最后进行合并</li>
 <li>上述过程其实可以用以下更清晰的方式来进行：</li>
 </ul>
-<h3 id="1-git-pull示例："><a href="#1-git-pull示例：" class="headerlink" title="(1). git pull示例："></a>(1). git pull示例：</h3><pre><code class="bash">git pull origin master
-</code></pre>
+<h3 id="1-git-pull示例："><a href="#1-git-pull示例：" class="headerlink" title="(1). git pull示例："></a>(1). git pull示例：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>上述命令其实相当于<code>git fetch</code>和<code>git merge</code>。在实际使用中，<code>git fetch</code>更安全一些，因为在merge前，我们可以查看更新情况，然后再决定是否合并。</p>
 <h2 id="5-Git-reset和revert的却别"><a href="#5-Git-reset和revert的却别" class="headerlink" title="5. Git reset和revert的却别"></a>5. Git reset和revert的却别</h2><ul>
 <li><code>git revert</code>是用一次新的commit来回滚之前的commit，<code>git reset</code>是直接删除指定的commit。 </li>
@@ -515,123 +518,123 @@ git merge origin/master
 <li>git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。</li>
 <li>git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了</li>
 </ul>
-<pre><code class="bash"># 恢复工作进度
-git stash pop [--index] [&lt;stash&gt;]
---index 参数：不仅恢复工作区，还恢复暂存区
-&lt;stash&gt; 指定恢复某一个具体进度。如果没有这个参数，默认恢复最新进度
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 恢复工作进度</span>
+<span class="token function">git</span> stash pop <span class="token punctuation">[</span>--index<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>stash<span class="token operator">></span><span class="token punctuation">]</span>
+<span class="token parameter variable">--index</span> 参数：不仅恢复工作区，还恢复暂存区
+<span class="token operator">&lt;</span>stash<span class="token operator">></span> 指定恢复某一个具体进度。如果没有这个参数，默认恢复最新进度
 
-# 这是git stash保存进度的完整命令形式
-git stash [save message] [-k|--no-keep-index] [--patch]
+<span class="token comment"># 这是git stash保存进度的完整命令形式</span>
+<span class="token function">git</span> stash <span class="token punctuation">[</span>save message<span class="token punctuation">]</span> <span class="token punctuation">[</span>-k<span class="token operator">|</span>--no-keep-index<span class="token punctuation">]</span> <span class="token punctuation">[</span>--patch<span class="token punctuation">]</span>
 -k和--no-keep-index指定保存进度后，是否重置暂存区
---patch 会显示工作区和HEAD的差异,通过编辑差异文件，排除不需要保存的内容。和git add -p命令类似
+<span class="token parameter variable">--patch</span> 会显示工作区和HEAD的差异,通过编辑差异文件，排除不需要保存的内容。和git <span class="token function">add</span> -p命令类似
 
 使用save可以对进度添加备注
-# git stash save &quot;这是保存的进度&quot;
-</code></pre>
-<h2 id="8-Git只从暂存区删除，从工作空间删除的命令分别是什么"><a href="#8-Git只从暂存区删除，从工作空间删除的命令分别是什么" class="headerlink" title="8. Git只从暂存区删除，从工作空间删除的命令分别是什么?"></a>8. Git只从暂存区删除，从工作空间删除的命令分别是什么?</h2><pre><code class="bash">git rm --cached
+<span class="token comment"># git stash save "这是保存的进度"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-git rm
-git commit
-</code></pre>
-<h2 id="9-Git标签的使用"><a href="#9-Git标签的使用" class="headerlink" title="9. Git标签的使用"></a>9. Git标签的使用</h2><pre><code class="bash"># 列出现有的标签
-git tag
+<h2 id="8-Git只从暂存区删除，从工作空间删除的命令分别是什么"><a href="#8-Git只从暂存区删除，从工作空间删除的命令分别是什么" class="headerlink" title="8. Git只从暂存区删除，从工作空间删除的命令分别是什么?"></a>8. Git只从暂存区删除，从工作空间删除的命令分别是什么?</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">rm</span> <span class="token parameter variable">--cached</span>
 
-# 打标签
-git tag -a v1.01 -m &quot;Relase version 1.01&quot;
+<span class="token function">git</span> <span class="token function">rm</span>
+<span class="token function">git</span> commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-# 查看相应标签的版本信息
-git show v1.4
-</code></pre>
+<h2 id="9-Git标签的使用"><a href="#9-Git标签的使用" class="headerlink" title="9. Git标签的使用"></a>9. Git标签的使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 列出现有的标签</span>
+<span class="token function">git</span> tag
+
+<span class="token comment"># 打标签</span>
+<span class="token function">git</span> tag <span class="token parameter variable">-a</span> v1.01 <span class="token parameter variable">-m</span> <span class="token string">"Relase version 1.01"</span>
+
+<span class="token comment"># 查看相应标签的版本信息</span>
+<span class="token function">git</span> show v1.4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>-a 选项,创建一个含附注类型的标签</li>
 <li>-m 选项,指定了对应的标签说明</li>
 </ul>
-<h2 id="9-Git分支的使用"><a href="#9-Git分支的使用" class="headerlink" title="9. Git分支的使用"></a>9. Git分支的使用</h2><pre><code class="bash"># 查看本地分支
-git branch
+<h2 id="9-Git分支的使用"><a href="#9-Git分支的使用" class="headerlink" title="9. Git分支的使用"></a>9. Git分支的使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看本地分支</span>
+<span class="token function">git</span> branch
 
-# 查看远程分支
-git branch -r
+<span class="token comment"># 查看远程分支</span>
+<span class="token function">git</span> branch <span class="token parameter variable">-r</span>
 
-# 创建本地分支(注意新分支创建后不会自动切换为当前分支)
-git branch [name]
+<span class="token comment"># 创建本地分支(注意新分支创建后不会自动切换为当前分支)</span>
+<span class="token function">git</span> branch <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
 
-# 切换分支
-git checkout [name]
+<span class="token comment"># 切换分支</span>
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
 
-# 创建新分支并立即切换到新分支
-git checkout -b [name]
+<span class="token comment"># 创建新分支并立即切换到新分支</span>
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
 
-# 强制删除一个分支
-git branch -D [name]
+<span class="token comment"># 强制删除一个分支</span>
+<span class="token function">git</span> branch <span class="token parameter variable">-D</span> <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
 
-# 合并分支(将名称为[name]的分支与当前分支合并)
-git merge [name]
+<span class="token comment"># 合并分支(将名称为[name]的分支与当前分支合并)</span>
+<span class="token function">git</span> merge <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
 
-# 查看各个分支最后提交信息
-git br -v
+<span class="token comment"># 查看各个分支最后提交信息</span>
+<span class="token function">git</span> br <span class="token parameter variable">-v</span>
 
-# 查看已经被合并到当前分支的分支
-git br --merged
+<span class="token comment"># 查看已经被合并到当前分支的分支</span>
+<span class="token function">git</span> br <span class="token parameter variable">--merged</span>
 
-# 查看尚未被合并到当前分支的分支
-git br --no-merged
-</code></pre>
+<span class="token comment"># 查看尚未被合并到当前分支的分支</span>
+<span class="token function">git</span> br --no-merged<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="10-介绍Git冲突处理经验，以及merge和rebase中的ours和theirs的差别。"><a href="#10-介绍Git冲突处理经验，以及merge和rebase中的ours和theirs的差别。" class="headerlink" title="10. 介绍Git冲突处理经验，以及merge和rebase中的ours和theirs的差别。"></a>10. 介绍Git冲突处理经验，以及merge和rebase中的ours和theirs的差别。</h2><p>merge和rebase对于ours和theirs的定义是完全相反的。在merge时，ours指代的是当前分支，theirs代表需要被合并的分支。而在rebase过程中，ours指向了修改参考分支，theirs却是当前分支。因为rebase 隐含了一个<code>git checkout upstream</code>的过程，将<code>HEAD</code>从local分支变成了upstream分支。git会在rebase结束后撤销这个改变，但它已经不可避免地影响了冲突的状态，使rebase中ours和theirs的定义与merge 截然相反。因此，在使用ours与theirs时请格外小心。</p>
 <h2 id="11-Git远程操作相关"><a href="#11-Git远程操作相关" class="headerlink" title="11. Git远程操作相关"></a>11. Git远程操作相关</h2><h3 id="1-clone"><a href="#1-clone" class="headerlink" title="(1). clone"></a>(1). clone</h3><blockquote>
 <p>git clone &lt;版本库的网址&gt;<br>git clone &lt;版本库的网址&gt; &lt;本地目录名&gt;</p>
 </blockquote>
-<pre><code class="bash"># 克隆jQuery的版本库
- git clone https://github.com/jquery/jquery.git
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 克隆jQuery的版本库</span>
+ <span class="token function">git</span> clone https://github.com/jquery/jquery.git
  
- git clone -o jQuery https://github.com/jquery/jquery.git
-</code></pre>
-<h3 id="2-remote"><a href="#2-remote" class="headerlink" title="(2). remote"></a>(2). remote</h3><pre><code class="bash"># 列出所有远程主机
-git remote
+ <span class="token function">git</span> clone <span class="token parameter variable">-o</span> jQuery https://github.com/jquery/jquery.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-# 使用-v选项，可以参看远程主机的网址
-git remote -v
+<h3 id="2-remote"><a href="#2-remote" class="headerlink" title="(2). remote"></a>(2). remote</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 列出所有远程主机</span>
+<span class="token function">git</span> remote
+
+<span class="token comment"># 使用-v选项，可以参看远程主机的网址</span>
+<span class="token function">git</span> remote <span class="token parameter variable">-v</span>
  
-# 可以查看该主机的详细信息
-git remote show &lt;主机名&gt;
+<span class="token comment"># 可以查看该主机的详细信息</span>
+<span class="token function">git</span> remote show <span class="token operator">&lt;</span>主机名<span class="token operator">></span>
  
-# 添加远程主机
-git remote add &lt;主机名&gt; &lt;网址&gt;
+<span class="token comment"># 添加远程主机</span>
+<span class="token function">git</span> remote <span class="token function">add</span> <span class="token operator">&lt;</span>主机名<span class="token operator">></span> <span class="token operator">&lt;</span>网址<span class="token operator">></span>
 
-# 删除远程主机
-git remote rm &lt;主机名&gt;
+<span class="token comment"># 删除远程主机</span>
+<span class="token function">git</span> remote <span class="token function">rm</span> <span class="token operator">&lt;</span>主机名<span class="token operator">></span>
 
-# 修改远程主机名称
-git remote rename &lt;原主机名&gt; &lt;新主机名&gt;
-</code></pre>
-<h3 id="3-fetch"><a href="#3-fetch" class="headerlink" title="(3). fetch"></a>(3). fetch</h3><pre><code class="bash"># 取回所有分支(branch)的更新到本地
-git fetch &lt;远程主机名&gt;
+<span class="token comment"># 修改远程主机名称</span>
+<span class="token function">git</span> remote <span class="token function">rename</span> <span class="token operator">&lt;</span>原主机名<span class="token operator">></span> <span class="token operator">&lt;</span>新主机名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-# 取回某的特定分支的更新
-git fetch &lt;远程主机名&gt; &lt;分支名&gt;
+<h3 id="3-fetch"><a href="#3-fetch" class="headerlink" title="(3). fetch"></a>(3). fetch</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 取回所有分支(branch)的更新到本地</span>
+<span class="token function">git</span> fetch <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span>
 
-# 取回origin主机的master分支的更新
-git fetch origin master
+<span class="token comment"># 取回某的特定分支的更新</span>
+<span class="token function">git</span> fetch <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>分支名<span class="token operator">></span>
 
-# 所取回的更新，在本地主机上要用”远程主机名/分支名”的形式读取。比如origin主机的master，就要用origin/master读取。可以使用git merge命令或者git rebase命令，在本地分支上合并远程分支
-git merge origin/master
-git rebase origin/master
-</code></pre>
+<span class="token comment"># 取回origin主机的master分支的更新</span>
+<span class="token function">git</span> fetch origin master
+
+<span class="token comment"># 所取回的更新，在本地主机上要用”远程主机名/分支名”的形式读取。比如origin主机的master，就要用origin/master读取。可以使用git merge命令或者git rebase命令，在本地分支上合并远程分支</span>
+<span class="token function">git</span> merge origin/master
+<span class="token function">git</span> rebase origin/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="4-pull"><a href="#4-pull" class="headerlink" title="(4). pull"></a>(4). pull</h3><blockquote>
 <p>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</p>
 </blockquote>
-<pre><code class="bash"># 取回origin主机的next分支，与本地的master分支合并
-git pull origin next:master
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 取回origin主机的next分支，与本地的master分支合并</span>
+<span class="token function">git</span> pull origin next:master
 
-# 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。
-git pull origin next
+<span class="token comment"># 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。</span>
+<span class="token function">git</span> pull origin next
 
-# 上面的命令实质上等同于先做git fetch，再做git merge。
-git fetch origin
-git merge origin/next
+<span class="token comment"># 上面的命令实质上等同于先做git fetch，再做git merge。</span>
+<span class="token function">git</span> fetch origin
+<span class="token function">git</span> merge origin/next
 
-# 合并需要采用rebase模式
-git pull --rebase &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
-</code></pre>
+<span class="token comment"># 合并需要采用rebase模式</span>
+<span class="token function">git</span> pull <span class="token parameter variable">--rebase</span> <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="5-push"><a href="#5-push" class="headerlink" title="(5). push"></a>(5). push</h3><blockquote>
 <p>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</p>
 </blockquote>
@@ -640,31 +643,31 @@ git pull --rebase &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分�
 <li>如果省略远程分支名，则表示将本地分支推送与之存在”追踪关系”的远程分支(通常两者同名)，如果该远程分支不存在，则会被新建。</li>
 <li>如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。</li>
 </ul>
-<pre><code class="bash"># 将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建
-git push origin master
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建</span>
+<span class="token function">git</span> push origin master
 
-# 省略了本地分支，以下等同，删除origin主机的master分支
-git push origin :master
-git push origin --delete master
+<span class="token comment"># 省略了本地分支，以下等同，删除origin主机的master分支</span>
+<span class="token function">git</span> push origin :master
+<span class="token function">git</span> push origin <span class="token parameter variable">--delete</span> master
 
-# 如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略
-git push origin
+<span class="token comment"># 如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略</span>
+<span class="token function">git</span> push origin
 
-# 如果当前分支只有一个追踪分支，那么主机名都可以省略。
-git push
+<span class="token comment"># 如果当前分支只有一个追踪分支，那么主机名都可以省略。</span>
+<span class="token function">git</span> push
 
-# 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push
-git push -u origin master
+<span class="token comment"># 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push</span>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin master
 
-# 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
-git push --all origin
+<span class="token comment"># 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机</span>
+<span class="token function">git</span> push <span class="token parameter variable">--all</span> origin
 
-# 强制推送
-git push --force origin
+<span class="token comment"># 强制推送</span>
+<span class="token function">git</span> push <span class="token parameter variable">--force</span> origin
 
-# git push不会推送标签(tag)，除非使用–tags选项
-git push origin --tags
-</code></pre>
+<span class="token comment"># git push不会推送标签(tag)，除非使用–tags选项</span>
+<span class="token function">git</span> push origin <span class="token parameter variable">--tags</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="12-Git-Flow使用简介"><a href="#12-Git-Flow使用简介" class="headerlink" title="12. Git Flow使用简介"></a>12. Git Flow使用简介</h2><p>就像代码需要代码规范一样，代码管理同样需要一个清晰的流程和规范。三种广泛使用的工作流程：</p>
 <ul>
 <li>Git flow</li>
@@ -681,64 +684,64 @@ git push origin --tags
 <li><code>Release</code>分支。当你需要一个发布一个新Release的时候，我们基于Develop分支创建一个Release分支，完成Release后，我们合并到Master和Develop分支。</li>
 <li><code>Hotfix</code>分支。当我们在Production发现新的Bug时候，我们需要创建一个Hotfix, 完成Hotfix后，我们合并回Master和Develop分支，所以Hotfix的改动会进入下一个Release。</li>
 </ul>
-<h3 id="3-Git-Flow代码示例"><a href="#3-Git-Flow代码示例" class="headerlink" title="(3). Git Flow代码示例"></a>(3). Git Flow代码示例</h3><h4 id="a-创建develop分支"><a href="#a-创建develop分支" class="headerlink" title="a. 创建develop分支"></a>a. 创建develop分支</h4><pre><code class="bash">git branch develop
-git push -u origin develop
-</code></pre>
-<h4 id="b-开始新Feature开发"><a href="#b-开始新Feature开发" class="headerlink" title="b. 开始新Feature开发"></a>b. 开始新Feature开发</h4><pre><code class="bash">git checkout -b some-feature develop
-# Optionally, push branch to origin:
-git push -u origin some-feature
+<h3 id="3-Git-Flow代码示例"><a href="#3-Git-Flow代码示例" class="headerlink" title="(3). Git Flow代码示例"></a>(3). Git Flow代码示例</h3><h4 id="a-创建develop分支"><a href="#a-创建develop分支" class="headerlink" title="a. 创建develop分支"></a>a. 创建develop分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch develop
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin develop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-# 做一些改动
-git status
-git add some-file
-git commit
-</code></pre>
-<h4 id="c-完成Feature"><a href="#c-完成Feature" class="headerlink" title="c. 完成Feature"></a>c. 完成Feature</h4><pre><code class="bash">git pull origin develop
-git checkout develop
-git merge --no-ff some-feature
-git push origin develop
+<h4 id="b-开始新Feature开发"><a href="#b-开始新Feature开发" class="headerlink" title="b. 开始新Feature开发"></a>b. 开始新Feature开发</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> some-feature develop
+<span class="token comment"># Optionally, push branch to origin:</span>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin some-feature
 
-git branch -d some-feature
+<span class="token comment"># 做一些改动</span>
+<span class="token function">git</span> status
+<span class="token function">git</span> <span class="token function">add</span> some-file
+<span class="token function">git</span> commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-# If you pushed branch to origin:
-git push origin --delete some-feature
-</code></pre>
-<h4 id="d-开始Relase"><a href="#d-开始Relase" class="headerlink" title="d. 开始Relase"></a>d. 开始Relase</h4><pre><code class="bash">git checkout -b release-0.1.0 develop
+<h4 id="c-完成Feature"><a href="#c-完成Feature" class="headerlink" title="c. 完成Feature"></a>c. 完成Feature</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin develop
+<span class="token function">git</span> checkout develop
+<span class="token function">git</span> merge --no-ff some-feature
+<span class="token function">git</span> push origin develop
 
-# Optional: Bump version number, commit
-# Prepare release, commit
-</code></pre>
-<h4 id="e-完成Release"><a href="#e-完成Release" class="headerlink" title="e. 完成Release"></a>e. 完成Release</h4><pre><code class="bash">git checkout master
-git merge --no-ff release-0.1.0
-git push
+<span class="token function">git</span> branch <span class="token parameter variable">-d</span> some-feature
 
-git checkout develop
-git merge --no-ff release-0.1.0
-git push
+<span class="token comment"># If you pushed branch to origin:</span>
+<span class="token function">git</span> push origin <span class="token parameter variable">--delete</span> some-feature<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-git branch -d release-0.1.0
+<h4 id="d-开始Relase"><a href="#d-开始Relase" class="headerlink" title="d. 开始Relase"></a>d. 开始Relase</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> release-0.1.0 develop
 
-# If you pushed branch to origin:
-git push origin --delete release-0.1.0   
+<span class="token comment"># Optional: Bump version number, commit</span>
+<span class="token comment"># Prepare release, commit</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-git tag -a v0.1.0 master
-git push --tags
-</code></pre>
-<h4 id="f-开始Hotfix"><a href="#f-开始Hotfix" class="headerlink" title="f. 开始Hotfix"></a>f. 开始Hotfix</h4><pre><code class="bash">git checkout -b hotfix-0.1.1 master
-</code></pre>
-<h4 id="g-完成Hotfix"><a href="#g-完成Hotfix" class="headerlink" title="g. 完成Hotfix"></a>g. 完成Hotfix</h4><pre><code class="bash">git checkout master
-git merge --no-ff hotfix-0.1.1
-git push
+<h4 id="e-完成Release"><a href="#e-完成Release" class="headerlink" title="e. 完成Release"></a>e. 完成Release</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<span class="token function">git</span> merge --no-ff release-0.1.0
+<span class="token function">git</span> push
 
-git checkout develop
-git merge --no-ff hotfix-0.1.1
-git push
+<span class="token function">git</span> checkout develop
+<span class="token function">git</span> merge --no-ff release-0.1.0
+<span class="token function">git</span> push
 
-git branch -d hotfix-0.1.1
+<span class="token function">git</span> branch <span class="token parameter variable">-d</span> release-0.1.0
 
-git tag -a v0.1.1 master
-git push --tags
-</code></pre>
+<span class="token comment"># If you pushed branch to origin:</span>
+<span class="token function">git</span> push origin <span class="token parameter variable">--delete</span> release-0.1.0   
+
+<span class="token function">git</span> tag <span class="token parameter variable">-a</span> v0.1.0 master
+<span class="token function">git</span> push <span class="token parameter variable">--tags</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="f-开始Hotfix"><a href="#f-开始Hotfix" class="headerlink" title="f. 开始Hotfix"></a>f. 开始Hotfix</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> hotfix-0.1.1 master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="g-完成Hotfix"><a href="#g-完成Hotfix" class="headerlink" title="g. 完成Hotfix"></a>g. 完成Hotfix</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<span class="token function">git</span> merge --no-ff hotfix-0.1.1
+<span class="token function">git</span> push
+
+<span class="token function">git</span> checkout develop
+<span class="token function">git</span> merge --no-ff hotfix-0.1.1
+<span class="token function">git</span> push
+
+<span class="token function">git</span> branch <span class="token parameter variable">-d</span> hotfix-0.1.1
+
+<span class="token function">git</span> tag <span class="token parameter variable">-a</span> v0.1.1 master
+<span class="token function">git</span> push <span class="token parameter variable">--tags</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>

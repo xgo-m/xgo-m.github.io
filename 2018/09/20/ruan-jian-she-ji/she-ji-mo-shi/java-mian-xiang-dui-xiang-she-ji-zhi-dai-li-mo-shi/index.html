@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -432,94 +435,94 @@
 </ul>
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/20/proxy-structure.jpg" alt="代理模式结构图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先，是抽象的主题接口和真实主题类：</p>
-<pre><code class="java">package com.blinkfox.patterns.proxy;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * 抽象主题类
  * Created by blinkfox on 2017/1/1.
- */
-public interface ISubject &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 定义一个方法
-     */
-    public void request();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">package com.blinkfox.patterns.proxy;
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * 真实主题类
  * Created by blinkfox on 2017/1/1.
- */
-public class RealSubject implements ISubject &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RealSubject</span> <span class="token keyword">implements</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 实现方法
-     */
-    @Override
-    public void request() &#123;
-        System.out.println(&quot;真实主题类请求方法...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"真实主题类请求方法..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后，是代理类：</p>
-<pre><code class="java">package com.blinkfox.patterns.proxy;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * 代理类
  * Created by blinkfox on 2017/1/1.
- */
-public class Proxy implements ISubject &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Proxy</span> <span class="token keyword">implements</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
-    private ISubject subject;
+    <span class="token keyword">private</span> <span class="token class-name">ISubject</span> subject<span class="token punctuation">;</span>
 
-    public Proxy(ISubject subject) &#123;
-        this.subject = subject;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span><span class="token class-name">ISubject</span> subject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>subject <span class="token operator">=</span> subject<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    @Override
-    public void request() &#123;
-        this.before();
-        this.subject.request();
-        this.after();
-    &#125;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>subject<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 预处理
-     */
-    private void before() &#123;
-        System.out.println(&quot;执行前(before)的处理...&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">before</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行前(before)的处理..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 善后处理
-     */
-    private void after() &#123;
-        System.out.println(&quot;执行后(after)的处理...&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">after</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行后(after)的处理..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是客户端场景测试类：</p>
-<pre><code class="java">package com.blinkfox.patterns.proxy;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * 代理模式客户端场景类
  * Created by blinkfox on 2017/1/1.
- */
-public class ProxyClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProxyClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        ISubject subject = new RealSubject();
-        Proxy proxy = new Proxy(subject);
-        proxy.request();
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ISubject</span> subject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RealSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Proxy</span> proxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>subject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        proxy<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><h3 id="1-优点"><a href="#1-优点" class="headerlink" title="1. 优点"></a>1. 优点</h3><p>代理模式的优点：</p>
 <ul>
 <li>代理模式能够协调调用者和被调用者，在一定程度上降低了系 统的耦合度。</li>

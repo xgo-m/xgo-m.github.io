@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -437,40 +440,40 @@
 </li>
 </ul>
 <h2 id="一、Web-Services-Metadata"><a href="#一、Web-Services-Metadata" class="headerlink" title="一、Web Services Metadata"></a>一、Web Services Metadata</h2><p><code>WebService</code>是一种独立于特定语言、特定平台，基于网络的、分布式的模块化组件。是一个能够使用<code>xml</code>消息通过网络来访问的接口，这个接口描述了一组可访问的操作。在Java6中，在想要发布为<code>WebService</code>的类上加上<code>@WebService</code>的注解，这个类的方法就变为<code>WebService</code>方法了，再通过<code>Endpoint.publish()</code>方法发布这个服务。到此，一个最简单的<code>WebService</code>搞定。运行<code>main</code>方法，在浏览器里输入<code>http://localhost:8080/com.blinkfox.test.Hello?wsdl</code>，即可查看你WebService的WSDL信息。</p>
-<pre><code class="java">import javax.jws.WebService;
-import javax.xml.ws.Endpoint;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>jws<span class="token punctuation">.</span></span><span class="token class-name">WebService</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>ws<span class="token punctuation">.</span></span><span class="token class-name">Endpoint</span></span><span class="token punctuation">;</span>
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * Hello.
  * @author blinkfox on 2017-11-28.
- */
-@WebService
-public class Hello &#123;
+ */</span>
+<span class="token annotation punctuation">@WebService</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Hello</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(Hello.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">Hello</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * sayHello.
      * @param name 名称
      * @return 结果
-     */
-    public String sayHello(String name) &#123;
-        return &quot;Hello &quot;.concat(name);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"Hello "</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * @param args
-     */
-    public static void main(String[] args) &#123;
-        Endpoint.publish(&quot;http://localhost:8080/com.blinkfox.test.Hello&quot;, new Hello());
-        log.info(&quot;调用成功!&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Endpoint</span><span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span><span class="token string">"http://localhost:8080/com.blinkfox.test.Hello"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"调用成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>Java 自从JDK5中添加了元数据功能(注解)之后,SUN几乎重构了整个J2EE体系，由于变化很大，干脆将名字也重构为Java EE，Java EE(当前版本为5.0)将元数据纳入很多规范当中，这其中就包括<code>Web Services</code>的相关规范，这显然比以前的JAX-RPC编程模型简单(当然, Axis的编程模型也很简单)。这里要谈的Web服务元数据(JSR 181)只是Java Web 服务规范中的一个,它跟Common Annotations, JAXB2, StAX, SAAJ和JAX-WS等共同构成Java EE 5的Web Services技术堆栈。</p>
 <p>下面介绍<code>JSR-181</code>里面各个元数据的相关参数及用途。</p>
 <table>
@@ -527,185 +530,185 @@ public class Hello &#123;
 </tbody></table>
 <h2 id="二、Scripting"><a href="#二、Scripting" class="headerlink" title="二、Scripting"></a>二、Scripting</h2><p>Java6增加了对动态语言的支持，原理上是将脚本语言编译成字节码，这样脚本语言也能享用Java平台的诸多优势，包括可移植性，安全等。另外由于现在是编译成字节码后再执行，所以比原来边解释边执行效率要高很多。可以很好的利用脚本语言的动态特性，主要支持的有<code>JavaSrcipt</code>、<code>Ruby</code>、<code>Python</code>等。</p>
 <p>以下使用<code>JavaScript</code>的脚本，代码示例如下：</p>
-<pre><code class="java">import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>script<span class="token punctuation">.</span></span><span class="token class-name">Invocable</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>script<span class="token punctuation">.</span></span><span class="token class-name">ScriptEngine</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>script<span class="token punctuation">.</span></span><span class="token class-name">ScriptEngineManager</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>script<span class="token punctuation">.</span></span><span class="token class-name">ScriptException</span></span><span class="token punctuation">;</span>
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * JsTest.
  * @author blinkfox
  * @version 1.0
  *
- */
-public class JsTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JsTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(Hello.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">Hello</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
      * @param args 数组参数
      * @throws ScriptException 脚本异常
      * @throws NoSuchMethodException 无方法异常
-     */
-    public static void main(String[] args) throws ScriptException, NoSuchMethodException &#123;
-        ScriptEngineManager enjineManager = new ScriptEngineManager();
-        ScriptEngine engine = enjineManager.getEngineByName(&quot;JavaScript&quot;);
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ScriptException</span><span class="token punctuation">,</span> <span class="token class-name">NoSuchMethodException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ScriptEngineManager</span> enjineManager <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ScriptEngineManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">ScriptEngine</span> engine <span class="token operator">=</span> enjineManager<span class="token punctuation">.</span><span class="token function">getEngineByName</span><span class="token punctuation">(</span><span class="token string">"JavaScript"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        String script=&quot;function hello(name)&#123;return &#39;Hello &#39; + name&#125;&quot;;
-        engine.eval(script);
-        Invocable inv=(Invocable) engine;
-        String result = (String) inv.invokeFunction(&quot;hello&quot;, &quot;blinkfox&quot;);
-        log.info(&quot;脚本执行结果:&#123;&#125;&quot;, result);
-    &#125;
+        <span class="token class-name">String</span> script<span class="token operator">=</span><span class="token string">"function hello(name)&#123;return 'Hello ' + name&#125;"</span><span class="token punctuation">;</span>
+        engine<span class="token punctuation">.</span><span class="token function">eval</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Invocable</span> inv<span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">Invocable</span><span class="token punctuation">)</span> engine<span class="token punctuation">;</span>
+        <span class="token class-name">String</span> result <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> inv<span class="token punctuation">.</span><span class="token function">invokeFunction</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"blinkfox"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"脚本执行结果:&#123;&#125;"</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="三、Compiler-API"><a href="#三、Compiler-API" class="headerlink" title="三、Compiler API"></a>三、Compiler API</h2><p>在Java6中提供了一套<code>Compiler API</code>，定义在<code>JSR199</code>中, 提供在运行期动态编译java代码为字节码的功能。一套API就好比是在java程序中模拟javac程序，将Java源文件编译为class文件；其提供的默认实现也正是在文件系统上进行查找、编译工作的。<code>Compiler API</code>结合反射功能就可以实现动态的产生Java代码并编译执行这些代码，有点动态语言的特征。</p>
 <p>基本使用示例如下：</p>
-<pre><code class="java">public class JavaCompilerAPICompiler &#123;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JavaCompilerAPICompiler</span> <span class="token punctuation">&#123;</span>
 
-    public void compile(Path src, Path output) throws IOException &#123;
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) &#123;
-            Iterable&lt;? extends JavaFileObject&gt; compilationUnits = fileManager.getJavaFileObjects(src.toFile());
-            Iterable&lt;String&gt; options = Arrays.asList(&quot;-d&quot;, output.toString());
-            JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, null, options, null, compilationUnits);
-            boolean result = task.call();
-        &#125;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">compile</span><span class="token punctuation">(</span><span class="token class-name">Path</span> src<span class="token punctuation">,</span> <span class="token class-name">Path</span> output<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">JavaCompiler</span> compiler <span class="token operator">=</span> <span class="token class-name">ToolProvider</span><span class="token punctuation">.</span><span class="token function">getSystemJavaCompiler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">StandardJavaFileManager</span> fileManager <span class="token operator">=</span> compiler<span class="token punctuation">.</span><span class="token function">getStandardFileManager</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Iterable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">JavaFileObject</span><span class="token punctuation">></span></span> compilationUnits <span class="token operator">=</span> fileManager<span class="token punctuation">.</span><span class="token function">getJavaFileObjects</span><span class="token punctuation">(</span>src<span class="token punctuation">.</span><span class="token function">toFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Iterable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> options <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"-d"</span><span class="token punctuation">,</span> output<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">JavaCompiler<span class="token punctuation">.</span>CompilationTask</span> task <span class="token operator">=</span> compiler<span class="token punctuation">.</span><span class="token function">getTask</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> fileManager<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> options<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> compilationUnits<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">boolean</span> result <span class="token operator">=</span> task<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="四、轻量级HTTP-server"><a href="#四、轻量级HTTP-server" class="headerlink" title="四、轻量级HTTP server"></a>四、轻量级HTTP server</h2><p>JDK6提供了一个轻量级的<code>Http Server API</code>，据此我们可以构建自己的嵌入式Http Server，它支持<code>Http</code>和<code>Https</code>协议,提供了HTTP1.1的部分实现，没有被实现的那部分可以通过扩展已有的Http Server API来实现，程序员必须自己实现<code>HttpHandler</code>接口，HttpServer会调用<code>HttpHandler</code>实现类的回调方法来处理客户端请求，在这里，我们把一个Http请求和它的响应称为一个交换,包装成<code>HttpExchange</code>类,HttpServer负责将<code>HttpExchange</code>传给<code>HttpHandler</code>实现类的回调方法。</p>
 <p>以下是通过JDK6新特性能够实现的HttpServer的示例：</p>
-<pre><code class="java">import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.spi.HttpServerProvider;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>sun<span class="token punctuation">.</span>net<span class="token punctuation">.</span>httpserver<span class="token punctuation">.</span></span><span class="token class-name">HttpExchange</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>sun<span class="token punctuation">.</span>net<span class="token punctuation">.</span>httpserver<span class="token punctuation">.</span></span><span class="token class-name">HttpHandler</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>sun<span class="token punctuation">.</span>net<span class="token punctuation">.</span>httpserver<span class="token punctuation">.</span></span><span class="token class-name">HttpServer</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>sun<span class="token punctuation">.</span>net<span class="token punctuation">.</span>httpserver<span class="token punctuation">.</span>spi<span class="token punctuation">.</span></span><span class="token class-name">HttpServerProvider</span></span><span class="token punctuation">;</span>
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">BufferedReader</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStreamReader</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">OutputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">InetSocketAddress</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * 自定义的http服务器.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class MyHttpServer &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyHttpServer</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 启动服务，监听来自客户端的请求.
      *
      * @throws IOException IO异常
-     */
-    private static void httpserverService() throws IOException &#123;
-        HttpServerProvider provider = HttpServerProvider.provider();
-        HttpServer httpserver = provider.createHttpServer(new InetSocketAddress(8888), 200); // 监听端口8888,能同时接受100个请求
-        httpserver.createContext(&quot;/mytest&quot;, new MyHttpHandler());
-        httpserver.setExecutor(null);
-        httpserver.start();
-        System.out.println(&quot;server started&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">httpserverService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HttpServerProvider</span> provider <span class="token operator">=</span> <span class="token class-name">HttpServerProvider</span><span class="token punctuation">.</span><span class="token function">provider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">HttpServer</span> httpserver <span class="token operator">=</span> provider<span class="token punctuation">.</span><span class="token function">createHttpServer</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InetSocketAddress</span><span class="token punctuation">(</span><span class="token number">8888</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 监听端口8888,能同时接受100个请求</span>
+        httpserver<span class="token punctuation">.</span><span class="token function">createContext</span><span class="token punctuation">(</span><span class="token string">"/mytest"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">MyHttpHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        httpserver<span class="token punctuation">.</span><span class="token function">setExecutor</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        httpserver<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"server started"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * Http请求处理类.
-     */
-    private static class MyHttpHandler implements HttpHandler &#123;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">MyHttpHandler</span> <span class="token keyword">implements</span> <span class="token class-name">HttpHandler</span> <span class="token punctuation">&#123;</span>
 
-        public void handle(HttpExchange httpExchange) throws IOException &#123;
-            String responseMsg = &quot;ok&quot;; //响应信息
-            InputStream in = httpExchange.getRequestBody(); //获得输入流
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String temp = null;
-            while((temp = reader.readLine()) != null) &#123;
-                System.out.println(&quot;client request:&quot; + temp);
-            &#125;
-            httpExchange.sendResponseHeaders(200, responseMsg.length()); //设置响应头属性及响应信息的长度
-            OutputStream out = httpExchange.getResponseBody();  //获得输出流
-            out.write(responseMsg.getBytes());
-            out.flush();
-            httpExchange.close();
-        &#125;
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">HttpExchange</span> httpExchange<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> responseMsg <span class="token operator">=</span> <span class="token string">"ok"</span><span class="token punctuation">;</span> <span class="token comment">//响应信息</span>
+            <span class="token class-name">InputStream</span> in <span class="token operator">=</span> httpExchange<span class="token punctuation">.</span><span class="token function">getRequestBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//获得输入流</span>
+            <span class="token class-name">BufferedReader</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">String</span> temp <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>temp <span class="token operator">=</span> reader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"client request:"</span> <span class="token operator">+</span> temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            httpExchange<span class="token punctuation">.</span><span class="token function">sendResponseHeaders</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> responseMsg<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置响应头属性及响应信息的长度</span>
+            <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> httpExchange<span class="token punctuation">.</span><span class="token function">getResponseBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//获得输出流</span>
+            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>responseMsg<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            httpExchange<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-    &#125;
+    <span class="token punctuation">&#125;</span>
 
-    public static void main(String[] args) throws IOException &#123;
-        httpserverService();
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">httpserverService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">BufferedReader</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStreamReader</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">OutputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">HttpURLConnection</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">URL</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ExecutorService</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">Executors</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Http服务器测试类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class HttpTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HttpTest</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        ExecutorService exec = Executors.newCachedThreadPool();
-        // 测试并发对MyHttpServer的影响
-        for (int i = 0; i &lt; 20; i++) &#123;
-            Runnable run = new Runnable() &#123;
-                public void run() &#123;
-                    try &#123;
-                        startWork();
-                    &#125; catch (IOException e) &#123;
-                        e.printStackTrace();
-                    &#125;
-                &#125;
-            &#125;;
-            exec.execute(run);
-        &#125;
-        exec.shutdown();// 关闭线程池
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ExecutorService</span> exec <span class="token operator">=</span> <span class="token class-name">Executors</span><span class="token punctuation">.</span><span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 测试并发对MyHttpServer的影响</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                        <span class="token function">startWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+            exec<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>run<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        exec<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 关闭线程池</span>
+    <span class="token punctuation">&#125;</span>
 
-    public static void startWork() throws IOException &#123;
-        URL url = new URL(&quot;http://127.0.0.1:8888/mytest&quot;);
-        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-        urlConn.setDoOutput(true);
-        urlConn.setDoInput(true);
-        urlConn.setRequestMethod(&quot;POST&quot;);
-        // 测试内容包
-        String teststr = &quot;this is a test message&quot;;
-        OutputStream out = urlConn.getOutputStream();
-        out.write(teststr.getBytes());
-        out.flush();
-        while (urlConn.getContentLength() != -1) &#123;
-            if (urlConn.getResponseCode() == 200) &#123;
-                InputStream in = urlConn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String temp = &quot;&quot;;
-                while ((temp = reader.readLine()) != null) &#123;
-                    System.err.println(&quot;server response:&quot; + temp);// 打印收到的信息
-                &#125;
-                reader.close();
-                in.close();
-                urlConn.disconnect();
-            &#125;
-        &#125;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">startWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">URL</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:8888/mytest"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">HttpURLConnection</span> urlConn <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpURLConnection</span><span class="token punctuation">)</span> url<span class="token punctuation">.</span><span class="token function">openConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        urlConn<span class="token punctuation">.</span><span class="token function">setDoOutput</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        urlConn<span class="token punctuation">.</span><span class="token function">setDoInput</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        urlConn<span class="token punctuation">.</span><span class="token function">setRequestMethod</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 测试内容包</span>
+        <span class="token class-name">String</span> teststr <span class="token operator">=</span> <span class="token string">"this is a test message"</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> out <span class="token operator">=</span> urlConn<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>teststr<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>urlConn<span class="token punctuation">.</span><span class="token function">getContentLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>urlConn<span class="token punctuation">.</span><span class="token function">getResponseCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">InputStream</span> in <span class="token operator">=</span> urlConn<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">BufferedReader</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">String</span> temp <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>temp <span class="token operator">=</span> reader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"server response:"</span> <span class="token operator">+</span> temp<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 打印收到的信息</span>
+                <span class="token punctuation">&#125;</span>
+                reader<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                in<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                urlConn<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="五、Common-annotations"><a href="#五、Common-annotations" class="headerlink" title="五、Common annotations"></a>五、Common annotations</h2><p><code>Common annotations</code>原本是Java EE 5.0(JSR 244)规范的一部分，现在SUN把它的一部分放到了Java SE 6.0中.随着Annotation元数据功能(JSR 175)加入到Java SE 5.0里面，很多Java 技术(比如EJB,Web Services)都会用Annotation部分代替XML文件来配置运行参数（或者说是支持声明式编程,如EJB的声明式事务）, 如果这些技术为通用目的都单独定义了自己的Annotations,显然有点重复建设, 所以,为其他相关的Java技术定义一套公共的Annotation是有价值的，可以避免重复建设的同时，也保证Java SE和Java EE 各种技术的一致性。</p>
 <p>下面列举出<code>Common Annotations 1.0</code>里面的10个<code>Annotations</code>：</p>
 <table>
@@ -850,468 +853,468 @@ public class HttpTest &#123;
 </tbody></table>
 <p>下面代码演示了如何通过StAX读取xml文档和生成xml文档：</p>
 <p>需要读取的xml文件：</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;catalogs&gt;
-    &lt;catalog id=&quot;001&quot;&gt;Book&lt;/catalog&gt;
-    &lt;catalog id=&quot;002&quot;&gt;Video&lt;/catalog&gt;
-&lt;/catalogs&gt;
-</code></pre>
-<p>读和写XML文件的Java代码：</p>
-<pre><code class="java">import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import javax.xml.namespace.QName;
-import javax.xml.stream.*;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>catalogs</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>catalog</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>001<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Book<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>catalog</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>catalog</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>002<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Video<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>catalog</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>catalogs</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<p>读和写XML文件的Java代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileInputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileNotFoundException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileOutputStream</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>namespace<span class="token punctuation">.</span></span><span class="token class-name">QName</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>stream<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>stream<span class="token punctuation">.</span>events<span class="token punctuation">.</span></span><span class="token class-name">StartElement</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>stream<span class="token punctuation">.</span>events<span class="token punctuation">.</span></span><span class="token class-name">XMLEvent</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Stax测试类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class StaxTester &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StaxTester</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 根据StAX读取XML文件.
      *
      * @throws XMLStreamException XML流异常
      * @throws FileNotFoundException 文件未找到异常
-     */
-    private static void readXxmlByStax() throws XMLStreamException, FileNotFoundException &#123;
-        XMLInputFactory xmlif = XMLInputFactory.newInstance();
-        XMLEventReader xmler = xmlif.createXMLEventReader(new FileInputStream(&quot;G:\\test\\test.xml&quot;));
-        XMLEvent event;
-        StringBuilder sb = new StringBuilder();
-        while (xmler.hasNext()) &#123;
-            event = xmler.nextEvent();
-            if (event.isStartElement()) &#123; //如果解析的是起始标记
-                StartElement element = event.asStartElement();
-                sb.append(&quot;&lt;&quot;);
-                sb.append(element.getName());
-                if(element.getName().getLocalPart().equals(&quot;catalog&quot;)) &#123;
-                    sb.append(&quot; id=/&quot;);
-                    sb.append(element.getAttributeByName(new QName(&quot;id&quot;)).getValue());
-                    sb.append(&quot;/&quot;);
-                &#125;
-                sb.append(&quot;&gt;&quot;);
-            &#125; else if (event.isCharacters()) &#123; //如果解析的是文本内容
-                sb.append(event.asCharacters().getData());
-            &#125; else if(event.isEndElement()) &#123; //如果解析的是结束标记
-                sb.append(&quot;&lt;/&quot;);
-                sb.append(event.asEndElement().getName());
-                sb.append(&quot;&gt;&quot;);
-            &#125;
-        &#125;
-        System.out.println(sb);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">readXxmlByStax</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">XMLStreamException</span><span class="token punctuation">,</span> <span class="token class-name">FileNotFoundException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">XMLInputFactory</span> xmlif <span class="token operator">=</span> <span class="token class-name">XMLInputFactory</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">XMLEventReader</span> xmler <span class="token operator">=</span> xmlif<span class="token punctuation">.</span><span class="token function">createXMLEventReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"G:\\test\\test.xml"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">XMLEvent</span> event<span class="token punctuation">;</span>
+        <span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>xmler<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            event <span class="token operator">=</span> xmler<span class="token punctuation">.</span><span class="token function">nextEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">isStartElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//如果解析的是起始标记</span>
+                <span class="token class-name">StartElement</span> element <span class="token operator">=</span> event<span class="token punctuation">.</span><span class="token function">asStartElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getLocalPart</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"catalog"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" id=/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token function">getAttributeByName</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">QName</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">">"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">isCharacters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//如果解析的是文本内容</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">asCharacters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">isEndElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//如果解析的是结束标记</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">asEndElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">">"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>sb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 根据StAX写入XML文件.
      *
      * @throws XMLStreamException XML流异常
      * @throws FileNotFoundException 文件未找到异常
-     */
-    private static void writeXmlByStax() throws XMLStreamException, FileNotFoundException &#123;
-        XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
-        XMLStreamWriter xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(&quot;G:\\test\\output.xml&quot;));
-        // 写入默认的 XML 声明到xml文档
-        xmlw.writeStartDocument();
-        xmlw.writeCharacters(&quot;\n&quot;);
-        // 写入注释到xml文档
-        xmlw.writeComment(&quot;testing comment&quot;);
-        xmlw.writeCharacters(&quot;\n&quot;);
-        // 写入一个catalogs根元素
-        xmlw.writeStartElement(&quot;catalogs&quot;);
-        xmlw.writeNamespace(&quot;myNS&quot;, &quot;http://blinkfox.com&quot;);
-        xmlw.writeAttribute(&quot;owner&quot;,&quot;Chinajash&quot;);
-        xmlw.writeCharacters(&quot;\n&quot;);
-        // 写入子元素catalog
-        xmlw.writeCharacters(&quot;    &quot;);
-        xmlw.writeStartElement(&quot;http://blinkfox.com&quot;, &quot;catalog&quot;);
-        xmlw.writeAttribute(&quot;id&quot;,&quot;007&quot;);
-        xmlw.writeCharacters(&quot;Apparel&quot;);
-        // 写入catalog元素的结束标签
-        xmlw.writeEndElement();
-        // 写入catalogs元素的结束标签
-        xmlw.writeCharacters(&quot;\n&quot;);
-        xmlw.writeEndElement();
-        // 结束 XML 文档
-        xmlw.writeEndDocument();
-        xmlw.close();
-        System.out.println(&quot;生成xml文件成功!&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">writeXmlByStax</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">XMLStreamException</span><span class="token punctuation">,</span> <span class="token class-name">FileNotFoundException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">XMLOutputFactory</span> xmlof <span class="token operator">=</span> <span class="token class-name">XMLOutputFactory</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">XMLStreamWriter</span> xmlw <span class="token operator">=</span> xmlof<span class="token punctuation">.</span><span class="token function">createXMLStreamWriter</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"G:\\test\\output.xml"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入默认的 XML 声明到xml文档</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeStartDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入注释到xml文档</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeComment</span><span class="token punctuation">(</span><span class="token string">"testing comment"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入一个catalogs根元素</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeStartElement</span><span class="token punctuation">(</span><span class="token string">"catalogs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeNamespace</span><span class="token punctuation">(</span><span class="token string">"myNS"</span><span class="token punctuation">,</span> <span class="token string">"http://blinkfox.com"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeAttribute</span><span class="token punctuation">(</span><span class="token string">"owner"</span><span class="token punctuation">,</span><span class="token string">"Chinajash"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入子元素catalog</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"    "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeStartElement</span><span class="token punctuation">(</span><span class="token string">"http://blinkfox.com"</span><span class="token punctuation">,</span> <span class="token string">"catalog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeAttribute</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span><span class="token string">"007"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"Apparel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入catalog元素的结束标签</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeEndElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 写入catalogs元素的结束标签</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeCharacters</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeEndElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 结束 XML 文档</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">writeEndDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xmlw<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生成xml文件成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
      *
      * @param args 数组参数
      * @throws XMLStreamException XML流异常
      * @throws FileNotFoundException 文件未找到异常
-     */
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException &#123;
-        readXxmlByStax();
-        writeXmlByStax();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">XMLStreamException</span><span class="token punctuation">,</span> <span class="token class-name">FileNotFoundException</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">readXxmlByStax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">writeXmlByStax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>运行上面程序后，控制台输出如下:</p>
-<pre><code class="bash">&lt;catalogs&gt;
-    &lt;catalog id=/001/&gt;Book&lt;/catalog&gt;
-    &lt;catalog id=/002/&gt;Video&lt;/catalog&gt;
-&lt;/catalogs&gt;
-生成xml文件成功!
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>catalogs<span class="token operator">></span>
+    <span class="token operator">&lt;</span>catalog <span class="token assign-left variable">id</span><span class="token operator">=</span>/001/<span class="token operator">></span>Book<span class="token operator">&lt;</span>/catalog<span class="token operator">></span>
+    <span class="token operator">&lt;</span>catalog <span class="token assign-left variable">id</span><span class="token operator">=</span>/002/<span class="token operator">></span>Video<span class="token operator">&lt;</span>/catalog<span class="token operator">></span>
+<span class="token operator">&lt;</span>/catalogs<span class="token operator">></span>
+生成xml文件成功<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>产生的<code>output.xml</code>文件如下:</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
-&lt;!--testing comment--&gt;
-&lt;catalogs xmlns:myNS=&quot;http://blinkfox.com&quot; owner=&quot;Chinajash&quot;&gt;
-    &lt;myNS:catalog id=&quot;007&quot;&gt;Apparel&lt;/myNS:catalog&gt;
-&lt;/catalogs&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" ?></span>
+<span class="token comment">&lt;!--testing comment--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>catalogs</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>myNS</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://blinkfox.com<span class="token punctuation">"</span></span> <span class="token attr-name">owner</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Chinajash<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">myNS:</span>catalog</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>007<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Apparel<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">myNS:</span>catalog</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>catalogs</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="七、JAXB2"><a href="#七、JAXB2" class="headerlink" title="七、JAXB2"></a>七、JAXB2</h2><p><code>JAXB</code>是<code>Java Architecture for XML Binding</code>的缩写，可以将一个Java对象转变成为XML格式，反之亦然。我们把对象与关系数据库之间的映射称为ORM, 其实也可以把对象与XML之间的映射称为<code>OXM</code>(Object XML Mapping). 原来JAXB是Java EE的一部分，在JDK6中，SUN将其放到了Java SE中，这也是SUN的一贯做法。JDK6中自带的这个JAXB版本是2.0, 比起1.0(JSR 31)来，JAXB2(JSR 222)用JDK5的新特性<code>Annotation</code>来标识要作绑定的类和属性等，这就极大简化了开发的工作量。实际上，在Java EE 5.0中，EJB和Web Services也通过Annotation来简化开发工作。另外,JAXB2在底层是用StAX(JSR 173)来处理XML文档。 下面用代码演示在JDK6中如何来用<code>JAXB2</code>：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * Gender性别枚举类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public enum Gender &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">Gender</span> <span class="token punctuation">&#123;</span>
 
-    MALE(true),
+    <span class="token function">MALE</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 
-    FEMALE (false);
+    <span class="token constant">FEMALE</span> <span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    private boolean code;
+    <span class="token keyword">private</span> <span class="token keyword">boolean</span> code<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 构造方法.
      * @param code 性别值
-     */
-    Gender(boolean code) &#123;
-        this.code = code;
-    &#125;
+     */</span>
+    <span class="token class-name">Gender</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XmlAttribute</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XmlElement</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Address地址类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class Address &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Address</span> <span class="token punctuation">&#123;</span>
 
-    @XmlAttribute
-    String country;
+    <span class="token annotation punctuation">@XmlAttribute</span>
+    <span class="token class-name">String</span> country<span class="token punctuation">;</span>
 
-    @XmlElement
-    String state;
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">String</span> state<span class="token punctuation">;</span>
 
-    @XmlElement
-    String city;
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">String</span> city<span class="token punctuation">;</span>
 
-    @XmlElement
-    String street;
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">String</span> street<span class="token punctuation">;</span>
 
-    /** 由于没有添加@XmlElement,所以该元素不会出现在输出的xml中. */
-    String zipcode;
+    <span class="token comment">/** 由于没有添加@XmlElement,所以该元素不会出现在输出的xml中. */</span>
+    <span class="token class-name">String</span> zipcode<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 默认的空构造方法.
-     */
-    public Address() &#123;
-        super();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Address</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public Address(String country, String state, String city, String street, String zipcode) &#123;
-        this.country = country;
-        this.state = state;
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Address</span><span class="token punctuation">(</span><span class="token class-name">String</span> country<span class="token punctuation">,</span> <span class="token class-name">String</span> state<span class="token punctuation">,</span> <span class="token class-name">String</span> city<span class="token punctuation">,</span> <span class="token class-name">String</span> street<span class="token punctuation">,</span> <span class="token class-name">String</span> zipcode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>country <span class="token operator">=</span> country<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> state<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>city <span class="token operator">=</span> city<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>street <span class="token operator">=</span> street<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>zipcode <span class="token operator">=</span> zipcode<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * country的getter方法.
      *
      * @return country
-     */
-    public String getCountry() &#123;
-        return country;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getCountry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> country<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">import java.util.Calendar;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Calendar</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XmlAttribute</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XmlElement</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XmlRootElement</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Person类.
  *
  * @author blinkfox on 2017-12-04.
- */
-@XmlRootElement
-public class Person &#123;
+ */</span>
+<span class="token annotation punctuation">@XmlRootElement</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">&#123;</span>
 
-    /** birthday将作为person的子元素. */
-    @XmlElement
-    Calendar birthDay;
+    <span class="token comment">/** birthday将作为person的子元素. */</span>
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">Calendar</span> birthDay<span class="token punctuation">;</span>
 
-    /** name将作为person的的一个属性. */
-    @XmlAttribute
-    String name;
+    <span class="token comment">/** name将作为person的的一个属性. */</span>
+    <span class="token annotation punctuation">@XmlAttribute</span>
+    <span class="token class-name">String</span> name<span class="token punctuation">;</span>
 
-    /** address将作为person的子元素. */
-    @XmlElement
-    Address address;
+    <span class="token comment">/** address将作为person的子元素. */</span>
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">Address</span> address<span class="token punctuation">;</span>
 
-    /** gender将作为person的子元素. */
-    @XmlElement
-    Gender gender;
+    <span class="token comment">/** gender将作为person的子元素. */</span>
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">Gender</span> gender<span class="token punctuation">;</span>
 
-    /** job将作为person的子元素. */
-    @XmlElement
-    String job;
+    <span class="token comment">/** job将作为person的子元素. */</span>
+    <span class="token annotation punctuation">@XmlElement</span>
+    <span class="token class-name">String</span> job<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 默认的空构造方法.
-     */
-    public Person() &#123;
-        super();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public Person(Calendar birthDay, String name, Address address, Gender gender, String job) &#123;
-        this.birthDay = birthDay;
-        this.name = name;
-        this.address = address;
-        this.gender = gender;
-        this.job = job;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token class-name">Calendar</span> birthDay<span class="token punctuation">,</span> <span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">Address</span> address<span class="token punctuation">,</span> <span class="token class-name">Gender</span> gender<span class="token punctuation">,</span> <span class="token class-name">String</span> job<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>birthDay <span class="token operator">=</span> birthDay<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>address <span class="token operator">=</span> address<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>gender <span class="token operator">=</span> gender<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>job <span class="token operator">=</span> job<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * address的getter方法.
      * @return address
-     */
-    public Address getAddress() &#123;
-        return address;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Address</span> <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> address<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.Calendar;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileReader</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileWriter</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Calendar</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span></span><span class="token class-name">JAXBContext</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span></span><span class="token class-name">Marshaller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>bind<span class="token punctuation">.</span></span><span class="token class-name">Unmarshaller</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>commons<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOUtils</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * JAXB2测试类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class JAXB2Test &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JAXB2Test</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(JAXB2Test.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">JAXB2Test</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    public static void main(String[] args) &#123;
-        Address address = new Address(&quot;中国&quot;, &quot;北京&quot;, &quot;北京&quot;, &quot;上地&quot;, &quot;100080&quot;);
-        Person p = new Person(Calendar.getInstance(),&quot;JAXB2&quot;, address, Gender.MALE, &quot;软件工程师&quot;);
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Address</span> address <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Address</span><span class="token punctuation">(</span><span class="token string">"中国"</span><span class="token punctuation">,</span> <span class="token string">"北京"</span><span class="token punctuation">,</span> <span class="token string">"北京"</span><span class="token punctuation">,</span> <span class="token string">"上地"</span><span class="token punctuation">,</span> <span class="token string">"100080"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Person</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token class-name">Calendar</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"JAXB2"</span><span class="token punctuation">,</span> address<span class="token punctuation">,</span> <span class="token class-name">Gender</span><span class="token punctuation">.</span><span class="token constant">MALE</span><span class="token punctuation">,</span> <span class="token string">"软件工程师"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        FileReader reader = null;
-        FileWriter writer = null;
-        try &#123;
-            // 生成xml文件.
-            JAXBContext context = JAXBContext.newInstance(Person.class);
-            writer = new FileWriter(&quot;G:/test/person.xml&quot;);
-            Marshaller m = context.createMarshaller();
-            m.marshal(p, writer);
-            log.info(&quot;生成person.xml文件成功!&quot;);
+        <span class="token class-name">FileReader</span> reader <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">FileWriter</span> writer <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 生成xml文件.</span>
+            <span class="token class-name">JAXBContext</span> context <span class="token operator">=</span> <span class="token class-name">JAXBContext</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            writer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileWriter</span><span class="token punctuation">(</span><span class="token string">"G:/test/person.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Marshaller</span> m <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">createMarshaller</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m<span class="token punctuation">.</span><span class="token function">marshal</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"生成person.xml文件成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            // 读取xml文件.
-            reader = new FileReader(&quot;G:/test/person.xml&quot;);
-            Unmarshaller um = context.createUnmarshaller();
-            Person p2 = (Person) um.unmarshal(reader);
-            log.info(&quot;Country:&#123;&#125;&quot;, p2.getAddress().getCountry());
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;生成和读取XML文件出错！&quot;, e);
-        &#125; finally &#123;
-            IOUtils.closeQuietly(writer);
-            IOUtils.closeQuietly(reader);
-        &#125;
-    &#125;
+            <span class="token comment">// 读取xml文件.</span>
+            reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token string">"G:/test/person.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Unmarshaller</span> um <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">createUnmarshaller</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Person</span> p2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">)</span> um<span class="token punctuation">.</span><span class="token function">unmarshal</span><span class="token punctuation">(</span>reader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Country:&#123;&#125;"</span><span class="token punctuation">,</span> p2<span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getCountry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"生成和读取XML文件出错！"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeQuietly</span><span class="token punctuation">(</span>writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeQuietly</span><span class="token punctuation">(</span>reader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>运行该程序，我们会得到一个<code>person.xml</code>的文件，内容如下：</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
-&lt;person name=&quot;JAXB2&quot;&gt;
-    &lt;birthDay&gt;2017-12-04T17:16:19.226+08:00&lt;/birthDay&gt;
-    &lt;address country=&quot;中国&quot;&gt;
-        &lt;state&gt;北京&lt;/state&gt;
-        &lt;city&gt;北京&lt;/city&gt;
-        &lt;street&gt;上地&lt;/street&gt;
-    &lt;/address&gt;
-    &lt;gender&gt;MALE&lt;/gender&gt;
-    &lt;job&gt;软件工程师&lt;/job&gt;
-&lt;/person&gt;
-</code></pre>
-<h2 id="八、Console"><a href="#八、Console" class="headerlink" title="八、Console"></a>八、Console</h2><p>JDK6中提供了<code>java.io.Console</code>类专用来访问基于字符的控制台设备。你的程序如果要与Windows下的cmd或者Linux下的Terminal交互,就可以用Console类代劳. 但我们不总是能得到可用的Console, 一个JVM是否有可用的Console依赖于底层平台和JVM如何被调用。如果JVM是在交互式命令行(比如Windows的cmd)中启动的,并且输入输出没有重定向到另外的地方，那么就可以得到一个可用的Console实例。下面代码演示了Console类的用法:</p>
-<pre><code class="java">import java.io.Console;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>person</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>JAXB2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>birthDay</span><span class="token punctuation">></span></span>2017-12-04T17:16:19.226+08:00<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>birthDay</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span> <span class="token attr-name">country</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>中国<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>state</span><span class="token punctuation">></span></span>北京<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>state</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>city</span><span class="token punctuation">></span></span>北京<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>city</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>street</span><span class="token punctuation">></span></span>上地<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>street</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>address</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>gender</span><span class="token punctuation">></span></span>MALE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>gender</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>job</span><span class="token punctuation">></span></span>软件工程师<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>job</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>person</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-/**
+<h2 id="八、Console"><a href="#八、Console" class="headerlink" title="八、Console"></a>八、Console</h2><p>JDK6中提供了<code>java.io.Console</code>类专用来访问基于字符的控制台设备。你的程序如果要与Windows下的cmd或者Linux下的Terminal交互,就可以用Console类代劳. 但我们不总是能得到可用的Console, 一个JVM是否有可用的Console依赖于底层平台和JVM如何被调用。如果JVM是在交互式命令行(比如Windows的cmd)中启动的,并且输入输出没有重定向到另外的地方，那么就可以得到一个可用的Console实例。下面代码演示了Console类的用法:</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">Console</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Jdk6之Console测试类.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class ConsoleTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConsoleTest</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        // 获得Console实例，并判断console是否可用
-        Console console = System.console();
-        if (console != null) &#123;
-            // 读取整行字符和密码，密码输入时不会显示
-            String user = new String(console.readLine(&quot;请输入用户名:&quot;));
-            String pwd = new String(console.readPassword(&quot;再输入密码:&quot;));
-            console.printf(&quot;用户名是:&quot; + user + &quot;\n&quot;);
-            console.printf(&quot;密码是:&quot; + pwd + &quot;\n&quot;);
-        &#125; else &#123;
-            System.out.println(&quot;Console不可用!&quot;);
-        &#125;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 获得Console实例，并判断console是否可用</span>
+        <span class="token class-name">Console</span> console <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">console</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>console <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 读取整行字符和密码，密码输入时不会显示</span>
+            <span class="token class-name">String</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token string">"请输入用户名:"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">String</span> pwd <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span><span class="token function">readPassword</span><span class="token punctuation">(</span><span class="token string">"再输入密码:"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"用户名是:"</span> <span class="token operator">+</span> user <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"密码是:"</span> <span class="token operator">+</span> pwd <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Console不可用!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>编译该代码，并在命令行中输入：<code>java ConsoleTest</code>，然后即可运行，运行示例如下：</p>
-<pre><code class="bash">请输入用户名:张三
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">请输入用户名:张三
 再输入密码:
 打印出的用户名是:张三
-打印出的密码是:123456
-</code></pre>
+打印出的密码是:123456<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注</strong>: 在这里可以看到输入密码时,控制台时不显示这些密码字符的,但是程序可以得到输入的密码字符串,这与Linux下面输入密码的情况是一样的。</p>
 </blockquote>
 <h2 id="九、Java-DB-Derby"><a href="#九、Java-DB-Derby" class="headerlink" title="九、Java DB(Derby)"></a>九、Java DB(Derby)</h2><p>从JDK6开始，JDK目录中新增了一个名为<code>db</code>的目录。这便是 Java 6 的新成员：Java DB。这是一个纯 Java 实现、开源的数据库管理系统（DBMS），源于 Apache 软件基金会（ASF）名下的项目<code>Derby</code>。它只有 2MB 大小，对比动辄上 G 的数据库来说可谓袖珍。但这并不妨碍 Derby 功能齐备，支持几乎大部分的数据库应用所需要的特性。JDK6.0里面带的这个Derby的版本是10.2.1.7,支持存储过程和触发器；有两种运行模式，一种是作为嵌入式数据库，另一种是作为网络数据库。前者的数据库服务器和客户端都在同一个JVM里面运行，后者允许数据库服务器端和客户端不在同一个JVM里面，而且允许这两者在不同的物理机器上。值得注意的是JDK6里面的这个Derby支持JDK6的新特性<code>JDBC 4.0</code>规范(JSR 221)。</p>
 <p>下面分两种情况演示一下如何用代码操作Derby数据库，一种是嵌入式数据库，一种是网络数据库。</p>
-<h3 id="1-嵌入式数据库"><a href="#1-嵌入式数据库" class="headerlink" title="1. 嵌入式数据库"></a>1. 嵌入式数据库</h3><pre><code class="java">import com.blinkfox.learn.jdbc.JdbcDaoHelper;
+<h3 id="1-嵌入式数据库"><a href="#1-嵌入式数据库" class="headerlink" title="1. 嵌入式数据库"></a>1. 嵌入式数据库</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>learn<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span></span><span class="token class-name">JdbcDaoHelper</span></span><span class="token punctuation">;</span>
 
-import java.sql.*;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * Derby内嵌数据库测试示例.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class EmbeddedDerbyTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmbeddedDerbyTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(EmbeddedDerbyTest.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">EmbeddedDerbyTest</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** Derby驱动,在derby.jar里面. */
-    private static final String DRIVER = &quot;org.apache.derby.jdbc.EmbeddedDriver&quot;;
+    <span class="token comment">/** Derby驱动,在derby.jar里面. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">DRIVER</span> <span class="token operator">=</span> <span class="token string">"org.apache.derby.jdbc.EmbeddedDriver"</span><span class="token punctuation">;</span>
 
-    /** 连接Derby的url，create=true表示当数据库不存在时就创建它. */
-    private static final String URL = &quot;jdbc:derby:EmbeddedDB;create=true&quot;;
+    <span class="token comment">/** 连接Derby的url，create=true表示当数据库不存在时就创建它. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">URL</span> <span class="token operator">=</span> <span class="token string">"jdbc:derby:EmbeddedDB;create=true"</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
      *
      * @param args 数组参数
-     */
-    public static void main(String[] args) &#123;
-        Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try &#123;
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL);//启动嵌入式数据库
-            st = conn.createStatement();
-            st.execute(&quot;create table foo (FOOID INT NOT NULL, FOONAME VARCHAR(30) NOT NULL)&quot;); //创建foo表
-            st.executeUpdate(&quot;insert into foo(FOOID,FOONAME) values (1, &#39;blinkfox&#39;)&quot;); //插入一条数据
-            rs = st.executeQuery(&quot;select * from foo&quot;);//读取刚插入的数据
-            while (rs.next()) &#123;
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                log.info(&quot;查询结果：id = &#123;&#125;; name = &#123;&#125;&quot;, id, name);
-            &#125;
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;使用Derby数据库出错!&quot;, e);
-        &#125; finally &#123;
-            JdbcDaoHelper.close(rs);
-            JdbcDaoHelper.close(st);
-            JdbcDaoHelper.close(conn);
-        &#125;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Connection</span> conn <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">Statement</span> st <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">ResultSet</span> rs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token constant">DRIVER</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conn <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//启动嵌入式数据库</span>
+            st <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">createStatement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            st<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token string">"create table foo (FOOID INT NOT NULL, FOONAME VARCHAR(30) NOT NULL)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//创建foo表</span>
+            st<span class="token punctuation">.</span><span class="token function">executeUpdate</span><span class="token punctuation">(</span><span class="token string">"insert into foo(FOOID,FOONAME) values (1, 'blinkfox')"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//插入一条数据</span>
+            rs <span class="token operator">=</span> st<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token string">"select * from foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//读取刚插入的数据</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> id <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">String</span> name <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"查询结果：id = &#123;&#125;; name = &#123;&#125;"</span><span class="token punctuation">,</span> id<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"使用Derby数据库出错!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">JdbcDaoHelper</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>rs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">JdbcDaoHelper</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>st<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">JdbcDaoHelper</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>运行上面程序后，会在当前目录生成名为<code>EmbeddedDB</code>的文件夹，既是<code>EmbeddedDB</code>数据库的数据文件存放的地方，控制台将输出：</p>
-<pre><code class="bash">查询结果：id = 1; name = blinkfox
-</code></pre>
-<h3 id="2-网络数据库"><a href="#2-网络数据库" class="headerlink" title="2. 网络数据库"></a>2. 网络数据库</h3><pre><code class="java">import java.io.PrintWriter;
-import java.sql.DriverManager;
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">查询结果：id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> name <span class="token operator">=</span> blinkfox<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-import org.apache.derby.drda.NetworkServerControl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<h3 id="2-网络数据库"><a href="#2-网络数据库" class="headerlink" title="2. 网络数据库"></a>2. 网络数据库</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">PrintWriter</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">DriverManager</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>derby<span class="token punctuation">.</span>drda<span class="token punctuation">.</span></span><span class="token class-name">NetworkServerControl</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
  * Derby网络数据库测试示例.
  *
  * @author blinkfox on 2017-12-04.
- */
-public class NetworkServerDerbyTest &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NetworkServerDerbyTest</span> <span class="token punctuation">&#123;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(NetworkServerDerbyTest.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">NetworkServerDerbyTest</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** Derby驱动,在derbyclient.jar里面. */
-    private static final String DRIVER = &quot;org.apache.derby.jdbc.ClientDriver&quot;;
+    <span class="token comment">/** Derby驱动,在derbyclient.jar里面. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">DRIVER</span> <span class="token operator">=</span> <span class="token string">"org.apache.derby.jdbc.ClientDriver"</span><span class="token punctuation">;</span>
 
-    /** 连接Derby的url. */
-    private static final String URL = &quot;jdbc:derby://localhost:1527/NetworkDB;create=true&quot;;
+    <span class="token comment">/** 连接Derby的url. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">URL</span> <span class="token operator">=</span> <span class="token string">"jdbc:derby://localhost:1527/NetworkDB;create=true"</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
-     * &lt;p&gt;创建Derby网络服务器,默认端口是1527,也可以通过运行&lt;Derby_Home&gt;/frameworks/NetworkServer/bin/startNetworkServer.bat
-     来创建并启动Derby网络服务器,如果是Unix,用startNetworkServer.ksh&lt;/p&gt;
+     * &lt;p>创建Derby网络服务器,默认端口是1527,也可以通过运行&lt;Derby_Home>/frameworks/NetworkServer/bin/startNetworkServer.bat
+     来创建并启动Derby网络服务器,如果是Unix,用startNetworkServer.ksh&lt;/p>
      *
      * @param args 数组参数
-     */
-    public static void main(String[] args) &#123;
-        NetworkServerControl derbyServer = null;
-        try &#123;
-            //NetworkServerControl类在derbynet.jar里面
-            derbyServer = new NetworkServerControl();
-            PrintWriter pw = new PrintWriter(System.out); //用系统输出作为Derby数据库的输出
-            derbyServer.start(pw); //启动Derby服务器
-            Class.forName(DRIVER);
-            DriverManager.getConnection(URL);
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;操作Derby网络数据库异常!&quot;, e);
-        &#125; finally &#123;
-            if (derbyServer != null) &#123;
-                try &#123;
-                    derbyServer.shutdown();
-                &#125; catch (Exception e) &#123;
-                    log.error(&quot;关闭Derby网络数据库异常!&quot;, e);
-                &#125;
-            &#125;
-        &#125;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">NetworkServerControl</span> derbyServer <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//NetworkServerControl类在derbynet.jar里面</span>
+            derbyServer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NetworkServerControl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">PrintWriter</span> pw <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrintWriter</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//用系统输出作为Derby数据库的输出</span>
+            derbyServer<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span>pw<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//启动Derby服务器</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token constant">DRIVER</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"操作Derby网络数据库异常!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>derbyServer <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                    derbyServer<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"关闭Derby网络数据库异常!"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>运行上面程序后,会在当前目录生成名为<code>NetworkDB</code>的文件夹。关于<code>Derby</code>的详细情况,请参考<a target="_blank" rel="noopener" href="http://db.apache.org/derby">http://db.apache.org/derby</a>。</p>
 <h2 id="十、JDBC-4-0"><a href="#十、JDBC-4-0" class="headerlink" title="十、JDBC 4.0"></a>十、JDBC 4.0</h2><p>在 Java SE 6 所提供的诸多新特性和改进中，值得一提的是为 Java 程序提供数据库访问机制的 JDBC 版本升级到了 4.0, 这个以 JSR-221 为代号的版本，提供了更加便利的代码编写机制及柔性，并且支持更多的数据类型。JDBC4.0 主要有以下改进和新特性。</p>
 <ul>
@@ -1354,19 +1357,19 @@ public class NetworkServerDerbyTest &#123;
 <ul>
 <li><code>newSetFromMap(Map)</code>: 从通用的Map实现中创建一个通用的Set实现。Java集合中有<code>IdentityHashMap</code>，但是没有<code>IdentityHashSet</code>类，我们可以通过这样的方式来实现：</li>
 </ul>
-<pre><code class="java">Set&lt;Object&gt; identityHashSet = Collections.newSetFromMap(new IdentityHashMap&lt;Object, Boolean&gt;());
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">></span></span> identityHashSet <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">newSetFromMap</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">IdentityHashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">,</span> <span class="token class-name">Boolean</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li><code>asLifoQueue(Deque)</code>: 通过传入<code>Deque</code>得到一个后进先出(LIFO)的队列。</li>
 </ul>
 <p>现在<code>Arrays</code>工具类，具有<code>copyOf</code>和<code>copyOfRange</code>方法，可以有效地调整，截断或复制所有类型的数组的子数组。</p>
 <p>以前是这样实现的：</p>
-<pre><code class="java">int[] newArray = new int[newLength];
-System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> newArray <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>newLength<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>oldArray<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> newArray<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> oldArray<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p>现在可以这样实现：</p>
-<pre><code class="java">int[] newArray = Arrays.copyOf(a, newLength);
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> newArray <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> newLength<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <hr>
 <p>参考文档：</p>
 <p>-<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/features-141434.html">JavaSE6 Features and Enhancements</a><br>-<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004417536">Java6的新特性</a><br>-<a target="_blank" rel="noopener" href="http://my.csdn.net/Chinajash">chinajash</a></p>

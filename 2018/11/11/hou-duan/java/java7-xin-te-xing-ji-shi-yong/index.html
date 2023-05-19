@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -435,94 +438,94 @@
 </li>
 </ul>
 <h2 id="一、switch支持String"><a href="#一、switch支持String" class="headerlink" title="一、switch支持String"></a>一、switch支持String</h2><p><code>switch</code>现在可以接受<code>String</code>类型的参数。示例代码如下：</p>
-<pre><code class="java">String s = ...
-switch(s) &#123;
-case &quot;quux&quot;:
-    processQuux(s);
-// fall-through
-case &quot;foo&quot;:
-case &quot;bar&quot;:
-    processFooOrBar(s);
-    break;
-case &quot;baz&quot;:
-    processBaz(s);
-    // fall-through
-default:
-    processDefault(s);
-    break;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">switch</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">case</span> <span class="token string">"quux"</span><span class="token operator">:</span>
+    <span class="token function">processQuux</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// fall-through</span>
+<span class="token keyword">case</span> <span class="token string">"foo"</span><span class="token operator">:</span>
+<span class="token keyword">case</span> <span class="token string">"bar"</span><span class="token operator">:</span>
+    <span class="token function">processFooOrBar</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token keyword">case</span> <span class="token string">"baz"</span><span class="token operator">:</span>
+    <span class="token function">processBaz</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// fall-through</span>
+<span class="token keyword">default</span><span class="token operator">:</span>
+    <span class="token function">processDefault</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="二、try-with-resources"><a href="#二、try-with-resources" class="headerlink" title="二、try-with-resources"></a>二、try-with-resources</h2><p>Java中某些资源是需要手动关闭的，如<code>InputStream</code>，<code>Writer</code>，<code>Sockets</code>，<code>Connection</code>等。这个新的语言特性允许try语句本身申请更多的资源，这些资源作用于try代码块，并自动关闭。</p>
 <p>Java7之前的写法：</p>
-<pre><code class="java">BufferedReader br = null;
-try &#123;
-    br = new BufferedReader(new FileReader(path));
-    return br.readLine();
-&#125; catch (Exception e) &#123;
-    log.error(&quot;BufferedReader Exception&quot;, e);
-&#125; finally &#123;
-    if (br != null) &#123;
-        try &#123;
-            br.close();
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;BufferedReader close Exception&quot;, e);
-        &#125;
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">BufferedReader</span> br <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    br <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> br<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"BufferedReader Exception"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>br <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            br<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"BufferedReader close Exception"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>Java7及之后的写法：</p>
-<pre><code class="java">try (BufferedReader br = new BufferedReader(new FileReader(path)) &#123;
-    return br.readLine();
-&#125; catch (Exception e) &#123;
-    log.error(&quot;BufferedReader Exception&quot;, e);
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">BufferedReader</span> br <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> br<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"BufferedReader Exception"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="三、catch多个异常"><a href="#三、catch多个异常" class="headerlink" title="三、catch多个异常"></a>三、catch多个异常</h2><p>自Java7开始，<code>catch</code>中可以一次性捕捉多个异常做统一处理。示例如下：</p>
 <p>Java7之前的写法：</p>
-<pre><code class="java">public void handle() &#123;
-    ExceptionThrower thrower = new ExceptionThrower();
-    try &#123;
-        thrower.manyExceptions();
-    &#125; catch (ExceptionA a) &#123;
-        System.out.println(a.getClass());
-    &#125; catch (ExceptionB b) &#123;
-        System.out.println(b.getClass());
-    &#125; catch (ExceptionC c) &#123;
-        System.out.println(c.getClass());
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ExceptionThrower</span> thrower <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExceptionThrower</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        thrower<span class="token punctuation">.</span><span class="token function">manyExceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ExceptionA</span> a<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ExceptionB</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ExceptionC</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>Java7及之后的写法：</p>
-<pre><code class="java">public void handle() &#123;
-    ExceptionThrower thrower = new ExceptionThrower();
-    try &#123;
-        thrower.manyExceptions();
-    &#125; catch (ExceptionA | ExceptionB ab) &#123;
-        System.out.println(ab.getClass());
-    &#125; catch (ExceptionC c) &#123;
-        System.out.println(c.getClass());
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ExceptionThrower</span> thrower <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExceptionThrower</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        thrower<span class="token punctuation">.</span><span class="token function">manyExceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ExceptionA</span> <span class="token operator">|</span> <span class="token class-name">ExceptionB</span> ab<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ab<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ExceptionC</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="四、实例创建类型推断"><a href="#四、实例创建类型推断" class="headerlink" title="四、实例创建类型推断"></a>四、实例创建类型推断</h2><p>从Java7开始，泛型类的实例化也不用繁琐的将泛型声明再写一遍。示例如下：</p>
 <p>Java7之前的写法：</p>
-<pre><code class="java">Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;String, List&lt;String&gt;&gt;();
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>Java7及之后的写法：</p>
-<pre><code class="java">Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;&gt;();
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="五、数字字面量下划线分割"><a href="#五、数字字面量下划线分割" class="headerlink" title="五、数字字面量下划线分割"></a>五、数字字面量下划线分割</h2><p>很长的数字可读性不好，在Java 7中可以使用下划线分隔长<code>int</code>以及<code>long</code>型整数了。如：</p>
-<pre><code class="java">long creditCardNumber = 1234_5678_9012_3456L;
-public static final int ONE_MILLION = 1_000_000;
-public static final float PI = 3.14_15F;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">long</span> creditCardNumber <span class="token operator">=</span> <span class="token number">1234_5678_9012_3456L</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">ONE_MILLION</span> <span class="token operator">=</span> <span class="token number">1_000_000</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">float</span> <span class="token constant">PI</span> <span class="token operator">=</span> <span class="token number">3.14_15F</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="六、二进制字面量"><a href="#六、二进制字面量" class="headerlink" title="六、二进制字面量"></a>六、二进制字面量</h2><p>现在可以使用0b前缀创建二进制字面量：</p>
-<pre><code class="java">int binary = 0b1001_1001;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> binary <span class="token operator">=</span> <span class="token number">0b1001_1001</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>使用二进制字面量这种表示方式，使用非常简短的代码就可将二进制字符转换为数据类型，如在<code>byte</code>或<code>short</code>。</p>
-<pre><code class="java">byte aByte = (byte) 0b001;
-short aShort = (short) 0b010;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">byte</span> aByte <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span> <span class="token number">0b001</span><span class="token punctuation">;</span>
+<span class="token keyword">short</span> aShort <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">short</span><span class="token punctuation">)</span> <span class="token number">0b010</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h2 id="七、增强的文件系统"><a href="#七、增强的文件系统" class="headerlink" title="七、增强的文件系统"></a>七、增强的文件系统</h2><p>Java7 推出了全新的<code>NIO2.0 API</code>以此改变针对文件管理的不便，使得在<code>java.nio.file</code>包下使用<code>Path</code>、<code>Paths</code>、<code>Files</code>、<code>WatchService</code>、<code>FileSystem</code>等常用类型可以很好的简化开发人员对文件管理的编码工作。</p>
 <h3 id="1-Path接口和Paths类"><a href="#1-Path接口和Paths类" class="headerlink" title="1. Path接口和Paths类"></a>1. Path接口和Paths类</h3><p><code>Path</code>接口的某些功能其实可以和<code>java.io</code>包下的<code>File</code>类等价，当然这些功能仅限于只读操作。在实际开发过程中，开发人员可以联用<code>Path</code>接口和<code>Paths</code>类，从而获取文件的一系列上下文信息。</p>
 <ul>
@@ -532,12 +535,12 @@ short aShort = (short) 0b010;
 <li><code>Path getParent()</code>: 获取当前文件上级关联目录</li>
 </ul>
 <p>联用<code>Path</code>接口和<code>Paths</code>类型获取文件信息：</p>
-<pre><code class="java">Path path = Paths.get(&quot;G:/test/test.xml&quot;);
-System.out.println(&quot;文件节点数:&quot; + path.getNameCount());
-System.out.println(&quot;文件名称:&quot; + path.getFileName());
-System.out.println(&quot;文件根目录:&quot; + path.getRoot());
-System.out.println(&quot;文件上级关联目录:&quot; + path.getParent());
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Path</span> path <span class="token operator">=</span> <span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"G:/test/test.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件节点数:"</span> <span class="token operator">+</span> path<span class="token punctuation">.</span><span class="token function">getNameCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件名称:"</span> <span class="token operator">+</span> path<span class="token punctuation">.</span><span class="token function">getFileName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件根目录:"</span> <span class="token operator">+</span> path<span class="token punctuation">.</span><span class="token function">getRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件上级关联目录:"</span> <span class="token operator">+</span> path<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="2-Files类"><a href="#2-Files类" class="headerlink" title="2. Files类"></a>2. Files类</h3><p>联用<code>Path</code>接口和<code>Paths</code>类可以很方便的访问到目标文件的上下文信息。当然这些操作全都是只读的，如果开发人员想对文件进行其它非只读操作，比如文件的创建、修改、删除等操作，则可以使用<code>Files</code>类型进行操作。</p>
 <p>Files类型常用方法如下：</p>
 <ul>
@@ -547,8 +550,8 @@ System.out.println(&quot;文件上级关联目录:&quot; + path.getParent());
 <li><code>Path move()</code>: 将指定目标路径的文件转移到其他路径下，并删除源文件</li>
 </ul>
 <p>使用<code>Files</code>类型复制、粘贴文件示例：</p>
-<pre><code class="java">Files.copy(Paths.get(&quot;/test/src.xml&quot;), Paths.get(&quot;/test/target.xml&quot;));
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Files</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span><span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/test/src.xml"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/test/target.xml"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>使用<code>Files</code>类型来管理文件，相对于传统的I&#x2F;O方式来说更加方便和简单。因为具体的操作实现将全部移交给<code>NIO2.0 API</code>，开发人员则无需关注。</p>
 <h3 id="3-WatchService"><a href="#3-WatchService" class="headerlink" title="3. WatchService"></a>3. WatchService</h3><p>Java7 还为开发人员提供了一套全新的文件系统功能，那就是文件监测。在此或许有很多朋友并不知晓文件监测有何意义及目，那么请大家回想下调试成热发布功能后的Web容器。当项目迭代后并重新部署时，开发人员无需对其进行手动重启，因为Web容器一旦监测到文件发生改变后，便会自动去适应这些“变化”并重新进行内部装载。Web容器的热发布功能同样也是基于文件监测功能，所以不得不承认，文件监测功能的出现对于Java文件系统来说是具有重大意义的。</p>
 <p>文件监测是基于事件驱动的，事件触发是作为监测的先决条件。开发人员可以使用<code>java.nio.file</code>包下的<code>StandardWatchEventKinds</code>类型提供的3种字面常量来定义监测事件类型，值得注意的是监测事件需要和<code>WatchService</code>实例一起进行注册。</p>
@@ -559,35 +562,35 @@ System.out.println(&quot;文件上级关联目录:&quot; + path.getParent());
 <li><code>ENTRY_MODIFY</code>：文件或文件夹粘贴事件；</li>
 </ul>
 <p>使用<code>WatchService</code>类实现文件监控完整示例：</p>
-<pre><code class="java">public static void testWatch() &#123;
-    /* 监控目标路径 */
-    Path path = Paths.get(&quot;G:/&quot;);
-    try &#123;
-        /* 创建文件监控对象. */
-        WatchService watchService = FileSystems.getDefault().newWatchService();
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testWatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* 监控目标路径 */</span>
+    <span class="token class-name">Path</span> path <span class="token operator">=</span> <span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"G:/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* 创建文件监控对象. */</span>
+        <span class="token class-name">WatchService</span> watchService <span class="token operator">=</span> <span class="token class-name">FileSystems</span><span class="token punctuation">.</span><span class="token function">getDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newWatchService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        /* 注册文件监控的所有事件类型. */
-        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
-                StandardWatchEventKinds.ENTRY_MODIFY);
+        <span class="token comment">/* 注册文件监控的所有事件类型. */</span>
+        path<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span>watchService<span class="token punctuation">,</span> <span class="token class-name">StandardWatchEventKinds</span><span class="token punctuation">.</span><span class="token constant">ENTRY_CREATE</span><span class="token punctuation">,</span> <span class="token class-name">StandardWatchEventKinds</span><span class="token punctuation">.</span><span class="token constant">ENTRY_DELETE</span><span class="token punctuation">,</span>
+                <span class="token class-name">StandardWatchEventKinds</span><span class="token punctuation">.</span><span class="token constant">ENTRY_MODIFY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        /* 循环监测文件. */
-        while (true) &#123;
-            WatchKey watchKey = watchService.take();
+        <span class="token comment">/* 循环监测文件. */</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">WatchKey</span> watchKey <span class="token operator">=</span> watchService<span class="token punctuation">.</span><span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            /* 迭代触发事件的所有文件 */
-            for (WatchEvent&lt;?&gt; event : watchKey.pollEvents()) &#123;
-                System.out.println(event.context().toString() + &quot; 事件类型：&quot; + event.kind());
-            &#125;
+            <span class="token comment">/* 迭代触发事件的所有文件 */</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">WatchEvent</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> event <span class="token operator">:</span> watchKey<span class="token punctuation">.</span><span class="token function">pollEvents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" 事件类型："</span> <span class="token operator">+</span> event<span class="token punctuation">.</span><span class="token function">kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
 
-            if (!watchKey.reset()) &#123;
-                return;
-            &#125;
-        &#125;
-    &#125; catch (Exception e) &#123;
-        e.printStackTrace();
-    &#125;
-&#125;
-</code></pre>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>watchKey<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>通过上述程序示例我们可以看出，使用<code>WatchService</code>接口进行文件监控非常简单和方便。首先我们需要定义好目标监控路径，然后调用<code>FileSystems</code>类型的<code>newWatchService()</code>方法创建<code>WatchService</code>对象。接下来我们还需使用<code>Path</code>接口的<code>register()</code>方法注册<code>WatchService</code>实例及监控事件。当这些基础作业层全部准备好后，我们再编写外围实时监测循环。最后迭代<code>WatchKey</code>来获取所有触发监控事件的文件即可。</p>
 <h2 id="八、Fork-x2F-Join框架"><a href="#八、Fork-x2F-Join框架" class="headerlink" title="八、Fork&#x2F;Join框架"></a>八、Fork&#x2F;Join框架</h2><h3 id="1-什么是Fork-x2F-Join框架"><a href="#1-什么是Fork-x2F-Join框架" class="headerlink" title="1. 什么是Fork&#x2F;Join框架"></a>1. 什么是Fork&#x2F;Join框架</h3><p>Java7提供的一个用于并行执行任务的框架，是一个把大任务分割成若干个小任务，最终汇总每个小任务结果后得到大任务结果的框架。</p>
 <p>Fork&#x2F;Join的运行流程图如下：</p>
@@ -603,103 +606,103 @@ System.out.println(&quot;文件上级关联目录:&quot; + path.getParent());
 <h3 id="4-Fork-x2F-Join框架使用示例"><a href="#4-Fork-x2F-Join框架使用示例" class="headerlink" title="4. Fork&#x2F;Join框架使用示例"></a>4. Fork&#x2F;Join框架使用示例</h3><p>让我们通过一个简单的需求来使用下<code>Fork／Join</code>框架，需求是：计算<code>1 + 2 + 3 + 4</code>的结果。</p>
 <p>使用<code>Fork/Join</code>框架首先要考虑到的是如何分割任务，如果我们希望每个子任务最多执行两个数的相加，那么我们设置分割的阈值是<code>2</code>，由于是<code>4</code>个数字相加，所以<code>Fork/Join</code>框架会把这个任务<code>fork</code>成两个子任务，子任务一负责计算<code>1 + 2</code>，子任务二负责计算<code>3 + 4</code>，然后再<code>join</code>两个子任务的结果。</p>
 <p>因为是有结果的任务，所以必须继承<code>RecursiveTask</code>，实现代码如下：</p>
-<pre><code class="java">package com.blinkfox.test.other;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>test<span class="token punctuation">.</span>other</span><span class="token punctuation">;</span>
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
-import java.util.concurrent.RecursiveTask;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ExecutionException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ForkJoinPool</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">Future</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">RecursiveTask</span></span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * CountTask.
  *
  * @author blinkfox on 2018-01-03.
- */
-public class CountTask extends RecursiveTask&lt;Integer&gt; &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CountTask</span> <span class="token keyword">extends</span> <span class="token class-name">RecursiveTask</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
 
-    /** 阈值. */
-    public static final int THRESHOLD = 2;
+    <span class="token comment">/** 阈值. */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">THRESHOLD</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
 
-    /** 计算的开始值. */
-    private int start;
+    <span class="token comment">/** 计算的开始值. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> start<span class="token punctuation">;</span>
 
-    /** 计算的结束值. */
-    private int end;
+    <span class="token comment">/** 计算的结束值. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> end<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 构造方法.
      *
      * @param start 计算的开始值
      * @param end 计算的结束值
-     */
-    public CountTask(int start, int end) &#123;
-        this.start = start;
-        this.end = end;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">CountTask</span><span class="token punctuation">(</span><span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span> end<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>start <span class="token operator">=</span> start<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>end <span class="token operator">=</span> end<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 执行计算的方法.
      *
      * @return int型结果
-     */
-    @Override
-    protected Integer compute() &#123;
-        int sum = 0;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Integer</span> <span class="token function">compute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-        // 如果任务足够小就计算任务.
-        if ((end - start) &lt;= THRESHOLD) &#123;
-            for (int i = start; i &lt;= end; i++) &#123;
-                sum += i;
-            &#125;
-        &#125; else &#123;
-            // 如果任务大于阈值，就分裂成两个子任务来计算.
-            int middle = (start + end) / 2;
-            CountTask leftTask = new CountTask(start, middle);
-            CountTask rightTask = new CountTask(middle + 1, end);
+        <span class="token comment">// 如果任务足够小就计算任务.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token constant">THRESHOLD</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> start<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> end<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                sum <span class="token operator">+=</span> i<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 如果任务大于阈值，就分裂成两个子任务来计算.</span>
+            <span class="token keyword">int</span> middle <span class="token operator">=</span> <span class="token punctuation">(</span>start <span class="token operator">+</span> end<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token class-name">CountTask</span> leftTask <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CountTask</span><span class="token punctuation">(</span>start<span class="token punctuation">,</span> middle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">CountTask</span> rightTask <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CountTask</span><span class="token punctuation">(</span>middle <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> end<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            // 等待子任务执行完，并得到结果，再合并执行结果.
-            leftTask.fork();
-            rightTask.fork();
-            sum = leftTask.join() + rightTask.join();
-        &#125;
-        return sum;
-    &#125;
+            <span class="token comment">// 等待子任务执行完，并得到结果，再合并执行结果.</span>
+            leftTask<span class="token punctuation">.</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            rightTask<span class="token punctuation">.</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sum <span class="token operator">=</span> leftTask<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> rightTask<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * main方法.
      *
      * @param args 数组参数
-     */
-    public static void main(String[] args) throws ExecutionException, InterruptedException &#123;
-        ForkJoinPool fkPool = new ForkJoinPool();
-        CountTask task = new CountTask(1, 4);
-        Future&lt;Integer&gt; result = fkPool.submit(task);
-        System.out.println(&quot;result:&quot; + result.get());
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ExecutionException</span><span class="token punctuation">,</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ForkJoinPool</span> fkPool <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ForkJoinPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">CountTask</span> task <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CountTask</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> result <span class="token operator">=</span> fkPool<span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span>task<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"result:"</span> <span class="token operator">+</span> result<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="九、其它"><a href="#九、其它" class="headerlink" title="九、其它"></a>九、其它</h2><h3 id="1-JDBC4-1规范"><a href="#1-JDBC4-1规范" class="headerlink" title="1. JDBC4.1规范"></a>1. JDBC4.1规范</h3><p>JDBC4.1主要更新了两个新特性，分别是：</p>
 <h4 id="1-Connection，ResultSet-和-Statement-都实现了Closeable-接口"><a href="#1-Connection，ResultSet-和-Statement-都实现了Closeable-接口" class="headerlink" title="(1). Connection，ResultSet 和 Statement 都实现了Closeable 接口"></a>(1). Connection，ResultSet 和 Statement 都实现了Closeable 接口</h4><p><code>Connection</code>，<code>ResultSet</code>和<code>Statement</code>都实现了<code>Closeable</code>接口，所有在<code>try-with-resources</code>语句中调用，就可以自动关闭相关资源了。</p>
 <h4 id="2-RowSet-1-1"><a href="#2-RowSet-1-1" class="headerlink" title="(2). RowSet 1.1"></a>(2). RowSet 1.1</h4><p>引入<code>RowSetFactory</code>接口和<code>RowSetProvider</code>类，可以创建JDBC driver支持的各种&#96;Rowsets。</p>
-<pre><code class="java">RowSetFactory myRowSetFactory = null;
-JdbcRowSet jdbcRs = null;
-ResultSet rs = null;
-Statement stmt = null;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">RowSetFactory</span> myRowSetFactory <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token class-name">JdbcRowSet</span> jdbcRs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token class-name">ResultSet</span> rs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token class-name">Statement</span> stmt <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
 
-try &#123;
-  myRowSetFactory = RowSetProvider.newFactory();//用缺省的RowSetFactory 实现
-  jdbcRs = myRowSetFactory.createJdbcRowSet();
+<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+  myRowSetFactory <span class="token operator">=</span> <span class="token class-name">RowSetProvider</span><span class="token punctuation">.</span><span class="token function">newFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//用缺省的RowSetFactory 实现</span>
+  jdbcRs <span class="token operator">=</span> myRowSetFactory<span class="token punctuation">.</span><span class="token function">createJdbcRowSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  //创建一个 JdbcRowSet 对象，配置数据库连接属性
-  jdbcRs.setUrl(&quot;jdbc:myDriver:myAttribute&quot;);
-  jdbcRs.setUsername(username);
-  jdbcRs.setPassword(password);
+  <span class="token comment">//创建一个 JdbcRowSet 对象，配置数据库连接属性</span>
+  jdbcRs<span class="token punctuation">.</span><span class="token function">setUrl</span><span class="token punctuation">(</span><span class="token string">"jdbc:myDriver:myAttribute"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  jdbcRs<span class="token punctuation">.</span><span class="token function">setUsername</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  jdbcRs<span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  jdbcRs.setCommand(&quot;select ID from TEST&quot;);
-  jdbcRs.execute();
-&#125;
-</code></pre>
+  jdbcRs<span class="token punctuation">.</span><span class="token function">setCommand</span><span class="token punctuation">(</span><span class="token string">"select ID from TEST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  jdbcRs<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><code>RowSetFactory</code>接口包括了创建不同类型的RowSet的方法：</p>
 <ul>
 <li>createCachedRowSet</li>

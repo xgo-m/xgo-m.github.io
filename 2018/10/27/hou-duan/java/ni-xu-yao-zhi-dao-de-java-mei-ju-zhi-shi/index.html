@@ -410,6 +410,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -418,12 +421,12 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>枚举</strong>（<code>enum</code>全称为<code>enumeration</code>）类型是<code>Java 5</code>新增的类型，存放在<code>java.lang</code>包中，允许用常量来表示特定的数据片断，而且全部都以类型安全的形式来表示。</p>
 <h3 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h3><p> 创建枚举类型要使用<code>enum</code>关键字，隐含了所创建的类型都是<code>java.lang.Enum</code>类的子类（<code>java.lang.Enum</code>是一个抽象类）。枚举类型符合通用模式<code>Class Enum&lt;E extends Enum&lt;E&gt;&gt;</code>，而<code>E</code>表示枚举类型的名称。枚举类型的每一个值都将映射到<code>protected Enum(String name, int ordinal)</code>构造函数中。在这里每个值的名称都被转换成一个字符串，并且序数设置表示了此设置被创建的顺序。</p>
 <p>枚举类的定义格式如下：</p>
-<pre><code class="java">enum 类名 &#123;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">enum</span> 类名 <span class="token punctuation">&#123;</span>
 
-//枚举值
+<span class="token comment">//枚举值</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ul>
 <li>需要的数据不能是任意的，而必须是一定范围内的值</li>
 <li>枚举类也是一个特殊的类，构造方法默认的修饰符是<code>private</code>的</li>
@@ -442,233 +445,233 @@
 <li><code>static &lt;T extends Enum&lt;T&gt;&gt; T valueOf(Class&lt;T&gt; enumType, String name)</code>：返回指定名称的枚举常量指定的enumtype的方法。如：<code>ColorEnum color = ColorEnum.valueOf(&quot;RED&quot;);</code>。</li>
 </ul>
 <h2 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h2><h3 id="表达常量"><a href="#表达常量" class="headerlink" title="表达常量"></a>表达常量</h3><p>在<code>Java 5</code>之前，定义常量的最佳方式是在<code>final</code>修饰的常量类中定义：<code>public static fianl...</code>修饰的属性，且须将构造方法设为<code>private</code>。代码示例如下：</p>
-<pre><code class="java">public final class ColorConst &#123;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">ColorConst</span> <span class="token punctuation">&#123;</span>
 
-    public static final int RED = 1;
-    public static final int GREEN = 2;
-    public static final int BLUE = 3;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">RED</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">GREEN</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">BLUE</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
 
-    private ColorConst() &#123;&#125;
+    <span class="token keyword">private</span> <span class="token class-name">ColorConst</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>但，<strong>不建议在接口中定义常量</strong>。在<code>《Effective Java》</code>一书中提到过：</p>
 <blockquote>
 <p><strong>The constant interface pattern is a poor use of interfaces</strong>. That a class uses some constants internally is an implementation detail. Implementing a constant interface causes this implementation detail to leak into the class’s exported API. It is of no consequence to the users of a class that the class implements a constant interface. In fact, it may even confuse them. Worse, it represents a commitment: if in a future release the class is modified so that it no longer needs to use the constants, it still must implement the interface to ensure binary compatibility. If a nonfinal class implements a constant interface, all of its subclasses will have their namespaces polluted by the constants in the interface.There are several constant interfaces in the java platform libraries, such as java.io.ObjectStreamConstants. These interfaces should be regarded as anomalies and should not be emulated.</p>
 </blockquote>
 <p>大意是：<strong>如果某个实现了常量接口的类被修改不再需要常量了，也会因为序列化兼容原因不得不保持该实现，而且非<code>final</code>类实现常量接口会导致所有子类被污染</strong>。</p>
 <p>现在好了，有了枚举，可以把相关的常量分组到一个枚举类型里，而且枚举提供了比常量更多的方法。</p>
-<pre><code class="java">public enum ColorEnum &#123;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">ColorEnum</span> <span class="token punctuation">&#123;</span>
 
-    RED, GREEN, BLUE
+    <span class="token constant">RED</span><span class="token punctuation">,</span> <span class="token constant">GREEN</span><span class="token punctuation">,</span> <span class="token constant">BLUE</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注意</strong>：枚举类的名称一般以<code>Enum</code>结尾，比如<code>ColorEnum</code>等。如果你写个枚举类，取名为<code>Color</code>，那么没人能快速知道它是一个枚举类。</p>
 </blockquote>
 <h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>Java 中使用<code>values()</code>方法将枚举所有元素item转换成一个数组。这样就可以通过<code>foreach</code>语法来遍历枚举中的所有元素了。</p>
-<pre><code class="java">for (ColorEnum color: ColorEnum.values()) &#123;
-    log.info(&quot;ordinal:&#123;&#125;, name:&#123;&#125;&quot;, color.ordinal(), color.name());
-&#125;
-</code></pre>
-<p>输出结果；</p>
-<pre><code class="bash">ordinal:0, name:RED
-ordinal:1, name:GREEN
-ordinal:2, name:BLUE
-</code></pre>
-<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>在<code>JDK7</code>之前，String字符串是不支持通过<code>switch</code>语法来筛选数据，但是 Java 为枚举提供了<code>switch</code>语法的支持。使用示例如下：</p>
-<pre><code class="java">// 客户端传来的枚举item
-ColorEnum color = ColorEnum.GREEN;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ColorEnum</span> color<span class="token operator">:</span> <span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"ordinal:&#123;&#125;, name:&#123;&#125;"</span><span class="token punctuation">,</span> color<span class="token punctuation">.</span><span class="token function">ordinal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> color<span class="token punctuation">.</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-switch (color) &#123;
-    case RED: log.info(&quot;进入了 RED 的分支&quot;);
-        break;
-    case GREEN: log.info(&quot;进入了 GREEN 的分支&quot;);
-        break;
-    case BLUE: log.info(&quot;进入了 BLUE 的分支&quot;);
-        break;
-    default: log.info(&quot;进入了 default 的分支&quot;);
-&#125;
-</code></pre>
+<p>输出结果；</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ordinal:0, name:RED
+ordinal:1, name:GREEN
+ordinal:2, name:BLUE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>在<code>JDK7</code>之前，String字符串是不支持通过<code>switch</code>语法来筛选数据，但是 Java 为枚举提供了<code>switch</code>语法的支持。使用示例如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 客户端传来的枚举item</span>
+<span class="token class-name">ColorEnum</span> color <span class="token operator">=</span> <span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token constant">GREEN</span><span class="token punctuation">;</span>
+
+<span class="token keyword">switch</span> <span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token constant">RED</span><span class="token operator">:</span> log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"进入了 RED 的分支"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token constant">GREEN</span><span class="token operator">:</span> log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"进入了 GREEN 的分支"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token constant">BLUE</span><span class="token operator">:</span> log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"进入了 BLUE 的分支"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span> log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"进入了 default 的分支"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>输出结果：</p>
-<pre><code class="bash">进入了 GREEN 的分支
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">进入了 GREEN 的分支<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注意</strong>：<code>switch</code>后已经指定了枚举的类型，<code>case</code>后无须再使用全名<code>ColorEnum</code>。</p>
 </blockquote>
 <h3 id="自定义属性和方法"><a href="#自定义属性和方法" class="headerlink" title="自定义属性和方法"></a>自定义属性和方法</h3><p>Java枚举中允许定义属性和方法，但必须在枚举实例序列的最后一个分号后再添加。Java 要求必须先定义枚举实例在前面，使用示例如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 关于颜色的枚举.
  * @author blinkfox on 2017/9/17.
- */
-public enum ColorEnum &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">ColorEnum</span> <span class="token punctuation">&#123;</span>
 
-    RED(1, &quot;红色&quot;), GREEN(2, &quot;绿色&quot;), BLUE(3, &quot;蓝色&quot;);
+    <span class="token function">RED</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"红色"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">GREEN</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"绿色"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">BLUE</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"蓝色"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** 颜色的code. */
-    private int code;
+    <span class="token comment">/** 颜色的code. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> code<span class="token punctuation">;</span>
 
-    /** 颜色的名称. */
-    private String name;
+    <span class="token comment">/** 颜色的名称. */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 枚举的构造方法默认且只能是private的.
      * @param code 代码值
      * @param name 名称
-     */
-    ColorEnum(int code, String name) &#123;
-        this.code = code;
-        this.name = name;
-    &#125;
+     */</span>
+    <span class="token class-name">ColorEnum</span><span class="token punctuation">(</span><span class="token keyword">int</span> code<span class="token punctuation">,</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 根据颜色的code值获取到对应的名称.
      * @param code 颜色code
      * @return 颜色名称
-     */
-    public static String getNameByCode(int code) &#123;
-        for (ColorEnum color: ColorEnum.values()) &#123;
-            if (color.code == code) &#123;
-                return color.name;
-            &#125;
-        &#125;
-        return null;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">getNameByCode</span><span class="token punctuation">(</span><span class="token keyword">int</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ColorEnum</span> color<span class="token operator">:</span> <span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>color<span class="token punctuation">.</span>code <span class="token operator">==</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> color<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 覆盖的toString方法.
      * @return 字符串
-     */
-    @Override
-    public String toString() &#123;
-        return this.code + &quot;:&quot; + this.name;
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /* getter方法. */
+    <span class="token comment">/* getter方法. */</span>
 
-    public int getCode() &#123;
-        return code;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> code<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getName() &#123;
-        return name;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p><strong>注意</strong>：枚举的构造方法默认且只能是<code>private</code>的。</p>
 </blockquote>
 <h3 id="使用枚举来表达多态"><a href="#使用枚举来表达多态" class="headerlink" title="使用枚举来表达多态"></a>使用枚举来表达多态</h3><p>所有的枚举都继承自<code>java.lang.Enum</code>类。由于 Java 不支持多继承，所以枚举不能再继承其他类。但枚举类中可以定义抽象方法，也可以实现一个或者多个接口。由于每一个枚举值会呈现出不同的行为方式，则须要让每个枚举值分别实现方法。</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 关于颜色的枚举.
  * @author blinkfox on 2017/9/17.
- */
-public enum ColorEnum &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">ColorEnum</span> <span class="token punctuation">&#123;</span>
 
-    RED(1, &quot;红色&quot;) &#123;
-        @Override
-        public void paint() &#123;
-            log.info(&quot;使用了&#39;红色&#39;颜料来喷漆&quot;);
-        &#125;
-    &#125;,
+    <span class="token function">RED</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"红色"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"使用了'红色'颜料来喷漆"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 
-    GREEN(2, &quot;绿色&quot;) &#123;
-        @Override
-        public void paint() &#123;
-            log.info(&quot;使用了&#39;绿色&#39;颜料来喷漆&quot;);
-        &#125;
-    &#125;,
+    <span class="token function">GREEN</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"绿色"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"使用了'绿色'颜料来喷漆"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 
-    BLUE(3, &quot;蓝色&quot;) &#123;
-        @Override
-        public void paint() &#123;
-            log.info(&quot;使用了&#39;蓝色&#39;颜料来喷漆&quot;);
-        &#125;
-    &#125;;
+    <span class="token function">BLUE</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"蓝色"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"使用了'蓝色'颜料来喷漆"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-    private static final Logger log = LoggerFactory.getLogger(ColorEnum.class);
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /** 颜色的code. */
-    private int code;
+    <span class="token comment">/** 颜色的code. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> code<span class="token punctuation">;</span>
 
-    /** 颜色的名称. */
-    private String name;
+    <span class="token comment">/** 颜色的名称. */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 枚举的构造方法默认且只能是private的.
      * @param code 代码值
      * @param name 名称
-     */
-    ColorEnum(int code, String name) &#123;
-        this.code = code;
-        this.name = name;
-    &#125;
+     */</span>
+    <span class="token class-name">ColorEnum</span><span class="token punctuation">(</span><span class="token keyword">int</span> code<span class="token punctuation">,</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 使用不同的颜色来喷漆的抽象方法.
-     */
-    public abstract void paint();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 根据颜色的code值获取到对应的名称.
      * @param code 颜色code
      * @return 颜色名称
-     */
-    public static String getNameByCode(int code) &#123;
-        for (ColorEnum color: ColorEnum.values()) &#123;
-            if (color.code == code) &#123;
-                return color.name;
-            &#125;
-        &#125;
-        return null;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">getNameByCode</span><span class="token punctuation">(</span><span class="token keyword">int</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ColorEnum</span> color<span class="token operator">:</span> <span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>color<span class="token punctuation">.</span>code <span class="token operator">==</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> color<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /* getter方法. */
+    <span class="token comment">/* getter方法. */</span>
 
-    public int getCode() &#123;
-        return code;
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> code<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public String getName() &#123;
-        return name;
-    &#125;
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 覆盖的toString方法.
      * @return 字符串
-     */
-    @Override
-    public String toString() &#123;
-        return this.code + &quot;:&quot; + this.name;
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="枚举集合的使用"><a href="#枚举集合的使用" class="headerlink" title="枚举集合的使用"></a>枚举集合的使用</h3><p>Java 中提供了两个方便操作<code>enum</code>的集合类：<code>java.util.EnumSet</code>和<code>java.util.EnumMap</code>。<code>EnumSet</code>保证集合中的元素不重复；<code>EnumMap</code>中的<code>key</code>是<code>enum</code>类型且不能为<code>null</code>，而<code>value</code>则可以是任意类型。<code>EnumSet</code>和<code>EnumMap</code>内部以数组来实现，性能更好。</p>
 <p>以下是<code>EnumMap</code>的使用示例：</p>
-<pre><code class="java">EnumMap&lt;ColorEnum, String&gt; colorEnumMap = new EnumMap&lt;ColorEnum, String&gt;(ColorEnum.class);
-colorEnumMap.put(ColorEnum.RED, &quot;这是EnumMap中的&#39;RED&#39;&quot;);
-colorEnumMap.put(ColorEnum.GREEN, &quot;这是EnumMap中的&#39;GREEN&#39;&quot;);
-colorEnumMap.put(ColorEnum.BLUE, &quot;这是EnumMap中的&#39;BLUE&#39;&quot;);
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">EnumMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ColorEnum</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> colorEnumMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EnumMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ColorEnum</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+colorEnumMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token constant">RED</span><span class="token punctuation">,</span> <span class="token string">"这是EnumMap中的'RED'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+colorEnumMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token constant">GREEN</span><span class="token punctuation">,</span> <span class="token string">"这是EnumMap中的'GREEN'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+colorEnumMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">ColorEnum</span><span class="token punctuation">.</span><span class="token constant">BLUE</span><span class="token punctuation">,</span> <span class="token string">"这是EnumMap中的'BLUE'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-log.info(&quot;&#123;&#125;&quot;, colorEnumMap);
-</code></pre>
+log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"&#123;&#125;"</span><span class="token punctuation">,</span> colorEnumMap<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>输出结果：</p>
-<pre><code class="bash">&#123;1:红色=这是EnumMap中的&#39;RED&#39;, 2:绿色=这是EnumMap中的&#39;GREEN&#39;, 3:蓝色=这是EnumMap中的&#39;BLUE&#39;&#125;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span><span class="token number">1</span>:红色<span class="token operator">=</span>这是EnumMap中的<span class="token string">'RED'</span>, <span class="token number">2</span>:绿色<span class="token operator">=</span>这是EnumMap中的<span class="token string">'GREEN'</span>, <span class="token number">3</span>:蓝色<span class="token operator">=</span>这是EnumMap中的<span class="token string">'BLUE'</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h3 id="枚举单例"><a href="#枚举单例" class="headerlink" title="枚举单例"></a>枚举单例</h3><p>在<code>《Effective Java》</code>一书中强烈推荐<strong>使用枚举来实现单例模式</strong>，同时枚举单例代码也最为简单：</p>
-<pre><code class="java">public enum ColorEnumSingleton &#123;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">ColorEnumSingleton</span> <span class="token punctuation">&#123;</span>
 
-    INSTANCE;
+    <span class="token constant">INSTANCE</span><span class="token punctuation">;</span>
 
-    public static void doSomething()&#123;
-        // do something
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">// do something</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>使用枚举单例有以下好处：</p>
 <ul>
 <li>自由序列化</li>

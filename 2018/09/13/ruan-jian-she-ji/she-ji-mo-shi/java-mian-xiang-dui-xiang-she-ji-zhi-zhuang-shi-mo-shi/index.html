@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -439,147 +442,147 @@
 <h3 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/decorator-structure.jpg" alt="装饰模式结构图"></p>
 <h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/decorator-seq.jpg" alt="装饰模式时序图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先定义一个抽象构件接口：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象构件
  * Created by blinkfox on 16-6-26.
- */
-public interface Component &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
 
-    // 接口方法
-    void operate();
+    <span class="token comment">// 接口方法</span>
+    <span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后是具体构件实现类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体构件
  * Created by blinkfox on 16-6-26.
- */
-public class ConcreteComponent implements Component &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteComponent</span> <span class="token keyword">implements</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 具体实现方法
-     */
-    @Override
-    public void operate() &#123;
-        System.out.println(&quot;do Something...&quot;);
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"do Something..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>接着是装饰角色：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 装饰角色
  * 维持一个指向Component对象的引用，并定义一个与 Component接口一致的接口。
  * Created by blinkfox on 16-6-26.
- */
-public class Decorator implements Component &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Decorator</span> <span class="token keyword">implements</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
 
-    private Component component;
+    <span class="token keyword">private</span> <span class="token class-name">Component</span> component<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment">/**
      * 通过构造函数传递被修饰者
      * @param component
-     */
-    public Decorator(Component component) &#123;
-        this.component = component;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Decorator</span><span class="token punctuation">(</span><span class="token class-name">Component</span> component<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>component <span class="token operator">=</span> component<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 委托给被修饰者执行
-     */
-    @Override
-    public void operate() &#123;
-        this.component.operate();
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>component<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>下面是具体的装饰类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体的装饰类1
  * Created by blinkfox on 16-6-26.
- */
-public class ConcreteDecorator1 extends Decorator &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteDecorator1</span> <span class="token keyword">extends</span> <span class="token class-name">Decorator</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 通过构造函数传递被修饰者
      * @param component
-     */
-    public ConcreteDecorator1(Component component) &#123;
-        super(component);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteDecorator1</span><span class="token punctuation">(</span><span class="token class-name">Component</span> component<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>component<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 定义自己的修饰方法1
-     */
-    private void method1() &#123;
-        System.out.println(&quot;method1修饰...&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"method1修饰..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 重写父类的operate方法
-     */
-    public void operate() &#123;
-        this.method1();
-        super.operate();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体的装饰类2
  * Created by blinkfox on 16-6-26.
- */
-public class ConcreteDecorator2 extends Decorator &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteDecorator2</span> <span class="token keyword">extends</span> <span class="token class-name">Decorator</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 通过构造函数传递被修饰者
      * @param component
-     */
-    public ConcreteDecorator2(Component component) &#123;
-        super(component);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">ConcreteDecorator2</span><span class="token punctuation">(</span><span class="token class-name">Component</span> component<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>component<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 定义自己的修饰方法2
-     */
-    private void method2() &#123;
-        System.out.println(&quot;method2修饰...&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"method2修饰..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 重写父类的operate方法
-     */
-    public void operate() &#123;
-        this.method2();
-        super.operate();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后是客户端的场景类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 装饰模式的客户端场景类
  * Created by blinkfox on 16-6-26.
- */
-public class Client &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Component component = new ConcreteComponent();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Component</span> component <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 第一修饰
-        component = new ConcreteDecorator1(component);
+        <span class="token comment">// 第一修饰</span>
+        component <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteDecorator1</span><span class="token punctuation">(</span>component<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 第二修饰
-        component = new ConcreteDecorator2(component);
+        <span class="token comment">// 第二修饰</span>
+        component <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteDecorator2</span><span class="token punctuation">(</span>component<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 修饰后运行
-        component.operate();
-    &#125;
+        <span class="token comment">// 修饰后运行</span>
+        component<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="五、模式分析"><a href="#五、模式分析" class="headerlink" title="五、模式分析"></a>五、模式分析</h2><h3 id="总体分析"><a href="#总体分析" class="headerlink" title="总体分析"></a>总体分析</h3><ul>
 <li><strong>与继承关系相比，关联关系的主要优势在于不会破坏类的封装性，而且继承是一种耦合度较大的静态关系，无法在程序运行时动态扩展</strong>。在软件开发阶段，关联关系虽然不会比继承关系减少编码量，但是到了软件维护阶段，由于关联关系使系统具有较好的松耦合性，因此使得系统更加容易维护。当然，<em>关联关系的缺点是比继承关系要创建更多的对象</em>。</li>
 <li><strong>使用装饰模式来实现扩展比继承更加灵活，它以对客户透明的方式动态地给一个对象附加更多的责任</strong>。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</li>

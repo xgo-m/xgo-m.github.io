@@ -414,6 +414,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -430,117 +433,117 @@
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/factory-method.jpg" alt="工厂方法模式结构图"></p>
 <h3 id="3-时序图"><a href="#3-时序图" class="headerlink" title="3. 时序图"></a>3. 时序图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/14/seq-factory-method.jpg" alt="工厂方法模式时序图"></p>
 <h2 id="三、示例代码"><a href="#三、示例代码" class="headerlink" title="三、示例代码"></a>三、示例代码</h2><p>首先，是抽象的产品类和具体的产品类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象产品类
  * Created by blinkfox on 16-6-29.
- */
-public abstract class Product &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 产品类的公共方法
-     */
-    public void method1() &#123;
-        System.out.println(&quot;这是产品类的公共方法&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"这是产品类的公共方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 抽象方法
-     */
-    public abstract void method2();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体产品类1
  * Created by blinkfox on 16-6-29.
- */
-public class ConcreteProduct1 extends Product &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteProduct1</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
-    @Override
-    public void method2() &#123;
-        System.out.println(&quot;ConcreteProduct1的method2方法&quot;);
-    &#125;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConcreteProduct1的method2方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体产品类2
  * Created by blinkfox on 16-6-29.
- */
-public class ConcreteProduct2 extends Product &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteProduct2</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
-    @Override
-    public void method2() &#123;
-        System.out.println(&quot;ConcreteProduct2的method2方法&quot;);
-    &#125;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConcreteProduct2的method2方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>然后，是抽象的工厂类和具体的工厂类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象的工厂类
  * Created by blinkfox on 16-6-29.
- */
-public abstract class Factory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 运用了Java中的泛型和反射技术,生成某种具体的产品
      * 其输入类型可以自行设置
      * @param c
-     * @param &lt;T&gt;
+     * @param &lt;T>
      * @return
-     */
-    public abstract &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c);
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体生产产品的工厂类
  * Created by blinkfox on 16-6-29.
- */
-public class ConcreteFactory extends Factory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory</span> <span class="token keyword">extends</span> <span class="token class-name">Factory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 运用了Java中的泛型和反射技术,生成某种具体的产品
      * 其输入类型可以自行设置
      * @param c
-     * @param &lt;T&gt;
+     * @param &lt;T>
      * @return
-     */
-    @Override
-    public &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c) &#123;
-        Product product = null;
-        try &#123;
-            product = (Product) Class.forName(c.getName()).newInstance();
-        &#125; catch (Exception e) &#123;
-            System.out.println(&quot;生产产品出错&quot;);
-            e.printStackTrace();
-        &#125;
-        return (T) product;
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> product <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            product <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Product</span><span class="token punctuation">)</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生产产品出错"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">T</span><span class="token punctuation">)</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后，是客户端场景类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法模式客户端场景类
  * Created by blinkfox on 16-6-29.
- */
-public class Client &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Factory factory = new ConcreteFactory();
-        Product product1 = factory.createProduct(ConcreteProduct1.class);
-        product1.method1();
-        product1.method2();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Factory</span> factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Product</span> product1 <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">ConcreteProduct1</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product1<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product1<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Product product2 = factory.createProduct(ConcreteProduct2.class);
-        product2.method1();
-        product2.method2();
-    &#125;
+        <span class="token class-name">Product</span> product2 <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">ConcreteProduct2</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product2<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product2<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="四、模式分析"><a href="#四、模式分析" class="headerlink" title="四、模式分析"></a>四、模式分析</h2><p>在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。这个核心类仅仅负责给出具体工厂必须实现的接口，而不负责哪一个产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</p>
 <h3 id="1-优点"><a href="#1-优点" class="headerlink" title="1. 优点"></a>1. 优点</h3><p>工厂方法模式的优点：</p>
 <ul>
@@ -561,234 +564,234 @@ public class Client &#123;
 </ul>
 <h2 id="五、模式扩展"><a href="#五、模式扩展" class="headerlink" title="五、模式扩展"></a>五、模式扩展</h2><p>工厂方法模式有很多扩展，而且与其他模式结合使用威力更大，下面介绍4种常用扩展。</p>
 <h3 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1. 简单工厂模式"></a>1. 简单工厂模式</h3><p>我们这样考虑一个问题：一个模块仅需要一个工厂类，没有必要把它产生出来，使用静态的方法就可以了。因此去掉工厂类中继承的抽象类，把方法改成静态即可。通用代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 简单工厂模式中的工厂类
  * Created by blinkfox on 16-6-29.
- */
-public class SimpleFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleFactory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 运用了Java中的泛型和反射技术,生成某种具体的产品
      * 其输入类型可以自行设置
      * @param c
-     * @param &lt;T&gt;
+     * @param &lt;T>
      * @return
-     */
-    public static  &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c) &#123;
-        Product product = null;
-        try &#123;
-            product = (Product) Class.forName(c.getName()).newInstance();
-        &#125; catch (Exception e) &#123;
-            System.out.println(&quot;生产产品出错&quot;);
-            e.printStackTrace();
-        &#125;
-        return (T) product;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span>  <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> product <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            product <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Product</span><span class="token punctuation">)</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生产产品出错"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">T</span><span class="token punctuation">)</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
-<pre><code class="java">/**
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 简单工厂模式客户端场景类
  * Created by blinkfox on 16-6-29.
- */
-public class SimpleClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Product product1 = SimpleFactory.createProduct(ConcreteProduct1.class);
-        product1.method1();
-        product1.method2();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> product1 <span class="token operator">=</span> <span class="token class-name">SimpleFactory</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">ConcreteProduct1</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product1<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product1<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Product product2 = SimpleFactory.createProduct(ConcreteProduct2.class);
-        product2.method1();
-        product2.method2();
-    &#125;
+        <span class="token class-name">Product</span> product2 <span class="token operator">=</span> <span class="token class-name">SimpleFactory</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">ConcreteProduct2</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product2<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product2<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>运行结果没有发生变化，但是类图简单了，调用者也比较简单，简单工厂模式是工厂方法模式的弱化，也叫做静态工厂模式。其缺点是工厂类的扩展比较困难，不符合“开闭原则”，但它仍然是一个非常实用的设计模式。</p>
 <h3 id="2-多工厂类工厂方法模式"><a href="#2-多工厂类工厂方法模式" class="headerlink" title="2. 多工厂类工厂方法模式"></a>2. 多工厂类工厂方法模式</h3><p>当我们在一个比较复杂的项目时，经常会遇到初始化一个对象很耗费精力的情况，所有的产品类都放到一个工厂方法中进行初始化会使代码结构不清晰。为了让结构清晰，我们就为每类产品定义一个创造者，然后由调用者自己去选择与哪个工厂方法关联。多工厂模式的通用代码如下：</p>
 <p>多工厂模式的抽象工厂类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成多个产品的抽象工厂类
  * Created by blinkfox on 16-7-2.
- */
-public abstract class MultiFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 生成某种产品的方法
      * @return
-     */
-    public abstract Product createProduct();
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">Product</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>第一种产品的创建工厂实现：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成产品1的具体工厂类1
  * Created by blinkfox on 16-7-2.
- */
-public class ConcreteFactory1 extends MultiFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory1</span> <span class="token keyword">extends</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 生成产品1的方法
      * @return
-     */
-    @Override
-    public Product createProduct() &#123;
-        return new ConcreteProduct1();
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Product</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteProduct1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>第二种产品的创建工厂实现：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成产品2的具体工厂类2
  * Created by blinkfox on 16-7-2.
- */
-public class ConcreteFactory2 extends MultiFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory2</span> <span class="token keyword">extends</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 生成产品2的方法
      * @return
-     */
-    @Override
-    public Product createProduct() &#123;
-        return new ConcreteProduct2();
-    &#125;
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Product</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteProduct2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>多工厂模式的客户端场景类</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 多工厂方法模式客户端场景类
  * Created by blinkfox on 16-7-2.
- */
-public class MultiClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MultiClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Product concreteProduct1 = (new ConcreteFactory1()).createProduct();
-        concreteProduct1.method1();
-        concreteProduct1.method2();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> concreteProduct1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ConcreteFactory1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        concreteProduct1<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        concreteProduct1<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Product concreteProduct2 = (new ConcreteFactory2()).createProduct();
-        concreteProduct1.method1();
-        concreteProduct1.method2();
-    &#125;
+        <span class="token class-name">Product</span> concreteProduct2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ConcreteFactory2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        concreteProduct1<span class="token punctuation">.</span><span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        concreteProduct1<span class="token punctuation">.</span><span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="3-工厂方法的单例模式"><a href="#3-工厂方法的单例模式" class="headerlink" title="3. 工厂方法的单例模式"></a>3. 工厂方法的单例模式</h3><p>单例模式的核心要求就是在内存中只有一个对象，通过工厂方法模式也可以只在内存中生成一个对象，从而实现单例的功能。</p>
 <p>下面是单例类，其中定义了一个private的无参构造函数，目的是不允许通过new的方式创建对象，代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法模式中的单例类
  * Created by blinkfox on 16-7-4.
- */
-public class Singleton &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">&#123;</span>
 
-    /**
+    <span class="token comment">/**
      * 私有化构造方法，不允许new产生一个对象
-     */
-    private Singleton() &#123;&#125;
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 
-    /**
+    <span class="token comment">/**
      * 工厂方法模式中的单例模式业务方法
-     */
-    public void doSomething() &#123;
-        System.out.println(&quot;工厂方法模式中的单例模式方法。。。&quot;);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"工厂方法模式中的单例模式方法。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>以上单例类中不能通过正常的渠道建立一个对象，那单例的工厂类中如何建立一个单例对象呢？答案是通过反射方式创建，单例工厂类的代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成单例的工厂类
  * Created by blinkfox on 16-7-4.
- */
-public class SingletonFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingletonFactory</span> <span class="token punctuation">&#123;</span>
 
-    private static Singleton singleton;
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
 
-    static &#123;
-        try &#123;
-            Class c = Class.forName(Singleton.class.getName());
-            // 获得无参构造
-            Constructor constructor = c.getDeclaredConstructor();
-            // 设置无参构造是可访问的
-            constructor.setAccessible(true);
-            // 产生一个实例对象
-            singleton = (Singleton) constructor.newInstance();
-        &#125; catch (Exception e) &#123;
-            e.printStackTrace();
-            System.out.println(&quot;生成单例的工厂类方法中生成单例出错&quot;);zuihou
-        &#125;
-    &#125;
+    <span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Class</span> c <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 获得无参构造</span>
+            <span class="token class-name">Constructor</span> constructor <span class="token operator">=</span> c<span class="token punctuation">.</span><span class="token function">getDeclaredConstructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 设置无参构造是可访问的</span>
+            constructor<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 产生一个实例对象</span>
+            singleton <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">)</span> constructor<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生成单例的工厂类方法中生成单例出错"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>zuihou
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-    public static Singleton getSingleton() &#123;
-        return singleton;
-    &#125;
-&#125;
-</code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getSingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后是工厂方法单例模式的客户端场景类：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法单例模式客户端场景类
  * Created by blinkfox on 16-7-4.
- */
-public class SingleClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingleClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Singleton singleton = SingletonFactory.getSingleton();
-        singleton.doSomething();
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Singleton</span> singleton <span class="token operator">=</span> <span class="token class-name">SingletonFactory</span><span class="token punctuation">.</span><span class="token function">getSingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        singleton<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="4-工厂方法的延迟初始化"><a href="#4-工厂方法的延迟初始化" class="headerlink" title="4. 工厂方法的延迟初始化"></a>4. 工厂方法的延迟初始化</h3><p>何为延迟初始化？一个对象被消费完毕后，并不立即释放，工厂类保持其初始状态，等待再次使用。延迟初始化是工厂模式的一个扩展应用，其通用代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 延迟加载的工厂类
  * Created by blinkfox on 16-7-4.
- */
-public class LazyFactory &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazyFactory</span> <span class="token punctuation">&#123;</span>
 
-    private static final Map&lt;String, Product&gt; lazyMap = new HashMap&lt;String, Product&gt;();
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Product</span><span class="token punctuation">></span></span> lazyMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Product</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    public static synchronized Product createProduct(String type) &#123;
-        Product product = null;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> <span class="token class-name">Product</span> <span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token class-name">String</span> type<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> product <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
 
-        // 如果map中已经有这个对象，则直接取出该对象即可，否则创建并放在缓存容器中
-        if (lazyMap.containsKey(type)) &#123;
-            return lazyMap.get(type);
-        &#125;
+        <span class="token comment">// 如果map中已经有这个对象，则直接取出该对象即可，否则创建并放在缓存容器中</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>lazyMap<span class="token punctuation">.</span><span class="token function">containsKey</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> lazyMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        // 根据类型创建具体的产品对象
-        if (&quot;product1&quot;.equals(type)) &#123;
-            product = new ConcreteProduct1();
-        &#125; else &#123;
-            product = new ConcreteProduct2();
-        &#125;
-        // 同时把对象放到缓存容器中
-        lazyMap.put(&quot;type&quot;, product);
+        <span class="token comment">// 根据类型创建具体的产品对象</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"product1"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteProduct1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteProduct2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 同时把对象放到缓存容器中</span>
+        lazyMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">,</span> product<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        return product;
-    &#125;
+        <span class="token keyword">return</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>上面即为延迟加载的工厂类。代码比较简单，通过定义一个<code>map</code>容器来容纳所有产生的对象，如果在<code>map</code>容器中已经有的对象，则直接取出返回；如果没有，则根据需要的类型产生一个对象并放入到<code>map</code>容器中，以便下次调用。</p>
 <p>延迟加载的工厂模式客户端场景类代码如下：</p>
-<pre><code class="java">/**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 延迟加载的工厂模式客户端场景类
  * Created by blinkfox on 16-7-4.
- */
-public class LazyClient &#123;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazyClient</span> <span class="token punctuation">&#123;</span>
 
-    public static void main(String[] args) &#123;
-        Product product1 = LazyFactory.createProduct(&quot;product1&quot;);
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Product</span> product1 <span class="token operator">=</span> <span class="token class-name">LazyFactory</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token string">"product1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Product product11 = LazyFactory.createProduct(&quot;product1&quot;);
-    &#125;
+        <span class="token class-name">Product</span> product11 <span class="token operator">=</span> <span class="token class-name">LazyFactory</span><span class="token punctuation">.</span><span class="token function">createProduct</span><span class="token punctuation">(</span><span class="token string">"product1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-&#125;
-</code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><ul>
 <li><p>工厂方法模式又称为工厂模式，它属于类创建型模式。在工厂方法模式中，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，这样做的目的是将产品类的实例化操作延迟到工厂子类中完成，即通过工厂子类来确定究竟应该实例化哪一个具体产品类。</p>
 </li>
