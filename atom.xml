@@ -6,7 +6,7 @@
   <link href="https://xgo-m.github.io/atom.xml" rel="self"/>
   
   <link href="https://xgo-m.github.io/"/>
-  <updated>2023-05-19T10:04:36.801Z</updated>
+  <updated>2023-06-16T09:47:32.650Z</updated>
   <id>https://xgo-m.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>work-demo项目说明</title>
+    <link href="https://xgo-m.github.io/2023/06/16/ruan-jian-she-ji/work-demo-xiang-mu-shuo-ming/"/>
+    <id>https://xgo-m.github.io/2023/06/16/ruan-jian-she-ji/work-demo-xiang-mu-shuo-ming/</id>
+    <published>2023-06-16T09:41:00.000Z</published>
+    <updated>2023-06-16T09:47:32.650Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 align=&quot;center&quot;&gt;work-demo项目说明&lt;/h2&gt;
+
+&lt;h1 id=&quot;项目框架介绍&quot;&gt;&lt;a href=&quot;#项目框架介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="软件设计" scheme="https://xgo-m.github.io/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
+    
+    <category term="面向对象编程" scheme="https://xgo-m.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>软件设计师-知识点整理</title>
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-zhi-dao/ruan-jian-she-ji-shi-zhi-shi-dian-zheng-li/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-zhi-dao/ruan-jian-she-ji-shi-zhi-shi-dian-zheng-li/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -46,7 +75,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-02-zhang-chuang-jian-he-xiao-hui-dui-xiang/chuang-jian-he-xiao-hui-dui-xiang/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -71,7 +100,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-10-xiang-chong-xie-equals-shi-qing-zun-shou-tong-yong-yue-ding/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-10-xiang-chong-xie-equals-shi-qing-zun-shou-tong-yong-yue-ding/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -96,7 +125,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-11-xiang-dang-chong-xie-equals-fang-fa-shi-ye-yao-chong-xie-hashcode-fang-fa/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-11-xiang-dang-chong-xie-equals-fang-fa-shi-ye-yao-chong-xie-hashcode-fang-fa/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -121,7 +150,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-12-xiang-shi-zhong-chong-xie-tostring-fang-fa/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-12-xiang-shi-zhong-chong-xie-tostring-fang-fa/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -146,7 +175,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-13-xiang-jin-shen-di-chong-xie-clone-fang-fa/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-13-xiang-jin-shen-di-chong-xie-clone-fang-fa/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -171,7 +200,7 @@
     <link href="https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-14-xiang-kao-lu-shi-xian-comparable-jie-kou/"/>
     <id>https://xgo-m.github.io/2019/10/15/bian-cheng-shu-ji/effective-java-third-edition/di-03-zhang-dui-yu-suo-you-dui-xiang-du-tong-yong-de-fang-fa/di-14-xiang-kao-lu-shi-xian-comparable-jie-kou/</id>
     <published>2019-10-15T08:38:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -196,7 +225,7 @@
     <link href="https://xgo-m.github.io/2019/08/19/hou-duan/jpa/fenix-bi-mybatis-geng-jia-qiang-da-de-spring-data-jpa-kuo-zhan-ku/"/>
     <id>https://xgo-m.github.io/2019/08/19/hou-duan/jpa/fenix-bi-mybatis-geng-jia-qiang-da-de-spring-data-jpa-kuo-zhan-ku/</id>
     <published>2019-08-19T16:10:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -226,7 +255,7 @@
     <link href="https://xgo-m.github.io/2019/03/02/hou-duan/spring/springboot2.x-dan-yuan-ce-shi/"/>
     <id>https://xgo-m.github.io/2019/03/02/hou-duan/spring/springboot2.x-dan-yuan-ce-shi/</id>
     <published>2019-03-02T09:20:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -260,7 +289,7 @@
     <link href="https://xgo-m.github.io/2019/02/14/hou-duan/java/java-dai-ma-xing-neng-ping-gu-ku-stalker-jie-shao/"/>
     <id>https://xgo-m.github.io/2019/02/14/hou-duan/java/java-dai-ma-xing-neng-ping-gu-ku-stalker-jie-shao/</id>
     <published>2019-02-14T04:00:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.642Z</updated>
     
     
       
@@ -287,7 +316,7 @@
     <link href="https://xgo-m.github.io/2019/01/25/hou-duan/java/yi-ge-ji-jian-de-java-ascii-biao-ge-sheng-cheng-ku/"/>
     <id>https://xgo-m.github.io/2019/01/25/hou-duan/java/yi-ge-ji-jian-de-java-ascii-biao-ge-sheng-cheng-ku/</id>
     <published>2019-01-25T02:34:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -315,7 +344,7 @@
     <link href="https://xgo-m.github.io/2018/12/18/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-qiao-jie-mo-shi/"/>
     <id>https://xgo-m.github.io/2018/12/18/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-qiao-jie-mo-shi/</id>
     <published>2018-12-18T16:20:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -342,7 +371,7 @@
     <link href="https://xgo-m.github.io/2018/12/12/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-gua-pei-qi-mo-shi/"/>
     <id>https://xgo-m.github.io/2018/12/12/ruan-jian-she-ji/she-ji-mo-shi/java-mian-xiang-dui-xiang-she-ji-zhi-gua-pei-qi-mo-shi/</id>
     <published>2018-12-12T14:00:00.000Z</published>
-    <updated>2023-05-19T10:04:36.805Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -369,7 +398,7 @@
     <link href="https://xgo-m.github.io/2018/11/23/ruan-jian-she-ji/ruan-jian-cheng-xu-she-ji-yuan-ze/"/>
     <id>https://xgo-m.github.io/2018/11/23/ruan-jian-she-ji/ruan-jian-cheng-xu-she-ji-yuan-ze/</id>
     <published>2018-11-23T16:30:00.000Z</published>
-    <updated>2023-05-19T10:04:36.805Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -398,7 +427,7 @@
     <link href="https://xgo-m.github.io/2018/11/22/ruan-jian-gong-ju/devops/gitlab-ci-jie-shao-he-shi-yong/"/>
     <id>https://xgo-m.github.io/2018/11/22/ruan-jian-gong-ju/devops/gitlab-ci-jie-shao-he-shi-yong/</id>
     <published>2018-11-22T15:30:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -427,7 +456,7 @@
     <link href="https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/markdown/vue-wen-dang-feng-ge-de-typora-zhu-ti/"/>
     <id>https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/markdown/vue-wen-dang-feng-ge-de-typora-zhu-ti/</id>
     <published>2018-11-18T16:30:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -457,7 +486,7 @@
     <link href="https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/cpu-duo-ji-huan-cun/"/>
     <id>https://xgo-m.github.io/2018/11/18/ruan-jian-gong-ju/cpu-duo-ji-huan-cun/</id>
     <published>2018-11-18T13:55:00.000Z</published>
-    <updated>2023-05-19T10:04:36.801Z</updated>
+    <updated>2023-06-16T09:47:32.650Z</updated>
     
     
       
@@ -482,7 +511,7 @@
     <link href="https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/"/>
     <id>https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/</id>
     <published>2018-11-15T14:50:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.646Z</updated>
     
     
       
@@ -509,7 +538,7 @@
     <link href="https://xgo-m.github.io/2018/11/14/hou-duan/java/java8-xin-te-xing-ji-shi-yong-er/"/>
     <id>https://xgo-m.github.io/2018/11/14/hou-duan/java/java8-xin-te-xing-ji-shi-yong-er/</id>
     <published>2018-11-14T14:00:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
+    <updated>2023-06-16T09:47:32.642Z</updated>
     
     
       
@@ -517,31 +546,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;扩展注解的支持&quot;&gt;&lt;a href=&quot;#扩展注解的支持&quot; class=&quot;headerlink&quot; title=&quot;扩展注解的支持&quot;&gt;&lt;/a&gt;扩展注解的支持&lt;/h2&gt;&lt;p&gt;Java</summary>
-        
-      
-    
-    
-    
-    <category term="后端" scheme="https://xgo-m.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-    <category term="Java" scheme="https://xgo-m.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java8新特性及使用(一)</title>
-    <link href="https://xgo-m.github.io/2018/11/13/hou-duan/java/java8-xin-te-xing-ji-shi-yong-yi/"/>
-    <id>https://xgo-m.github.io/2018/11/13/hou-duan/java/java8-xin-te-xing-ji-shi-yong-yi/</id>
-    <published>2018-11-13T14:30:00.000Z</published>
-    <updated>2023-05-19T10:04:36.797Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;新特性列表&quot;&gt;&lt;a href=&quot;#新特性列表&quot; class=&quot;headerlink&quot; title=&quot;新特性列表&quot;&gt;&lt;/a&gt;新特性列表&lt;/h2&gt;&lt;p&gt;以下是Java8中的引入的部分新特性。关于Java8新特性更详细的介绍可参考&lt;a</summary>
         
       
     
