@@ -682,7 +682,7 @@ one <span class="token operator">==</span> anotherOne <span class="token builtin
 
 <p>因为自动装箱会隐式地创建对象，像前面提到的那样，如果在一个循环体中，会创建无用的中间对象，这样会增加GC压力，拉低程序的性能。所以在写循环时一定要注意代码，避免引入不必要的自动装箱操作。</p>
 <h2 id="四、枚举-Enums"><a href="#四、枚举-Enums" class="headerlink" title="四、枚举(Enums)"></a>四、枚举(Enums)</h2><p>枚举（<code>enum</code>全称为<code>enumeration</code>）类型是 Java5 新增的类型，存放在<code>java.lang</code>包中，允许用常量来表示特定的数据片断，而且全部都以类型安全的形式来表示。</p>
-<p>关于枚举的介绍，这里就不再细讲了，请参考我以前所整理的<a target="_blank" rel="noopener" href="http://blinkfox.com/java-mei-ju-zhi-shi-zheng-li/">Java 枚举知识整理</a>一文。</p>
+<p>关于枚举的介绍，这里就不再细讲了，请参考我以前所整理的<a target="_blank" rel="noopener" href="http://xgo-m.com/java-mei-ju-zhi-shi-zheng-li/">Java 枚举知识整理</a>一文。</p>
 <h2 id="五、可变参数-Varargs"><a href="#五、可变参数-Varargs" class="headerlink" title="五、可变参数(Varargs)"></a>五、可变参数(Varargs)</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><p>在 Java5 中提供了可变参数（<code>Varargs</code>），也就是在方法定义中可以使用个数不确定的参数，对于同一方法可以使用不同个数的参数调用，例如<code>print(&quot;hello&quot;);</code>、<code>print(&quot;hello&quot;,&quot;lisi&quot;);</code>等。下面介绍如何定义可变长参数以及如何使用可变长参数。</p>
 <p>使用<code>...</code>表示可变长参数，例如：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">print</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -728,7 +728,7 @@ one <span class="token operator">==</span> anotherOne <span class="token builtin
 <span class="token keyword">double</span> r <span class="token operator">=</span> <span class="token function">cos</span><span class="token punctuation">(</span><span class="token constant">PI</span> <span class="token operator">*</span> theta<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>当你需要频繁访问一个或两个类的静态成员、静态方法时才使用静态导入</strong>。如果您过度的使用了静态导入功能，则可能导致您的程序无法读取且无法维护，从而导致您导入的所有静态成员和方法污染其名称空间。你的代码读者（包括你，在你写了几个月后）不会知道静态成员来自哪个类。从类中导入所有静态成员对可读性尤其有害，如果您只需要一个或两个成员，请单独导入它们。使用适当的，静态导入可以使您的程序更具可读性，通过删除重复的类名称，来减少样板代码。</p>
-<h2 id="七、注解-Annotations"><a href="#七、注解-Annotations" class="headerlink" title="七、注解(Annotations)"></a>七、注解(Annotations)</h2><p>关于注解的介绍，这里就不再细讲了，请参考我前段时间所写的<a target="_blank" rel="noopener" href="http://blinkfox.com/javazhu-jie-de-li-jie-he-ying-yong/">Java注解的理解和应用</a>一文。</p>
+<h2 id="七、注解-Annotations"><a href="#七、注解-Annotations" class="headerlink" title="七、注解(Annotations)"></a>七、注解(Annotations)</h2><p>关于注解的介绍，这里就不再细讲了，请参考我前段时间所写的<a target="_blank" rel="noopener" href="http://xgo-m.com/javazhu-jie-de-li-jie-he-ying-yong/">Java注解的理解和应用</a>一文。</p>
 <h2 id="八、值得关注"><a href="#八、值得关注" class="headerlink" title="八、值得关注"></a>八、值得关注</h2><h3 id="1-新增ProcessBuilder类"><a href="#1-新增ProcessBuilder类" class="headerlink" title="1. 新增ProcessBuilder类"></a>1. 新增ProcessBuilder类</h3><p><code>ProcessBuilder</code>类是Java5在<code>java.lang</code>包中新添加的一个新类，此类用于创建操作系统进程，它提供一种启动和管理进程（也就是应用程序）的方法。在此之前，都是由<code>Process</code>类处来实现进程的控制管理。每个<code>ProcessBuilder</code>实例管理一个进程属性集。它的<code>start()</code>方法利用这些属性创建一个新的<code>Process</code>实例。<code>start()</code>方法可以从同一实例重复调用，以利用相同的或相关的属性创建新的子进程。</p>
 <p><code>ProcessBuilder</code>是一个<code>final</code>类，有两个带参数的构造方法，你可以通过构造方法来直接创建<code>ProcessBuilder</code>的对象。而<code>Process</code>是一个抽象类，一般都通过<code>Runtime.exec()</code>和<code>ProcessBuilder.start()</code>来间接创建其实例。<code>ProcessBuilder</code>为进程提供了更多的控制，例如，可以设置当前工作目录，还可以改变环境参数。而<code>Process</code>类的功能相对来说简单的多。<code>ProcessBuilder</code>类不是同步的。如果多个线程同时访问一个<code>ProcessBuilder</code>，而其中至少一个线程从结构上修改了其中一个属性，它必须保持外部同步。</p>
 <p>若要使用<code>ProcessBuilder</code>创建一个进程，只需要创建<code>ProcessBuilder</code>的一个实例，指定该进程的名称和所需参数。要执行此程序，调用该实例上的<code>start()</code>即可。下面是一个执行打开<code>Windows</code>记事本的例子。注意它将要编辑的文件名指定为一个参数。</p>
@@ -759,7 +759,7 @@ one <span class="token operator">==</span> anotherOne <span class="token builtin
 <span class="token comment">/**
  * 格式化测试使用的示例类.
  *
- * @author blinkfox on 2017-11-28.
+ * @author xgo-m on 2017-11-28.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FormatTester</span> <span class="token punctuation">&#123;</span>
 
@@ -858,7 +858,7 @@ one <span class="token operator">==</span> anotherOne <span class="token builtin
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
 * 扫描控制台输入.
 *
-* @author blinkfox 2017-11-28
+* @author xgo-m 2017-11-28
 */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ScannerTest</span> <span class="token punctuation">&#123;</span>
 
@@ -958,7 +958,7 @@ blue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -981,7 +981,7 @@ blue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -1335,7 +1335,7 @@ blue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             

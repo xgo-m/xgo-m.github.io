@@ -428,11 +428,11 @@
 </ul>
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2. 结构图"></a>2. 结构图</h3><p><img src="https://statics.sh1a.qingstor.com/2018/09/20/proxy-structure.jpg" alt="代理模式结构图"></p>
 <h2 id="四、示例代码"><a href="#四、示例代码" class="headerlink" title="四、示例代码"></a>四、示例代码</h2><p>首先，是抽象的主题接口和真实主题类：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy<span class="token punctuation">;</span>
 
 <span class="token comment">/**
  * 抽象主题类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
@@ -443,11 +443,11 @@
 
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy<span class="token punctuation">;</span>
 
 <span class="token comment">/**
  * 真实主题类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RealSubject</span> <span class="token keyword">implements</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
@@ -462,11 +462,11 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然后，是代理类：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy<span class="token punctuation">;</span>
 
 <span class="token comment">/**
  * 代理类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Proxy</span> <span class="token keyword">implements</span> <span class="token class-name">ISubject</span> <span class="token punctuation">&#123;</span>
 
@@ -500,11 +500,11 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>最后，是客户端场景测试类：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>patterns<span class="token punctuation">.</span>proxy<span class="token punctuation">;</span>
 
 <span class="token comment">/**
  * 代理模式客户端场景类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProxyClient</span> <span class="token punctuation">&#123;</span>
 
@@ -567,7 +567,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -590,7 +590,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -956,7 +956,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             

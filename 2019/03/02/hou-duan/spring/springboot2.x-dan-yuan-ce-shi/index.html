@@ -426,7 +426,7 @@
                 <blockquote>
 <p>一个 bug 被隐藏的时间越长，修复这个 bug 的代价就越大。</p>
 </blockquote>
-<p>我曾经在 <a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/">单元测试指南</a> 一文中写到过单元测试的必要性和 Java 单元测试相关的工具及方法。单元测试能帮助我们在早期就规避、发现和修复很多不易察觉的 bug 和漏洞，而且更能保障后期的需求变动和代码重构时所带来的隐患，减少测试成本和维护成本。在 SpringBoot2.x 集成和写单元测试更加容易了。</p>
+<p>我曾经在 <a href="https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/">单元测试指南</a> 一文中写到过单元测试的必要性和 Java 单元测试相关的工具及方法。单元测试能帮助我们在早期就规避、发现和修复很多不易察觉的 bug 和漏洞，而且更能保障后期的需求变动和代码重构时所带来的隐患，减少测试成本和维护成本。在 SpringBoot2.x 集成和写单元测试更加容易了。</p>
 <h2 id="创建-SpringBoot2-x-项目"><a href="#创建-SpringBoot2-x-项目" class="headerlink" title="创建 SpringBoot2.x 项目"></a>创建 SpringBoot2.x 项目</h2><p>在 <a target="_blank" rel="noopener" href="https://start.spring.io/">start.spring.io</a> 中创建一个自己的 SpringBoot2.x 项目，目前版本<code>2.1.3</code>。选出自己需要的一些组件生成项目即可，我这里选了如下几个：</p>
 <ul>
 <li><code>Web</code>: Web项目</li>
@@ -483,7 +483,7 @@
     <span class="token key atrule">generate-ddl</span><span class="token punctuation">:</span> <span class="token boolean important">false</span> <span class="token comment"># 启动时是否初始化数据库.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="准备实体-POJO-和-DAO-层-Repository-类"><a href="#准备实体-POJO-和-DAO-层-Repository-类" class="headerlink" title="准备实体 POJO 和 DAO 层 Repository 类"></a>准备实体 POJO 和 DAO 层 Repository 类</h3><p>博客信息的实体 POJO 类如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Date</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span></span><span class="token class-name">Column</span></span><span class="token punctuation">;</span>
@@ -498,7 +498,7 @@
 <span class="token comment">/**
  * 博客实体.
  *
- * @author blinkfox on 2019-2-26.
+ * @author xgo-m on 2019-2-26.
  */</span>
 <span class="token annotation punctuation">@Getter</span>
 <span class="token annotation punctuation">@Setter</span>
@@ -571,9 +571,9 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>下面是 <code>BlogRepository</code> 中的一个简单的自定义 <code>@Query</code> 查询，当然你也可以采用名称的规则来写本查询，我这里为了做示例，使用了 <code>@Query</code> 查询。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">Blog</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span>Blog</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
 
@@ -584,7 +584,7 @@
 <span class="token comment">/**
  * BlogRepository.
  *
- * @author blinkfox on 2019-02-27.
+ * @author xgo-m on 2019-02-27.
  */</span>
 <span class="token annotation punctuation">@Repository</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">BlogRepository</span> <span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Blog</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
@@ -595,9 +595,9 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="BlogRepository-的单元测试"><a href="#BlogRepository-的单元测试" class="headerlink" title="BlogRepository 的单元测试"></a>BlogRepository 的单元测试</h3><p>然后在 Intellij IDEA 中通过 <code>Ctrl + Shift + T</code> 来为 <code>BlogRepository</code> 生成它对应的单元测试类 <code>BlogRepositoryTest</code>。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">Blog</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span>Blog</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Optional</span></span><span class="token punctuation">;</span>
@@ -613,7 +613,7 @@
 <span class="token comment">/**
  * BlogRepositoryTest.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */</span>
 <span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span><span class="token class-name">SpringRunner</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@ActiveProfiles</span><span class="token punctuation">(</span><span class="token string">"hsqldb"</span><span class="token punctuation">)</span>
@@ -650,10 +650,10 @@
 
 <p>这样就完成了 DAO 层代码的测试，以上程序主要依托于内存数据库 HSQLDB 和 Spring Data JPA。</p>
 <h2 id="Service-层的单元测试"><a href="#Service-层的单元测试" class="headerlink" title="Service 层的单元测试"></a>Service 层的单元测试</h2><p>实际开发过程中，Service 层中的类依赖了 DAO 层中的类或其他 Service 类。为了隔离对其他 Service 类或 DAO 层中的类的依赖，只测试本 Service 类中的方法逻辑，就需要 Mock 数据和做打桩等操作。Spring Boot 中原生集成了 <a target="_blank" rel="noopener" href="https://site.mockito.org/">Mockito</a>，可以非常方便我们对 Java 代码做单元测试。</p>
-<h3 id="新建-BlogService-类"><a href="#新建-BlogService-类" class="headerlink" title="新建 BlogService 类"></a>新建 BlogService 类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service</span><span class="token punctuation">;</span>
+<h3 id="新建-BlogService-类"><a href="#新建-BlogService-类" class="headerlink" title="新建 BlogService 类"></a>新建 BlogService 类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">Blog</span></span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">.</span></span><span class="token class-name">BlogRepository</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span>Blog</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">.</span></span>BlogRepository</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Optional</span></span><span class="token punctuation">;</span>
@@ -666,7 +666,7 @@
 <span class="token comment">/**
  * BlogService.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */</span>
 <span class="token annotation punctuation">@Slf4j</span>
 <span class="token annotation punctuation">@Service</span>
@@ -704,10 +704,10 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="BlogService-的单元测试"><a href="#BlogService-的单元测试" class="headerlink" title="BlogService 的单元测试"></a>BlogService 的单元测试</h3><p>通过 <code>BlogService</code> 可以生成和书写出其对应的单元测试类和测试方法，代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">Blog</span></span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">.</span></span><span class="token class-name">BlogRepository</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span>Blog</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>repository<span class="token punctuation">.</span></span>BlogRepository</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
@@ -724,7 +724,7 @@
 <span class="token comment">/**
  * BlogServiceTest.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */</span>
 <span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span><span class="token class-name">MockitoJUnitRunner</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BlogServiceTest</span> <span class="token punctuation">&#123;</span>
@@ -797,10 +797,10 @@
 </blockquote>
 <p>这样就完成了 Service 层的单元测试，也是我们业务开发中需要重点关注和测试业务逻辑的一层。</p>
 <h2 id="Controller-层的单元测试"><a href="#Controller-层的单元测试" class="headerlink" title="Controller 层的单元测试"></a>Controller 层的单元测试</h2><p>Controller 层测试的重点是测试接口是否能正常工作。可以用到 Spring Boot 中提供的 <code>@WebMvcTest</code> 注解来模拟 Web 层的单元测试。当然，也需要通过 Mock 的方式类隔离对 Service 层各个类的依赖影响。</p>
-<h3 id="新建-BlogController-类"><a href="#新建-BlogController-类" class="headerlink" title="新建 BlogController 类"></a>新建 BlogController 类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+<h3 id="新建-BlogController-类"><a href="#新建-BlogController-类" class="headerlink" title="新建 BlogController 类"></a>新建 BlogController 类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>controller<span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">Blog</span></span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">BlogService</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span>Blog</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span>BlogService</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Resource</span></span><span class="token punctuation">;</span>
@@ -819,7 +819,7 @@
 <span class="token comment">/**
  * BlogController.
  *
- * @author blinkfox on 2019-02-28.
+ * @author xgo-m on 2019-02-28.
  */</span>
 <span class="token annotation punctuation">@Slf4j</span>
 <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/blogs"</span><span class="token punctuation">)</span>
@@ -862,13 +862,13 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="BlogController-的单元测试"><a href="#BlogController-的单元测试" class="headerlink" title="BlogController 的单元测试"></a>BlogController 的单元测试</h3><p>通过 <code>BlogController</code> 可以生成和书写出其对应的单元测试类和测试方法，代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>controller<span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token keyword">static</span> <span class="token import static"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>test<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>request<span class="token punctuation">.</span></span><span class="token class-name">MockMvcRequestBuilders</span><span class="token punctuation">.</span><span class="token static">get</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token keyword">static</span> <span class="token import static"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>test<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>request<span class="token punctuation">.</span></span><span class="token class-name">MockMvcRequestBuilders</span><span class="token punctuation">.</span><span class="token static">patch</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token keyword">static</span> <span class="token import static"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>test<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>result<span class="token punctuation">.</span></span><span class="token class-name">MockMvcResultMatchers</span><span class="token punctuation">.</span><span class="token static">status</span></span><span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">BlogService</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span><span class="token class-name"><span class="token namespace">m<span class="token punctuation">.</span>springbootsample<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span>BlogService</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Resource</span></span><span class="token punctuation">;</span>
@@ -884,7 +884,7 @@
 <span class="token comment">/**
  * BlogControllerTest.
  *
- * @author blinkfox on 2019-03-02.
+ * @author xgo-m on 2019-03-02.
  */</span>
 <span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span><span class="token class-name">SpringRunner</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@WebMvcTest</span><span class="token punctuation">(</span><span class="token class-name">BlogController</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
@@ -956,7 +956,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -979,7 +979,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -1356,7 +1356,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             

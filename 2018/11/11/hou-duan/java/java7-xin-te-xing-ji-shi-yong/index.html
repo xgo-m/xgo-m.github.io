@@ -599,7 +599,7 @@
 <h3 id="4-Fork-x2F-Join框架使用示例"><a href="#4-Fork-x2F-Join框架使用示例" class="headerlink" title="4. Fork&#x2F;Join框架使用示例"></a>4. Fork&#x2F;Join框架使用示例</h3><p>让我们通过一个简单的需求来使用下<code>Fork／Join</code>框架，需求是：计算<code>1 + 2 + 3 + 4</code>的结果。</p>
 <p>使用<code>Fork/Join</code>框架首先要考虑到的是如何分割任务，如果我们希望每个子任务最多执行两个数的相加，那么我们设置分割的阈值是<code>2</code>，由于是<code>4</code>个数字相加，所以<code>Fork/Join</code>框架会把这个任务<code>fork</code>成两个子任务，子任务一负责计算<code>1 + 2</code>，子任务二负责计算<code>3 + 4</code>，然后再<code>join</code>两个子任务的结果。</p>
 <p>因为是有结果的任务，所以必须继承<code>RecursiveTask</code>，实现代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>blinkfox<span class="token punctuation">.</span>test<span class="token punctuation">.</span>other</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>xgo</span><span class="token operator">-</span>m<span class="token punctuation">.</span>test<span class="token punctuation">.</span>other<span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ExecutionException</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ForkJoinPool</span></span><span class="token punctuation">;</span>
@@ -609,7 +609,7 @@
 <span class="token comment">/**
  * CountTask.
  *
- * @author blinkfox on 2018-01-03.
+ * @author xgo-m on 2018-01-03.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CountTask</span> <span class="token keyword">extends</span> <span class="token class-name">RecursiveTask</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
 
@@ -727,7 +727,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -750,7 +750,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -1103,7 +1103,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             

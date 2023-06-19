@@ -428,7 +428,7 @@
 <h2 id="三、示例代码"><a href="#三、示例代码" class="headerlink" title="三、示例代码"></a>三、示例代码</h2><p>首先，是抽象的产品类和具体的产品类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象产品类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
@@ -448,7 +448,7 @@
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体产品类1
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteProduct1</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
@@ -461,7 +461,7 @@
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体产品类2
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteProduct2</span> <span class="token keyword">extends</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
 
@@ -475,7 +475,7 @@
 <p>然后，是抽象的工厂类和具体的工厂类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 抽象的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">&#123;</span>
 
@@ -492,7 +492,7 @@
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 具体生产产品的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory</span> <span class="token keyword">extends</span> <span class="token class-name">Factory</span> <span class="token punctuation">&#123;</span>
 
@@ -520,7 +520,7 @@
 <p>最后，是客户端场景类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法模式客户端场景类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token punctuation">&#123;</span>
 
@@ -559,7 +559,7 @@
 <h3 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1. 简单工厂模式"></a>1. 简单工厂模式</h3><p>我们这样考虑一个问题：一个模块仅需要一个工厂类，没有必要把它产生出来，使用静态的方法就可以了。因此去掉工厂类中继承的抽象类，把方法改成静态即可。通用代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 简单工厂模式中的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -585,7 +585,7 @@
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 简单工厂模式客户端场景类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleClient</span> <span class="token punctuation">&#123;</span>
 
@@ -606,7 +606,7 @@
 <p>多工厂模式的抽象工厂类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成多个产品的抽象工厂类
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -621,7 +621,7 @@
 <p>第一种产品的创建工厂实现：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成产品1的具体工厂类1
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory1</span> <span class="token keyword">extends</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -639,7 +639,7 @@
 <p>第二种产品的创建工厂实现：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成产品2的具体工厂类2
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteFactory2</span> <span class="token keyword">extends</span> <span class="token class-name">MultiFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -657,7 +657,7 @@
 <p>多工厂模式的客户端场景类</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 多工厂方法模式客户端场景类
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MultiClient</span> <span class="token punctuation">&#123;</span>
 
@@ -677,7 +677,7 @@
 <p>下面是单例类，其中定义了一个private的无参构造函数，目的是不允许通过new的方式创建对象，代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法模式中的单例类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">&#123;</span>
 
@@ -698,7 +698,7 @@
 <p>以上单例类中不能通过正常的渠道建立一个对象，那单例的工厂类中如何建立一个单例对象呢？答案是通过反射方式创建，单例工厂类的代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 生成单例的工厂类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingletonFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -727,7 +727,7 @@
 <p>最后是工厂方法单例模式的客户端场景类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 工厂方法单例模式客户端场景类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingleClient</span> <span class="token punctuation">&#123;</span>
 
@@ -741,7 +741,7 @@
 <h3 id="4-工厂方法的延迟初始化"><a href="#4-工厂方法的延迟初始化" class="headerlink" title="4. 工厂方法的延迟初始化"></a>4. 工厂方法的延迟初始化</h3><p>何为延迟初始化？一个对象被消费完毕后，并不立即释放，工厂类保持其初始状态，等待再次使用。延迟初始化是工厂模式的一个扩展应用，其通用代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 延迟加载的工厂类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazyFactory</span> <span class="token punctuation">&#123;</span>
 
@@ -773,7 +773,7 @@
 <p>延迟加载的工厂模式客户端场景类代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 延迟加载的工厂模式客户端场景类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazyClient</span> <span class="token punctuation">&#123;</span>
 
@@ -813,7 +813,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -836,7 +836,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -1202,7 +1202,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             

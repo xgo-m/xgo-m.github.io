@@ -420,10 +420,10 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/blinkfox/fenix">Fenix</a>（菲尼克斯）是一个比 MyBatis 更加强大，为解决复杂、动态 SQL (<code>JPQL</code>) 而生的 <code>Spring Data JPA</code> 扩展库，目的是辅助开发者更方便、快捷的书写复杂、动态且易于维护的 SQL，支持 <code>XML</code> 和 Java 链式 <code>API</code> 两种方式来书写动态 SQL。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xgo-m/fenix">Fenix</a>（菲尼克斯）是一个比 MyBatis 更加强大，为解决复杂、动态 SQL (<code>JPQL</code>) 而生的 <code>Spring Data JPA</code> 扩展库，目的是辅助开发者更方便、快捷的书写复杂、动态且易于维护的 SQL，支持 <code>XML</code> 和 Java 链式 <code>API</code> 两种方式来书写动态 SQL。</p>
 </blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blinkfox.github.io/fenix">使用文档: https://blinkfox.github.io/fenix</a></li>
+<li><a href="https://xgo-m.github.io/fenix">使用文档: https://xgo-m.github.io/fenix</a></li>
 </ul>
 <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>简单、轻量级、无副作用的集成和使用；</li>
@@ -439,7 +439,7 @@
 <p>因此，为了更加极致的解决 SQL 片段“<strong>相似或重复</strong>”的问题，Fenix 中引入了 SQL 片段的“<strong>语义化标签</strong>”，将大多数常见的 SQL 片段做成 <code>XML</code> 标签，通过传递的字段和动态的参数值就可以生成对应的 SQL 片段和命名参数。语言化的 <code>XML</code> 标签可以在各个需要的地方复用，也支持自定义你自己的 XML SQL 语义标签。</p>
 <p>为了便于开发人员书写一般中短长度的动态 SQL，Fenix 还提供了 Java 链式 <code>API</code> 书写动态 SQL 的方式，使 SQL 可读性和紧凑性更好，如果要书写静态或动态的中、长 SQL，则推荐使用 <code>XML</code> 方式，便于集中阅读、调试和维护 SQL。</p>
 <blockquote>
-<p><strong>注</strong>：本 <code>Fenix</code> 扩展库开发的核心思想来源于我几年前写的动态 SQL 拼接库 <a target="_blank" rel="noopener" href="https://github.com/blinkfox/zealot">Zealot</a>。如果你熟悉《星际争霸》的话，大概能理解其中的关系。</p>
+<p><strong>注</strong>：本 <code>Fenix</code> 扩展库开发的核心思想来源于我几年前写的动态 SQL 拼接库 <a target="_blank" rel="noopener" href="https://github.com/xgo-m/zealot">Zealot</a>。如果你熟悉《星际争霸》的话，大概能理解其中的关系。</p>
 </blockquote>
 <h2 id="与-MyBatis-的-SQL-比较"><a href="#与-MyBatis-的-SQL-比较" class="headerlink" title="与 MyBatis 的 SQL 比较"></a>与 MyBatis 的 SQL 比较</h2><h3 id="假设业务查询场景"><a href="#假设业务查询场景" class="headerlink" title="假设业务查询场景"></a>假设业务查询场景</h3><p>下面将通过一个多条件查询<strong>操作日志</strong>的功能，来初步了解和比较 <code>MyBatis</code> 与 <code>Fenix</code> 在写“<strong>多条件模糊分页</strong>”查询时 SQL 写法的一些差异。</p>
 <p><img src="https://statics.sh1a.qingstor.com/2019/08/20/search.png" alt="查询页面"></p>
@@ -453,10 +453,10 @@
 <h3 id="MyBatis-的-SQL-写法"><a href="#MyBatis-的-SQL-写法" class="headerlink" title="MyBatis 的 SQL 写法"></a>MyBatis 的 SQL 写法</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
 <span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">mapper</span> <span class="token name">PUBLIC</span> <span class="token string">"-//mybatis.org//DTD Mapper 3.0//EN"</span>
         <span class="token string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapper</span> <span class="token attr-name">namespace</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.blinkfox.example.repository.mapper.OperationLogMapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapper</span> <span class="token attr-name">namespace</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.xgo-m.example.repository.mapper.OperationLogMapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 
     <span class="token comment">&lt;!-- MyBatis 映射字段为 Bean 的 resultMap. --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resultMap</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>operationLogMap<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.blinkfox.example.repository.pojo.OperationLog<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resultMap</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>operationLogMap<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.xgo-m.example.repository.pojo.OperationLog<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span> <span class="token attr-name">column</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>c_id<span class="token punctuation">"</span></span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>id<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>result</span> <span class="token attr-name">column</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>c_title<span class="token punctuation">"</span></span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>result</span> <span class="token attr-name">column</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>n_type<span class="token punctuation">"</span></span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>type<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
@@ -542,22 +542,22 @@
 <h2 id="支持场景"><a href="#支持场景" class="headerlink" title="支持场景"></a>支持场景</h2><p>适用于 Java <code>Spring Data JPA</code> 项目，<code>JDK 1.8</code> 及以上。</p>
 <h2 id="Spring-Boot-项目集成"><a href="#Spring-Boot-项目集成" class="headerlink" title="Spring Boot 项目集成"></a>Spring Boot 项目集成</h2><p>如果你是 Spring Boot 项目，那么直接集成 <code>fenix-spring-boot-starter</code> 库，并激活 <code>FenixJpaRepositoryFactoryBean</code>。</p>
 <blockquote>
-<p><strong>注</strong>：如果不是 Spring Boot 项目，请参看<a target="_blank" rel="noopener" href="https://blinkfox.github.io/fenix/#/quick-install?id=not-spring-boot-project">这里</a>。</p>
+<p><strong>注</strong>：如果不是 Spring Boot 项目，请参看<a href="https://xgo-m.github.io/fenix/#/quick-install?id=not-spring-boot-project">这里</a>。</p>
 </blockquote>
 <h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.blinkfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.xgo-m<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>fenix-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">compile <span class="token string">'com.blinkfox:fenix-spring-boot-starter:1.0.1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">compile <span class="token string">'com.xgo-m:fenix-spring-boot-starter:1.0.1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="激活-Fenix-FactoryBean"><a href="#激活-Fenix-FactoryBean" class="headerlink" title="激活 Fenix FactoryBean"></a>激活 Fenix FactoryBean</h3><p>然后需要在你的 Spring Boot 应用的 <code>@EnableJpaRepositories</code> 注解中，配置<br><code>repositoryFactoryBeanClass</code> 的属性值为 <code>FenixJpaRepositoryFactoryBean.class</code>。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 请在 Spring Boot 应用中配置 &#123;@link EnableJpaRepositories#repositoryFactoryBeanClass&#125;
  * 的值为 &#123;@link FenixJpaRepositoryFactoryBean&#125;.
  *
- * @author blinkfox on 2019-08-15.
+ * @author xgo-m on 2019-08-15.
  */</span>
 <span class="token annotation punctuation">@EnableJpaRepositories</span><span class="token punctuation">(</span>repositoryFactoryBeanClass <span class="token operator">=</span> <span class="token class-name">FenixJpaRepositoryFactoryBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@SpringBootApplication</span>
@@ -604,7 +604,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">blinkfox</a>
+                    <a href="/about" rel="external nofollow noreferrer">xgo-m</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -627,7 +627,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">blinkfox</a>
+                    <a href="/about" target="_blank">xgo-m</a>
                     !
                 </span>
             </div>
@@ -1001,7 +1001,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">262.2k</span>&nbsp;字
+                class="white-color">262.8k</span>&nbsp;字
             
             
             
