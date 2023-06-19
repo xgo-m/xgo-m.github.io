@@ -1,7 +1,7 @@
 ---
 title: 常用Bash命令整理之操作文件和目录
 date: 2018-10-10 23:10:00
-author: blinkfox
+author: xgo-m
 categories: 软件工具
 tags:
   - Linux
@@ -56,7 +56,7 @@ mkdir <dirname>
 mkdir backup/old
 
 # 在 backup 中的绝对路径中创建一个名为 old 的目录
-mkdir /home/blinkfox/backup/old
+mkdir /home/xgo-m/backup/old
 
 # 使用 -p 选项，会自动创建所有还不存在的父目录
 mkdir -p backup/old
@@ -100,7 +100,7 @@ cp -p filename /path/to/new/location/myfile
 
 # 使用 -R 或 -r 选项，恶意递归地复制一个目录
 # 即将一个目录及其下的所有文件和子目录都复制到另一个目录
-cp -R * /home/blinkfox/backup
+cp -R * /home/xgo-m/backup
 ```
 
 ## 4.ln - 链接文件或目录
@@ -108,11 +108,11 @@ cp -R * /home/blinkfox/backup
 `ln`命令用于创建软链接或硬链接。使用 -s 选项，可以创建一个软链接：
 
 ```bash
-# 在目录 lib 下创建一个软链接 library.so，链接到 /home/blinkfox/src/library.so
-ln -s /home/blinkfox/src/library.so /home/blinkfox/lib
+# 在目录 lib 下创建一个软链接 library.so，链接到 /home/xgo-m/src/library.so
+ln -s /home/xgo-m/src/library.so /home/xgo-m/lib
 
 # 创建目录的软链接
-ln -s /home/blinkfox/src source
+ln -s /home/xgo-m/src source
 ```
 
 ## 5. mv - 移动文件或目录

@@ -1,7 +1,7 @@
 ---
 title: 常用Bash命令整理之其他常用命令
 date: 2018-10-13 18:15:00
-author: blinkfox
+author: xgo-m
 categories: 软件工具
 tags: Linux
 ---
@@ -17,7 +17,7 @@ tags: Linux
 hostname
 
 # 修改你系统的主机名
-hostname blinkfox-system
+hostname xgo-m-system
 
 # 使用 -F 选项，从指定的文件中读取主机名
 hostname -F /root/hostname.txt
@@ -41,8 +41,8 @@ w
 # 打印如下
 22:42  up 18 days, 1 hr, 2 users, load averages: 1.23 1.79 1.75
 USER     TTY      FROM              LOGIN@  IDLE WHAT
-blinkfox console  -                日19   6days -
-blinkfox s000     -                五23       - w
+xgo-m console  -                日19   6days -
+xgo-m s000     -                五23       - w
 ```
 
 `who`命令有与`w`命令类似的用途，但它的功能比`w`命令更强大一些。语法格式如下：

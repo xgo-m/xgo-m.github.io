@@ -1,7 +1,7 @@
 ---
 title: 全功能JavaScript灯箱画廊插件lightgallery.js
 date: 2018-10-06 23:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/06/gallery.jpg
 categories: 前端
 tags:

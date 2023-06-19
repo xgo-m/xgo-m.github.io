@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之中介者模式
 date: 2018-10-17 23:40:00
-author: blinkfox
+author: xgo-m
 categories: 软件设计
 tags:
   - Java
@@ -47,7 +47,7 @@ tags:
 /**
  * 通用抽象中介者类.
  *
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public abstract class Mediator {
 
@@ -91,7 +91,7 @@ public abstract class Mediator {
 /**
  * 具体的通用中介者类.
  *
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public class ConcreteMediator extends Mediator {
 
@@ -122,7 +122,7 @@ public class ConcreteMediator extends Mediator {
 /**
  * 抽象的同事类.
  *
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public abstract class Colleague {
 
@@ -140,7 +140,7 @@ public abstract class Colleague {
 /**
  * 具体的同事类1.
  *
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public class ConcreteColleague1 extends Colleague {
 
@@ -170,7 +170,7 @@ public class ConcreteColleague1 extends Colleague {
 /**
  * 具体的同事类2.
  *
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public class ConcreteColleague2 extends Colleague {
 
@@ -201,7 +201,7 @@ public class ConcreteColleague2 extends Colleague {
 ```java
 /**
  * 中介者模式的场景类
- * Created by blinkfox on 16/8/21.
+ * Created by xgo-m on 16/8/21.
  */
 public class MediatorClient {
 

@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之代理模式
 date: 2018-09-20 21:50:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/20/proxy.jpg
 categories: 软件设计
 tags:
@@ -38,11 +38,11 @@ tags:
 首先，是抽象的主题接口和真实主题类：
 
 ```java
-package com.blinkfox.patterns.proxy;
+package com.xgo-m.patterns.proxy;
 
 /**
  * 抽象主题类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */
 public interface ISubject {
 
@@ -55,11 +55,11 @@ public interface ISubject {
 ```
 
 ```java
-package com.blinkfox.patterns.proxy;
+package com.xgo-m.patterns.proxy;
 
 /**
  * 真实主题类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */
 public class RealSubject implements ISubject {
 
@@ -77,11 +77,11 @@ public class RealSubject implements ISubject {
 然后，是代理类：
 
 ```java
-package com.blinkfox.patterns.proxy;
+package com.xgo-m.patterns.proxy;
 
 /**
  * 代理类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */
 public class Proxy implements ISubject {
 
@@ -118,11 +118,11 @@ public class Proxy implements ISubject {
 最后，是客户端场景测试类：
 
 ```java
-package com.blinkfox.patterns.proxy;
+package com.xgo-m.patterns.proxy;
 
 /**
  * 代理模式客户端场景类
- * Created by blinkfox on 2017/1/1.
+ * Created by xgo-m on 2017/1/1.
  */
 public class ProxyClient {
 

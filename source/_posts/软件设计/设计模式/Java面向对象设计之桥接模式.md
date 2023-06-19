@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之桥接模式
 date: 2018-12-19 00:20:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/12/19/bridge.jpg
 categories: 软件设计
 tags:
@@ -43,7 +43,7 @@ tags:
 /**
  * 实现化角色 Implementor.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public interface Implementor {
 
@@ -66,7 +66,7 @@ public interface Implementor {
 /**
  * ConcreteImplementor1.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public class ConcreteImplementor1 implements Implementor {
 
@@ -93,7 +93,7 @@ public class ConcreteImplementor1 implements Implementor {
 /**
  * ConcreteImplementor2.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public class ConcreteImplementor2 implements Implementor {
 
@@ -119,12 +119,12 @@ public class ConcreteImplementor2 implements Implementor {
 接下来，是抽象类角色`Abstraction`类：
 
 ```java
-package com.blinkfox.patterns.bridge;
+package com.xgo-m.patterns.bridge;
 
 /**
  * 抽象化角色 Abstraction.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public abstract class Abstraction {
 
@@ -165,7 +165,7 @@ public abstract class Abstraction {
 /**
  * RefinedAbstraction.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public class RefinedAbstraction extends Abstraction {
 
@@ -197,7 +197,7 @@ public class RefinedAbstraction extends Abstraction {
 /**
  * Client.
  *
- * @author blinkfox on 2018-12-17.
+ * @author xgo-m on 2018-12-17.
  */
 public class Client {
 

@@ -1,7 +1,7 @@
 ---
 title: 常用Bash命令整理之查看文件和目录
 date: 2018-10-09 22:45:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/09/linux.jpg
 categories: 软件工具
 tags:

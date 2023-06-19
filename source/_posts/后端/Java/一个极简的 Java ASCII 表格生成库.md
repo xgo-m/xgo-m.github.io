@@ -1,7 +1,7 @@
 ---
 title: 一个极简的 Java ASCII 表格生成库
 date: 2019-01-25 10:34:00
-author: blinkfox
+author: xgo-m
 cover: true
 img: https://statics.sh1a.qingstor.com/2019/01/25/minitable.jpg
 categories: 后端
@@ -15,7 +15,7 @@ tags:
 
 - 轻量级、无依赖（jar包仅`9kb`）
 - API简单易用
-- 易于集成或定制修改，仅一个[Java](https://github.com/blinkfox/mini-table/blob/master/src/main/java/com/blinkfox/minitable/MiniTable.java)文件，且代码规范
+- 易于集成或定制修改，仅一个[Java](https://github.com/xgo-m/mini-table/blob/master/src/main/java/com/xgo-m/minitable/MiniTable.java)文件，且代码规范
 
 ## 集成使用
 
@@ -23,7 +23,7 @@ tags:
 
 ```xml
 <dependency>
-    <groupId>com.blinkfox</groupId>
+    <groupId>com.xgo-m</groupId>
     <artifactId>mini-table</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -81,4 +81,4 @@ System.out.println(table);
 
 ## 许可证
 
-本 [mini-table](https://github.com/blinkfox/mini-table) 类库遵守 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 许可证。
+本 [mini-table](https://github.com/xgo-m/mini-table) 类库遵守 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 许可证。

@@ -1,7 +1,7 @@
 ---
 title: 常用Bash命令整理之文本处理
 date: 2018-10-11 22:05:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/11/bash.jpg
 categories: 软件工具
 tags:
@@ -108,29 +108,29 @@ grep [OPTION]... [-e PATTERN | -f FILE] [FILE]...
 ```
 
 ```bash
-# `grep`命令查找文件/etc/passwd 中帐号 blinkfox 的信息
-grep blinkfox /etc/passwd
+# `grep`命令查找文件/etc/passwd 中帐号 xgo-m 的信息
+grep xgo-m /etc/passwd
 
 # 使用 -i 选项，强制 grep 命令忽略搜索关键字的大小写
-grep -i blinkfox /etc/passwd
+grep -i xgo-m /etc/passwd
 
 # 使用 -r 选项，可以递归搜索指定目录下的所有文件
-grep -r blinkfox /etc/
+grep -r xgo-m /etc/
 
 # 使用 -w 选项，只匹配包含指定单词的行
-grep -w blinkfox /etc/
+grep -w xgo-m /etc/
 
 # 使用 -c 选项，报告文件或文本中模式被匹配的次数
-grep -c blinkfox /etc/passwd
+grep -c xgo-m /etc/passwd
 
 # 使用 -n 选项，显示每一个匹配的行的行号
-grep -n blinkfox /etc/passwd
+grep -n xgo-m /etc/passwd
 
 # 使用 -v 选项，可以输出除匹配指定模式的行以外的其他所有行
-grep -v blinkfox /etc/passwd
+grep -v xgo-m /etc/passwd
 
 # 使用 --color 选项，在输出中将匹配的字符串以彩色的形式标出
-grep --color blinkfox /etc/passwd
+grep --color xgo-m /etc/passwd
 ```
 
 ## 5.diff - 比较两个文件

@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之责任链模式
 date: 2018-11-4 22:00:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/04/chain.jpg
 categories: 软件设计
 tags:
@@ -40,7 +40,7 @@ tags:
 /**
  * 责任连模式的抽象处理者角色.
  *
- * Created by blinkfox on 16/7/11.
+ * Created by xgo-m on 16/7/11.
  */
 public abstract class Handler {
 
@@ -72,7 +72,7 @@ public abstract class Handler {
 /**
  * 具体处理角色1.
  *
- * Created by blinkfox on 16/7/11.
+ * Created by xgo-m on 16/7/11.
  */
 public class ConcreteHandler1 extends Handler {
 
@@ -99,7 +99,7 @@ public class ConcreteHandler1 extends Handler {
 /**
  * 具体处理角色2.
  *
- * Created by blinkfox on 16/7/11.
+ * Created by xgo-m on 16/7/11.
  */
 public class ConcreteHandler2 extends Handler {
 
@@ -126,7 +126,7 @@ public class ConcreteHandler2 extends Handler {
 /**
  * 具体处理角色n.
  *
- * Created by blinkfox on 16/7/11.
+ * Created by xgo-m on 16/7/11.
  */
 public class ConcreteHandlerN extends Handler {
 
@@ -150,7 +150,7 @@ public class ConcreteHandlerN extends Handler {
 /**
  * 责任连模式的客户端场景类.
  *
- * Created by blinkfox on 16/7/11.
+ * Created by xgo-m on 16/7/11.
  */
 public class ChainClient {
 

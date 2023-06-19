@@ -1,7 +1,7 @@
 ---
 title: Java集合框架知识整理
 date: 2018-10-24 23:10:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/24/collections.jpg
 top: true
 categories: 后端

@@ -1,7 +1,7 @@
 ---
 title: 轻量级滚动动画JavaScript库aos.js
 date: 2018-10-08 22:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/08/1.jpg
 categories: 前端
 tags:

@@ -1,7 +1,7 @@
 ---
 title: MVEL2.x模板指南
 date: 2018-09-19 00:13:00
-author: blinkfox
+author: xgo-m
 categories: 后端
 tags:
   - Java
@@ -232,4 +232,4 @@ String output = (String) TemplateRuntime.execute(compiled);
 ```
 
 [1]: https://github.com/mvel/mvel
-[2]: http://blinkfox.com/mvel-2-xyu-fa-zhi-nan/
+[2]: http://xgo-m.com/mvel-2-xyu-fa-zhi-nan/

@@ -1,7 +1,7 @@
 ---
 title: UML各类关系介绍
 date: 2018-10-22 09:00:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/22/orgran.jpg
 categories: 软件设计
 tags:

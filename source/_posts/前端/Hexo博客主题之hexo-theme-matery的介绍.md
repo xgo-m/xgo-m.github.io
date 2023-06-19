@@ -1,14 +1,14 @@
 ---
 title: Hexo博客主题之hexo-theme-matery的介绍
 date: 2018-09-28 13:34:00
-author: blinkfox
+author: xgo-m
 cover: true
 categories: 前端
 tags:
   - Hexo
   - hexo-theme-matery
 ---
-[English Document](README.md) | [演示示例](https://blinkfox.github.io/) | QQ交流群:`926552981`
+[English Document](README.md) | [演示示例](https://xgo-m.github.io/) | QQ交流群:`926552981`
 
 > 这是一个采用`Material Design`和响应式设计的 Hexo 博客主题。
 
@@ -36,12 +36,12 @@ tags:
 
 当你看到这里的时候，应该已经有一个自己的 [Hexo](https://hexo.io/zh-cn/) 博客了。如果还没有的话，不妨使用 Hexo 和 [Markdown](https://www.appinn.com/markdown/) 来写博客和文章。
 
-点击 [这里](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) 下载 `master` 分支的最新稳定版的代码，解压缩后，将 `hexo-theme-matery` 的文件夹复制到你 Hexo 的 `themes` 文件夹中即可。
+点击 [这里](https://codeload.github.com/xgo-m/hexo-theme-matery/zip/master) 下载 `master` 分支的最新稳定版的代码，解压缩后，将 `hexo-theme-matery` 的文件夹复制到你 Hexo 的 `themes` 文件夹中即可。
 
 当然你也可以在你的 `themes` 文件夹下使用 `Git clone` 命令来下载:
 
 ```bash
-git clone https://github.com/blinkfox/hexo-theme-matery.git
+git clone https://github.com/xgo-m/hexo-theme-matery.git
 ```
 
 ## 配置
@@ -145,7 +145,7 @@ layout: "friends"
     "avatar": "http://image.luokangyuan.com/4027734.jpeg",
     "name": "闪烁之狐",
     "introduction": "编程界大佬，技术牛，人还特别好，不懂的都可以请教大佬",
-    "url": "https://blinkfox.github.io/",
+    "url": "https://xgo-m.github.io/",
     "title": "前去学习"
 }, {
     "avatar": "http://image.luokangyuan.com/avatar.jpg",
@@ -266,7 +266,7 @@ feed:
 在主题的 `_config.yml` 文件中，默认支持 `QQ`、`GitHub` 和邮箱的配置，你可以在主题文件的 `/layout/_partial/social-link.ejs` 文件中，新增、修改你需要的社交链接地址，增加链接可参考如下代码：
 
 ```html
-<a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+<a href="https://github.com/xgo-m" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
     <i class="fa fa-github"></i>
 </a>
 ```

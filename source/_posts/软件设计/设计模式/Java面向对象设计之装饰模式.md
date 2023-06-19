@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之装饰模式
 date: 2018-09-14 00:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/14/decorator.jpg
 categories: 软件设计
 tags:
@@ -48,7 +48,7 @@ tags:
 ```java
 /**
  * 抽象构件
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public interface Component {
 
@@ -63,7 +63,7 @@ public interface Component {
 ```java
 /**
  * 具体构件
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public class ConcreteComponent implements Component {
 
@@ -84,7 +84,7 @@ public class ConcreteComponent implements Component {
 /**
  * 装饰角色
  * 维持一个指向Component对象的引用，并定义一个与 Component接口一致的接口。
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public class Decorator implements Component {
 
@@ -114,7 +114,7 @@ public class Decorator implements Component {
 ```java
 /**
  * 具体的装饰类1
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public class ConcreteDecorator1 extends Decorator {
 
@@ -147,7 +147,7 @@ public class ConcreteDecorator1 extends Decorator {
 ```java
 /**
  * 具体的装饰类2
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public class ConcreteDecorator2 extends Decorator {
 
@@ -182,7 +182,7 @@ public class ConcreteDecorator2 extends Decorator {
 ```java
 /**
  * 装饰模式的客户端场景类
- * Created by blinkfox on 16-6-26.
+ * Created by xgo-m on 16-6-26.
  */
 public class Client {
 

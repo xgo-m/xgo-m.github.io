@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之外观模式
 date: 2018-10-18 22:55:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/18/facade.jpg
 categories: 软件设计
 tags:
@@ -34,7 +34,7 @@ tags:
 /**
  * 子系统类A.
  *
- * Created by blinkfox on 16/8/25.
+ * Created by xgo-m on 16/8/25.
  */
 public class ClassA {
 
@@ -49,7 +49,7 @@ public class ClassA {
 /**
  * 子系统类B.
  *
- * Created by blinkfox on 16/8/25.
+ * Created by xgo-m on 16/8/25.
  */
 public class ClassB {
 
@@ -64,7 +64,7 @@ public class ClassB {
 /**
  * 子系统类C.
  *
- * Created by blinkfox on 16/8/25.
+ * Created by xgo-m on 16/8/25.
  */
 public class ClassC {
 
@@ -81,7 +81,7 @@ public class ClassC {
 /**
  * 外观门面类.
  *
- * Created by blinkfox on 16/8/25.
+ * Created by xgo-m on 16/8/25.
  */
 public class Facade {
 

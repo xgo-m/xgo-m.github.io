@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之命令模式
 date: 2018-10-16 22:40:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/16/command.jpg
 categories: 软件设计
 tags:
@@ -45,7 +45,7 @@ tags:
 /**
  * 通用的抽象 Receiver 接收者.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public abstract class Receiver {
 
@@ -61,7 +61,7 @@ public abstract class Receiver {
 /**
  * 具体的 Receiver 类1.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class ConcreteReceiver1 extends Receiver {
 
@@ -77,7 +77,7 @@ public class ConcreteReceiver1 extends Receiver {
 /**
  * 具体的 Receiver 类2.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class ConcreteReceiver2 extends Receiver {
 
@@ -95,7 +95,7 @@ public class ConcreteReceiver2 extends Receiver {
 /**
  * 抽象的 Command 类.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public abstract class Command {
 
@@ -111,7 +111,7 @@ public abstract class Command {
 /**
  * 具体的 Command 命令类1.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class ConcreteCommand1 extends Command {
 
@@ -137,7 +137,7 @@ public class ConcreteCommand1 extends Command {
 /**
  * 具体的 Command 命令类2.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class ConcreteCommand2 extends Command {
 
@@ -165,7 +165,7 @@ public class ConcreteCommand2 extends Command {
 /**
  * 调用者 Invoker 类.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class Invoker {
 
@@ -190,7 +190,7 @@ public class Invoker {
 /**
  * 命令模式的场景类.
  *
- * Created by blinkfox on 16/8/17.
+ * Created by xgo-m on 16/8/17.
  */
 public class CommandClient {
 

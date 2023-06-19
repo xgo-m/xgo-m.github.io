@@ -1,7 +1,7 @@
 ---
 title: Git知识点整理
 date: 2018-09-24 21:50:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/24/git.jpg
 categories: 软件工具
 tags: Git

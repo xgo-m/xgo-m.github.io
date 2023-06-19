@@ -1,7 +1,7 @@
 ---
 title: Java IO 知识整理
 date: 2018-11-05 11:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/05/io.jpg
 top: true
 categories: 后端
@@ -224,7 +224,7 @@ private static void testByByteArrayStream() {
 /**
  * 发送消息的线程.
  *
- * @author blinkfox on 2017/10/19.
+ * @author xgo-m on 2017/10/19.
  */
 public class Sender extends Thread {
 
@@ -259,7 +259,7 @@ public class Sender extends Thread {
 /**
  * 接收消息的线程.
  *
- * @author blinkfox on 2017/10/19.
+ * @author xgo-m on 2017/10/19.
  */
 public class Receiver extends Thread {
 
@@ -295,7 +295,7 @@ public class Receiver extends Thread {
 /**
  * PipedInputStream 和 PipedOutputStream 的测试类.
  *
- * @author blinkfox on 2017/10/19.
+ * @author xgo-m on 2017/10/19.
  */
 public class PipedStreamTest {
 

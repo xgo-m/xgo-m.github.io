@@ -1,7 +1,7 @@
 ---
 title: Java注解的理解和应用
 date: 2018-11-08 00:30:00
-author: blinkfox
+author: xgo-m
 categories: 后端
 tags:
   - Java
@@ -221,7 +221,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface MethodInfo {
 
-    String author() default 'blinkfox';
+    String author() default 'xgo-m';
 
     String date();
 
@@ -280,7 +280,7 @@ public class AnnotationParsing {
 
 ## 注解的应用之监控方法执行耗时
 
-通过前面对元注解的介绍，我们就可以自定义我们需要的注解了。假如，我们需要监控某些方法的执行，最原始的办法就是在方法执行的开头和结尾分别记录时间，最后计算前后的时间差即可，但是这些代码与核心业务无关，且大量重复、分散在各处，维护起来也困难。这时我们可以[使用Spring AOP来统计方法的执行耗时](http://blinkfox.com/shi-yong-spring-aoplai-tong-ji-fang-fa-de-zhi-xing-shi-jian/)，同时我们也可以使用注解的方式来实现，更自由灵活。
+通过前面对元注解的介绍，我们就可以自定义我们需要的注解了。假如，我们需要监控某些方法的执行，最原始的办法就是在方法执行的开头和结尾分别记录时间，最后计算前后的时间差即可，但是这些代码与核心业务无关，且大量重复、分散在各处，维护起来也困难。这时我们可以[使用Spring AOP来统计方法的执行耗时](http://xgo-m.com/shi-yong-spring-aoplai-tong-ji-fang-fa-de-zhi-xing-shi-jian/)，同时我们也可以使用注解的方式来实现，更自由灵活。
 
 首先，定义我们的执行耗时的方法上的注解：
 
@@ -294,7 +294,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义'统计方法耗时'并打印日志的注解.
  *
- * @author blinkfox on 2017-01-04.
+ * @author xgo-m on 2017-01-04.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
@@ -327,7 +327,7 @@ import org.slf4j.LoggerFactory;
  * 被标注为'@CostTime'注解的方法执行耗时的代理方法.
  * <p>实现了cglib中的`MethodInterceptor`的方法拦截接口.</p>
  *
- * @author blinkfox on 2017-01-04.
+ * @author xgo-m on 2017-01-04.
  */
 public class CostTimeProxy implements MethodInterceptor {
 
@@ -391,7 +391,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A类.
  *
- * @author blinkfox on 2017/1/1.
+ * @author xgo-m on 2017/1/1.
  */
 public class A {
 
@@ -419,11 +419,11 @@ public class A {
 最后，是用来测试`A`类某些业务方法执行耗时的测试类：
 
 ```java
-package com.blinkfox.test.reflect;
+package com.xgo-m.test.reflect;
 
 /**
  * 耗时注解使用测试示例
- * Created by blinkfox on 2017-01-04.
+ * Created by xgo-m on 2017-01-04.
  */
 public class CostTimeTest {
 

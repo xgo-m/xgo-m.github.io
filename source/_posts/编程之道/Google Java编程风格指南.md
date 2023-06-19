@@ -1,7 +1,7 @@
 ---
 title: Google Java编程风格指南
 date: 2018-10-05 16:38:00
-author: blinkfox
+author: xgo-m
 categories: 编程之道
 tags:
   - Java

@@ -213,17 +213,17 @@ myProjects:
     hexo-theme-matery:
       icon: fas fa-file-alt
       iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
-      url: http://github.com/blinkfox/hexo-theme-matery
+      url: http://github.com/xgo-m/hexo-theme-matery
       desc: This is a Hexo blog theme with 'Material Design' and responsive design.
     Fenix:
         icon: fas fa-database
         iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
-        url: https://github.com/blinkfox/fenix
+        url: https://github.com/xgo-m/fenix
         desc: 这是 Spring Data JPA 复杂或动态 SQL 查询的扩展库。
     typora-vue-theme:
         icon: fas fa-file-alt
         iconBackground: 'linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)'
-        url: https://github.com/blinkfox/typora-vue-theme
+        url: https://github.com/xgo-m/typora-vue-theme
         desc: This is a typora theme inspired by Vue document style.
 
 # config my skills informations in about page.
@@ -377,7 +377,7 @@ changyan:
 # 配置是否在 header 中显示 fork me on github 的图标，默认为true，你可以修改为你的仓库地址.
 githubLink:
   enable: false
-  url: https://github.com/blinkfox/hexo-theme-matery
+  url: https://github.com/xgo-m/hexo-theme-matery
   title: Fork Me
 
 # The password verification feature of read post. To use this feature,

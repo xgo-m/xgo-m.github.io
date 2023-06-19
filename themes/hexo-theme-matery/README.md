@@ -1,8 +1,8 @@
 # hexo-theme-matery
 
-[![HitCount](http://hits.dwyl.io/blinkfox/hexo-theme-matery.svg)](http://hits.dwyl.io/blinkfox/hexo-theme-matery) [![Gitter](https://img.shields.io/gitter/room/blinkfox/hexo-theme-matery.svg)](https://gitter.im/hexo-theme-matery/Lobby?utm_source=badge) [![GitHub issues](https://img.shields.io/github/issues/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/issues) [![GitHub license](https://img.shields.io/github/license/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/blob/master/LICENSE) [![Download](https://img.shields.io/badge/downloads-master-green.svg)](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) [![Hexo Version](https://img.shields.io/badge/hexo-%3E%3D%205.0.0-blue.svg)](http://hexo.io) [![GitHub forks](https://img.shields.io/github/forks/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/network) [![GitHub stars](https://img.shields.io/github/stars/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/stargazers)
+[![HitCount](http://hits.dwyl.io/xgo-m/hexo-theme-matery.svg)](http://hits.dwyl.io/xgo-m/hexo-theme-matery) [![Gitter](https://img.shields.io/gitter/room/xgo-m/hexo-theme-matery.svg)](https://gitter.im/hexo-theme-matery/Lobby?utm_source=badge) [![GitHub issues](https://img.shields.io/github/issues/xgo-m/hexo-theme-matery.svg)](https://github.com/xgo-m/hexo-theme-matery/issues) [![GitHub license](https://img.shields.io/github/license/xgo-m/hexo-theme-matery.svg)](https://github.com/xgo-m/hexo-theme-matery/blob/master/LICENSE) [![Download](https://img.shields.io/badge/downloads-master-green.svg)](https://codeload.github.com/xgo-m/hexo-theme-matery/zip/master) [![Hexo Version](https://img.shields.io/badge/hexo-%3E%3D%205.0.0-blue.svg)](http://hexo.io) [![GitHub forks](https://img.shields.io/github/forks/xgo-m/hexo-theme-matery.svg)](https://github.com/xgo-m/hexo-theme-matery/network) [![GitHub stars](https://img.shields.io/github/stars/xgo-m/hexo-theme-matery.svg)](https://github.com/xgo-m/hexo-theme-matery/stargazers)
 
-[🇨🇳中文说明](README_CN.md) | [国内访问示例(http://blinkfox.com)](http://blinkfox.com) | [Github Deploy Demo(https://blinkfox.github.io)](https://blinkfox.github.io)
+[🇨🇳中文说明](README_CN.md) | [国内访问示例(http://xgo-m.com)](http://xgo-m.com) | [Github Deploy Demo(https://xgo-m.github.io)](https://xgo-m.github.io)
 
 > This is a Hexo blog theme with 'Material Design' and responsive design.
 
@@ -41,13 +41,13 @@ Thanks to these contributors, without whom, hexo-theme-matery won't be this perf
 
 hexo-theme-matery **recommend you to use Hexo 5.0.0 and above**. If you already have your own [Hexo](https://hexo.io/zh-cn/) blog, I suggest you upgrade Hexo to the latest stable version.
 
-Click [here](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) to download master branch of the last stable version of the code.After decompressing, copy the `hexo-theme-matery` folder
+Click [here](https://codeload.github.com/xgo-m/hexo-theme-matery/zip/master) to download master branch of the last stable version of the code.After decompressing, copy the `hexo-theme-matery` folder
 to your `themes` folder of your Hexo blog project.
 
 Of course, you can use `git clone` to download in your `themes` folder.
 
 ```bash
-git clone https://github.com/blinkfox/hexo-theme-matery.git
+git clone https://github.com/xgo-m/hexo-theme-matery.git
 ```
 
 ## Configuration
@@ -171,8 +171,8 @@ Also, create a new `_data` directory in your blog's `source` directory and a new
 }, {
     "avatar": "http://image.luokangyuan.com/4027734.jpeg",
     "name": "Blinkfox",
-    "introduction": "Hello, I'm blinkfox, I like programming.",
-    "url": "https://blinkfox.github.io/",
+    "introduction": "Hello, I'm xgo-m, I like programming.",
+    "url": "https://xgo-m.github.io/",
     "title": "Visit Blog"
 }, {
     "avatar": "http://image.luokangyuan.com/avatar.jpg",
@@ -544,15 +544,15 @@ tags:
 
 ### Home
 
-![首页](http://static.blinkfox.com/matery-20181202-1.png)
+![首页](http://static.xgo-m.com/matery-20181202-1.png)
 
-![首页推荐文章](http://static.blinkfox.com/matery-20181202-2.png)
+![首页推荐文章](http://static.xgo-m.com/matery-20181202-2.png)
 
-![首页文章列表](http://static.blinkfox.com/matery-20181202-3.png)
+![首页文章列表](http://static.xgo-m.com/matery-20181202-3.png)
 
-![首页文章列表](http://static.blinkfox.com/matery-20181202-7.png)
+![首页文章列表](http://static.xgo-m.com/matery-20181202-7.png)
 
-![首页文章列表](http://static.blinkfox.com/matery-20181202-8.png)
+![首页文章列表](http://static.xgo-m.com/matery-20181202-8.png)
 
 ## Custom modification
 
@@ -611,4 +611,4 @@ There are 24 featured pictures in `/source/medias/featureimages`, you can add or
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/blinkfox/hexo-theme-matery/blob/master/README.md)
+See [CHANGELOG.md](https://github.com/xgo-m/hexo-theme-matery/blob/master/README.md)

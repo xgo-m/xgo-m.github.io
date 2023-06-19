@@ -1,7 +1,7 @@
 ---
 title: SpringBoot2.x 单元测试
 date: 2019-03-02 17:20:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2019/03/02/spring.png
 top: true
 categories: 后端
@@ -14,7 +14,7 @@ tags:
 
 > 一个 bug 被隐藏的时间越长，修复这个 bug 的代价就越大。
 
-我曾经在 [单元测试指南](https://blinkfox.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/) 一文中写到过单元测试的必要性和 Java 单元测试相关的工具及方法。单元测试能帮助我们在早期就规避、发现和修复很多不易察觉的 bug 和漏洞，而且更能保障后期的需求变动和代码重构时所带来的隐患，减少测试成本和维护成本。在 SpringBoot2.x 集成和写单元测试更加容易了。
+我曾经在 [单元测试指南](https://xgo-m.github.io/2018/11/15/hou-duan/java/dan-yuan-ce-shi-zhi-nan/) 一文中写到过单元测试的必要性和 Java 单元测试相关的工具及方法。单元测试能帮助我们在早期就规避、发现和修复很多不易察觉的 bug 和漏洞，而且更能保障后期的需求变动和代码重构时所带来的隐患，减少测试成本和维护成本。在 SpringBoot2.x 集成和写单元测试更加容易了。
 
 ## 创建 SpringBoot2.x 项目
 
@@ -97,7 +97,7 @@ spring:
 博客信息的实体 POJO 类如下：
 
 ```java
-package com.blinkfox.springbootsample.pojo;
+package com.xgo-m.springbootsample.pojo;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -112,7 +112,7 @@ import lombok.experimental.Accessors;
 /**
  * 博客实体.
  *
- * @author blinkfox on 2019-2-26.
+ * @author xgo-m on 2019-2-26.
  */
 @Getter
 @Setter
@@ -188,9 +188,9 @@ public class Blog {
 下面是 `BlogRepository` 中的一个简单的自定义 `@Query` 查询，当然你也可以采用名称的规则来写本查询，我这里为了做示例，使用了 `@Query` 查询。
 
 ```java
-package com.blinkfox.springbootsample.repository;
+package com.xgo-m.springbootsample.repository;
 
-import com.blinkfox.springbootsample.pojo.Blog;
+import com.xgo-m.springbootsample.pojo.Blog;
 
 import java.util.List;
 
@@ -201,7 +201,7 @@ import org.springframework.stereotype.Repository;
 /**
  * BlogRepository.
  *
- * @author blinkfox on 2019-02-27.
+ * @author xgo-m on 2019-02-27.
  */
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, String> {
@@ -217,9 +217,9 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
 然后在 Intellij IDEA 中通过 `Ctrl + Shift + T` 来为 `BlogRepository` 生成它对应的单元测试类 `BlogRepositoryTest`。
 
 ```java
-package com.blinkfox.springbootsample.repository;
+package com.xgo-m.springbootsample.repository;
 
-import com.blinkfox.springbootsample.pojo.Blog;
+import com.xgo-m.springbootsample.pojo.Blog;
 
 import java.util.List;
 import java.util.Optional;
@@ -235,7 +235,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * BlogRepositoryTest.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */
 @RunWith(SpringRunner.class)
 @ActiveProfiles("hsqldb")
@@ -280,10 +280,10 @@ public class BlogRepositoryTest {
 ### 新建 BlogService 类
 
 ```java
-package com.blinkfox.springbootsample.service;
+package com.xgo-m.springbootsample.service;
 
-import com.blinkfox.springbootsample.pojo.Blog;
-import com.blinkfox.springbootsample.repository.BlogRepository;
+import com.xgo-m.springbootsample.pojo.Blog;
+import com.xgo-m.springbootsample.repository.BlogRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -296,7 +296,7 @@ import org.springframework.stereotype.Service;
 /**
  * BlogService.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */
 @Slf4j
 @Service
@@ -339,10 +339,10 @@ public class BlogService {
 通过 `BlogService` 可以生成和书写出其对应的单元测试类和测试方法，代码如下：
 
 ```java
-package com.blinkfox.springbootsample.service;
+package com.xgo-m.springbootsample.service;
 
-import com.blinkfox.springbootsample.pojo.Blog;
-import com.blinkfox.springbootsample.repository.BlogRepository;
+import com.xgo-m.springbootsample.pojo.Blog;
+import com.xgo-m.springbootsample.repository.BlogRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -359,7 +359,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 /**
  * BlogServiceTest.
  *
- * @author blinkfox on 2019-03-01.
+ * @author xgo-m on 2019-03-01.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class BlogServiceTest {
@@ -439,10 +439,10 @@ Controller 层测试的重点是测试接口是否能正常工作。可以用到
 ### 新建 BlogController 类
 
 ```java
-package com.blinkfox.springbootsample.controller;
+package com.xgo-m.springbootsample.controller;
 
-import com.blinkfox.springbootsample.pojo.Blog;
-import com.blinkfox.springbootsample.service.BlogService;
+import com.xgo-m.springbootsample.pojo.Blog;
+import com.xgo-m.springbootsample.service.BlogService;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -461,7 +461,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * BlogController.
  *
- * @author blinkfox on 2019-02-28.
+ * @author xgo-m on 2019-02-28.
  */
 @Slf4j
 @RequestMapping("/blogs")
@@ -509,13 +509,13 @@ public class BlogController {
 通过 `BlogController` 可以生成和书写出其对应的单元测试类和测试方法，代码如下：
 
 ```java
-package com.blinkfox.springbootsample.controller;
+package com.xgo-m.springbootsample.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.blinkfox.springbootsample.service.BlogService;
+import com.xgo-m.springbootsample.service.BlogService;
 
 import java.util.ArrayList;
 import javax.annotation.Resource;
@@ -531,7 +531,7 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * BlogControllerTest.
  *
- * @author blinkfox on 2019-03-02.
+ * @author xgo-m on 2019-03-02.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(BlogController.class)

@@ -1,7 +1,7 @@
 ---
 title: 你需要知道的Java枚举知识
 date: 2018-10-27 23:20:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/27/java-enum.jpg
 categories: 后端
 tags:
@@ -136,7 +136,7 @@ Java枚举中允许定义属性和方法，但必须在枚举实例序列的最�
 ```java
 /**
  * 关于颜色的枚举.
- * @author blinkfox on 2017/9/17.
+ * @author xgo-m on 2017/9/17.
  */
 public enum ColorEnum {
 
@@ -203,7 +203,7 @@ public enum ColorEnum {
 ```java
 /**
  * 关于颜色的枚举.
- * @author blinkfox on 2017/9/17.
+ * @author xgo-m on 2017/9/17.
  */
 public enum ColorEnum {
 

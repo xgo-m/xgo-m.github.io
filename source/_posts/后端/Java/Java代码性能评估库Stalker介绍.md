@@ -1,7 +1,7 @@
 ---
 title: Java代码性能评估库Stalker介绍
 date: 2019-02-14 12:00:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2019/02/14/stalker.jpg
 cover: true
 categories: 后端
@@ -10,7 +10,7 @@ tags:
   - 性能测试
 ---
 
-[English Document](https://github.com/blinkfox/stalker/blob/master/README.md)
+[English Document](https://github.com/xgo-m/stalker/blob/master/README.md)
 
 > 这是一个简单的用来对Java代码做性能评估的工具库。
 
@@ -24,7 +24,7 @@ tags:
 
 ```xml
 <dependency>
-    <groupId>com.blinkfox</groupId>
+    <groupId>com.xgo-m</groupId>
     <artifactId>stalker</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -40,7 +40,7 @@ tags:
 /**
  * 用于测量（仅测试使用）该类中的方法的执行耗时的类.
  *
- * @author blinkfox on 2019-02-03.
+ * @author xgo-m on 2019-02-03.
  */
 public class MyTestService {
 
@@ -199,4 +199,4 @@ Assert.assertFaster(Options.of(),
 
 ## 许可证
 
-本 [stalker](https://github.com/blinkfox/stalker) 类库遵守 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 许可证。
+本 [stalker](https://github.com/xgo-m/stalker) 类库遵守 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 许可证。

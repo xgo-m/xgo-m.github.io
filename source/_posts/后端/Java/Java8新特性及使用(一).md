@@ -1,7 +1,7 @@
 ---
 title: Java8新特性及使用(一)
 date: 2018-11-13 22:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/13/java8-1.jpg
 categories: 后端
 tags:
@@ -760,7 +760,7 @@ System.out.println(string);     // Nov 03, 2014 - 07:13
 
 和`java.text.NumberFormat`不一样的是新版的`DateTimeFormatter`是不可变的，所以它是线程安全的。
 
-关于Java8中日期API更多的使用示例可以参考[Java 8中关于日期和时间API的20个使用示例](http://blinkfox.com/java-8zhong-guan-yu-ri-qi-he-shi-jian-apide-20ge-shi-yong-shi-li/)。
+关于Java8中日期API更多的使用示例可以参考[Java 8中关于日期和时间API的20个使用示例](http://xgo-m.com/java-8zhong-guan-yu-ri-qi-he-shi-jian-apide-20ge-shi-yong-shi-li/)。
 
 ## 八、重复注解
 

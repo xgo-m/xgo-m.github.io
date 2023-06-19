@@ -1,7 +1,7 @@
 ---
 title: GitLab CI/CD 介绍和使用
 date: 2018-11-22 23:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/22/gitlab-ci-machine.png
 categories: 软件工具
 tags:

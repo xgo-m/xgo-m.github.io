@@ -1,7 +1,7 @@
 ---
 title: Spring基础介绍
 date: 2018-09-17 22:32:00
-author: blinkfox
+author: xgo-m
 categories: 后端
 tags:
   - Spring
@@ -107,10 +107,10 @@ Apache Maven 是一个基于项目对象模型（Project Object Model，POM）�
 在创建项目之前，须确保你的计算机上已经安装好有 Java 和 Maven 环境。然后，打开终端通过以下简单的命令就可以在你的当前目录下创建一个 Jave web 的项目结构：
 
 ```bash
-mvn archetype:generate -DgroupId=com.blinkfox -DartifactId=springdemo -DpackageName=com.blinkfox.springdemo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.xgo-m -DartifactId=springdemo -DpackageName=com.xgo-m.springdemo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
-其中`-DgroupId=com.blinkfox`是组织名，`-DartifactId=springdemo`是该组织下的项目名称，`-DarchetypeArtifactId=maven-archetype-webapp`代表创建一个简单的 webapp 项目。
+其中`-DgroupId=com.xgo-m`是组织名，`-DartifactId=springdemo`是该组织下的项目名称，`-DarchetypeArtifactId=maven-archetype-webapp`代表创建一个简单的 webapp 项目。
 
 创建项目的时候，Maven会自动下载一些需要用到的 jar 包和 Maven 插件。如果顺利创建成功的话，就会在你的当前目录下看到名为 springdemo 的项目，其中包含`src`的文件夹和`pom.xml`文件。且在你的终端会看到如下输出：
 
@@ -123,7 +123,7 @@ mvn archetype:generate -DgroupId=com.blinkfox -DartifactId=springdemo -DpackageN
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.blinkfox</groupId>
+    <groupId>com.xgo-m</groupId>
     <artifactId>springdemo</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -210,12 +210,12 @@ Spring IoC 容器（ApplicationContext）负责创建 Bean，并通过容器将�
 （1）编写功能类的 Bean。
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
 import org.springframework.stereotype.Service;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 @Service
 public class FunctionService {
@@ -233,13 +233,13 @@ public class FunctionService {
 （2）使用功能类的 Bean。
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 @Service
 public class UseFunctionService {
@@ -262,16 +262,16 @@ public class UseFunctionService {
 （3）配置类。
 
 ```java
-package com.blinkfox.config;
+package com.xgo-m.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 @Configuration
-@ComponentScan("com.blinkfox.service.impl")
+@ComponentScan("com.xgo-m.service.impl")
 public class DiConfig {
 }
 ```
@@ -283,14 +283,14 @@ public class DiConfig {
 （4）运行。
 
 ```java
-package com.blinkfox.maintest;
+package com.xgo-m.maintest;
 
-import com.blinkfox.config.DiConfig;
-import com.blinkfox.service.impl.UseFunctionService;
+import com.xgo-m.config.DiConfig;
+import com.xgo-m.service.impl.UseFunctionService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 public class FunctionMain {
 
@@ -327,10 +327,10 @@ Java 配置是通过 @Configuration 和 @Bean 来实现的。
 （1）编写功能类的 Bean
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 // 1
 public class JavaConfigService {
@@ -348,10 +348,10 @@ public class JavaConfigService {
 （2）使用功能类的 Bean
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 // 1
 public class UseJavaConfigService {
@@ -376,15 +376,15 @@ public class UseJavaConfigService {
 （3）Java 配置类
 
 ```java
-package com.blinkfox.config;
+package com.xgo-m.config;
 
-import com.blinkfox.service.impl.JavaConfigService;
-import com.blinkfox.service.impl.UseJavaConfigService;
+import com.xgo-m.service.impl.JavaConfigService;
+import com.xgo-m.service.impl.UseJavaConfigService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 @Configuration // 1
 public class JavaConfig {
@@ -412,14 +412,14 @@ public class JavaConfig {
 （4）运行
 
 ```java
-package com.blinkfox.maintest;
+package com.xgo-m.maintest;
 
-import com.blinkfox.config.JavaConfig;
-import com.blinkfox.service.impl.UseJavaConfigService;
+import com.xgo-m.config.JavaConfig;
+import com.xgo-m.service.impl.UseJavaConfigService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Created by blinkfox on 2016/10/27.
+ * Created by xgo-m on 2016/10/27.
  */
 public class JavaConfigMain {
 
@@ -475,12 +475,12 @@ Spring本身在事务处理（@Transcational）和数据缓存（@Cacheable）�
 （2）编写拦截规则的注解。
 
 ```java
-package com.blinkfox.annotation;
+package com.xgo-m.annotation;
 
 import java.lang.annotation.*;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -498,13 +498,13 @@ public @interface LogAction {
 （3）编写使用注解的被拦截类。
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
-import com.blinkfox.annotation.LogAction;
+import com.xgo-m.annotation.LogAction;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 @Service
 public class DemoAnnotationService {
@@ -520,12 +520,12 @@ public class DemoAnnotationService {
 （4）编写使用方法规则被拦截规类。
 
 ```java
-package com.blinkfox.service.impl;
+package com.xgo-m.service.impl;
 
 import org.springframework.stereotype.Service;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 @Service
 public class DemoMethodService {
@@ -540,9 +540,9 @@ public class DemoMethodService {
 （5）编写切面。
 
 ```java
-package com.blinkfox.aop;
+package com.xgo-m.aop;
 
-import com.blinkfox.annotation.LogAction;
+import com.xgo-m.annotation.LogAction;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -553,13 +553,13 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 @Aspect // 1
 @Component // 2
 public class LogAspect {
 
-    @Pointcut("@annotation(com.blinkfox.annotation.LogAction)") // 3
+    @Pointcut("@annotation(com.xgo-m.annotation.LogAction)") // 3
     public void annotationPointCut() {
 
     }
@@ -572,7 +572,7 @@ public class LogAspect {
         System.out.println("---注解式拦截:" + logAction.name()); // 5
     }
 
-    @After("execution(* com.blinkfox.service.impl.DemoMethodService.*(..))") // 6
+    @After("execution(* com.xgo-m.service.impl.DemoMethodService.*(..))") // 6
     public void before(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
@@ -593,17 +593,17 @@ public class LogAspect {
 （6）配置类。
 
 ```java
-package com.blinkfox.config;
+package com.xgo-m.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 @Configuration
-@ComponentScan("com.blinkfox")
+@ComponentScan("com.xgo-m")
 @EnableAspectJAutoProxy
 public class AopConfig {
 
@@ -616,15 +616,15 @@ public class AopConfig {
 （6）运行。
 
 ```java
-package com.blinkfox.maintest;
+package com.xgo-m.maintest;
 
-import com.blinkfox.config.AopConfig;
-import com.blinkfox.service.impl.DemoAnnotationService;
-import com.blinkfox.service.impl.DemoMethodService;
+import com.xgo-m.config.AopConfig;
+import com.xgo-m.service.impl.DemoAnnotationService;
+import com.xgo-m.service.impl.DemoMethodService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Created by blinkfox on 2016/10/29.
+ * Created by xgo-m on 2016/10/29.
  */
 public class AopMain {
 

@@ -1,7 +1,7 @@
 ---
 title: CPU多级缓存
 date: 2018-11-18 21:55:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/18/cpu.jpg
 categories: 软件工具
 tags:

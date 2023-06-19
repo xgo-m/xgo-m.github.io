@@ -1,7 +1,7 @@
 ---
 title: Java7新特性及使用
 date: 2018-11-12 00:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/12/coffee.jpg
 categories: 后端
 tags:
@@ -292,7 +292,7 @@ ForkJoinPool ：ForkJoinTask需要通过ForkJoinPool来执行，任务分割出�
 因为是有结果的任务，所以必须继承`RecursiveTask`，实现代码如下：
 
 ```java
-package com.blinkfox.test.other;
+package com.xgo-m.test.other;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
@@ -302,7 +302,7 @@ import java.util.concurrent.RecursiveTask;
 /**
  * CountTask.
  *
- * @author blinkfox on 2018-01-03.
+ * @author xgo-m on 2018-01-03.
  */
 public class CountTask extends RecursiveTask<Integer> {
 

@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之工厂方法模式
 date: 2018-09-14 22:50:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/14/factory.jpg
 categories: 软件设计
 tags:
@@ -39,7 +39,7 @@ tags:
 ```java
 /**
  * 抽象产品类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public abstract class Product {
 
@@ -61,7 +61,7 @@ public abstract class Product {
 ```java
 /**
  * 具体产品类1
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class ConcreteProduct1 extends Product {
 
@@ -76,7 +76,7 @@ public class ConcreteProduct1 extends Product {
 ```java
 /**
  * 具体产品类2
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class ConcreteProduct2 extends Product {
 
@@ -93,7 +93,7 @@ public class ConcreteProduct2 extends Product {
 ```java
 /**
  * 抽象的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public abstract class Factory {
 
@@ -112,7 +112,7 @@ public abstract class Factory {
 ```java
 /**
  * 具体生产产品的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class ConcreteFactory extends Factory {
 
@@ -143,7 +143,7 @@ public class ConcreteFactory extends Factory {
 ```java
 /**
  * 工厂方法模式客户端场景类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class Client {
 
@@ -199,7 +199,7 @@ public class Client {
 ```java
 /**
  * 简单工厂模式中的工厂类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class SimpleFactory {
 
@@ -227,7 +227,7 @@ public class SimpleFactory {
 ```java
 /**
  * 简单工厂模式客户端场景类
- * Created by blinkfox on 16-6-29.
+ * Created by xgo-m on 16-6-29.
  */
 public class SimpleClient {
 
@@ -255,7 +255,7 @@ public class SimpleClient {
 ```java
 /**
  * 生成多个产品的抽象工厂类
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */
 public abstract class MultiFactory {
 
@@ -273,7 +273,7 @@ public abstract class MultiFactory {
 ```java
 /**
  * 生成产品1的具体工厂类1
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */
 public class ConcreteFactory1 extends MultiFactory {
 
@@ -294,7 +294,7 @@ public class ConcreteFactory1 extends MultiFactory {
 ```java
 /**
  * 生成产品2的具体工厂类2
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */
 public class ConcreteFactory2 extends MultiFactory {
 
@@ -315,7 +315,7 @@ public class ConcreteFactory2 extends MultiFactory {
 ```java
 /**
  * 多工厂方法模式客户端场景类
- * Created by blinkfox on 16-7-2.
+ * Created by xgo-m on 16-7-2.
  */
 public class MultiClient {
 
@@ -341,7 +341,7 @@ public class MultiClient {
 ```java
 /**
  * 工厂方法模式中的单例类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */
 public class Singleton {
 
@@ -365,7 +365,7 @@ public class Singleton {
 ```java
 /**
  * 生成单例的工厂类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */
 public class SingletonFactory {
 
@@ -397,7 +397,7 @@ public class SingletonFactory {
 ```java
 /**
  * 工厂方法单例模式客户端场景类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */
 public class SingleClient {
 
@@ -416,7 +416,7 @@ public class SingleClient {
 ```java
 /**
  * 延迟加载的工厂类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */
 public class LazyFactory {
 
@@ -452,7 +452,7 @@ public class LazyFactory {
 ```java
 /**
  * 延迟加载的工厂模式客户端场景类
- * Created by blinkfox on 16-7-4.
+ * Created by xgo-m on 16-7-4.
  */
 public class LazyClient {
 

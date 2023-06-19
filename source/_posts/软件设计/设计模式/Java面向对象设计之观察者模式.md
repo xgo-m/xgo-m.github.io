@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之观察者模式
 date: 2018-10-14 17:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/14/observer.jpg
 categories: 软件设计
 tags:
@@ -45,7 +45,7 @@ tags:
 ```java
 /**
  * 观察者接口
- * Created by blinkfox on 16/7/14.
+ * Created by xgo-m on 16/7/14.
  */
 public interface Observer {
 
@@ -61,7 +61,7 @@ public interface Observer {
 /**
  * 具体的观察者.
  *
- * Created by blinkfox on 16/7/15.
+ * Created by xgo-m on 16/7/15.
  */
 public class ConcreteObserver implements Observer {
 
@@ -82,7 +82,7 @@ public class ConcreteObserver implements Observer {
 /**
  * 被观察者的抽象类.
  *
- * Created by blinkfox on 16/7/14.
+ * Created by xgo-m on 16/7/14.
  */
 public abstract class Subject {
 
@@ -125,7 +125,7 @@ public abstract class Subject {
 /**
  * 具体的被观察者.
  *
- * Created by blinkfox on 16/7/15.
+ * Created by xgo-m on 16/7/15.
  */
 public class ConcreteSubject extends Subject {
 
@@ -145,7 +145,7 @@ public class ConcreteSubject extends Subject {
 /**
  * 观察者模式客户端场景类.
  *
- * Created by blinkfox on 16/7/15.
+ * Created by xgo-m on 16/7/15.
  */
 public class ObserverClient {
 

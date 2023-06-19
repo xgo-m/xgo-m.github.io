@@ -1,7 +1,7 @@
 ---
 title: Java反射基础
 date: 2018-11-07 21:40:00
-author: blinkfox
+author: xgo-m
 categories: 后端
 tags:
   - Java
@@ -42,7 +42,7 @@ Java反射框架主要提供以下功能：
 `Class.forName(String className)`方法可以通过类或接口的名称（一个字符串或完全限定名）来获取对应的Class对象。
 
 ```java
-Class<?> cls = Class.forName("com.blinkfox.Zealot");
+Class<?> cls = Class.forName("com.xgo-m.Zealot");
 ```
 
 #### 直接获取某个类的class(最安全/性能最好)

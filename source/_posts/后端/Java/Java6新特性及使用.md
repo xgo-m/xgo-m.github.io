@@ -1,7 +1,7 @@
 ---
 title: Java6新特性及使用
 date: 2018-11-11 22:40:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/11/java.jpg
 categories: 后端
 tags:
@@ -29,7 +29,7 @@ tags:
 
 ## 一、Web Services Metadata
 
-`WebService`是一种独立于特定语言、特定平台，基于网络的、分布式的模块化组件。是一个能够使用`xml`消息通过网络来访问的接口，这个接口描述了一组可访问的操作。在Java6中，在想要发布为`WebService`的类上加上`@WebService`的注解，这个类的方法就变为`WebService`方法了，再通过`Endpoint.publish()`方法发布这个服务。到此，一个最简单的`WebService`搞定。运行`main`方法，在浏览器里输入`http://localhost:8080/com.blinkfox.test.Hello?wsdl`，即可查看你WebService的WSDL信息。
+`WebService`是一种独立于特定语言、特定平台，基于网络的、分布式的模块化组件。是一个能够使用`xml`消息通过网络来访问的接口，这个接口描述了一组可访问的操作。在Java6中，在想要发布为`WebService`的类上加上`@WebService`的注解，这个类的方法就变为`WebService`方法了，再通过`Endpoint.publish()`方法发布这个服务。到此，一个最简单的`WebService`搞定。运行`main`方法，在浏览器里输入`http://localhost:8080/com.xgo-m.test.Hello?wsdl`，即可查看你WebService的WSDL信息。
 
 ```java
 import javax.jws.WebService;
@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Hello.
- * @author blinkfox on 2017-11-28.
+ * @author xgo-m on 2017-11-28.
  */
 @WebService
 public class Hello {
@@ -60,7 +60,7 @@ public class Hello {
      * @param args
      */
     public static void main(String[] args) {
-        Endpoint.publish("http://localhost:8080/com.blinkfox.test.Hello", new Hello());
+        Endpoint.publish("http://localhost:8080/com.xgo-m.test.Hello", new Hello());
         log.info("调用成功!");
     }
 
@@ -100,7 +100,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * JsTest.
- * @author blinkfox
+ * @author xgo-m
  * @version 1.0
  *
  */
@@ -121,7 +121,7 @@ public class JsTest {
         String script="function hello(name){return 'Hello ' + name}";
         engine.eval(script);
         Invocable inv=(Invocable) engine;
-        String result = (String) inv.invokeFunction("hello", "blinkfox");
+        String result = (String) inv.invokeFunction("hello", "xgo-m");
         log.info("脚本执行结果:{}", result);
     }
 
@@ -172,7 +172,7 @@ import java.net.InetSocketAddress;
 /**
  * 自定义的http服务器.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class MyHttpServer {
 
@@ -233,7 +233,7 @@ import java.util.concurrent.Executors;
 /**
  * Http服务器测试类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class HttpTest {
 
@@ -348,7 +348,7 @@ import javax.xml.stream.events.XMLEvent;
 /**
  * Stax测试类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class StaxTester {
 
@@ -403,12 +403,12 @@ public class StaxTester {
         xmlw.writeCharacters("\n");
         // 写入一个catalogs根元素
         xmlw.writeStartElement("catalogs");
-        xmlw.writeNamespace("myNS", "http://blinkfox.com");
+        xmlw.writeNamespace("myNS", "http://xgo-m.com");
         xmlw.writeAttribute("owner","Chinajash");
         xmlw.writeCharacters("\n");
         // 写入子元素catalog
         xmlw.writeCharacters("    ");
-        xmlw.writeStartElement("http://blinkfox.com", "catalog");
+        xmlw.writeStartElement("http://xgo-m.com", "catalog");
         xmlw.writeAttribute("id","007");
         xmlw.writeCharacters("Apparel");
         // 写入catalog元素的结束标签
@@ -452,7 +452,7 @@ public class StaxTester {
 ```xml
 <?xml version="1.0" ?>
 <!--testing comment-->
-<catalogs xmlns:myNS="http://blinkfox.com" owner="Chinajash">
+<catalogs xmlns:myNS="http://xgo-m.com" owner="Chinajash">
     <myNS:catalog id="007">Apparel</myNS:catalog>
 </catalogs>
 ```
@@ -465,7 +465,7 @@ public class StaxTester {
 /**
  * Gender性别枚举类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public enum Gender {
 
@@ -493,7 +493,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * Address地址类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class Address {
 
@@ -548,7 +548,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Person类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 @XmlRootElement
 public class Person {
@@ -614,7 +614,7 @@ import org.slf4j.LoggerFactory;
 /**
  * JAXB2测试类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class JAXB2Test {
 
@@ -676,7 +676,7 @@ import java.io.Console;
 /**
  * Jdk6之Console测试类.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class ConsoleTest {
 
@@ -717,7 +717,7 @@ public class ConsoleTest {
 ### 1. 嵌入式数据库
 
 ```java
-import com.blinkfox.learn.jdbc.JdbcDaoHelper;
+import com.xgo-m.learn.jdbc.JdbcDaoHelper;
 
 import java.sql.*;
 
@@ -727,7 +727,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Derby内嵌数据库测试示例.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class EmbeddedDerbyTest {
 
@@ -753,7 +753,7 @@ public class EmbeddedDerbyTest {
             conn = DriverManager.getConnection(URL);//启动嵌入式数据库
             st = conn.createStatement();
             st.execute("create table foo (FOOID INT NOT NULL, FOONAME VARCHAR(30) NOT NULL)"); //创建foo表
-            st.executeUpdate("insert into foo(FOOID,FOONAME) values (1, 'blinkfox')"); //插入一条数据
+            st.executeUpdate("insert into foo(FOOID,FOONAME) values (1, 'xgo-m')"); //插入一条数据
             rs = st.executeQuery("select * from foo");//读取刚插入的数据
             while (rs.next()) {
                 int id = rs.getInt(1);
@@ -775,7 +775,7 @@ public class EmbeddedDerbyTest {
 运行上面程序后，会在当前目录生成名为`EmbeddedDB`的文件夹，既是`EmbeddedDB`数据库的数据文件存放的地方，控制台将输出：
 
 ```bash
-查询结果：id = 1; name = blinkfox
+查询结果：id = 1; name = xgo-m
 ```
 
 ### 2. 网络数据库
@@ -791,7 +791,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Derby网络数据库测试示例.
  *
- * @author blinkfox on 2017-12-04.
+ * @author xgo-m on 2017-12-04.
  */
 public class NetworkServerDerbyTest {
 

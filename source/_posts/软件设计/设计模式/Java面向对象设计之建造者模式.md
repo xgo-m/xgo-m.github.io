@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之建造者模式
 date: 2018-10-20 15:55:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/20/builder.jpg
 categories: 软件设计
 tags:
@@ -46,7 +46,7 @@ tags:
 /**
  * 产品类.
  *
- * Created by blinkfox on 2016/10/8.
+ * Created by xgo-m on 2016/10/8.
  */
 public class Product {
 
@@ -81,7 +81,7 @@ public class Product {
 /**
  * 抽象的建造者.
  *
- * Created by blinkfox on 2016/10/8.
+ * Created by xgo-m on 2016/10/8.
  */
 public interface Builder {
 
@@ -109,7 +109,7 @@ public interface Builder {
 /**
  * 具体的建造者实现类.
  *
- * Created by blinkfox on 2016/10/8.
+ * Created by xgo-m on 2016/10/8.
  */
 public class ConcreteBuilder implements Builder {
 
@@ -151,7 +151,7 @@ public class ConcreteBuilder implements Builder {
 /**
  * 导演者类.
  *
- * Created by blinkfox on 2016/10/8.
+ * Created by xgo-m on 2016/10/8.
  */
 public class Director {
 
@@ -184,7 +184,7 @@ public class Director {
 /**
  * 建造者模式的客户端场景类.
  *
- * Created by blinkfox on 2016/10/8.
+ * Created by xgo-m on 2016/10/8.
  */
 public class BuilderClient {
 

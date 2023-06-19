@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之状态模式
 date: 2018-09-21 23:44:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/21/state.jpg
 categories: 软件设计
 tags:
@@ -42,7 +42,7 @@ tags:
 ```java
 /**
  * 抽象状态角色
- * Created by blinkfox on 16/7/12.
+ * Created by xgo-m on 16/7/12.
  */
 public interface IState {
 
@@ -65,7 +65,7 @@ public interface IState {
 ```java
 /**
  * 具体状态角色类1
- * Created by blinkfox on 16/7/12.
+ * Created by xgo-m on 16/7/12.
  */
 public class ConcreteState1 implements IState {
 
@@ -92,7 +92,7 @@ public class ConcreteState1 implements IState {
 ```java
 /**
  * 具体状态角色类2
- * Created by blinkfox on 16/7/12.
+ * Created by xgo-m on 16/7/12.
  */
 public class ConcreteState2 implements IState {
 
@@ -121,7 +121,7 @@ public class ConcreteState2 implements IState {
 ```java
 /**
  * 环境角色类
- * Created by blinkfox on 16/7/12.
+ * Created by xgo-m on 16/7/12.
  */
 public class Context {
 
@@ -159,7 +159,7 @@ public class Context {
 ```java
 /**
  * 状态模式的客户端场景累
- * Created by blinkfox on 16/7/12.
+ * Created by xgo-m on 16/7/12.
  */
 public class StateClient {
 

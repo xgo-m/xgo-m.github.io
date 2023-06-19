@@ -1,7 +1,7 @@
 ---
 title: Fenix — 比 MyBatis 更加强大的 Spring Data JPA 扩展库
 date: 2019-08-20 00:10:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2019/08/20/jpa.png
 cover: true
 categories: 后端
@@ -11,9 +11,9 @@ tags:
   - Fenix
 ---
 
-> [Fenix](https://github.com/blinkfox/fenix)（菲尼克斯）是一个比 MyBatis 更加强大，为解决复杂、动态 SQL (`JPQL`) 而生的 `Spring Data JPA` 扩展库，目的是辅助开发者更方便、快捷的书写复杂、动态且易于维护的 SQL，支持 `XML` 和 Java 链式 `API` 两种方式来书写动态 SQL。
+> [Fenix](https://github.com/xgo-m/fenix)（菲尼克斯）是一个比 MyBatis 更加强大，为解决复杂、动态 SQL (`JPQL`) 而生的 `Spring Data JPA` 扩展库，目的是辅助开发者更方便、快捷的书写复杂、动态且易于维护的 SQL，支持 `XML` 和 Java 链式 `API` 两种方式来书写动态 SQL。
 
-- [使用文档: https://blinkfox.github.io/fenix](https://blinkfox.github.io/fenix)
+- [使用文档: https://xgo-m.github.io/fenix](https://xgo-m.github.io/fenix)
 
 ## 特性
 
@@ -35,7 +35,7 @@ tags:
 
 为了便于开发人员书写一般中短长度的动态 SQL，Fenix 还提供了 Java 链式 `API` 书写动态 SQL 的方式，使 SQL 可读性和紧凑性更好，如果要书写静态或动态的中、长 SQL，则推荐使用 `XML` 方式，便于集中阅读、调试和维护 SQL。
 
-> **注**：本 `Fenix` 扩展库开发的核心思想来源于我几年前写的动态 SQL 拼接库 [Zealot](https://github.com/blinkfox/zealot)。如果你熟悉《星际争霸》的话，大概能理解其中的关系。
+> **注**：本 `Fenix` 扩展库开发的核心思想来源于我几年前写的动态 SQL 拼接库 [Zealot](https://github.com/xgo-m/zealot)。如果你熟悉《星际争霸》的话，大概能理解其中的关系。
 
 ## 与 MyBatis 的 SQL 比较
 
@@ -58,10 +58,10 @@ tags:
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blinkfox.example.repository.mapper.OperationLogMapper">
+<mapper namespace="com.xgo-m.example.repository.mapper.OperationLogMapper">
 
     <!-- MyBatis 映射字段为 Bean 的 resultMap. -->
-    <resultMap id="operationLogMap" type="com.blinkfox.example.repository.pojo.OperationLog">
+    <resultMap id="operationLogMap" type="com.xgo-m.example.repository.pojo.OperationLog">
         <id column="c_id" property="id"/>
         <result column="c_title" property="title"/>
         <result column="n_type" property="type"/>
@@ -158,13 +158,13 @@ tags:
 
 如果你是 Spring Boot 项目，那么直接集成 `fenix-spring-boot-starter` 库，并激活 `FenixJpaRepositoryFactoryBean`。
 
-> **注**：如果不是 Spring Boot 项目，请参看[这里](https://blinkfox.github.io/fenix/#/quick-install?id=not-spring-boot-project)。
+> **注**：如果不是 Spring Boot 项目，请参看[这里](https://xgo-m.github.io/fenix/#/quick-install?id=not-spring-boot-project)。
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>com.blinkfox</groupId>
+    <groupId>com.xgo-m</groupId>
     <artifactId>fenix-spring-boot-starter</artifactId>
     <version>1.0.1</version>
 </dependency>
@@ -173,7 +173,7 @@ tags:
 ### Gradle
 
 ```bash
-compile 'com.blinkfox:fenix-spring-boot-starter:1.0.1'
+compile 'com.xgo-m:fenix-spring-boot-starter:1.0.1'
 ```
 
 ### 激活 Fenix FactoryBean
@@ -186,7 +186,7 @@ compile 'com.blinkfox:fenix-spring-boot-starter:1.0.1'
  * 请在 Spring Boot 应用中配置 {@link EnableJpaRepositories#repositoryFactoryBeanClass}
  * 的值为 {@link FenixJpaRepositoryFactoryBean}.
  *
- * @author blinkfox on 2019-08-15.
+ * @author xgo-m on 2019-08-15.
  */
 @EnableJpaRepositories(repositoryFactoryBeanClass = FenixJpaRepositoryFactoryBean.class)
 @SpringBootApplication

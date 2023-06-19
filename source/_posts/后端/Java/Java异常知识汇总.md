@@ -1,7 +1,7 @@
 ---
 title: Java异常知识汇总
 date: 2018-10-28 00:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/28/exception.jpg
 categories: 后端
 tags:

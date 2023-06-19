@@ -1,7 +1,7 @@
 ---
 title: JavaScript之再学习
 date: 2018-10-30 00:30:00
-author: blinkfox
+author: xgo-m
 categories: 前端
 tags:
   - JavaScript

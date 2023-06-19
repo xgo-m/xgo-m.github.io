@@ -1,7 +1,7 @@
 ---
 title: 使用Java调用PhantomJS动态导出ECharts图片到Word文件中
 date: 2018-10-01 22:50:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/10/01/java-word-chart.jpg
 categories: 后端
 tags:
@@ -48,7 +48,7 @@ tags:
 ```java
 /**
  * BaseProp
- * @author blinkfox on 2017-06-28.
+ * @author xgo-m on 2017-06-28.
  */
 public class BaseProp {
     
@@ -76,7 +76,7 @@ public class BaseProp {
 ```java
 /**
  * 测试旅游信息的bean.
- * @author blinkfox on 2017-06-28.
+ * @author xgo-m on 2017-06-28.
  */
 public class Travel extends BaseProp {
 
@@ -187,7 +187,7 @@ public class Travel extends BaseProp {
 ```java
 /**
  * poi-tl库的使用示例.
- * Created by blinkfox on 2017/6/27.
+ * Created by xgo-m on 2017/6/27.
  */
 public class PoitlTest {
 
@@ -267,7 +267,7 @@ public class PoitlTest {
 vi ~/.bashrc
 
 # 将PhantomJS的bin目录加入到PATH环境变量中.
-export PHANTOMJS_HOME=/home/blinkfox/Documents/phantomjs-2.1.1-linux-x86_64
+export PHANTOMJS_HOME=/home/xgo-m/Documents/phantomjs-2.1.1-linux-x86_64
 export PATH=${PHANTOMJS_HOME}/bin:$PATH
 
 # 退出vi编辑器，使用source命令让刚才的配置即时生效.
@@ -349,7 +349,7 @@ function postImage() {
 ```java
 /**
  * 保存Echarts统计图片的Servlet.
- * @author blinkfox on 2017-06-28.
+ * @author xgo-m on 2017-06-28.
  */
 public class SaveImageServlet extends HttpServlet {
 
@@ -472,7 +472,7 @@ page.open(url, function(status) {
 ```java
 /**
  * HttpTest.
- * @author blinkfox on 2017-06-28.
+ * @author xgo-m on 2017-06-28.
  * @version 1.0
  */
 public class HttpTest {

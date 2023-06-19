@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之策略模式
 date: 2018-09-14 00:20:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/09/14/strategy.jpg
 categories: 软件设计
 tags:

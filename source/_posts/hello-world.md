@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2018-09-12 22:25:00
-author: blinkfox
+author: xgo-m
 categories: 前端
 tags:
   - Hexo

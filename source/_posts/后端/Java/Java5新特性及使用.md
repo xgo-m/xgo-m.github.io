@@ -1,7 +1,7 @@
 ---
 title: Java5新特性及使用
 date: 2018-11-09 00:30:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/11/09/java.jpg
 categories: 后端
 tags:
@@ -354,7 +354,7 @@ if (count <= 0) {
 
 枚举（`enum`全称为`enumeration`）类型是 Java5 新增的类型，存放在`java.lang`包中，允许用常量来表示特定的数据片断，而且全部都以类型安全的形式来表示。
 
-关于枚举的介绍，这里就不再细讲了，请参考我以前所整理的[Java 枚举知识整理](http://blinkfox.com/java-mei-ju-zhi-shi-zheng-li/)一文。
+关于枚举的介绍，这里就不再细讲了，请参考我以前所整理的[Java 枚举知识整理](http://xgo-m.com/java-mei-ju-zhi-shi-zheng-li/)一文。
 
 ## 五、可变参数(Varargs)
 
@@ -427,7 +427,7 @@ double r = cos(PI * theta);
 
 ## 七、注解(Annotations)
 
-关于注解的介绍，这里就不再细讲了，请参考我前段时间所写的[Java注解的理解和应用](http://blinkfox.com/javazhu-jie-de-li-jie-he-ying-yong/)一文。
+关于注解的介绍，这里就不再细讲了，请参考我前段时间所写的[Java注解的理解和应用](http://xgo-m.com/javazhu-jie-de-li-jie-he-ying-yong/)一文。
 
 ## 八、值得关注
 
@@ -473,7 +473,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 格式化测试使用的示例类.
  *
- * @author blinkfox on 2017-11-28.
+ * @author xgo-m on 2017-11-28.
  */
 public class FormatTester {
 
@@ -584,7 +584,7 @@ public class FormatTester {
 /**
 * 扫描控制台输入.
 *
-* @author blinkfox 2017-11-28
+* @author xgo-m 2017-11-28
 */
 public class ScannerTest {
 

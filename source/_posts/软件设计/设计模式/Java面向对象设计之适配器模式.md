@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之适配器模式
 date: 2018-12-12 22:00:00
-author: blinkfox
+author: xgo-m
 img: https://statics.sh1a.qingstor.com/2018/12/12/adapter.jpg
 categories: 软件设计
 tags:
@@ -44,7 +44,7 @@ tags:
 /**
  * Target 目标角色类.
  *
- * @author blinkfox on 2018-12-11.
+ * @author xgo-m on 2018-12-11.
  */
 public interface Target {
 
@@ -60,7 +60,7 @@ public interface Target {
 /**
  * 具体的目标角色实现类.
  *
- * @author blinkfox on 2018-12-11.
+ * @author xgo-m on 2018-12-11.
  */
 public class ConcreteTarget implements Target {
 
@@ -81,7 +81,7 @@ public class ConcreteTarget implements Target {
 /**
  * 适配者类.
  *
- * @author blinkfox on 2018-12-11.
+ * @author xgo-m on 2018-12-11.
  */
 public class Adaptee {
 
@@ -101,7 +101,7 @@ public class Adaptee {
 /**
  * 适配器类.
  *
- * @author blinkfox on 2018-12-11.
+ * @author xgo-m on 2018-12-11.
  */
 public class Adapter extends Adaptee implements Target {
 
@@ -123,7 +123,7 @@ public class Adapter extends Adaptee implements Target {
 /**
  * 客户端场景类.
  *
- * @author blinkfox on 2018-12-11.
+ * @author xgo-m on 2018-12-11.
  */
 public class Client {
 

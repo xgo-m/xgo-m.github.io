@@ -1,7 +1,7 @@
 ---
 title: Java面向对象设计之单例模式
 date: 2018-10-29 23:30:00
-author: blinkfox
+author: xgo-m
 categories: 软件设计
 tags:
   - Java
@@ -48,7 +48,7 @@ tags:
 /**
  * 饿汉式单例模式.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public class Singleton {
 
@@ -72,7 +72,7 @@ public class Singleton {
 /**
  * 非线程安全的懒汉式.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public class Singleton {
 
@@ -102,7 +102,7 @@ public class Singleton {
 /**
  * 低效的线程安全的懒汉式.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public class Singleton {
 
@@ -132,7 +132,7 @@ public class Singleton {
 /**
  * 双重校验锁线程安全懒汉式.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public class Singleton {
 
@@ -166,7 +166,7 @@ public class Singleton {
 /**
  * 枚举方式的单例.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public enum Singleton {
 
@@ -183,7 +183,7 @@ public enum Singleton {
 /**
  * 通过使用静态内部类的方式来实现懒加载且线程安全的创建单例.
  *
- * @author blinkfox on 2017-10-23.
+ * @author xgo-m on 2017-10-23.
  */
 public class Singleton {
 
